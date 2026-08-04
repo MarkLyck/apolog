@@ -10,7 +10,7 @@ The MVP also includes hybrid keyword/semantic article search, a global Command-K
 
 ## Architecture and Repository Structure
 
-Use Bun workspaces with Turborepo. Pin the Bun version in the root `packageManager` field, commit `bun.lock`, and use Bun for dependency installation and all repository scripts:
+Use Bun workspaces with Turborepo. Pin the Bun version exactly in the root `packageManager` field, commit `bun.lock`, and use Bun for dependency installation and all repository scripts:
 
 ```text
 apps/
@@ -50,10 +50,15 @@ packages/
 - Tooling
   - Root scripts: `dev`, `build`, `test`, `typecheck`, `lint`, `format`, `format:check`, and `check`.
   - Run workspace tasks through `bun run` and Turbo; do not add pnpm, npm, or Yarn lockfiles or package-manager commands.
+  - Pin every registry-backed `dependencies`, `devDependencies`, `optionalDependencies`, and `peerDependencies` entry to an exact version. Do not use caret, tilde, comparison, wildcard, `latest`, `next`, `canary`, or other floating tags.
+  - Use Bun's `workspace:*` protocol only for packages that live inside this repository; it is the sole allowed non-exact manifest specifier. Pin Git dependencies to a full commit SHA rather than a branch or tag.
+  - Treat the committed `bun.lock` as the exact transitive dependency graph. CI, Conductor, and Vercel install with `bun install --frozen-lockfile` and fail rather than rewriting it.
+  - Add a repository check that scans every workspace manifest and fails when an external dependency is not exact, the root `packageManager` is not an exact `bun@x.y.z`, or an unexpected package-manager lockfile exists.
+  - Pin third-party GitHub Actions by full commit SHA with the human-readable release in a comment. Dependency updates arrive as reviewed PRs that update the manifest pins and `bun.lock` together.
   - Configure Ultracite's React, Next.js, and Vitest presets over Oxlint and Oxfmt. ([Ultracite setup](https://www.ultracite.ai/))
   - Test with Vitest, Testing Library, `convex-test`, and Playwright.
   - Vercel's build runs the Convex deployment step before the Turbo-filtered web build.
-  - Add `.conductor/settings.toml` with `bun install --frozen-lockfile` setup and one process-group dev command, invoked through Bun, that starts Convex and Next.js on `CONDUCTOR_PORT`.
+  - Add `.conductor/settings.toml` with `bun install --frozen-lockfile` setup and one process-group dev command, invoked through the pinned Bun version, that starts Convex and Next.js on `CONDUCTOR_PORT`.
   - Mark local Conductor run mode nonconcurrent while workspaces share one Convex development deployment.
 
 ## Neutral Domain Language and Bible/Quran Selection
@@ -399,7 +404,7 @@ Test coverage includes:
 - An SEO route matrix covering unique titles/descriptions, corpus-aware canonicals, `noindex,follow` query variants, robots rules, published-only sitemap entries, 404/draft behavior, internal links, and safe schema-valid JSON-LD.
 - Dynamic Open Graph and Twitter metadata, including visual snapshots at 1200×630 for each route class, both corpora, long/non-ASCII titles, missing media, cache updates, and accessible alt text.
 - Playwright journeys for every route, Bible/Quran switching, search deep links, debate copy flow, map deep links, and 404s.
-- CI acceptance requires formatting, linting, type checking, tests, and a production build from a clean checkout.
+- CI acceptance requires exact-dependency-policy validation, a frozen Bun install, formatting, linting, type checking, tests, and a production build from a clean checkout.
 
 ## Assumptions and Defaults
 
