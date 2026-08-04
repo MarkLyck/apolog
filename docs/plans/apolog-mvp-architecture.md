@@ -10,7 +10,7 @@ The MVP also includes hybrid keyword/semantic article search, a global Command-K
 
 ## Architecture and Repository Structure
 
-Use pnpm workspaces with Turborepo:
+Use Bun workspaces with Turborepo. Pin the Bun version in the root `packageManager` field, commit `bun.lock`, and use Bun for dependency installation and all repository scripts:
 
 ```text
 apps/
@@ -49,10 +49,11 @@ packages/
 
 - Tooling
   - Root scripts: `dev`, `build`, `test`, `typecheck`, `lint`, `format`, `format:check`, and `check`.
+  - Run workspace tasks through `bun run` and Turbo; do not add pnpm, npm, or Yarn lockfiles or package-manager commands.
   - Configure Ultracite's React, Next.js, and Vitest presets over Oxlint and Oxfmt. ([Ultracite setup](https://www.ultracite.ai/))
   - Test with Vitest, Testing Library, `convex-test`, and Playwright.
   - Vercel's build runs the Convex deployment step before the Turbo-filtered web build.
-  - Add `.conductor/settings.toml` with `pnpm install` setup and one process-group dev command that starts Convex and Next.js on `CONDUCTOR_PORT`.
+  - Add `.conductor/settings.toml` with `bun install --frozen-lockfile` setup and one process-group dev command, invoked through Bun, that starts Convex and Next.js on `CONDUCTOR_PORT`.
   - Mark local Conductor run mode nonconcurrent while workspaces share one Convex development deployment.
 
 ## Neutral Domain Language and Bible/Quran Selection
