@@ -89,6 +89,15 @@ Selector behavior:
   - Landing page whose featured contradictions, articles, geographical entries, and counts are scoped to the active corpus.
   - Includes the Bible/Quran switch, category explanations, map preview, and debate call-to-action.
 
+Shared article-list behavior for `/debunked`, `/immoral`, and `/evidence`:
+
+- Uses nuqs-backed `?q=`, `?sort=newest|oldest|relevance`, and category-specific filter parameters so searches and sort choices are shareable and survive navigation.
+- Defaults to `newest` when there is no query. `relevance` is available only when `q` is nonempty; clearing the query returns the sort to `newest` unless the user explicitly selected `oldest`.
+- With no query, cursor-paginates 24 articles at a time through the corpus link projection ordered by the source article's creation timestamp.
+- With a query, full-text search retrieves at most 200 corpus-scoped candidates. The user can order those candidates by relevance, newest, or oldest; the UI requests a narrower query if the cap is reached.
+- Search covers title, dek, tags, passage references, and the plain-text projection of article blocks.
+- Search, sorting, corpus selection, and topic/finding filters compose rather than resetting one another.
+
 - `/contradictions`
   - Uses `?q=` for search and the global `?text=` selection.
   - With no search query, cursor-paginates 24 results at a time by descending `effectiveObviousnessScore` using a compound Convex index.
@@ -100,6 +109,7 @@ Selector behavior:
 
 - `/debunked`
   - Lists factually or historically challenged stories and claims for the active corpus.
+  - Provides the shared article search and created-date sort controls.
   - Filters by topic and finding such as `contradicted`, `unsupported`, `anachronistic`, or `physically implausible`; the finding prevents every case from being overstated as the same kind of failure.
 
 - `/debunked/[slug]`
@@ -107,6 +117,7 @@ Selector behavior:
 
 - `/immoral`
   - Lists ethically objectionable passages, laws, commands, and stories for the active corpus.
+  - Provides the shared article search and created-date sort controls.
   - Supports search and topic filters such as genocide, slavery, sexual violence, misogyny, child punishment, collective punishment, and religious intolerance.
 
 - `/immoral/[slug]`
@@ -120,6 +131,7 @@ Selector behavior:
 
 - `/evidence`
   - Lists evidence topics relevant to claims commonly made about the active corpus.
+  - Provides the shared article search and created-date sort controls.
   - Examples include evolution, Earth's shape, dating methods, fossils, and Neanderthals.
   - Evidence linked to both corpora appears in both modes through explicit corpus-link records.
 
@@ -168,8 +180,8 @@ All detail routes have stable slugs, server-rendered metadata, Open Graph data, 
 | `sources` | URL, title, publisher, author, publication/access dates, source type, archive URL, license metadata |
 | `citations` | Source ID, optional passage ID, locator/page/section, exact supporting excerpt where permitted, verification status |
 | `contradictions` | Corpus key, slug, title, summary, claim groups, explanation blocks, citation IDs, search text, AI score, future editor score, effective score, scoring rationale/version, provenance, status, import key |
-| `articles` | Kind (`debunked`, `immoral`, or `evidence`), slug, title, dek, finding, content warnings, hero media, structured blocks, search text, status, version, timestamps, import key |
-| `articleCorpora` | Article ID, corpus key, projected article kind/status/published time; compound-indexed for efficient corpus lists |
+| `articles` | Kind (`debunked`, `immoral`, or `evidence`), slug, title, dek, finding, content warnings, hero media, structured blocks, search text, status, version, `updatedAt`, publication time, import key |
+| `articleCorpora` | Article ID, corpus key, projected article kind/status/creation/publication times, `updatedAt`; compound-indexed for efficient corpus/date lists |
 | `tags` | Managed topic key, label, description, and content category |
 | `articleTags` | Article ID, tag ID, and projected corpus key for indexed corpus/topic filtering |
 | `media` | Convex storage ID, MIME type, dimensions, alt text, caption, credit, license, source URL |
@@ -178,10 +190,21 @@ All detail routes have stable slugs, server-rendered metadata, Open Graph data, 
 | `mapEntryCorpora` | Map entry ID, corpus key, projected type/status; compound-indexed for corpus-scoped map queries |
 | `geoFeatures` | GeoJSON geometry, label, current and historical place names, precision, uncertainty notes, provenance |
 | `mapEntryFeatures` | Map entry ID, feature ID, role, display order, and styling overrides |
-| `searchDocuments` | One denormalized document per content item and corpus, with content kind/ID, title, searchable text, status, and ranking fields |
+| `searchDocuments` | One denormalized document per content item and corpus, with content kind/ID, title, searchable text, status, source creation time, `updatedAt`, and ranking fields |
 | `ingestionRuns` | Adapter, corpus key, source URL/hash, adapter/model/prompt versions, status, counts, errors, timestamps |
 
 `articleCorpora`, `mapEntryCorpora`, and `searchDocuments` deliberately duplicate small amounts of data. Convex mutations update these projections atomically so corpus filtering and search remain indexed and do not scan array fields.
+
+### Record timestamps
+
+- Every document in an Apolog-owned Convex table uses Convex's automatic `_creationTime` as its canonical creation timestamp. Do not add a second `createdAt` field that could disagree with it. ([Convex system fields](https://docs.convex.dev/database/types#system-fields))
+- Every Apolog-owned table requires an application-managed `updatedAt: number`, stored as UTC milliseconds and set to the same `Date.now()` value used by the enclosing mutation.
+- Inserts set `updatedAt` immediately. Every mutation that changes a source record, relationship, status, projection, or ingestion result must update it atomically.
+- System-managed Convex tables such as `_storage` and `_scheduled_functions` are excluded because their schemas are controlled by Convex.
+- Re-importing an existing record preserves `_creationTime` and changes `updatedAt`; creating a genuinely new record receives a new `_creationTime`.
+- Publication time remains a separate optional `publishedAt` field and must not replace either creation or update time.
+- `articleCorpora.articleCreatedAt` and `searchDocuments.sourceCreatedAt` copy the source article's `_creationTime`. List sorting must use these projected values, not the link/projection document's own `_creationTime`.
+- Add compound indexes for `articleCorpora` covering corpus key, article kind, publication status, and `articleCreatedAt`; query them ascending for oldest and descending for newest.
 
 ### Contradiction structure and ranking
 
@@ -244,7 +267,7 @@ Public reads:
 
 - `contradictions.list({ corpusKey, query?, paginationOpts })`
 - `contradictions.getBySlug({ slug })`
-- `articles.list({ kind, corpusKey, query?, tagKeys?, paginationOpts })`
+- `articles.list({ kind, corpusKey, query?, sort, tagKeys?, finding?, paginationOpts })`, where `sort` is `newest | oldest | relevance`
 - `articles.getBySlug({ kind, slug })`
 - `map.listEntries({ corpusKey, typeKeys?, topicKeys?, certainty? })`
 - `map.getEntryBySlug({ slug })`
@@ -290,6 +313,10 @@ Test coverage includes:
 - No Bible-only record appearing in Quran mode or Quran-only record appearing in Bible mode.
 - Dual-linked articles and map entries appearing in both modes without duplicate cards.
 - Corpus link/search projections remaining consistent after create, update, publish, archive, and re-import operations.
+- Every Apolog-owned table exposing `_creationTime` and a required `updatedAt`, with `updatedAt` advancing on every mutation while `_creationTime` remains stable.
+- Article corpus/search projections copying the source article creation time and preserving correct newest/oldest ordering even when links are rebuilt.
+- Debunked, Immoral, and Evidence lists composing corpus, query, date sort, tags, findings, and pagination without dropping URL state.
+- Article search sorting bounded candidates correctly by relevance, newest, and oldest, including the 200-candidate refinement state.
 - Default contradiction pagination ordered by effective score and bounded search mode ordered by score.
 - Claim groups containing valid passages and citation references.
 - Rejection of invented, mismatched, unlicensed, or incorrectly attributed passage quotations.
