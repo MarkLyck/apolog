@@ -355,7 +355,7 @@ Import operations:
 - Stable import keys preserve IDs and slugs across reruns.
 - Validation rejects missing corpus links, unlicensed passage quotations, unverifiable quotation text, invalid GeoJSON, impossible coordinate ranges, and comparison metrics without methods and citations.
 
-The public Next.js HTTP APIs are `POST /api/chat` and the bounded semantic-search bridge `GET /api/search/articles`. The search endpoint validates with Valibot, rate-limits anonymous sessions, accepts only known corpus/kind/sort values, caps query length and results, and calls the protected Convex action. All other content reads, including instant keyword typeahead, use typed Convex queries directly.
+The public Next.js HTTP APIs are `POST /api/chat` and the bounded semantic-search bridge `GET /api/search/articles`. The search endpoint validates with Valibot, rate-limits anonymous sessions, accepts only known corpus/type/sort values, caps query length and results, and calls the protected Convex action. All other content reads, including instant keyword typeahead, use typed Convex queries directly.
 
 ## Editorial and Provenance Rules
 
