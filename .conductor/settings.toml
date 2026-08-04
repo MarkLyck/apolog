@@ -1,0 +1,15 @@
+"$schema" = "https://conductor.build/schemas/settings.repo.schema.json"
+
+[scripts]
+setup = "bun install --frozen-lockfile"
+run_mode = "nonconcurrent"
+
+[scripts.run.dev]
+available_in = ["local"]
+command = "bun run dev"
+default = true
+icon = "play"
+
+[scripts.run.test]
+command = "bun test"
+icon = "test-tube"

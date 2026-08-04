@@ -1,0 +1,18 @@
+{
+  "name": "@apolog/ingest",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dry-run": "bun run src/cli.ts dry-run",
+    "seed": "bun run src/cli.ts seed",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@apolog/shared": "workspace:*"
+  },
+  "devDependencies": {
+    "@types/bun": "1.3.14",
+    "typescript": "6.0.3"
+  }
+}

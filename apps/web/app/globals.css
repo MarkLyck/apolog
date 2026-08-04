@@ -1,0 +1,215 @@
+@import "maplibre-gl/dist/maplibre-gl.css";
+@import "tailwindcss";
+@source "../../../packages/ui/src";
+
+:root {
+  --paper: #f7f5ef;
+  --surface: #fffdf8;
+  --surface-strong: #eeece4;
+  --ink: #17211e;
+  --muted: #606b66;
+  --line: #d8dcd5;
+  --accent: #d27a35;
+  --accent-strong: #9d4d1a;
+  --teal: #176a5b;
+  --inverse-muted: #b4b5ae;
+}
+
+.dark {
+  --paper: #101713;
+  --surface: #17201c;
+  --surface-strong: #202c27;
+  --ink: #f4f1e8;
+  --muted: #a8b3ad;
+  --line: #33413a;
+  --accent: #ee9d59;
+  --accent-strong: #ffc18a;
+  --teal: #70c5b4;
+  --inverse-muted: #555753;
+}
+
+@theme inline {
+  --font-sans: var(--font-sans);
+  --font-display: var(--font-display);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  display: flex;
+  min-height: 100dvh;
+  flex-direction: column;
+  margin: 0;
+  background:
+    radial-gradient(
+      circle at 8% 4%,
+      color-mix(in srgb, var(--accent) 11%, transparent),
+      transparent 28rem
+    ),
+    radial-gradient(
+      circle at 92% 22%,
+      color-mix(in srgb, var(--teal) 9%, transparent),
+      transparent 32rem
+    ),
+    var(--paper);
+  color: var(--ink);
+  font-family:
+    Inter,
+    ui-sans-serif,
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    sans-serif;
+  text-rendering: optimizeLegibility;
+}
+
+#main-content {
+  flex: 1 0 auto;
+}
+
+.font-display,
+h1,
+h2,
+h3 {
+  font-family:
+    Iowan Old Style,
+    Baskerville,
+    "Times New Roman",
+    serif;
+  letter-spacing: -0.025em;
+}
+
+::selection {
+  background: color-mix(in srgb, var(--accent) 38%, transparent);
+}
+
+a {
+  text-decoration: none;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
+
+.editorial-grid {
+  background-image:
+    linear-gradient(
+      to right,
+      color-mix(in srgb, var(--line) 42%, transparent) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      to bottom,
+      color-mix(in srgb, var(--line) 42%, transparent) 1px,
+      transparent 1px
+    );
+  background-size: 38px 38px;
+}
+
+.prose-apolog p {
+  color: var(--muted);
+  font-size: 1.08rem;
+  line-height: 1.85;
+}
+
+.prose-apolog h2 {
+  margin-top: 2.5rem;
+  font-size: clamp(1.8rem, 3vw, 2.45rem);
+  line-height: 1.15;
+}
+
+.prose-apolog ul {
+  display: grid;
+  gap: 0.8rem;
+  margin: 1.5rem 0;
+  padding-left: 1.25rem;
+  color: var(--muted);
+  line-height: 1.7;
+}
+
+.debate-markdown > :first-child {
+  margin-top: 0;
+}
+
+.debate-markdown > :last-child {
+  margin-bottom: 0;
+}
+
+.debate-markdown p,
+.debate-markdown ul,
+.debate-markdown ol,
+.debate-markdown h2,
+.debate-markdown h3 {
+  margin-block: 0.75rem;
+}
+
+.debate-markdown h2,
+.debate-markdown h3 {
+  font-family: var(--font-display), Georgia, serif;
+  font-size: 1.15rem;
+  line-height: 1.4;
+}
+
+.debate-markdown ul,
+.debate-markdown ol {
+  display: grid;
+  gap: 0.4rem;
+  padding-left: 1.3rem;
+}
+
+.debate-markdown ul {
+  list-style: disc;
+}
+
+.debate-markdown ol {
+  list-style: decimal;
+}
+
+.debate-markdown a {
+  color: var(--accent-strong);
+  font-weight: 700;
+  text-decoration: underline;
+  text-underline-offset: 0.18em;
+}
+
+.maplibregl-map {
+  font-family: inherit;
+}
+
+.apolog-map-marker {
+  width: 1.35rem;
+  height: 1.35rem;
+  border: 3px solid #fff;
+  border-radius: 999px;
+  background: var(--accent-strong);
+  box-shadow: 0 3px 16px rgb(0 0 0 / 0.28);
+  cursor: pointer;
+  transition: transform 180ms ease;
+}
+
+.apolog-map-marker:hover,
+.apolog-map-marker:focus-visible {
+  transform: scale(1.25);
+  outline: 3px solid var(--accent);
+  outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+  }
+}

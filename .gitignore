@@ -2,3 +2,23 @@
 .env
 .env.*
 !.env.example
+
+# Dependencies and package-manager caches
+node_modules/
+.bun/
+
+# Framework and build outputs
+.next/
+.turbo/
+dist/
+out/
+
+# Test and coverage artifacts
+coverage/
+playwright-report/
+test-results/
+
+# Local tooling and operating-system files
+.context/
+*.tsbuildinfo
+.DS_Store

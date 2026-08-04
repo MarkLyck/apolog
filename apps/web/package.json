@@ -1,0 +1,38 @@
+{
+  "name": "@apolog/web",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "next dev --turbopack -p ${CONDUCTOR_PORT:-3000}",
+    "build": "next build",
+    "start": "next start",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@apolog/backend": "workspace:*",
+    "@apolog/shared": "workspace:*",
+    "@apolog/ui": "workspace:*",
+    "@wrksz/themes": "1.1.0",
+    "ai": "7.0.51",
+    "cnfast": "0.1.0",
+    "convex": "1.43.0",
+    "maplibre-gl": "6.1.0",
+    "next": "16.3.0",
+    "react": "19.2.8",
+    "react-dom": "19.2.8",
+    "react-icons": "5.7.0",
+    "react-markdown": "10.1.0",
+    "valibot": "1.4.2"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "4.3.3",
+    "@types/bun": "1.3.14",
+    "@types/node": "26.1.2",
+    "@types/react": "19.2.18",
+    "@types/react-dom": "19.2.4",
+    "postcss": "8.5.25",
+    "tailwindcss": "4.3.3",
+    "typescript": "6.0.3"
+  }
+}
