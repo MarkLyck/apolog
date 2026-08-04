@@ -71,7 +71,8 @@ type CorpusKey = "bible" | "quran";
 
 Naming rules:
 
-- Use `corpus`, `edition`, `passage`, `passageReference`, `textualClaim`, and `claimedMiracle`.
+- Prefer conventional, short domain names such as `corpus`, `edition`, `passage`, `passageReference`, `claim`, `summary`, `rank`, `type`, `status`, and `mapEntry`.
+- Name stored fields for what they contain, not how they were produced or how the UI interprets them. For example, use `rank` rather than an AI-specific or criteria-specific score name.
 - Do not use theological status labels or an unqualified supernatural claim in schemas, APIs, variables, or neutral interface copy.
 - Quotations are called passage quotations or source-text quotations.
 - The public control is labeled “Bible / Quran,” not with a theological category label.
@@ -102,14 +103,14 @@ Shared article-list behavior for `/debunked`, `/immoral`, and `/evidence`:
 - Defaults to `newest` when there is no query. `relevance` is available only when `q` is nonempty; clearing the query returns the sort to `newest` unless the user explicitly selected `oldest`.
 - With no query, cursor-paginates 24 articles at a time through the corpus link projection ordered by the source article's creation timestamp.
 - With a query, hybrid search combines full-text matches with semantic vector matches. The user can order the bounded result set by fused relevance, newest, or oldest; the UI requests a narrower query if the cap is reached.
-- Search covers title, dek, tags, passage references, and the plain-text projection of article blocks.
+- Search covers title, summary, tags, passage references, and the plain-text projection of article blocks.
 - Search, sorting, corpus selection, and topic/finding filters compose rather than resetting one another.
 
 Global search palette:
 
 - Mount one accessible command-palette singleton in the root layout. Open it with Command-K on macOS, Control-K elsewhere, or a visible header button; Escape closes it and focus returns to the trigger.
 - With no query it shows direct route commands, a Bible/Quran switch, and recent article destinations stored locally on that device.
-- A query searches published Debunked, Immoral, and Evidence articles for the active corpus through the same hybrid service used by the list pages. Results are grouped by category and show title, dek, publication date, matched heading, and an excerpt taken only from stored article text.
+- A query searches published Debunked, Immoral, and Evidence articles for the active corpus through the same hybrid service used by the list pages. Results are grouped by category and show title, summary, publication date, matched heading, and an excerpt taken only from stored article text.
 - Return at most 12 palette results, followed by category-specific “View all results” links that preserve `?text=`, `?q=`, and `?sort=relevance`.
 - Keyword results update immediately. Semantic search starts only for normalized queries of at least three characters after a 400 ms debounce; stale requests are cancelled or ignored so slower responses cannot replace newer ones.
 - Arrow keys, Home/End, Enter, and Escape work as expected. The dialog/combobox has announced result counts, visible focus, IME-safe input handling, and a useful empty/error state.
@@ -117,12 +118,12 @@ Global search palette:
 
 - `/contradictions`
   - Uses `?q=` for search and the global `?text=` selection.
-  - With no search query, cursor-paginates 24 results at a time by descending `effectiveObviousnessScore` using a compound Convex index.
-  - With a search query, Convex full-text search retrieves at most 200 candidates, then the response sorts matches by `effectiveObviousnessScore`; search mode is intentionally not cursor-paginated, and the UI asks the user to refine the query if the cap is reached. This avoids pretending Convex search can natively combine relevance pagination with a custom score order. ([Convex full-text search](https://docs.convex.dev/search/text-search))
-  - Cards show the score, short explanation, compared passage references, and source count.
+  - With no search query, cursor-paginates 24 results at a time by ascending `rank` using a compound Convex index; rank `1` appears first.
+  - With a search query, Convex full-text search retrieves at most 200 candidates, then the response sorts matches by ascending `rank`; search mode is intentionally not cursor-paginated, and the UI asks the user to refine the query if the cap is reached. This avoids pretending Convex search can natively combine relevance pagination with a custom rank order. ([Convex full-text search](https://docs.convex.dev/search/text-search))
+  - Cards show the rank, short explanation, compared passage references, and source count.
 
 - `/contradictions/[contradiction-slug]`
-  - Shows two or more structured claim groups, their passages, the exact conflict, relevant textual context, common reconciliation attempts and responses, provenance, and claim-level citations.
+  - Shows two or more structured claims, their passages, the exact conflict, relevant textual context, common reconciliation attempts and responses, provenance, and claim-level citations.
 
 - `/debunked`
   - Lists factually or historically challenged stories and claims for the active corpus.
@@ -194,7 +195,7 @@ SEO is a route-level acceptance requirement rather than a final polish pass. Pub
 - Root metadata defines `metadataBase`, a title template, default description, application name, icons, and a default `twitter.card = "summary_large_image"`. Static metadata is used where possible; content-dependent pages use server-only `generateMetadata`. ([Next.js metadata API](https://nextjs.org/docs/app/api-reference/functions/generate-metadata))
 - Each list page generates a unique title, description, canonical URL, Open Graph values, and introductory copy for its category and active corpus. `/debunked?text=bible` and `/debunked?text=quran`, for example, are separate canonical pages because their primary content differs.
 - A list route without `text` performs a temporary redirect to the remembered corpus, or Bible when there is no cookie, so the displayed corpus and canonical URL are never ambiguous. URLs containing `q`, `sort`, topic/finding filters, pagination state, or `entry` use `robots: { index: false, follow: true }` and canonicalize to the clean category-and-corpus URL. Search engines can follow result links without indexing an unbounded set of query combinations.
-- Each contradiction/article detail page loads its content once for both page rendering and `generateMetadata`, then emits a unique title, dek/summary description, canonical slug URL, publication and modification dates, category, linked corpus names, and social-image metadata. A `?text=` context never changes its canonical detail URL or SEO metadata; dual-linked content names both corpora while the selector may still tailor surrounding navigation.
+- Each contradiction/article detail page loads its content once for both page rendering and `generateMetadata`, then emits a unique title, summary description, canonical slug URL, publication and modification dates, category, linked corpus names, and social-image metadata. A `?text=` context never changes its canonical detail URL or SEO metadata; dual-linked content names both corpora while the selector may still tailor surrounding navigation.
 - `/debate` may index its static explanatory landing content, but conversation state, API endpoints, command-palette results, and error/loading URLs are never indexable.
 - Missing, draft, or archived slugs call `notFound()` and are excluded from metadata feeds. Draft/preview responses are explicitly `noindex`.
 - `app/robots.ts` permits public content, disallows private/internal API and preview paths, and names the sitemap. `app/sitemap.ts` queries all published contradiction, article, and indexable map-list URLs and supplies `lastModified` from `updatedAt`; split with `generateSitemaps` before reaching search-engine limits. ([Next.js robots convention](https://nextjs.org/docs/app/api-reference/file-conventions/metadata/robots), [Next.js sitemap convention](https://nextjs.org/docs/app/api-reference/file-conventions/metadata/sitemap))
@@ -232,9 +233,9 @@ SEO is a route-level acceptance requirement rather than a final polish pass. Pub
 | `passages` | Edition ID, canonical reference key, display reference, sortable book/surah and passage range, licensed exact text |
 | `sources` | URL, title, publisher, author, publication/access dates, source type, archive URL, license metadata |
 | `citations` | Source ID, optional passage ID, locator/page/section, exact supporting excerpt where permitted, verification status |
-| `contradictions` | Corpus key, slug, title, summary, claim groups, explanation blocks, citation IDs, search text, AI score, future editor score, effective score, scoring rationale/version, provenance, status, import key |
-| `articles` | Kind (`debunked`, `immoral`, or `evidence`), slug, title, dek, finding, content warnings, hero media, structured blocks, search text, status, version, `updatedAt`, publication time, import key |
-| `articleCorpora` | Article ID, corpus key, projected article kind/status/creation/publication times, `updatedAt`; compound-indexed for efficient corpus/date lists |
+| `contradictions` | Corpus key, slug, title, summary, claims, explanation blocks, citation IDs, search text, rank, provenance, status, import key |
+| `articles` | Type (`debunked`, `immoral`, or `evidence`), slug, title, summary, finding, content warnings, hero media, structured blocks, search text, status, version, `updatedAt`, publication time, import key |
+| `articleCorpora` | Article ID, corpus key, projected article type/status/creation/publication times, `updatedAt`; compound-indexed for efficient corpus/date lists |
 | `tags` | Managed topic key, label, description, and content category |
 | `articleTags` | Article ID, tag ID, and projected corpus key for indexed corpus/topic filtering |
 | `media` | Convex storage ID, MIME type, dimensions, alt text, caption, credit, license, source URL |
@@ -243,9 +244,9 @@ SEO is a route-level acceptance requirement rather than a final polish pass. Pub
 | `mapEntryCorpora` | Map entry ID, corpus key, projected type/status; compound-indexed for corpus-scoped map queries |
 | `geoFeatures` | GeoJSON geometry, label, current and historical place names, precision, uncertainty notes, provenance |
 | `mapEntryFeatures` | Map entry ID, feature ID, role, display order, and styling overrides |
-| `searchDocuments` | One denormalized document per content item and corpus, with content kind/ID, title, searchable text, status, source creation time, `updatedAt`, and ranking fields |
+| `searchDocuments` | One denormalized document per content item and corpus, with content type/ID, title, searchable text, status, source creation time, `updatedAt`, and ranking fields |
 | `articleSearchState` | Article ID, corpus key, content hash, embedding model/version, active chunk version, indexing status/error, last indexed time, `updatedAt` |
-| `articleChunks` | Search-state/article IDs, corpus key, article kind, chunk order, heading path, stored excerpt text, 1,536-dimensional embedding, chunk version/status, source creation time, `updatedAt` |
+| `articleChunks` | Search-state/article IDs, corpus key, article type, chunk order, heading path, stored excerpt text, 1,536-dimensional embedding, chunk version/status, source creation time, `updatedAt` |
 | `ingestionRuns` | Adapter, corpus key, source URL/hash, adapter/model/prompt versions, status, counts, errors, timestamps |
 
 `articleCorpora`, `mapEntryCorpora`, `searchDocuments`, and the active article chunks deliberately duplicate small amounts of data. Convex mutations update or activate these projections atomically so corpus filtering and search remain indexed and do not scan array fields.
@@ -259,7 +260,7 @@ SEO is a route-level acceptance requirement rather than a final polish pass. Pub
 - Re-importing an existing record preserves `_creationTime` and changes `updatedAt`; creating a genuinely new record receives a new `_creationTime`.
 - Publication time remains a separate optional `publishedAt` field and must not replace either creation or update time.
 - `articleCorpora.articleCreatedAt` and `searchDocuments.sourceCreatedAt` copy the source article's `_creationTime`. List sorting must use these projected values, not the link/projection document's own `_creationTime`.
-- Add compound indexes for `articleCorpora` covering corpus key, article kind, publication status, and `articleCreatedAt`; query them ascending for oldest and descending for newest.
+- Add compound indexes for `articleCorpora` covering corpus key, article type, publication status, and `articleCreatedAt`; query them ascending for oldest and descending for newest.
 - `articleChunks.sourceCreatedAt` also copies the source article's `_creationTime`. `articleSearchState` and every chunk follow the same required `updatedAt` rule as all other Apolog-owned records.
 
 ### Hybrid article search and indexing
@@ -269,7 +270,7 @@ Convex provides indexed full-text and vector search, but it does not create embe
 - Use `AI_EMBEDDING_MODEL=openai/text-embedding-3-small` through the AI SDK's `embed`/`embedMany` APIs. Store the model name, dimensions, chunking version, and content hash; the initial vector index has 1,536 dimensions. The model remains an environment setting, but a dimension change requires a new compatible index/version. ([AI Gateway embedding model](https://vercel.com/ai-gateway/models/text-embedding-3-small/faq))
 - Before publication or a material article-version update, generate a deterministic plain-text document, then split it at paragraph/heading boundaries into roughly 600–900-token chunks with at most 100 tokens of overlap. Never split an exact passage quotation or table row merely to hit the target.
 - Embed bounded batches with `embedMany`. Unchanged content hashes do not re-embed. Archiving an article deactivates its chunks and corpus search projections.
-- Build the Convex vector index on `articleChunks.embedding`, with filter fields for `corpusKey`, article kind, and active status. Every query supplies the active corpus filter; kinds narrow the vector search when a list page or retrieval caller needs them.
+- Build the Convex vector index on `articleChunks.embedding`, with filter fields for `corpusKey`, article type, and active status. Every query supplies the active corpus filter; types narrow the vector search when a list page or retrieval caller needs them.
 - Stage embeddings under the same content version as the draft. Only after all chunks validate does one mutation publish the article/projections, activate the new chunk version, and deactivate the old one. A failed partial reindex records its error and leaves the last published content and matching search version serving traffic, so excerpts never describe a different revision than the article they open.
 - Keyword search returns at most 200 article candidates. Semantic search requests at most 64 chunk matches, deduplicates them to their best article-level evidence, and retains the matched heading/excerpt.
 - For relevance order, fuse keyword and semantic ranks with deterministic reciprocal-rank fusion using constant 60, then apply a documented exact-title boost and stable ID tie-breaker. Do not compare raw full-text and cosine scores directly. `newest` and `oldest` reorder the same bounded article candidate union by projected source creation time.
@@ -278,18 +279,18 @@ Convex provides indexed full-text and vector search, but it does not create embe
 
 ### Contradiction structure and ranking
 
-Each contradiction contains at least two claim groups:
+Each contradiction contains at least two claims. A claim can cite multiple passages when they express the same proposition:
 
 ```ts
-type ContradictionClaimGroup = {
+type ContradictionClaim = {
   label: string;
-  claim: string;
+  text: string;
   passageIds: Id<"passages">[];
   citationIds: Id<"citations">[];
 };
 ```
 
-`aiObviousnessScore` is an integer from 0 to 100 generated during ingestion. The saved scoring record includes subscores for semantic opposition, directness of wording, dependence on translation, dependence on chronology/context, and the number of extra assumptions required to reconcile the claims. `effectiveObviousnessScore` equals a future editor override when present and otherwise the AI score. Public ordering never triggers a new model call.
+`rank` is a positive integer scoped to a corpus; lower numbers appear first and rank `1` is the first contradiction. AI assigns the initial ordering during ingestion, but the database field remains simply `rank`, and a future editor changes that same field rather than writing to a separate override column. Ranking model and prompt versions belong to the associated `ingestionRuns` provenance, not to specially named score fields. Public ordering never triggers a model call.
 
 ### Geography structure
 
@@ -337,13 +338,13 @@ Public reads:
 
 - `contradictions.list({ corpusKey, query?, paginationOpts })`
 - `contradictions.getBySlug({ slug })`
-- `articles.list({ kind, corpusKey, query?, sort, tagKeys?, finding?, paginationOpts })`, where `sort` is `newest | oldest | relevance`
-- `articles.getBySlug({ kind, slug })`
+- `articles.list({ type, corpusKey, query?, sort, tagKeys?, finding?, paginationOpts })`, where `sort` is `newest | oldest | relevance`
+- `articles.getBySlug({ type, slug })`
 - `map.listEntries({ corpusKey, typeKeys?, topicKeys?, certainty? })`
 - `map.getEntryBySlug({ slug })`
-- `search.keywordArticles({ corpusKey, query, kinds?, limit })` as the low-latency public Convex query
-- `search.hybridArticles({ corpusKey, query, kinds?, limit, sort? })` as the protected Convex action used by the web search bridge
-- `retrieval.searchPublished({ corpusKey, query, kinds?, limit })`
+- `search.keywordArticles({ corpusKey, query, types?, limit })` as the low-latency public Convex query
+- `search.hybridArticles({ corpusKey, query, types?, limit, sort? })` as the protected Convex action used by the web search bridge
+- `retrieval.searchPublished({ corpusKey, query, types?, limit })`
 - `home.getFeatured({ corpusKey })`
 
 Import operations:
@@ -374,7 +375,7 @@ The public Next.js HTTP APIs are `POST /api/chat` and the bounded semantic-searc
 3. Implement passages, sources, citations, structured content, representative fixtures, and the shared server-rendered SEO/JSON-LD contract.
 4. Build Contradictions, Debunked, Immoral, and Evidence list/detail experiences, including route-specific metadata and dynamic Open Graph cards.
 5. Add full-text projections, chunk/version indexing, AI Gateway embeddings, Convex vector search, deterministic hybrid ranking, and the global Command-K palette.
-6. Build the ingestion CLI, AI generation/scoring, quotation and citation verification, dry runs, idempotent staging, explicit publication, and embedding reindex commands.
+6. Build the ingestion CLI, AI generation/ranking, quotation and citation verification, dry runs, idempotent staging, explicit publication, and embedding reindex commands.
 7. Add AI Gateway debate, corpus-scoped hybrid retrieval, live-search citations, copy-ready responses, privacy controls, and abuse limits.
 8. Build the generalized geography explorer with points, routes, regions, comparisons, deep links, filters, and accessible list mode.
 9. Configure Vercel and Convex preview/production deployments, seed preview fixtures, submit sitemaps, and complete accessibility/performance/social-preview checks.
@@ -390,10 +391,10 @@ Test coverage includes:
 - Debunked, Immoral, and Evidence lists composing corpus, query, date sort, tags, findings, and pagination without dropping URL state.
 - Article search sorting bounded candidates correctly by relevance, newest, and oldest, including the 200-candidate refinement state.
 - Embedding jobs skipping unchanged hashes, activating only complete chunk versions, preserving the prior version after failures, and deactivating archived content.
-- Hybrid search enforcing corpus/kind filters, deduplicating chunk hits by article, producing deterministic reciprocal-rank fusion, and never exposing draft content or text from the wrong corpus.
+- Hybrid search enforcing corpus/type filters, deduplicating chunk hits by article, producing deterministic reciprocal-rank fusion, and never exposing draft content or text from the wrong corpus.
 - Command-K/Control-K opening globally; focus restoration, keyboard/IME behavior, stale-response handling, recent items, route commands, result caps, and active-corpus preservation.
-- Default contradiction pagination ordered by effective score and bounded search mode ordered by score.
-- Claim groups containing valid passages and citation references.
+- Default contradiction pagination and bounded search mode ordered by ascending rank.
+- Contradiction claims containing valid passages and citation references.
 - Rejection of invented, mismatched, unlicensed, or incorrectly attributed passage quotations.
 - Citation coverage and broken-source handling.
 - Immoral article filters, warnings, narrative/command distinctions, and apologetic-response blocks.
@@ -415,7 +416,7 @@ Test coverage includes:
 - Geography is modeled generically and is not limited to claimed supernatural events.
 - Map comparisons are explanatory tools, not automatic proof; methods and uncertainty remain visible.
 - Passage imports require edition and license metadata.
-- AI scores and analysis are stored with reproducibility metadata and are never silently regenerated at read time.
+- AI-assigned ranks and analysis are stored with reproducibility metadata and are never silently regenerated at read time.
 - No user accounts, saved chats, comments, submissions, admin UI, or voice mode are included.
 - Vercel AI Gateway and Grok 4.5 are configurable through environment variables but are the MVP defaults.
 - `openai/text-embedding-3-small` through Vercel AI Gateway is the initial 1,536-dimensional embedding model; changing dimensions is a versioned migration, not an in-place configuration flip.
