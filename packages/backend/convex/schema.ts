@@ -1,3 +1,4 @@
+import { authTables } from "@convex-dev/auth/server";
 import { defineSchema, defineTable } from "convex/server";
 import { v } from "convex/values";
 
@@ -7,9 +8,17 @@ import {
   corpusKeyValidator as corpusKey,
   mapCertaintyValidator,
   publicationStatusValidator as status,
+  userRoleValidator as userRole,
 } from "./validators";
 
 export default defineSchema({
+  ...authTables,
+
+  userRoles: defineTable({
+    role: userRole,
+    userId: v.id("users"),
+  }).index("by_user", ["userId"]),
+
   articleCorpora: defineTable({
     articleCreatedAt: v.number(),
     articleId: v.id("articles"),

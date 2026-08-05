@@ -15,6 +15,14 @@ The web app starts at `http://localhost:${CONDUCTOR_PORT:-3000}` and the same co
 
 Useful routes include `/debunked`, `/immoral`, `/evidence`, `/silly`, `/contradictions`, `/map`, and `/debate`. Switch the active corpus in the header or use `?text=bible` / `?text=quran` explicitly.
 
+Account creation and login are intentionally unlinked from the public interface. Visit `/signup` or `/login` directly. New accounts have the `user` role. To promote an account without exposing a browser-callable privilege escalation path, run:
+
+```bash
+bunx convex run userRoles:setByEmail '{"email":"you@example.com","role":"admin"}'
+```
+
+Add `--prod` to target the production deployment.
+
 ## Verify and maintain
 
 ```bash
