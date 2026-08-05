@@ -7,14 +7,7 @@ import { usePathname, useSearchParams } from "next/navigation";
 import { useEffect, useEffectEvent, useRef, useState } from "react";
 import { FiArrowRight, FiSearch, FiX } from "react-icons/fi";
 
-const routes = [
-  ["/contradictions", "Browse contradictions"],
-  ["/debunked", "Review factual claims"],
-  ["/immoral", "Explore moral critiques"],
-  ["/evidence", "Read evidence guides"],
-  ["/silly", "Browse the silliest stories"],
-  ["/map", "Open the geography explorer"],
-] as const;
+import { searchPaletteLinks } from "@/lib/public-routes";
 
 type SearchState =
   | { status: "idle" }
@@ -146,7 +139,7 @@ export function SearchPalette({
               <p className="px-3 py-2 text-xs font-bold uppercase tracking-[0.18em] text-[var(--muted)]">
                 Go directly
               </p>
-              {routes.map(([href, label]) => (
+              {searchPaletteLinks.map(({ href, label }) => (
                 <Link
                   className="flex items-center justify-between rounded-xl px-3 py-3 text-sm font-semibold hover:bg-[var(--surface)]"
                   href={`${href}?text=${corpusKey}`}

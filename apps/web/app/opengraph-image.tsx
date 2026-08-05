@@ -67,7 +67,7 @@ export default function OpenGraphImage() {
         </div>
       </div>
       <div style={{ color: "#a8b3ad", fontFamily: "sans-serif", fontSize: 24 }}>
-        Passages · Evidence · Ethics · Geography
+        Passages · Evidence · Ethics · Debate
       </div>
     </div>,
     size

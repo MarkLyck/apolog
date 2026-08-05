@@ -1,7 +1,5 @@
 import * as v from "valibot";
 
-import type { CorpusKey } from "./corpus";
-
 export const articleTypes = [
   "debunked",
   "immoral",
@@ -93,20 +91,6 @@ export const contradictionContentSchema = v.object({
   updatedAt: timestamp,
 });
 
-export const mapEntryContentSchema = v.object({
-  slug: requiredText,
-  title: requiredText,
-  summary: requiredText,
-  corpusKeys: v.pipe(v.array(corpusKeySchema), v.minLength(1)),
-  type: requiredText,
-  period: requiredText,
-  certainty: v.picklist(["traditional", "probable", "disputed"]),
-  longitude: v.pipe(v.number(), v.minValue(-180), v.maxValue(180)),
-  latitude: v.pipe(v.number(), v.minValue(-90), v.maxValue(90)),
-  comparison: requiredText,
-  updatedAt: timestamp,
-});
-
 export const demoContentSchema = v.object({
   corpora: v.array(
     v.object({
@@ -117,7 +101,6 @@ export const demoContentSchema = v.object({
   ),
   articles: v.array(articleContentSchema),
   contradictions: v.array(contradictionContentSchema),
-  mapEntries: v.array(mapEntryContentSchema),
 });
 
 export const articleSearchResultSchema = v.object({
@@ -144,13 +127,7 @@ export type ArticleSearchResult = v.InferOutput<
 export type ContradictionContent = v.InferOutput<
   typeof contradictionContentSchema
 >;
-export type MapEntryContent = v.InferOutput<typeof mapEntryContentSchema>;
-export interface DemoContent {
-  corpora: { key: CorpusKey; name: string; description: string }[];
-  articles: ArticleContent[];
-  contradictions: ContradictionContent[];
-  mapEntries: MapEntryContent[];
-}
+export type DemoContent = v.InferOutput<typeof demoContentSchema>;
 
 export function validateDemoContent(input: unknown): { success: boolean } {
   return { success: v.safeParse(demoContentSchema, input).success };

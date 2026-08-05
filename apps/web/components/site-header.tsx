@@ -6,19 +6,12 @@ import Link from "next/link";
 import { usePathname, useSearchParams } from "next/navigation";
 import { useCallback, useRef, useState } from "react";
 
-import { articleSections } from "@/lib/article-sections";
+import { primaryNavigationLinks } from "@/lib/public-routes";
 
 import { CorpusSwitch } from "./corpus-switch";
 import { SearchPalette } from "./search-palette";
 import { SearchTrigger } from "./search-trigger";
 import { ThemeToggle } from "./theme-toggle";
-
-const links = [
-  ["/contradictions", "Contradictions"],
-  ...articleSections.map(({ href, label }) => [href, label] as const),
-  ["/map", "Map"],
-  ["/debate", "Debate"],
-] as const;
 
 export function PrimaryNavigation({
   corpusKey,
@@ -40,7 +33,7 @@ export function PrimaryNavigation({
           : "hidden items-center gap-1 xl:flex"
       }
     >
-      {links.map(([href, label]) => (
+      {primaryNavigationLinks.map(({ href, label }) => (
         <Link
           aria-current={pathname.startsWith(href) ? "page" : undefined}
           className={

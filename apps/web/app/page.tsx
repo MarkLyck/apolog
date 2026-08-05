@@ -18,7 +18,7 @@ import { getFeatured } from "@/lib/data";
 
 export const metadata: Metadata = {
   description:
-    "Trace passages, evidence, moral arguments, and geographic claims to their sources.",
+    "Trace passages, evidence, and moral arguments to their sources.",
   title: "Examine the claim",
 };
 
@@ -226,45 +226,6 @@ export default async function Home({
               key={article.slug}
             />
           ))}
-        </div>
-      </section>
-
-      <section className="mx-auto max-w-[92rem] px-5 pb-10 lg:px-8">
-        <div className="grid overflow-hidden rounded-[2rem] bg-[var(--ink)] text-[var(--paper)] lg:grid-cols-2">
-          <div className="p-8 sm:p-12 lg:p-16">
-            <FiCompass
-              aria-hidden="true"
-              className="text-3xl text-[var(--accent)]"
-            />
-            <h2 className="mt-8 text-4xl sm:text-5xl">
-              Claims happen somewhere.
-            </h2>
-            <p className="mt-5 max-w-lg leading-7 text-[var(--inverse-muted)]">
-              Compare routes, regions, proposed locations, and scale without
-              presenting modern estimates as ancient certainties.
-            </p>
-            <Link
-              className="mt-8 inline-flex items-center gap-2 rounded-full bg-white px-5 py-3 text-sm font-bold text-[#17211e]"
-              href={`/map?text=${corpusKey}`}
-            >
-              Open geography explorer <FiArrowRight aria-hidden="true" />
-            </Link>
-          </div>
-          <div className="relative min-h-80 border-t border-white/10 bg-[radial-gradient(circle_at_30%_30%,#2b7b69,transparent_36%),radial-gradient(circle_at_70%_65%,#c86c32,transparent_30%),#111815] lg:border-l lg:border-t-0">
-            <div className="absolute inset-0 opacity-25 editorial-grid" />
-            {featured.mapEntries.map((entry, index) => (
-              <div
-                className="absolute rounded-full border border-white/35 bg-white/10 px-4 py-2 text-xs font-bold backdrop-blur"
-                key={entry.slug}
-                style={{
-                  left: `${18 + index * 38}%`,
-                  top: `${30 + index * 28}%`,
-                }}
-              >
-                {entry.title}
-              </div>
-            ))}
-          </div>
         </div>
       </section>
 

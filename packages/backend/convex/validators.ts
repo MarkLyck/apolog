@@ -50,9 +50,3 @@ export const contentBlockValidator = v.union(
     items: v.array(v.string()),
   })
 );
-
-export const mapCertaintyValidator = v.union(
-  v.literal("traditional"),
-  v.literal("probable"),
-  v.literal("disputed")
-);

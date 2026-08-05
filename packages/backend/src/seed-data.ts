@@ -71,17 +71,5 @@ export function buildSeedDocuments(fixtures: DemoContent) {
       ...corpus,
       enabled: true,
     })),
-    mapEntries: fixtures.mapEntries.map((fixture) => {
-      const { corpusKeys, ...entry } = fixture;
-      return {
-        corpusKeys,
-        document: {
-          ...entry,
-          importKey: `demo:map:${entry.slug}`,
-          status: "published" as const,
-          version: 1,
-        },
-      };
-    }),
   };
 }

@@ -15,7 +15,6 @@ import type * as crons from "../crons.js";
 import type * as email from "../email.js";
 import type * as home from "../home.js";
 import type * as http from "../http.js";
-import type * as map from "../map.js";
 import type * as rateLimits from "../rateLimits.js";
 import type * as search from "../search.js";
 import type * as seed from "../seed.js";
@@ -37,7 +36,6 @@ declare const fullApi: ApiFromModules<{
   email: typeof email;
   home: typeof home;
   http: typeof http;
-  map: typeof map;
   rateLimits: typeof rateLimits;
   search: typeof search;
   seed: typeof seed;

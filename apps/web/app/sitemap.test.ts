@@ -12,5 +12,6 @@ describe("sitemap", () => {
     expect(
       urls.some((url) => url.includes("/silly/") && !url.includes("?"))
     ).toBe(true);
+    expect(urls.some((url) => url.includes("/map"))).toBe(false);
   });
 });

@@ -2,9 +2,9 @@
 
 ## Summary
 
-Build Apolog as a public, account-free platform for critically examining the Bible and Quran: internal contradictions, factually debunked claims, immoral passages, conflicts with established evidence, and geographical or chronological claims.
+Build Apolog as a public, account-free platform for critically examining the Bible and Quran: internal contradictions, factually debunked claims, immoral passages, conflicts with established evidence, and chronological claims.
 
-A persistent Bible/Quran switch controls every data surface: landing-page recommendations, list pages, searches, related content, debate retrieval, and map entries. A record can apply to one corpus or both, but content from the other corpus must never leak into the active view unintentionally.
+A persistent Bible/Quran switch controls every data surface: landing-page recommendations, list pages, searches, related content, and debate retrieval. A record can apply to one corpus or both, but content from the other corpus must never leak into the active view unintentionally.
 
 The MVP also includes hybrid keyword/semantic article search, a global Command-K palette, route-specific search metadata and social cards, and text-only debate powered by Vercel AI SDK, Vercel AI Gateway, and Grok 4.5. Voice chat and an authenticated admin editor remain future extensions.
 
@@ -29,8 +29,8 @@ packages/
   - Initializes shadcn explicitly with Base UI. ([shadcn Base UI documentation](https://ui.shadcn.com/docs/changelog/2026-01-base-ui))
   - Replaces shadcn's generated `cn` helper with `cnfast`.
   - Uses `@wrksz/themes/next` with cookie/hybrid storage for light, dark, and system themes. ([themes documentation](https://themes.wrksz.dev/))
-  - Uses `react-icons` and MapLibre GL.
-  - Server-renders all indexable list and detail content; client components are limited to filters, live updates, chat, and the map.
+  - Uses `react-icons`.
+  - Server-renders all indexable list and detail content; client components are limited to filters, live updates, and chat.
 
 - `packages/backend`
   - Owns the Convex project and exports its generated typed API.
@@ -71,7 +71,7 @@ type CorpusKey = "bible" | "quran";
 
 Naming rules:
 
-- Prefer conventional, short domain names such as `corpus`, `edition`, `passage`, `passageReference`, `claim`, `summary`, `rank`, `type`, `status`, and `mapEntry`.
+- Prefer conventional, short domain names such as `corpus`, `edition`, `passage`, `passageReference`, `claim`, `summary`, `rank`, `type`, and `status`.
 - Name stored fields for what they contain, not how they were produced or how the UI interprets them. For example, use `rank` rather than an AI-specific or criteria-specific score name.
 - Do not use theological status labels or an unqualified supernatural claim in schemas, APIs, variables, or neutral interface copy.
 - Quotations are called passage quotations or source-text quotations.
@@ -83,19 +83,19 @@ Selector behavior:
 - Canonical URL state is `?text=bible` or `?text=quran`, managed through nuqs.
 - A `SameSite=Lax` cookie named `apolog-text` remembers the most recent choice for one year.
 - URL state wins over the cookie; Bible is the fallback when neither exists.
-- Navigation carries the active value into every list, debate, and map route.
-- Every list, search, featured-content, retrieval, and map query requires a `corpusKey`.
-- Many-to-many link tables associate articles and map entries with one or both corpora; do not filter array fields with full table scans.
+- Navigation carries the active value into every list and debate route.
+- Every list, search, featured-content, and retrieval query requires a `corpusKey`.
+- Many-to-many link tables associate articles with one or both corpora; do not filter array fields with full table scans.
 - Contradictions belong to exactly one corpus because their compared claims are corpus-specific.
 - Switching while viewing an item linked to both corpora keeps the current page and updates its context.
 - Switching from a corpus-specific detail page navigates to the equivalent list for the new corpus.
-- The active corpus is visibly stated beside page titles and in debate and map interfaces.
+- The active corpus is visibly stated beside page titles and in the debate interface.
 
 ## Routes and Product Behavior
 
 - `/`
-  - Landing page whose featured contradictions, articles, geographical entries, and counts are scoped to the active corpus.
-  - Includes the Bible/Quran switch, category explanations, map preview, and debate call-to-action.
+  - Landing page whose featured contradictions, articles, and counts are scoped to the active corpus.
+  - Includes the Bible/Quran switch, category explanations, and debate call-to-action.
 
 Shared article-list behavior for `/debunked`, `/immoral`, and `/evidence`:
 
@@ -169,43 +169,28 @@ Global search palette:
   - Valibot validates roles, message count, per-message length, total context, and request shape.
   - Abuse controls combine a signed anonymous session ID, a rotating hash of the request IP, request/body/output caps, and Vercel AI Gateway spending limits. Raw IP addresses are not stored.
 
-- `/map`
-  - A generalized geography explorer for claims and narratives in the active corpus.
-  - Supports claimed supernatural events, journeys, migrations, battles, conquests, claimed historical events, affected regions, competing location hypotheses, and distance/duration/scale comparisons.
-  - Supports points, routes, regions, and multiple GeoJSON features per entry.
-  - Example: Moses' journey can display origin/destination, proposed route reconstructions, the claimed 40-year duration, and a sourced modern walking-time comparison.
-  - Every comparison states its method, assumptions, source, and uncertainty. A modern direct route is never presented as the exact ancient route.
-  - Entry types are data records rather than a closed TypeScript union, allowing future categories without a schema migration.
-  - Filters include corpus, entry type, topic, historical period, and geographic certainty.
-  - Low-zoom points cluster; routes and regions remain independently selectable.
-  - `?entry=<slug>` deep-links the selected side panel without adding another required route.
-  - The panel contains a summary, passage references, chronology, comparison metrics, related content, and citations.
-  - Includes a fully accessible, indexable non-map list view.
-  - The MVP fetches the complete published map dataset for the active corpus and performs viewport filtering and clustering in the client. Convex has no assumed geospatial index in this design; add a geohash/tile projection only if corpus datasets become too large for a single payload.
-  - Uses a configurable OpenFreeMap style initially.
-
 All detail routes have stable slugs, server-rendered metadata, Open Graph data, sitemap entries, canonical URLs, structured article data, and proper 404 handling.
 
 ## SEO and Social Sharing Contract
 
-SEO is a route-level acceptance requirement rather than a final polish pass. Public list/detail content is rendered as meaningful HTML in the initial response; client JavaScript enhances filters, the command palette, chat, and MapLibre interactions but is not required to read an article or follow its internal links.
+SEO is a route-level acceptance requirement rather than a final polish pass. Public list/detail content is rendered as meaningful HTML in the initial response; client JavaScript enhances filters, the command palette, and chat but is not required to read an article or follow its internal links.
 
 ### Metadata and indexation
 
 - Root metadata defines `metadataBase`, a title template, default description, application name, icons, and a default `twitter.card = "summary_large_image"`. Static metadata is used where possible; content-dependent pages use server-only `generateMetadata`. ([Next.js metadata API](https://nextjs.org/docs/app/api-reference/functions/generate-metadata))
 - Each list page generates a unique title, description, canonical URL, Open Graph values, and introductory copy for its category and active corpus. `/debunked?text=bible` and `/debunked?text=quran`, for example, are separate canonical pages because their primary content differs.
-- A list route without `text` performs a temporary redirect to the remembered corpus, or Bible when there is no cookie, so the displayed corpus and canonical URL are never ambiguous. URLs containing `q`, `sort`, topic/finding filters, pagination state, or `entry` use `robots: { index: false, follow: true }` and canonicalize to the clean category-and-corpus URL. Search engines can follow result links without indexing an unbounded set of query combinations.
+- A list route without `text` performs a temporary redirect to the remembered corpus, or Bible when there is no cookie, so the displayed corpus and canonical URL are never ambiguous. URLs containing `q`, `sort`, topic/finding filters, or pagination state use `robots: { index: false, follow: true }` and canonicalize to the clean category-and-corpus URL. Search engines can follow result links without indexing an unbounded set of query combinations.
 - Each contradiction/article detail page loads its content once for both page rendering and `generateMetadata`, then emits a unique title, summary description, canonical slug URL, publication and modification dates, category, linked corpus names, and social-image metadata. A `?text=` context never changes its canonical detail URL or SEO metadata; dual-linked content names both corpora while the selector may still tailor surrounding navigation.
 - `/debate` may index its static explanatory landing content, but conversation state, API endpoints, command-palette results, and error/loading URLs are never indexable.
 - Missing, draft, or archived slugs call `notFound()` and are excluded from metadata feeds. Draft/preview responses are explicitly `noindex`.
-- `app/robots.ts` permits public content, disallows private/internal API and preview paths, and names the sitemap. `app/sitemap.ts` queries all published contradiction, article, and indexable map-list URLs and supplies `lastModified` from `updatedAt`; split with `generateSitemaps` before reaching search-engine limits. ([Next.js robots convention](https://nextjs.org/docs/app/api-reference/file-conventions/metadata/robots), [Next.js sitemap convention](https://nextjs.org/docs/app/api-reference/file-conventions/metadata/sitemap))
+- `app/robots.ts` permits public content, disallows private/internal API and preview paths, and names the sitemap. `app/sitemap.ts` queries all published contradiction and article URLs and supplies `lastModified` from `updatedAt`; split with `generateSitemaps` before reaching search-engine limits. ([Next.js robots convention](https://nextjs.org/docs/app/api-reference/file-conventions/metadata/robots), [Next.js sitemap convention](https://nextjs.org/docs/app/api-reference/file-conventions/metadata/sitemap))
 
 ### Structured, crawlable content
 
 - The root emits `Organization` and `WebSite` JSON-LD. Detail routes emit an appropriate `Article`/`BlogPosting` object with headline, description, canonical URL, image, `datePublished`, `dateModified`, author attribution, publisher, and corpus/category keywords, plus `BreadcrumbList` for the visible breadcrumb trail. ([Next.js JSON-LD guide](https://nextjs.org/docs/app/guides/json-ld))
 - JSON-LD mirrors visible page facts, uses absolute URLs, and is serialized with `<` escaped to prevent script injection. Do not add FAQ, review, or rating markup unless the matching content is visibly present and eligible.
 - Every page has one descriptive `h1`, a logical heading hierarchy, semantic landmarks, descriptive link text, accessible image alt text/captions/credits, and real HTML table headers and captions. Article pages add a table of contents where length warrants it.
-- Related articles, linked contradictions, map entries, previous/next items, and corpus/category breadcrumbs form crawlable server-rendered internal links. The map includes the already-required server-rendered non-map list so its entries are discoverable without WebGL.
+- Related articles, linked contradictions, previous/next items, and corpus/category breadcrumbs form crawlable server-rendered internal links.
 - The first list page and its detail links are server-rendered. Interactive cursor pagination is for users; all published detail URLs remain discoverable through internal links and the sitemap.
 
 ### Dynamic Open Graph cards
@@ -213,13 +198,13 @@ SEO is a route-level acceptance requirement rather than a final polish pass. Pub
 - Use `ImageResponse` from `next/og` to generate 1200×630 PNGs. The root uses `app/opengraph-image.tsx` with exported `alt`, `size`, and `contentType`; dynamic metadata points list and detail pages at a validated `app/og/route.ts` handler backed by a shared TSX renderer and carrying only stable category, corpus, slug, and content-version parameters. This is necessary because route-segment image functions receive dynamic path params but not the list page's `?text=` search parameter. ([Next.js generated OG-image convention](https://nextjs.org/docs/app/api-reference/file-conventions/metadata/opengraph-image))
 - The image route looks up all displayed content server-side rather than trusting title or image text from its URL. The content version in the image URL provides deterministic cache busting after edits. Twitter cards reuse the same tested image renderer and declare `summary_large_image`.
 - A shared renderer enforces a recognizable fixed editorial design: Apolog mark, high-contrast category color, Bible/Quran label, restrained evidence/quotation motif, title, short supporting line, and domain. It uses bundled local fonts and no request-time dependency on remote font or logo servers.
-- The root gets a durable brand card; list routes get category-and-corpus cards; every contradiction/article detail route gets a content-specific card sourced from the published record. `/debate` and `/map` get purpose-built route cards rather than inheriting a generic image. Long titles are clamped safely, optional hero art has a reliable fallback, and graphic article content is never shown by default.
+- The root gets a durable brand card; list routes get category-and-corpus cards; every contradiction/article detail route gets a content-specific card sourced from the published record. `/debate` gets a purpose-built route card rather than inheriting a generic image. Long titles are clamped safely, optional hero art has a reliable fallback, and graphic article content is never shown by default.
 - Social cards use a fixed light or dark art direction rather than the viewer's theme, remain legible at small feed sizes, and never render arbitrary HTML or unsanitized remote media URLs. Cache invalidation/revalidation follows the source record's version or `updatedAt` so an edit cannot leave stale social copy indefinitely.
 - Visual tests render cards at 1200×630 for long titles, missing media, both corpora, every category, and non-ASCII text. Automated metadata tests assert canonical, robots, title, description, Open Graph image/alt/dimensions, Twitter card, and JSON-LD on every route class.
 
 ### Performance and measurement
 
-- Target good Core Web Vitals: optimize and size editorial images, use local/subset fonts, reserve media dimensions, keep server/client boundaries narrow, and lazy-load MapLibre outside the map viewport. Metadata and primary copy must not wait for client hydration.
+- Target good Core Web Vitals: optimize and size editorial images, use local/subset fonts, reserve media dimensions, and keep server/client boundaries narrow. Metadata and primary copy must not wait for client hydration.
 - Configure Search Console and privacy-conscious traffic/error measurement after deployment. Monitor indexed pages, sitemap failures, broken canonicals, rich-result errors, social-card response failures, and top zero-result searches without storing raw chat content.
 
 ## Data Model and Interfaces
@@ -239,17 +224,12 @@ SEO is a route-level acceptance requirement rather than a final polish pass. Pub
 | `tags` | Managed topic key, label, description, and content category |
 | `articleTags` | Article ID, tag ID, and projected corpus key for indexed corpus/topic filtering |
 | `media` | Convex storage ID, MIME type, dimensions, alt text, caption, credit, license, source URL |
-| `mapEntryTypes` | Extensible type key, label, description, icon, and default styling |
-| `mapEntries` | Slug, type ID, title, summary, chronology, passage references, comparison metrics, citations, certainty, status, version, import key |
-| `mapEntryCorpora` | Map entry ID, corpus key, projected type/status; compound-indexed for corpus-scoped map queries |
-| `geoFeatures` | GeoJSON geometry, label, current and historical place names, precision, uncertainty notes, provenance |
-| `mapEntryFeatures` | Map entry ID, feature ID, role, display order, and styling overrides |
 | `searchDocuments` | One denormalized document per content item and corpus, with content type/ID, title, searchable text, status, source creation time, `updatedAt`, and ranking fields |
 | `articleSearchState` | Article ID, corpus key, content hash, embedding model/version, active chunk version, indexing status/error, last indexed time, `updatedAt` |
 | `articleChunks` | Search-state/article IDs, corpus key, article type, chunk order, heading path, stored excerpt text, 1,536-dimensional embedding, chunk version/status, source creation time, `updatedAt` |
 | `ingestionRuns` | Adapter, corpus key, source URL/hash, adapter/model/prompt versions, status, counts, errors, timestamps |
 
-`articleCorpora`, `mapEntryCorpora`, `searchDocuments`, and the active article chunks deliberately duplicate small amounts of data. Convex mutations update or activate these projections atomically so corpus filtering and search remain indexed and do not scan array fields.
+`articleCorpora`, `searchDocuments`, and the active article chunks deliberately duplicate small amounts of data. Convex mutations update or activate these projections atomically so corpus filtering and search remain indexed and do not scan array fields.
 
 ### Record timestamps
 
@@ -292,28 +272,6 @@ type ContradictionClaim = {
 
 `rank` is a positive integer scoped to a corpus; lower numbers appear first and rank `1` is the first contradiction. AI assigns the initial ordering during ingestion, but the database field remains simply `rank`, and a future editor changes that same field rather than writing to a separate override column. Ranking model and prompt versions belong to the associated `ingestionRuns` provenance, not to specially named score fields. Public ordering never triggers a model call.
 
-### Geography structure
-
-`geoFeatures.geometry` supports GeoJSON `Point`, `LineString`, `MultiLineString`, `Polygon`, and `MultiPolygon` geometries. Coordinates are always stored as longitude/latitude and validated for legal ranges and valid polygon rings.
-
-Initial feature roles are:
-
-```ts
-type GeoFeatureRole =
-  | "event-site"
-  | "origin"
-  | "destination"
-  | "claimed-route"
-  | "alternative-route"
-  | "comparison-route"
-  | "affected-region"
-  | "claimed-promised-region";
-```
-
-Initial `mapEntryTypes` seed records include `claimed-miracle`, `journey`, `battle`, `conquest`, `migration`, `claimed-event`, `geographic-claim`, `distance-comparison`, and `duration-comparison`.
-
-Comparison metrics contain the claimed value, comparison value, normalized unit, calculation method, assumptions, uncertainty, citation IDs, and any feature IDs used in the calculation.
-
 ### Structured content contract
 
 Define a Valibot-validated discriminated union for:
@@ -326,7 +284,6 @@ Define a Valibot-validated discriminated union for:
 - Callouts and content notices.
 - Claim-level citation references.
 - Apologetic argument/response pairs.
-- Map embeds and sourced metric comparisons.
 
 Passage quotation blocks reference `passages` records. Arbitrary HTML and executable MDX are not stored or rendered. A plain-text projection is generated from blocks for search and previews.
 
@@ -340,8 +297,6 @@ Public reads:
 - `contradictions.getBySlug({ slug })`
 - `articles.list({ type, corpusKey, query?, sort, tagKeys?, finding?, paginationOpts })`, where `sort` is `newest | oldest | relevance`
 - `articles.getBySlug({ type, slug })`
-- `map.listEntries({ corpusKey, typeKeys?, topicKeys?, certainty? })`
-- `map.getEntryBySlug({ slug })`
 - `search.keywordArticles({ corpusKey, query, types?, limit })` as the low-latency public Convex query
 - `search.hybridArticles({ corpusKey, query, types?, limit, sort? })` as the protected Convex action used by the web search bridge
 - `retrieval.searchPublished({ corpusKey, query, types?, limit })`
@@ -350,10 +305,10 @@ Public reads:
 Import operations:
 
 - A dedicated bearer-authenticated Convex HTTP action accepts bounded batches from `apps/ingest`; the secret is stored only in local/Convex environment configuration and is never a client-exposed value.
-- Internal mutations upsert editions, passages, sources, citations, contradictions, articles, media, map entries, and features.
+- Internal mutations upsert editions, passages, sources, citations, contradictions, articles, and media.
 - `publishImportRun` publishes only records belonging to a fully validated run and atomically updates corpus links and search projections.
 - Stable import keys preserve IDs and slugs across reruns.
-- Validation rejects missing corpus links, unlicensed passage quotations, unverifiable quotation text, invalid GeoJSON, impossible coordinate ranges, and comparison metrics without methods and citations.
+- Validation rejects missing corpus links, unlicensed passage quotations, and unverifiable quotation text.
 
 The public Next.js HTTP APIs are `POST /api/chat` and the bounded semantic-search bridge `GET /api/search/articles`. The search endpoint validates with Valibot, rate-limits anonymous sessions, accepts only known corpus/type/sort values, caps query length and results, and calls the protected Convex action. All other content reads, including instant keyword typeahead, use typed Convex queries directly.
 
@@ -377,14 +332,13 @@ The public Next.js HTTP APIs are `POST /api/chat` and the bounded semantic-searc
 5. Add full-text projections, chunk/version indexing, AI Gateway embeddings, Convex vector search, deterministic hybrid ranking, and the global Command-K palette.
 6. Build the ingestion CLI, AI generation/ranking, quotation and citation verification, dry runs, idempotent staging, explicit publication, and embedding reindex commands.
 7. Add AI Gateway debate, corpus-scoped hybrid retrieval, live-search citations, copy-ready responses, privacy controls, and abuse limits.
-8. Build the generalized geography explorer with points, routes, regions, comparisons, deep links, filters, and accessible list mode.
-9. Configure Vercel and Convex preview/production deployments, seed preview fixtures, submit sitemaps, and complete accessibility/performance/social-preview checks.
+8. Configure Vercel and Convex preview/production deployments, seed preview fixtures, submit sitemaps, and complete accessibility/performance/social-preview checks.
 
 Test coverage includes:
 
 - URL-versus-cookie precedence and selector persistence across every route.
 - No Bible-only record appearing in Quran mode or Quran-only record appearing in Bible mode.
-- Dual-linked articles and map entries appearing in both modes without duplicate cards.
+- Dual-linked articles appearing in both modes without duplicate cards.
 - Corpus link/search projections remaining consistent after create, update, publish, archive, and re-import operations.
 - Every Apolog-owned table exposing `_creationTime` and a required `updatedAt`, with `updatedAt` advancing on every mutation while `_creationTime` remains stable.
 - Article corpus/search projections copying the source article creation time and preserving correct newest/oldest ordering even when links are rebuilt.
@@ -398,23 +352,19 @@ Test coverage includes:
 - Rejection of invented, mismatched, unlicensed, or incorrectly attributed passage quotations.
 - Citation coverage and broken-source handling.
 - Immoral article filters, warnings, narrative/command distinctions, and apologetic-response blocks.
-- GeoJSON validation for points, routes, polygon rings, and coordinate order.
-- Map entries with multiple features, alternative hypotheses, and sourced comparisons.
 - Debate retrieval enforcing the active corpus, prompt-injection resistance, source rendering, rate limits, cancellation, and provider errors.
-- Server-rendered route content, responsive layouts, keyboard navigation, themes, accessible tables, and map list fallback.
+- Server-rendered route content, responsive layouts, keyboard navigation, themes, and accessible tables.
 - An SEO route matrix covering unique titles/descriptions, corpus-aware canonicals, `noindex,follow` query variants, robots rules, published-only sitemap entries, 404/draft behavior, internal links, and safe schema-valid JSON-LD.
 - Dynamic Open Graph and Twitter metadata, including visual snapshots at 1200×630 for each route class, both corpora, long/non-ASCII titles, missing media, cache updates, and accessible alt text.
-- Playwright journeys for every route, Bible/Quran switching, search deep links, debate copy flow, map deep links, and 404s.
+- Playwright journeys for every route, Bible/Quran switching, search deep links, debate copy flow, and 404s.
 - CI acceptance requires exact-dependency-policy validation, a frozen Bun install, formatting, linting, type checking, tests, and a production build from a clean checkout.
 
 ## Assumptions and Defaults
 
 - English is the MVP language; Bible and Quran are the initial corpora.
 - Bible is the fallback selection, but every data experience honors the active corpus.
-- Every publishable article and map entry has at least one explicit corpus link.
+- Every publishable article has at least one explicit corpus link.
 - `/immoral` is the canonical route spelling.
-- Geography is modeled generically and is not limited to claimed supernatural events.
-- Map comparisons are explanatory tools, not automatic proof; methods and uncertainty remain visible.
 - Passage imports require edition and license metadata.
 - AI-assigned ranks and analysis are stored with reproducibility metadata and are never silently regenerated at read time.
 - No user accounts, saved chats, comments, submissions, admin UI, or voice mode are included.
