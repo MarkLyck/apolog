@@ -21,7 +21,7 @@ describe("PrimaryNavigation", () => {
     expect(html).toContain("Immoral");
     expect(html).toContain("Evidence");
     expect(html).toContain("Silly");
-    expect(html).toContain("Map");
+    expect(html).not.toContain("Map");
     expect(html).toContain("Debate");
     expect(html).toContain("/silly?text=quran");
     expect(html).toContain('aria-current="page"');

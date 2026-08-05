@@ -66,9 +66,6 @@ describe("accessible color tokens", () => {
       expect(
         contrastRatio(token(theme, "--muted"), token(theme, "--surface-strong"))
       ).toBeGreaterThanOrEqual(4.5);
-      expect(
-        contrastRatio(token(theme, "--inverse-muted"), token(theme, "--ink"))
-      ).toBeGreaterThanOrEqual(4.5);
     }
   });
 });

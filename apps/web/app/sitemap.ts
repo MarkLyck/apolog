@@ -4,6 +4,7 @@ import type { ArticleType } from "@apolog/shared";
 import { fetchQuery } from "convex/nextjs";
 import type { MetadataRoute } from "next";
 
+import { sitemapRoutes } from "@/lib/public-routes";
 import { siteConfig } from "@/lib/site";
 
 interface SitemapContent {
@@ -12,17 +13,7 @@ interface SitemapContent {
 }
 
 export function buildSitemap(content: SitemapContent): MetadataRoute.Sitemap {
-  const staticRoutes = [
-    "",
-    "/contradictions",
-    "/debunked",
-    "/immoral",
-    "/evidence",
-    "/silly",
-    "/debate",
-    "/map",
-  ];
-  const corpusRoutes = staticRoutes.flatMap((route) =>
+  const corpusRoutes = sitemapRoutes.flatMap((route) =>
     corpusKeys.map((corpus) => ({
       changeFrequency: "weekly" as const,
       lastModified: new Date(),

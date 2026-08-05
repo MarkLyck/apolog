@@ -75,40 +75,6 @@ async function reconcileArticleProjections(
   }
 }
 
-async function reconcileMapLinks(
-  ctx: MutationCtx,
-  mapEntryId: Id<"mapEntries">,
-  type: string,
-  updatedAt: number,
-  corpusKeys: ("bible" | "quran")[]
-) {
-  const desired = new Set(corpusKeys);
-  const current = await ctx.db
-    .query("mapEntryCorpora")
-    .withIndex("by_entry_corpus", (index) => index.eq("mapEntryId", mapEntryId))
-    .collect();
-  for (const link of current) {
-    if (!desired.has(link.corpusKey)) {
-      await ctx.db.delete(link._id);
-    }
-  }
-  for (const corpusKey of corpusKeys) {
-    const value = {
-      corpusKey,
-      mapEntryId,
-      status: "published" as const,
-      type,
-      updatedAt,
-    };
-    const existing = current.find((item) => item.corpusKey === corpusKey);
-    if (existing) {
-      await ctx.db.patch(existing._id, value);
-    } else {
-      await ctx.db.insert("mapEntryCorpora", value);
-    }
-  }
-}
-
 export const seed = internalMutation({
   args: {},
   handler: async (ctx) => {
@@ -163,33 +129,9 @@ export const seed = internalMutation({
       }
     }
 
-    for (const fixture of prepared.mapEntries) {
-      const existing = await ctx.db
-        .query("mapEntries")
-        .withIndex("by_import_key", (index) =>
-          index.eq("importKey", fixture.document.importKey)
-        )
-        .unique();
-      let mapEntryId: Id<"mapEntries">;
-      if (existing) {
-        await ctx.db.patch(existing._id, fixture.document);
-        mapEntryId = existing._id;
-      } else {
-        mapEntryId = await ctx.db.insert("mapEntries", fixture.document);
-      }
-      await reconcileMapLinks(
-        ctx,
-        mapEntryId,
-        fixture.document.type,
-        fixture.document.updatedAt,
-        fixture.corpusKeys
-      );
-    }
-
     return {
       articles: prepared.articles.length,
       contradictions: prepared.contradictions.length,
-      mapEntries: prepared.mapEntries.length,
     };
   },
 });

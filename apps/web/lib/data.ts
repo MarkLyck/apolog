@@ -61,10 +61,6 @@ export function getContradiction(slug: string) {
   return fetchQuery(api.contradictions.getBySlug, { slug });
 }
 
-export function listMapEntries(corpusKey: CorpusKey) {
-  return fetchQuery(api.map.listEntries, { corpusKey });
-}
-
 export function getFeatured(corpusKey: CorpusKey) {
   return fetchQuery(api.home.getFeatured, { corpusKey });
 }

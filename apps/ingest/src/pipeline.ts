@@ -18,7 +18,6 @@ export function createDryRunReport() {
         (sum, article) => sum + article.corpusKeys.length,
         0
       ),
-      mapEntries: contentFixtures.mapEntries.length,
     },
     mode: "dry-run" as const,
     provenance: {

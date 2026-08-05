@@ -1,6 +1,6 @@
 # Apolog
 
-Apolog is a source-first research experience for examining factual, moral, and geographic claims in Bible and Quran content. The repository is a Bun/Turborepo monorepo with a Next.js web app, Convex backend, shared content contracts, UI components, and an ingestion CLI.
+Apolog is a source-first research experience for examining factual and moral claims in Bible and Quran content. The repository is a Bun/Turborepo monorepo with a Next.js web app, Convex backend, shared content contracts, UI components, and an ingestion CLI.
 
 ## Run locally
 
@@ -13,7 +13,7 @@ bun run dev
 
 The web app starts at `http://localhost:${CONDUCTOR_PORT:-3000}` and the same command keeps the Convex development functions synchronized. The development database is already seeded with representative Bible and Quran content for every public content type.
 
-Useful routes include `/debunked`, `/immoral`, `/evidence`, `/silly`, `/contradictions`, `/map`, and `/debate`. Switch the active corpus in the header or use `?text=bible` / `?text=quran` explicitly.
+Useful routes include `/debunked`, `/immoral`, `/evidence`, `/silly`, `/contradictions`, and `/debate`. Switch the active corpus in the header or use `?text=bible` / `?text=quran` explicitly.
 
 Account creation and login are intentionally unlinked from the public interface. Visit `/signup` or `/login` directly. New accounts have the `user` role. To promote an account without exposing a browser-callable privilege escalation path, run:
 

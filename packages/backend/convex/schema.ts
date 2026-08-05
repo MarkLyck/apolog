@@ -6,7 +6,6 @@ import {
   articleTypeValidator as articleType,
   contentBlockValidator,
   corpusKeyValidator as corpusKey,
-  mapCertaintyValidator,
   publicationStatusValidator as status,
   userRoleValidator as userRole,
 } from "./validators";
@@ -89,34 +88,6 @@ export default defineSchema({
     name: v.string(),
     updatedAt: v.number(),
   }).index("by_key", ["key"]),
-
-  mapEntries: defineTable({
-    certainty: mapCertaintyValidator,
-    comparison: v.string(),
-    importKey: v.string(),
-    latitude: v.number(),
-    longitude: v.number(),
-    period: v.string(),
-    slug: v.string(),
-    status,
-    summary: v.string(),
-    title: v.string(),
-    type: v.string(),
-    updatedAt: v.number(),
-    version: v.number(),
-  })
-    .index("by_import_key", ["importKey"])
-    .index("by_slug", ["slug"]),
-
-  mapEntryCorpora: defineTable({
-    corpusKey,
-    mapEntryId: v.id("mapEntries"),
-    status,
-    type: v.string(),
-    updatedAt: v.number(),
-  })
-    .index("by_corpus_status", ["corpusKey", "status"])
-    .index("by_entry_corpus", ["mapEntryId", "corpusKey"]),
 
   rateLimits: defineTable({
     count: v.number(),

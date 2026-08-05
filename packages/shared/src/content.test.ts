@@ -67,12 +67,6 @@ describe("representative content fixtures", () => {
         first(value.contradictions).claims = [null] as never;
       },
     ],
-    [
-      "impossible map coordinates",
-      (value: DemoContent) => {
-        first(value.mapEntries).latitude = 140;
-      },
-    ],
   ])("rejects %s at the content boundary", (_label, corrupt) => {
     const input = structuredClone(contentFixtures);
     corrupt(input);

@@ -24,15 +24,6 @@ export const getFeatured = query({
     const articles = (
       await Promise.all(articleLinks.map((link) => ctx.db.get(link.articleId)))
     ).filter((article) => article !== null);
-    const mapLinks = await ctx.db
-      .query("mapEntryCorpora")
-      .withIndex("by_corpus_status", (index) =>
-        index.eq("corpusKey", args.corpusKey).eq("status", "published")
-      )
-      .take(2);
-    const mapEntries = (
-      await Promise.all(mapLinks.map((link) => ctx.db.get(link.mapEntryId)))
-    ).filter((entry) => entry !== null);
-    return { articles, contradictions, mapEntries };
+    return { articles, contradictions };
   },
 });

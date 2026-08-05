@@ -5,7 +5,6 @@ const routeContentFiles = [
   new URL("../app/contradictions/[slug]/page.tsx", import.meta.url),
   new URL("article-detail-page.tsx", import.meta.url),
   new URL("content-blocks.tsx", import.meta.url),
-  new URL("map-explorer.tsx", import.meta.url),
 ];
 
 describe("route landmark semantics", () => {

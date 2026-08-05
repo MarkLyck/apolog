@@ -41,15 +41,10 @@ describe("Convex seed preparation", () => {
     ).toBe(first.articles.length);
   });
 
-  test("prepares stable roots for every fixture-backed content type", () => {
+  test("prepares stable roots for fixture-backed contradictions", () => {
     const result = buildSeedDocuments(contentFixtures);
     expect(
       result.contradictions.every((item) => item.importKey.startsWith("demo:"))
-    ).toBe(true);
-    expect(
-      result.mapEntries.every((item) =>
-        item.document.importKey.startsWith("demo:")
-      )
     ).toBe(true);
   });
 });

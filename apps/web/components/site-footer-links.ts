@@ -1,9 +1,10 @@
 import type { CorpusKey } from "@apolog/shared";
 
+import { footerLinks } from "@/lib/public-routes";
+
 export function getSiteFooterLinks(corpusKey: CorpusKey) {
-  return [
-    { href: `/evidence?text=${corpusKey}`, label: "Methods" },
-    { href: `/map?text=${corpusKey}`, label: "Geography" },
-    { href: `/debate?text=${corpusKey}`, label: "Debate" },
-  ];
+  return footerLinks.map(({ href, label }) => ({
+    href: `${href}?text=${corpusKey}`,
+    label,
+  }));
 }
