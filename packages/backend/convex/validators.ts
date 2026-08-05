@@ -11,6 +11,8 @@ export const publicationStatusValidator = v.union(
   v.literal("archived")
 );
 
+export const userRoleValidator = v.union(v.literal("user"), v.literal("admin"));
+
 export const articleTypeValidator = v.union(
   v.literal("debunked"),
   v.literal("immoral"),

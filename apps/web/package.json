@@ -13,6 +13,7 @@
     "@apolog/backend": "workspace:*",
     "@apolog/shared": "workspace:*",
     "@apolog/ui": "workspace:*",
+    "@convex-dev/auth": "0.0.94",
     "@wrksz/themes": "1.1.0",
     "ai": "7.0.51",
     "cnfast": "0.1.0",
