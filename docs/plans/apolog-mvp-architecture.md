@@ -227,14 +227,14 @@ SEO is a route-level acceptance requirement rather than a final polish pass. Pub
 ### Core Convex tables
 
 | Table | Purpose and principal fields |
-|---|---|
+| --- | --- |
 | `corpora` | Stable key (`bible` or `quran`), display name, description, enabled state, default edition ID |
 | `editions` | Corpus key, code, title, language, translator/editor, publisher, license, source URL |
 | `passages` | Edition ID, canonical reference key, display reference, sortable book/surah and passage range, licensed exact text |
 | `sources` | URL, title, publisher, author, publication/access dates, source type, archive URL, license metadata |
 | `citations` | Source ID, optional passage ID, locator/page/section, exact supporting excerpt where permitted, verification status |
 | `contradictions` | Corpus key, slug, title, summary, claims, explanation blocks, citation IDs, search text, rank, provenance, status, import key |
-| `articles` | Type (`debunked`, `immoral`, or `evidence`), slug, title, summary, finding, content warnings, hero media, structured blocks, search text, status, version, `updatedAt`, publication time, import key |
+| `articles` | Type (`debunked`, `immoral`, `evidence`, or `silly`), slug, title, summary, finding, content warnings, hero media, structured blocks, search text, status, version, `updatedAt`, publication time, import key |
 | `articleCorpora` | Article ID, corpus key, projected article type/status/creation/publication times, `updatedAt`; compound-indexed for efficient corpus/date lists |
 | `tags` | Managed topic key, label, description, and content category |
 | `articleTags` | Article ID, tag ID, and projected corpus key for indexed corpus/topic filtering |
