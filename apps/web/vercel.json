@@ -1,4 +1,4 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
-  "buildCommand": "cd ../.. && bunx convex deploy --preview-run seed:seed --cmd-url-env-var-name NEXT_PUBLIC_CONVEX_URL --cmd 'bun turbo run build --filter=@apolog/web'"
+  "buildCommand": "cd ../.. && bun scripts/vercel-build.ts"
 }
