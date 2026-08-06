@@ -12,10 +12,27 @@ describe("ArticleCard", () => {
       throw new Error("Fixture missing");
     }
     const html = renderToStaticMarkup(
-      <ArticleCard article={article} corpusKey="quran" />
+      <ArticleCard
+        article={{
+          collectionKey: "debunked",
+          comparisonReferences: [],
+          finding: article.finding,
+          id: "article-id",
+          position: 0,
+          publishedAt: article.publishedAt,
+          readingMinutes: article.readingMinutes,
+          slug: article.slug,
+          summary: article.summary,
+          tags: article.tags,
+          title: article.title,
+        }}
+        corpusKey="quran"
+      />
     );
     expect(html).toContain(article.title);
     expect(html).toContain("8 min read");
-    expect(html).toContain("/debunked/global-flood-evidence?text=quran");
+    expect(html).toContain(
+      "/articles/global-flood-evidence?from=debunked&amp;text=quran"
+    );
   });
 });

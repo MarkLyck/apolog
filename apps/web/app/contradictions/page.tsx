@@ -5,7 +5,7 @@ import { ContradictionCard } from "@/components/contradiction-card";
 import { PageIntro } from "@/components/page-intro";
 import { getPageCorpus } from "@/lib/corpus";
 import type { PageSearchParams } from "@/lib/corpus";
-import { listContradictions } from "@/lib/data";
+import { listArticles } from "@/lib/data";
 
 export const metadata: Metadata = {
   description:
@@ -23,7 +23,13 @@ export default async function Page({
     searchParams,
   ]);
   const query = typeof parameters.q === "string" ? parameters.q : "";
-  const items = await listContradictions(corpusKey, query);
+  const articles = await listArticles(
+    "contradictions",
+    corpusKey,
+    query
+      ? { mode: "search", query, sort: "relevance" }
+      : { mode: "browse", sort: "ranked" }
+  );
   return (
     <>
       <PageIntro
@@ -56,15 +62,15 @@ export default async function Page({
           className="mb-8 mt-5 text-sm text-[var(--muted)]"
           aria-live="polite"
         >
-          {items.length} ranked{" "}
-          {items.length === 1 ? "comparison" : "comparisons"}
+          {articles.length} ranked{" "}
+          {articles.length === 1 ? "comparison" : "comparisons"}
         </div>
         <div className="grid gap-4 md:grid-cols-2">
-          {items.map((item) => (
+          {articles.map((article) => (
             <ContradictionCard
+              article={article}
               corpusKey={corpusKey}
-              item={item}
-              key={item.slug}
+              key={article.slug}
             />
           ))}
         </div>

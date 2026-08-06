@@ -1,32 +1,41 @@
-import { corpusLabel } from "@apolog/shared";
-import type { ArticleType, CorpusKey } from "@apolog/shared";
+import { collectionRegistry, corpusLabel } from "@apolog/shared";
+import type { CollectionKey, CorpusKey } from "@apolog/shared";
 import { Badge } from "@apolog/ui";
 import Link from "next/link";
 import { notFound, redirect } from "next/navigation";
 import { FiArrowLeft, FiClock, FiExternalLink } from "react-icons/fi";
 
-import { getArticleCorpusRedirect } from "@/lib/article-visibility";
+import { resolveArticlePlacement } from "@/lib/article-placement";
 import { getArticle } from "@/lib/data";
 
 import { ContentBlocks } from "./content-blocks";
 
 export async function ArticleDetailPage({
-  type,
   slug,
   corpusKey,
+  requestedCollection,
 }: {
-  type: ArticleType;
   slug: string;
   corpusKey: CorpusKey;
+  requestedCollection: CollectionKey | null;
 }) {
-  const article = await getArticle(type, slug);
+  const article = await getArticle(slug);
   if (!article) {
     notFound();
   }
-  const corpusRedirect = getArticleCorpusRedirect(article, corpusKey, type);
-  if (corpusRedirect) {
-    redirect(corpusRedirect);
+  const resolved = resolveArticlePlacement(
+    article.placements,
+    corpusKey,
+    requestedCollection
+  );
+  if (resolved.redirect) {
+    redirect(resolved.redirect);
   }
+  if (!resolved.placement) {
+    notFound();
+  }
+  const activePlacement = resolved.placement;
+  const collection = collectionRegistry[activePlacement.collectionKey];
 
   return (
     <article>
@@ -34,14 +43,17 @@ export async function ArticleDetailPage({
         <div className="mx-auto max-w-5xl px-5 py-16 lg:px-8 lg:py-24">
           <Link
             className="inline-flex items-center gap-2 text-sm font-bold text-[var(--muted)]"
-            href={`/${type}?text=${corpusKey}`}
+            href={`/${activePlacement.collectionKey}?text=${corpusKey}`}
           >
-            <FiArrowLeft aria-hidden="true" /> Back to {type}
+            <FiArrowLeft aria-hidden="true" /> Back to {collection.label}
           </Link>
           <div className="mt-10 flex flex-wrap gap-2">
             <Badge className="border-[var(--accent)] text-[var(--accent-strong)]">
-              {type}
+              {collection.label}
             </Badge>
+            {activePlacement.position > 0 ? (
+              <Badge>Rank {activePlacement.position}</Badge>
+            ) : null}
             <Badge>{corpusLabel(corpusKey)} context</Badge>
             <Badge className="gap-1.5">
               <FiClock aria-hidden="true" /> {article.readingMinutes} min read
@@ -61,7 +73,7 @@ export async function ArticleDetailPage({
         </div>
       </header>
       <div className="mx-auto grid max-w-5xl gap-12 px-5 py-14 lg:grid-cols-[minmax(0,1fr)_15rem] lg:px-8">
-        <ContentBlocks blocks={article.blocks} />
+        <ContentBlocks blocks={article.document.blocks} />
         <div className="space-y-8 lg:sticky lg:top-28 lg:self-start">
           <div>
             <h2 className="font-sans text-xs font-bold uppercase tracking-[0.18em] text-[var(--muted)]">

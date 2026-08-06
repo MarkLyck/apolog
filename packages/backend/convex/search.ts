@@ -2,17 +2,18 @@ import { normalizeSearchQuery } from "@apolog/shared/search";
 import { v } from "convex/values";
 
 import { query } from "./_generated/server";
-import { articleTypeValidator, corpusKeyValidator } from "./validators";
+import { toPublishedArticleListItem } from "./articleViews";
+import { collectionKeyValidator, corpusKeyValidator } from "./validators";
 
 export const keywordArticles = query({
   args: {
+    collectionKey: v.optional(collectionKeyValidator),
     corpusKey: corpusKeyValidator,
     limit: v.number(),
     query: v.string(),
     sort: v.optional(
       v.union(v.literal("newest"), v.literal("oldest"), v.literal("relevance"))
     ),
-    type: v.optional(articleTypeValidator),
   },
   handler: async (ctx, args) => {
     const normalized = normalizeSearchQuery(args.query);
@@ -26,27 +27,32 @@ export const keywordArticles = query({
         const scoped = index
           .search("searchText", normalized)
           .eq("corpusKey", args.corpusKey);
-        return args.type
-          ? scoped.eq("contentType", args.type).eq("status", "published")
+        return args.collectionKey
+          ? scoped
+              .eq("collectionKey", args.collectionKey)
+              .eq("status", "published")
           : scoped.eq("status", "published");
       });
-    const hits = await search.take(Math.min(boundedLimit * 4, 96));
+    const hits = await search.take(Math.min(boundedLimit * 6, 120));
+    const seen = new Set<string>();
+    const uniqueHits = hits.filter((hit) => {
+      if (seen.has(hit.articleId)) {
+        return false;
+      }
+      seen.add(hit.articleId);
+      return true;
+    });
     const fetched = await Promise.all(
-      hits.map((hit) => ctx.db.get(hit.articleId))
+      uniqueHits.map(async (hit, relevanceRank) => ({
+        article: await ctx.db.get(hit.articleId),
+        hit,
+        relevanceRank,
+      }))
     );
     const normalizedLower = normalized.toLowerCase();
-    const results = fetched.flatMap((article, relevanceRank) => {
-      if (!article || article.status !== "published") {
-        return [];
-      }
-      return [
-        {
-          article,
-          exactTitle: article.title.toLowerCase() === normalizedLower,
-          relevanceRank,
-        },
-      ];
-    });
+    const results = fetched.flatMap(({ article, hit, relevanceRank }) =>
+      article?.status === "published" ? [{ article, hit, relevanceRank }] : []
+    );
     results.sort((left, right) => {
       if (args.sort === "oldest") {
         return (
@@ -59,20 +65,14 @@ export const keywordArticles = query({
         );
       }
       return (
-        Number(right.exactTitle) - Number(left.exactTitle) ||
+        Number(right.article.title.toLowerCase() === normalizedLower) -
+          Number(left.article.title.toLowerCase() === normalizedLower) ||
         left.relevanceRank - right.relevanceRank
       );
     });
-    return results.slice(0, boundedLimit).map(({ article }) => ({
-      finding: article.finding,
-      id: article._id,
-      publishedAt: article.publishedAt ?? 0,
-      readingMinutes: article.readingMinutes,
-      slug: article.slug,
-      summary: article.summary,
-      tags: article.tags,
-      title: article.title,
-      type: article.type,
-    }));
+    return results
+      .slice(0, boundedLimit)
+      .map(({ article, hit }) => toPublishedArticleListItem(article, hit))
+      .filter((article) => article !== null);
   },
 });

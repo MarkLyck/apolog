@@ -1,4 +1,4 @@
-/* oxlint-disable unicorn/prefer-ternary -- Explicit branches make database writes and returned IDs auditable. */
+/* oxlint-disable unicorn/prefer-ternary -- Explicit branches keep reconciliation auditable. */
 import { contentFixtures } from "@apolog/shared/demo-content";
 
 import { buildSeedDocuments } from "../src/seed-data";
@@ -10,68 +10,68 @@ type PreparedArticle = ReturnType<
   typeof buildSeedDocuments
 >["articles"][number];
 
-async function reconcileArticleProjections(
+async function reconcileArticleRelations(
   ctx: MutationCtx,
   article: Doc<"articles">,
-  fixture: PreparedArticle
+  fixture: PreparedArticle,
+  seededAt: number
 ) {
-  const corpusKeys = fixture.projections.map(
-    (projection) => projection.corpusKey
-  );
-  const desired = new Set(corpusKeys);
-  const currentLinks = await ctx.db
-    .query("articleCorpora")
-    .withIndex("by_article_corpus", (index) =>
-      index.eq("articleId", article._id)
-    )
+  const currentPlacements = await ctx.db
+    .query("articlePlacements")
+    .withIndex("by_article", (index) => index.eq("articleId", article._id))
     .collect();
-  const currentSearch = await ctx.db
+  const currentSearches = await ctx.db
     .query("searchDocuments")
-    .withIndex("by_article_corpus", (index) =>
-      index.eq("articleId", article._id)
-    )
+    .withIndex("by_article", (index) => index.eq("articleId", article._id))
+    .collect();
+  const currentTags = await ctx.db
+    .query("articleTags")
+    .withIndex("by_article", (index) => index.eq("articleId", article._id))
     .collect();
 
-  for (const link of currentLinks) {
-    if (!desired.has(link.corpusKey)) {
-      await ctx.db.delete(link._id);
-    }
-  }
-  for (const document of currentSearch) {
-    if (!desired.has(document.corpusKey)) {
-      await ctx.db.delete(document._id);
-    }
+  for (const relation of [
+    ...currentPlacements,
+    ...currentSearches,
+    ...currentTags,
+  ]) {
+    await ctx.db.delete(relation._id);
   }
 
-  for (const projection of fixture.projections) {
-    const { corpusKey } = projection;
-    const existingLink = currentLinks.find(
-      (item) => item.corpusKey === corpusKey
-    );
-    const linkValue = {
+  for (const placement of fixture.placements) {
+    await ctx.db.insert("articlePlacements", {
+      ...placement,
       articleCreatedAt: article._creationTime,
       articleId: article._id,
-      ...projection.link,
-    };
-    if (existingLink) {
-      await ctx.db.patch(existingLink._id, linkValue);
-    } else {
-      await ctx.db.insert("articleCorpora", linkValue);
-    }
-
-    const existingSearch = currentSearch.find(
-      (item) => item.corpusKey === corpusKey
-    );
-    const documentValue = {
-      ...projection.search,
+    });
+  }
+  for (const search of fixture.searches) {
+    await ctx.db.insert("searchDocuments", {
+      ...search,
       articleId: article._id,
       sourceCreatedAt: article._creationTime,
-    };
-    if (existingSearch) {
-      await ctx.db.patch(existingSearch._id, documentValue);
-    } else {
-      await ctx.db.insert("searchDocuments", documentValue);
+    });
+  }
+  for (const tag of fixture.tagKeys) {
+    const existingTag = await ctx.db
+      .query("tags")
+      .withIndex("by_key", (index) => index.eq("key", tag.key))
+      .unique();
+    const tagId = existingTag
+      ? existingTag._id
+      : await ctx.db.insert("tags", { ...tag, updatedAt: seededAt });
+    if (existingTag && existingTag.label !== tag.label) {
+      await ctx.db.patch(existingTag._id, {
+        label: tag.label,
+        updatedAt: seededAt,
+      });
     }
+    await ctx.db.insert("articleTags", {
+      articleId: article._id,
+      tagId,
+      tagKey: tag.key,
+      tagLabel: tag.label,
+      updatedAt: seededAt,
+    });
   }
 }
 
@@ -112,26 +112,9 @@ export const seed = internalMutation({
       if (!article) {
         throw new Error(`Could not read seeded article ${articleId}`);
       }
-      await reconcileArticleProjections(ctx, article, fixture);
+      await reconcileArticleRelations(ctx, article, fixture, seededAt);
     }
 
-    for (const item of prepared.contradictions) {
-      const existing = await ctx.db
-        .query("contradictions")
-        .withIndex("by_import_key", (index) =>
-          index.eq("importKey", item.importKey)
-        )
-        .unique();
-      if (existing) {
-        await ctx.db.patch(existing._id, item);
-      } else {
-        await ctx.db.insert("contradictions", item);
-      }
-    }
-
-    return {
-      articles: prepared.articles.length,
-      contradictions: prepared.contradictions.length,
-    };
+    return { articles: prepared.articles.length };
   },
 });

@@ -1,24 +1,41 @@
-import type { ArticleType } from "@apolog/shared";
+import { collectionRegistry } from "@apolog/shared";
+import type { CollectionKey } from "@apolog/shared";
 
 export const publicRoutes = {
   home: "",
-  contradictions: "/contradictions",
+  contradictions: collectionRegistry.contradictions.href,
   debate: "/debate",
-  debunked: "/debunked",
-  evidence: "/evidence",
-  immoral: "/immoral",
-  silly: "/silly",
+  debunked: collectionRegistry.debunked.href,
+  evidence: collectionRegistry.evidence.href,
+  immoral: collectionRegistry.immoral.href,
+  silly: collectionRegistry.silly.href,
 } as const;
 
 export const articleSections = [
-  { href: publicRoutes.debunked, label: "Debunked", type: "debunked" },
-  { href: publicRoutes.immoral, label: "Immoral", type: "immoral" },
-  { href: publicRoutes.evidence, label: "Evidence", type: "evidence" },
-  { href: publicRoutes.silly, label: "Silly", type: "silly" },
+  {
+    collectionKey: "debunked",
+    href: collectionRegistry.debunked.href,
+    label: collectionRegistry.debunked.label,
+  },
+  {
+    collectionKey: "immoral",
+    href: collectionRegistry.immoral.href,
+    label: collectionRegistry.immoral.label,
+  },
+  {
+    collectionKey: "evidence",
+    href: collectionRegistry.evidence.href,
+    label: collectionRegistry.evidence.label,
+  },
+  {
+    collectionKey: "silly",
+    href: collectionRegistry.silly.href,
+    label: collectionRegistry.silly.label,
+  },
 ] as const satisfies readonly {
-  href: `/${ArticleType}`;
+  collectionKey: CollectionKey;
+  href: `/${CollectionKey}`;
   label: string;
-  type: ArticleType;
 }[];
 
 export const primaryNavigationLinks = [

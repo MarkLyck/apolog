@@ -1,6 +1,5 @@
 import { api } from "@apolog/backend/api";
 import { corpusKeys } from "@apolog/shared";
-import type { ArticleType } from "@apolog/shared";
 import { fetchQuery } from "convex/nextjs";
 import type { MetadataRoute } from "next";
 
@@ -8,8 +7,7 @@ import { sitemapRoutes } from "@/lib/public-routes";
 import { siteConfig } from "@/lib/site";
 
 interface SitemapContent {
-  articles: { slug: string; type: ArticleType; updatedAt: number }[];
-  contradictions: { slug: string; updatedAt: number }[];
+  articles: { slug: string; updatedAt: number }[];
 }
 
 export function buildSitemap(content: SitemapContent): MetadataRoute.Sitemap {
@@ -25,15 +23,9 @@ export function buildSitemap(content: SitemapContent): MetadataRoute.Sitemap {
     changeFrequency: "monthly" as const,
     lastModified: new Date(article.updatedAt),
     priority: 0.7,
-    url: `${siteConfig.url}/${article.type}/${article.slug}`,
+    url: `${siteConfig.url}/articles/${article.slug}`,
   }));
-  const contradictionRoutes = content.contradictions.map((item) => ({
-    changeFrequency: "monthly" as const,
-    lastModified: new Date(item.updatedAt),
-    priority: 0.7,
-    url: `${siteConfig.url}/contradictions/${item.slug}`,
-  }));
-  return [...corpusRoutes, ...articleRoutes, ...contradictionRoutes];
+  return [...corpusRoutes, ...articleRoutes];
 }
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {

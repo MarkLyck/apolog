@@ -9,5 +9,7 @@ export default function Page({
 }: {
   searchParams: PageSearchParams;
 }) {
-  return <ArticleListPage searchParams={searchParams} type="immoral" />;
+  return (
+    <ArticleListPage collectionKey="immoral" searchParams={searchParams} />
+  );
 }

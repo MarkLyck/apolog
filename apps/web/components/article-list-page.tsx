@@ -1,5 +1,5 @@
-import { corpusLabel } from "@apolog/shared";
-import type { ArticleType } from "@apolog/shared";
+import { collectionRegistry, corpusLabel } from "@apolog/shared";
+import type { CollectionKey } from "@apolog/shared";
 import { FiFilter, FiSearch } from "react-icons/fi";
 
 import { getPageCorpus } from "@/lib/corpus";
@@ -9,38 +9,11 @@ import { listArticles } from "@/lib/data";
 import { ArticleCard } from "./article-card";
 import { PageIntro } from "./page-intro";
 
-const copy = {
-  debunked: {
-    description:
-      "Historical and factual claims examined with explicit findings: contradicted, unsupported, anachronistic, or physically implausible.",
-    eyebrow: "Claims under review",
-    title: "What would the evidence look like?",
-  },
-  evidence: {
-    description:
-      "Accessible guides to evidence, uncertainty, cross-checks, and limitations across science, history, and archaeology.",
-    eyebrow: "Methods and findings",
-    title: "Understand how we know.",
-  },
-  immoral: {
-    description:
-      "Moral analysis that distinguishes narration, command, approval, punishment, and attributed speech before applying a transparent ethical framework.",
-    eyebrow: "Ethics in context",
-    title: "Name the standard. Read the whole passage.",
-  },
-  silly: {
-    description:
-      "Talking animals, impossible logistics, strange miracles, and narrative turns that can be examined critically without mocking the people who believe them.",
-    eyebrow: "The strange and silly",
-    title: "Some stories are hard to read with a straight face.",
-  },
-} as const;
-
 export async function ArticleListPage({
-  type,
+  collectionKey,
   searchParams,
 }: {
-  type: ArticleType;
+  collectionKey: Exclude<CollectionKey, "contradictions">;
   searchParams: PageSearchParams;
 }) {
   const [corpusKey, parameters] = await Promise.all([
@@ -50,16 +23,21 @@ export async function ArticleListPage({
   const query = typeof parameters.q === "string" ? parameters.q : "";
   const requestedSort =
     typeof parameters.sort === "string" ? parameters.sort : "";
-  const sort =
+  const searchSort =
     requestedSort === "oldest" ||
     requestedSort === "relevance" ||
     requestedSort === "newest"
       ? requestedSort
-      : query
-        ? "relevance"
-        : "newest";
-  const articles = await listArticles(type, corpusKey, query, sort);
-  const pageCopy = copy[type];
+      : "relevance";
+  const browseSort = requestedSort === "oldest" ? "oldest" : "newest";
+  const articles = await listArticles(
+    collectionKey,
+    corpusKey,
+    query
+      ? { mode: "search", query, sort: searchSort }
+      : { mode: "browse", sort: browseSort }
+  );
+  const pageCopy = collectionRegistry[collectionKey].page;
 
   return (
     <>
@@ -77,7 +55,7 @@ export async function ArticleListPage({
               className="w-full bg-transparent text-sm outline-none placeholder:text-[var(--muted)]"
               defaultValue={query}
               name="q"
-              placeholder={`Search ${corpusLabel(corpusKey)} ${type}…`}
+              placeholder={`Search ${corpusLabel(corpusKey)} ${collectionKey}…`}
             />
           </label>
           <label className="flex min-h-12 items-center gap-2 rounded-xl border border-[var(--line)] px-4 text-sm font-semibold">
@@ -85,7 +63,7 @@ export async function ArticleListPage({
             <span className="sr-only">Sort results</span>
             <select
               className="bg-transparent outline-none"
-              defaultValue={sort}
+              defaultValue={query ? searchSort : browseSort}
               name="sort"
             >
               {query ? <option value="relevance">Most relevant</option> : null}

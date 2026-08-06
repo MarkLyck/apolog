@@ -1,3 +1,4 @@
+import { parseCollection } from "@apolog/shared";
 import type { Metadata } from "next";
 
 import { ArticleDetailPage } from "@/components/article-detail-page";
@@ -11,17 +12,26 @@ interface Props {
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const { slug } = await params;
-  const article = await getArticle("immoral", slug);
+  const article = await getArticle((await params).slug);
   return article
     ? { description: article.summary, title: article.title }
     : { title: "Not found" };
 }
 
 export default async function Page({ params, searchParams }: Props) {
-  const [{ slug }, corpusKey] = await Promise.all([
+  const [{ slug }, corpusKey, parameters] = await Promise.all([
     params,
     getPageCorpus(searchParams),
+    searchParams,
   ]);
-  return <ArticleDetailPage corpusKey={corpusKey} slug={slug} type="immoral" />;
+  const from = Array.isArray(parameters.from)
+    ? parameters.from[0]
+    : parameters.from;
+  return (
+    <ArticleDetailPage
+      corpusKey={corpusKey}
+      requestedCollection={parseCollection(from)}
+      slug={slug}
+    />
+  );
 }

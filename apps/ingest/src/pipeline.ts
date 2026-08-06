@@ -12,10 +12,9 @@ export function createDryRunReport() {
   return {
     counts: {
       articles: contentFixtures.articles.length,
-      contradictions: contentFixtures.contradictions.length,
       corpora: contentFixtures.corpora.length,
-      corpusLinks: contentFixtures.articles.reduce(
-        (sum, article) => sum + article.corpusKeys.length,
+      placements: contentFixtures.articles.reduce(
+        (sum, article) => sum + article.placements.length,
         0
       ),
     },

@@ -9,5 +9,7 @@ export default function Page({
 }: {
   searchParams: PageSearchParams;
 }) {
-  return <ArticleListPage searchParams={searchParams} type="debunked" />;
+  return (
+    <ArticleListPage collectionKey="debunked" searchParams={searchParams} />
+  );
 }
