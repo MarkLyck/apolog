@@ -1,31 +1,19 @@
-import type { ArticleContent, CorpusKey } from "@apolog/shared";
-import { withCorpus } from "@apolog/shared";
+import type { ArticleListItem, CorpusKey } from "@apolog/shared";
+import { collectionRegistry, withCorpus } from "@apolog/shared";
 import { Badge, Card } from "@apolog/ui";
 import Link from "next/link";
 import { FiArrowUpRight, FiClock } from "react-icons/fi";
-
-type ArticleCardArticle = Pick<
-  ArticleContent,
-  "slug" | "type" | "title" | "summary" | "tags" | "readingMinutes" | "finding"
->;
-
-const categoryLabels = {
-  debunked: "Claim review",
-  evidence: "Evidence guide",
-  immoral: "Moral analysis",
-  silly: "Silly story",
-} as const;
 
 export function ArticleCard({
   article,
   corpusKey,
 }: {
-  article: ArticleCardArticle;
+  article: ArticleListItem;
   corpusKey: CorpusKey;
 }) {
   return (
     <Card
-      eyebrow={categoryLabels[article.type]}
+      eyebrow={collectionRegistry[article.collectionKey].cardLabel}
       className="flex h-full flex-col"
     >
       <div className="mb-5 flex flex-wrap gap-2">
@@ -49,7 +37,10 @@ export function ArticleCard({
       </div>
       <Link
         className="mt-6 inline-flex items-center gap-2 text-sm font-bold text-[var(--accent-strong)] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--accent)]"
-        href={withCorpus(`/${article.type}/${article.slug}`, corpusKey)}
+        href={withCorpus(
+          `/articles/${article.slug}?from=${article.collectionKey}`,
+          corpusKey
+        )}
       >
         Read analysis <FiArrowUpRight aria-hidden="true" />
       </Link>

@@ -10,5 +10,5 @@ export default function Page({
 }: {
   searchParams: PageSearchParams;
 }) {
-  return <ArticleListPage searchParams={searchParams} type="silly" />;
+  return <ArticleListPage collectionKey="silly" searchParams={searchParams} />;
 }

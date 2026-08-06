@@ -80,7 +80,7 @@ export async function POST(request: Request) {
   const context = retrieved
     .map(
       (article) =>
-        `- ${article.title}: ${article.summary} (/${article.type}/${article.slug})`
+        `- ${article.title}: ${article.summary} (/articles/${article.slug})`
     )
     .join("\n");
 

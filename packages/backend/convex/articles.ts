@@ -1,58 +1,101 @@
 import { paginationOptsValidator } from "convex/server";
 import { v } from "convex/values";
 
-import type { Doc } from "./_generated/dataModel";
 import { query } from "./_generated/server";
-import { articleTypeValidator, corpusKeyValidator } from "./validators";
+import {
+  getArticleTagLabels,
+  toPublishedArticleListItem,
+} from "./articleViews";
+import { collectionKeyValidator, corpusKeyValidator } from "./validators";
 
 export const list = query({
   args: {
+    collectionKey: collectionKeyValidator,
     corpusKey: corpusKeyValidator,
     paginationOpts: paginationOptsValidator,
-    sort: v.union(v.literal("newest"), v.literal("oldest")),
-    type: articleTypeValidator,
+    sort: v.union(
+      v.literal("newest"),
+      v.literal("oldest"),
+      v.literal("ranked")
+    ),
   },
   handler: async (ctx, args) => {
-    const projections = await ctx.db
-      .query("articleCorpora")
-      .withIndex("by_corpus_type_status_created", (index) =>
-        index
-          .eq("corpusKey", args.corpusKey)
-          .eq("articleType", args.type)
-          .eq("status", "published")
+    const base =
+      args.sort === "ranked"
+        ? ctx.db
+            .query("articlePlacements")
+            .withIndex("by_corpus_collection_status_position", (index) =>
+              index
+                .eq("corpusKey", args.corpusKey)
+                .eq("collectionKey", args.collectionKey)
+                .eq("status", "published")
+            )
+        : ctx.db
+            .query("articlePlacements")
+            .withIndex("by_corpus_collection_status_created", (index) =>
+              index
+                .eq("corpusKey", args.corpusKey)
+                .eq("collectionKey", args.collectionKey)
+                .eq("status", "published")
+            );
+    const projections = await base
+      .order(
+        args.sort === "oldest" ? "asc" : args.sort === "newest" ? "desc" : "asc"
       )
-      .order(args.sort === "oldest" ? "asc" : "desc")
       .paginate(args.paginationOpts);
-    const page = (
-      await Promise.all(
-        projections.page.map((projection) => ctx.db.get(projection.articleId))
+    const page = await Promise.all(
+      projections.page.map(async (placement) =>
+        toPublishedArticleListItem(
+          await ctx.db.get(placement.articleId),
+          placement
+        )
       )
-    ).filter(
-      (article): article is Doc<"articles"> =>
-        article !== null && article.status === "published"
     );
-    return { ...projections, page };
+    return {
+      ...projections,
+      page: page.filter((article) => article !== null),
+    };
   },
 });
 
 export const getBySlug = query({
-  args: { slug: v.string(), type: articleTypeValidator },
+  args: { slug: v.string() },
   handler: async (ctx, args) => {
     const article = await ctx.db
       .query("articles")
-      .withIndex("by_type_slug", (index) =>
-        index.eq("type", args.type).eq("slug", args.slug)
-      )
+      .withIndex("by_slug", (index) => index.eq("slug", args.slug))
       .unique();
     if (!article || article.status !== "published") {
       return null;
     }
-    const links = await ctx.db
-      .query("articleCorpora")
-      .withIndex("by_article_corpus", (index) =>
-        index.eq("articleId", article._id)
-      )
-      .collect();
-    return { ...article, corpusKeys: links.map((link) => link.corpusKey) };
+    const placements = (
+      await ctx.db
+        .query("articlePlacements")
+        .withIndex("by_article", (index) => index.eq("articleId", article._id))
+        .collect()
+    )
+      .filter((placement) => placement.status === "published")
+      .sort(
+        (left, right) =>
+          left.corpusKey.localeCompare(right.corpusKey) ||
+          Number(right.isPrimary) - Number(left.isPrimary) ||
+          left.collectionKey.localeCompare(right.collectionKey)
+      );
+    if (placements.length === 0) {
+      return null;
+    }
+    return {
+      ...article,
+      corpusKeys: [...new Set(placements.map((item) => item.corpusKey))],
+      placements: placements.map(
+        ({ collectionKey, corpusKey, isPrimary, position }) => ({
+          collectionKey,
+          corpusKey,
+          isPrimary,
+          position,
+        })
+      ),
+      tags: await getArticleTagLabels(ctx, article._id),
+    };
   },
 });

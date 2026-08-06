@@ -7,11 +7,7 @@ import { PrimaryNavigation } from "./site-header";
 describe("PrimaryNavigation", () => {
   test("shows every route without a clipped mobile scroller", () => {
     const html = renderToStaticMarkup(
-      <PrimaryNavigation
-        corpusKey="quran"
-        pathname="/silly/solomon-understands-the-ant"
-        variant="mobile"
-      />
+      <PrimaryNavigation corpusKey="quran" pathname="/silly" variant="mobile" />
     );
 
     expect(html).toContain("flex-wrap");

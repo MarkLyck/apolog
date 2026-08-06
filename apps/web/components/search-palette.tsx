@@ -1,7 +1,7 @@
 "use client";
 
-import { parseArticleSearchResponse, parseCorpus } from "@apolog/shared";
-import type { ArticleSearchResult, CorpusKey } from "@apolog/shared";
+import { parseArticleListResponse, parseCorpus } from "@apolog/shared";
+import type { ArticleListItem, CorpusKey } from "@apolog/shared";
 import Link from "next/link";
 import { usePathname, useSearchParams } from "next/navigation";
 import { useEffect, useEffectEvent, useRef, useState } from "react";
@@ -13,7 +13,7 @@ type SearchState =
   | { status: "idle" }
   | { status: "loading" }
   | { status: "error"; message: string }
-  | { status: "success"; results: ArticleSearchResult[] };
+  | { status: "success"; results: ArticleListItem[] };
 
 export function SearchPalette({
   initialCorpus,
@@ -73,9 +73,7 @@ export function SearchPalette({
         if (!response.ok) {
           throw new Error(`Search request failed with ${response.status}`);
         }
-        const resultsPayload = parseArticleSearchResponse(
-          await response.json()
-        );
+        const resultsPayload = parseArticleListResponse(await response.json());
         if (!resultsPayload) {
           throw new Error("Search returned an invalid response");
         }
@@ -170,11 +168,11 @@ export function SearchPalette({
             ? search.results.map((result) => (
                 <Link
                   className="block rounded-xl p-4 hover:bg-[var(--surface)] focus:bg-[var(--surface)] focus:outline-none"
-                  href={`/${result.type}/${result.slug}?text=${corpusKey}`}
-                  key={`${result.type}:${result.slug}`}
+                  href={`/articles/${result.slug}?from=${result.collectionKey}&text=${corpusKey}`}
+                  key={result.slug}
                 >
                   <div className="mb-1 text-[0.65rem] font-bold uppercase tracking-[0.18em] text-[var(--accent-strong)]">
-                    {result.type}
+                    {result.collectionKey}
                   </div>
                   <div className="font-display text-lg">{result.title}</div>
                   <p className="mt-1 line-clamp-2 text-sm text-[var(--muted)]">

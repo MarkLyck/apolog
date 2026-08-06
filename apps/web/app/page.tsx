@@ -198,11 +198,11 @@ export default async function Home({
             </Link>
           </div>
           <div className="grid gap-4 md:grid-cols-2">
-            {featured.contradictions.map((item) => (
+            {featured.contradictions.map((article) => (
               <ContradictionCard
+                article={article}
                 corpusKey={corpusKey}
-                item={item}
-                key={item.slug}
+                key={article.slug}
               />
             ))}
           </div>
