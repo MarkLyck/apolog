@@ -7,6 +7,7 @@ describe("Vercel deployment wiring", () => {
     ).json();
 
     expect(config.buildCommand).toContain("convex deploy");
+    expect(config.buildCommand).toContain("--preview-run seed:seed");
     expect(config.buildCommand).toContain(
       "--cmd-url-env-var-name NEXT_PUBLIC_CONVEX_URL"
     );
