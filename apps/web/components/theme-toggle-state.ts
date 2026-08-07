@@ -1,17 +1,23 @@
+import type { ResolvedTheme, ThemeSelection } from "@wrksz/themes/client";
+
 export interface ThemeTogglePresentation {
   icon: "moon" | "sun";
   label: string;
-  nextTheme: "dark" | "light";
+  nextTheme: ThemeSelection;
 }
 
 export function getThemeTogglePresentation(
-  resolvedTheme: string | undefined,
+  resolvedTheme: ResolvedTheme | undefined,
+  systemTheme: ResolvedTheme | undefined,
   hydrated: boolean
 ): ThemeTogglePresentation {
-  const isDark = hydrated && resolvedTheme === "dark";
+  const currentTheme = hydrated ? (resolvedTheme ?? "light") : "light";
+  const currentSystemTheme = hydrated ? systemTheme : undefined;
+  const targetTheme = currentTheme === "dark" ? "light" : "dark";
+
   return {
-    icon: isDark ? "sun" : "moon",
-    label: `Use ${isDark ? "light" : "dark"} theme`,
-    nextTheme: isDark ? "light" : "dark",
+    icon: targetTheme === "light" ? "sun" : "moon",
+    label: `Use ${targetTheme} theme`,
+    nextTheme: targetTheme === currentSystemTheme ? "system" : targetTheme,
   };
 }

@@ -1,24 +1,19 @@
 "use client";
 
-import { useTheme } from "@wrksz/themes/client";
-import { useSyncExternalStore } from "react";
+import { useHydrated, useTheme } from "@wrksz/themes/client";
 import { FiMoon, FiSun } from "react-icons/fi";
 
 import { getThemeTogglePresentation } from "./theme-toggle-state";
 
-const subscribeHydration = () => {
-  const controller = new AbortController();
-  return () => controller.abort();
-};
-
 export function ThemeToggle() {
-  const { resolvedTheme, setTheme } = useTheme();
-  const hydrated = useSyncExternalStore(
-    subscribeHydration,
-    () => true,
-    () => false
+  const { resolvedTheme, setTheme, systemTheme } = useTheme();
+  const hydrated = useHydrated();
+  const presentation = getThemeTogglePresentation(
+    resolvedTheme,
+    systemTheme,
+    hydrated
   );
-  const presentation = getThemeTogglePresentation(resolvedTheme, hydrated);
+
   return (
     <button
       aria-label={presentation.label}
