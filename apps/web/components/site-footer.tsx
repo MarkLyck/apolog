@@ -12,13 +12,16 @@ export function SiteFooter({ initialCorpus }: { initialCorpus: CorpusKey }) {
   const corpusKey = parseCorpus(searchParams.get("text")) ?? initialCorpus;
   const links = getSiteFooterLinks(corpusKey);
   return (
-    <footer className="mt-24 border-t border-[var(--line)]">
-      <div className="mx-auto flex max-w-[92rem] flex-col gap-4 px-5 py-10 text-sm text-[var(--muted)] md:flex-row md:items-center md:justify-between lg:px-8">
-        <p>
-          Apolog is an evidence-first editorial demo. Verify quotations before
-          publication.
-        </p>
-        <div className="flex gap-5">
+    <footer className="bg-[var(--ink)] text-[var(--paper)]">
+      <div className="mx-auto grid max-w-[92rem] gap-8 px-5 py-12 md:grid-cols-[1fr_auto] md:items-end lg:px-8">
+        <div>
+          <div className="font-display text-3xl">Apolog</div>
+          <p className="mt-3 max-w-xl text-sm leading-6 opacity-70">
+            An evidence-first editorial demo. Verify quotations before
+            publication.
+          </p>
+        </div>
+        <div className="flex gap-5 text-sm font-semibold">
           {links.map((link) => (
             <Link href={link.href} key={link.href}>
               {link.label}

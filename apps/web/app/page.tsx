@@ -1,5 +1,4 @@
 import { corpusLabel } from "@apolog/shared";
-import { Badge, Card } from "@apolog/ui";
 import type { Metadata } from "next";
 import Link from "next/link";
 import type { IconType } from "react-icons";
@@ -28,28 +27,24 @@ const categoryCards = [
       "Test historical and factual claims against evidence that could confirm or challenge them.",
     href: "/debunked",
     label: "Debunked",
-    number: "01",
   },
   {
     description:
       "Apply explicit ethical standards while preserving textual and historical context.",
     href: "/immoral",
     label: "Immoral",
-    number: "02",
   },
   {
     description:
       "Understand the methods behind geology, evolution, archaeology, and chronology.",
     href: "/evidence",
     label: "Evidence",
-    number: "03",
   },
   {
     description:
       "Examine talking animals, strange miracles, and stories whose narrative logic is simply hard to take seriously.",
     href: "/silly",
     label: "Silly",
-    number: "04",
   },
 ] as const;
 
@@ -89,52 +84,55 @@ export default async function Home({
 
   return (
     <>
-      <section className="editorial-grid relative overflow-hidden border-b border-[var(--line)]">
-        <div className="mx-auto grid min-h-[72vh] max-w-[92rem] items-end gap-12 px-5 py-16 lg:grid-cols-[1.35fr_0.65fr] lg:px-8 lg:py-24">
+      <section className="editorial-grid hero-rule border-b border-[var(--line)]">
+        <div className="mx-auto grid min-h-[42rem] max-w-[92rem] gap-16 px-5 py-16 lg:grid-cols-[minmax(0,1.35fr)_minmax(18rem,0.65fr)] lg:items-end lg:px-8 lg:py-24">
           <div>
-            <Badge className="mb-8 border-[var(--accent)] text-[var(--accent-strong)]">
-              {label} library active
-            </Badge>
-            <h1 className="max-w-5xl text-[clamp(4rem,9vw,9rem)] leading-[0.82]">
+            <div className="mb-10 flex items-center gap-3 text-sm font-semibold text-[var(--muted)]">
+              <span className="size-2 bg-[var(--accent)]" aria-hidden="true" />
+              {label} library selected
+            </div>
+            <h1 className="max-w-4xl text-[clamp(4rem,8vw,6rem)] leading-[0.88]">
               Examine
               <br />
-              <span className="italic text-[var(--accent-strong)]">
-                the claim.
-              </span>
+              the claim.
             </h1>
-            <p className="mt-9 max-w-2xl text-lg leading-8 text-[var(--muted)] md:text-xl">
+            <p className="mt-9 max-w-[65ch] text-lg leading-8 text-[var(--muted)] md:text-xl">
               Read the passage. Follow the evidence. See the strongest response.
               Apolog makes critical inquiry legible without flattening
               uncertainty.
             </p>
-            <div className="mt-9 flex flex-wrap gap-3">
+            <div className="mt-10 flex flex-wrap gap-3">
               <Link
-                className="inline-flex min-h-12 items-center gap-2 rounded-full bg-[var(--ink)] px-6 text-sm font-bold text-[var(--paper)]"
+                className="inline-flex min-h-12 items-center gap-3 border border-[var(--ink)] bg-[var(--ink)] px-6 text-sm font-bold text-[var(--paper)] transition hover:border-[var(--accent-strong)] hover:bg-[var(--accent-strong)]"
                 href={`/contradictions?text=${corpusKey}`}
               >
                 Start with contradictions <FiArrowRight aria-hidden="true" />
               </Link>
               <Link
-                className="inline-flex min-h-12 items-center rounded-full border border-[var(--line)] bg-[var(--surface)] px-6 text-sm font-bold"
+                className="inline-flex min-h-12 items-center border border-[var(--ink)] px-6 text-sm font-bold transition hover:bg-[var(--surface)]"
                 href={`/evidence?text=${corpusKey}`}
               >
                 Explore evidence
               </Link>
             </div>
           </div>
-          <div className="rounded-[2rem] border border-[var(--line)] bg-[color:var(--surface)]/88 p-7 backdrop-blur-sm lg:mb-3">
-            <div className="text-xs font-bold uppercase tracking-[0.2em] text-[var(--muted)]">
-              Our method
-            </div>
-            <ol className="mt-6 grid gap-5">
+
+          <div className="border-t-2 border-[var(--ink)] lg:border-l lg:border-t-0 lg:pl-8">
+            <h2 className="py-5 font-sans text-sm font-bold uppercase tracking-[0.14em] lg:pt-0">
+              A working method
+            </h2>
+            <ol className="border-b border-[var(--line)]">
               {[
                 "Quote precisely",
                 "Separate claim types",
                 "Show uncertainty",
                 "Cite at claim level",
               ].map((item, index) => (
-                <li className="flex items-center gap-4" key={item}>
-                  <span className="grid size-8 shrink-0 place-items-center rounded-full bg-[var(--surface-strong)] text-xs font-bold">
+                <li
+                  className="grid grid-cols-[2rem_1fr] gap-3 border-t border-[var(--line)] py-4"
+                  key={item}
+                >
+                  <span className="text-xs font-bold text-[var(--accent-strong)]">
                     {index + 1}
                   </span>
                   <span className="font-semibold">{item}</span>
@@ -145,59 +143,52 @@ export default async function Home({
         </div>
       </section>
 
-      <section className="mx-auto max-w-[92rem] px-5 py-20 lg:px-8">
-        <div className="mb-10 flex items-end justify-between gap-8">
-          <div>
-            <div className="text-xs font-bold uppercase tracking-[0.2em] text-[var(--accent-strong)]">
-              Four ways in
-            </div>
-            <h2 className="mt-3 text-4xl sm:text-5xl">
-              Choose the question, not the conclusion.
-            </h2>
-          </div>
-        </div>
-        <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
+      <section className="mx-auto max-w-[92rem] px-5 py-20 lg:px-8 lg:py-28">
+        <h2 className="max-w-4xl text-4xl leading-[0.98] sm:text-5xl lg:text-6xl">
+          Choose the question,
+          <br className="hidden sm:block" /> not the conclusion.
+        </h2>
+        <div className="mt-12 grid border-b border-[var(--line)] md:grid-cols-2">
           {categoryCards.map((card) => (
-            <Link href={`${card.href}?text=${corpusKey}`} key={card.href}>
-              <Card className="h-full">
-                <div className="mb-12 flex items-start justify-between">
-                  <span className="text-xs font-bold uppercase tracking-[0.2em] text-[var(--accent-strong)]">
-                    {card.number}
-                  </span>
-                  <FiArrowRight
-                    aria-hidden="true"
-                    className="transition group-hover:translate-x-1"
-                  />
-                </div>
-                <h3 className="text-3xl">{card.label}</h3>
-                <p className="mt-3 text-sm leading-6 text-[var(--muted)]">
-                  {card.description}
-                </p>
-              </Card>
+            <Link
+              className="group grid min-h-48 gap-6 border-t border-[var(--line)] py-7 transition hover:bg-[var(--surface)] md:grid-cols-[minmax(8rem,0.45fr)_1fr] md:px-6 md:even:border-l"
+              href={`${card.href}?text=${corpusKey}`}
+              key={card.href}
+            >
+              <h3 className="flex items-start justify-between text-3xl">
+                {card.label}
+                <FiArrowRight
+                  aria-hidden="true"
+                  className="mt-2 text-base text-[var(--accent-strong)] transition group-hover:translate-x-1"
+                />
+              </h3>
+              <p className="max-w-sm text-sm leading-6 text-[var(--muted)]">
+                {card.description}
+              </p>
             </Link>
           ))}
         </div>
       </section>
 
-      <section className="border-y border-[var(--line)] bg-[var(--surface-strong)]/55 py-20">
-        <div className="mx-auto max-w-[92rem] px-5 lg:px-8">
-          <div className="mb-10 flex items-end justify-between">
-            <div>
-              <div className="text-xs font-bold uppercase tracking-[0.2em] text-[var(--accent-strong)]">
-                Ranked for review
-              </div>
-              <h2 className="mt-3 text-4xl sm:text-5xl">
-                Featured contradictions
-              </h2>
-            </div>
+      <section className="border-y border-[var(--line)] bg-[var(--surface-strong)] py-20 lg:py-24">
+        <div className="mx-auto grid max-w-[92rem] gap-10 px-5 lg:grid-cols-[minmax(15rem,0.5fr)_minmax(0,1fr)] lg:px-8">
+          <div>
+            <h2 className="text-4xl leading-none sm:text-5xl">
+              Featured
+              <br />
+              contradictions
+            </h2>
+            <p className="mt-5 max-w-xs text-sm leading-6 text-[var(--muted)]">
+              Parallel accounts placed side by side, ranked for focused review.
+            </p>
             <Link
-              className="hidden text-sm font-bold md:block"
+              className="mt-8 inline-flex items-center gap-2 border-b border-[var(--ink)] pb-1 text-sm font-bold"
               href={`/contradictions?text=${corpusKey}`}
             >
-              View all →
+              View all <FiArrowRight aria-hidden="true" />
             </Link>
           </div>
-          <div className="grid gap-4 md:grid-cols-2">
+          <div className="grid max-w-3xl gap-4">
             {featured.contradictions.map((article) => (
               <ContradictionCard
                 article={article}
@@ -209,14 +200,14 @@ export default async function Home({
         </div>
       </section>
 
-      <section className="mx-auto max-w-[92rem] px-5 py-20 lg:px-8">
-        <div className="mb-10">
-          <div className="text-xs font-bold uppercase tracking-[0.2em] text-[var(--accent-strong)]">
-            Build the foundation
-          </div>
-          <h2 className="mt-3 text-4xl sm:text-5xl">
+      <section className="mx-auto max-w-[92rem] px-5 py-20 lg:px-8 lg:py-28">
+        <div className="mb-12 grid gap-5 border-b-2 border-[var(--ink)] pb-7 md:grid-cols-[1fr_0.7fr] md:items-end">
+          <h2 className="text-4xl leading-none sm:text-5xl">
             Evidence before argument
           </h2>
+          <p className="text-sm leading-6 text-[var(--muted)] md:justify-self-end">
+            Methods, predictions, and cross-checks that make a claim testable.
+          </p>
         </div>
         <div className="grid gap-4 md:grid-cols-2">
           {featured.articles.map((article) => (
@@ -229,16 +220,19 @@ export default async function Home({
         </div>
       </section>
 
-      <section className="mx-auto max-w-[92rem] px-5 py-20 lg:px-8">
-        <div className="grid gap-4 md:grid-cols-3">
+      <section className="bg-[var(--ink)] text-[var(--paper)]">
+        <div className="mx-auto grid max-w-[92rem] md:grid-cols-3">
           {principles.map(({ icon: Icon, title, copy }) => (
-            <div className="border-l border-[var(--line)] p-6" key={title}>
+            <div
+              className="border-b border-[color:var(--paper)]/20 px-5 py-10 last:border-b-0 md:border-b-0 md:border-r md:last:border-r-0 lg:px-8 lg:py-14"
+              key={title}
+            >
               <Icon
                 aria-hidden="true"
-                className="text-xl text-[var(--accent-strong)]"
+                className="text-xl text-[var(--accent)]"
               />
-              <h3 className="mt-5 text-xl">{title}</h3>
-              <p className="mt-2 text-sm leading-6 text-[var(--muted)]">
+              <h3 className="mt-8 text-2xl">{title}</h3>
+              <p className="mt-3 max-w-sm text-sm leading-6 opacity-70">
                 {copy(label)}
               </p>
             </div>

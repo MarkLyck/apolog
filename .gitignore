@@ -20,5 +20,6 @@ test-results/
 
 # Local tooling and operating-system files
 .context/
+.impeccable/*.local.json
 *.tsbuildinfo
 .DS_Store

@@ -9,13 +9,13 @@ export function Card({ eyebrow, className, children, ...props }: CardProps) {
   return (
     <article
       className={cn(
-        "group rounded-[1.4rem] border border-[var(--line)] bg-[var(--surface)] p-6 shadow-[0_18px_60px_-38px_rgba(10,20,18,0.42)] transition duration-300 hover:-translate-y-1 hover:border-[var(--accent)] hover:shadow-[0_24px_70px_-34px_rgba(16,93,76,0.35)]",
+        "group border border-[var(--line)] bg-[var(--surface)] p-6 shadow-[0_16px_40px_-36px_color-mix(in_srgb,var(--ink)_45%,transparent)] transition duration-300 hover:border-[var(--ink)] hover:shadow-[0_20px_44px_-34px_color-mix(in_srgb,var(--ink)_38%,transparent)]",
         className
       )}
       {...props}
     >
       {eyebrow ? (
-        <div className="mb-4 text-[0.68rem] font-bold uppercase tracking-[0.2em] text-[var(--muted)]">
+        <div className="mb-4 text-[0.68rem] font-bold uppercase tracking-[0.16em] text-[var(--muted)]">
           {eyebrow}
         </div>
       ) : null}

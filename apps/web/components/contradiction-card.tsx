@@ -28,7 +28,7 @@ export function ContradictionCard({
           <div className="mt-5 flex flex-wrap gap-2">
             {article.comparisonReferences.map((reference) => (
               <span
-                className="rounded-full bg-[var(--surface-strong)] px-3 py-1.5 text-xs font-semibold"
+                className="border border-[var(--line)] bg-[var(--surface-strong)] px-3 py-1.5 text-xs font-semibold"
                 key={reference}
               >
                 {reference}

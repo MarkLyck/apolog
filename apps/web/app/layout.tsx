@@ -1,4 +1,6 @@
 import { ThemeProvider } from "@wrksz/themes/next";
+import "@fontsource-variable/ibm-plex-sans";
+import "@fontsource-variable/newsreader";
 import type { Metadata } from "next";
 import { Suspense } from "react";
 import type { ReactNode } from "react";
@@ -43,7 +45,7 @@ export default async function RootLayout({
           storageKey="apolog-theme"
         >
           <a
-            className="fixed left-3 top-3 z-[60] -translate-y-20 rounded-full bg-[var(--ink)] px-4 py-2 text-sm font-bold text-[var(--paper)] focus:translate-y-0"
+            className="fixed left-3 top-3 z-[60] -translate-y-20 border border-[var(--ink)] bg-[var(--paper)] px-4 py-2 text-sm font-bold text-[var(--ink)] focus:translate-y-0"
             href="#main-content"
           >
             Skip to content
