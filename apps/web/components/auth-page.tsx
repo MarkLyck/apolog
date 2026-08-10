@@ -5,10 +5,12 @@ import { AuthForm } from "./auth-form";
 export function AuthPage({
   description,
   mode,
+  redirectTo,
   title,
 }: {
   description: ReactNode;
   mode: "login" | "signup";
+  redirectTo?: string;
   title: string;
 }) {
   return (
@@ -19,7 +21,7 @@ export function AuthPage({
         </div>
         <h1 className="mt-4 text-5xl leading-none">{title}</h1>
         <p className="mb-8 mt-5 leading-7 text-[var(--muted)]">{description}</p>
-        <AuthForm mode={mode} />
+        <AuthForm mode={mode} redirectTo={redirectTo} />
       </div>
     </section>
   );
