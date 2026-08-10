@@ -5,6 +5,7 @@ import type { CorpusKey } from "@apolog/shared";
 import Link from "next/link";
 import { usePathname, useSearchParams } from "next/navigation";
 import { useCallback, useRef, useState } from "react";
+import { FiEdit3 } from "react-icons/fi";
 
 import { primaryNavigationLinks } from "@/lib/public-routes";
 
@@ -93,6 +94,14 @@ export function SiteHeader({ initialCorpus }: { initialCorpus: CorpusKey }) {
           search={serialized}
         />
         <SearchTrigger onOpen={openSearch} triggerRef={searchTriggerRef} />
+        <Link
+          aria-label="Open article editor"
+          className="grid size-10 place-items-center rounded-full border border-[var(--line)] text-[var(--muted)] transition hover:border-[var(--accent)] hover:text-[var(--ink)]"
+          href="/admin/articles"
+          title="Article editor"
+        >
+          <FiEdit3 aria-hidden="true" />
+        </Link>
         <ThemeToggle />
       </div>
       <PrimaryNavigation

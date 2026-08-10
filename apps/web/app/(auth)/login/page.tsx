@@ -7,11 +7,18 @@ export const metadata: Metadata = {
   title: "Log in",
 };
 
-export default function LoginPage() {
+export default async function LoginPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ next?: string }>;
+}) {
+  const { next } = await searchParams;
+  const redirectTo = next === "/admin/articles" ? next : "/";
   return (
     <AuthPage
       description="Enter the email and password for your Apolog account."
       mode="login"
+      redirectTo={redirectTo}
       title="Log in"
     />
   );
