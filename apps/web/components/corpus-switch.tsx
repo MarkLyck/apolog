@@ -23,13 +23,13 @@ export function CorpusSwitch({
   return (
     <nav
       aria-label="Choose text corpus"
-      className="inline-grid grid-cols-2 rounded-full border border-[var(--line)] bg-[var(--surface)] p-1 shadow-sm"
+      className="inline-grid grid-cols-2 border border-[var(--line)] bg-[var(--surface)]"
     >
       {corpusKeys.map((key) => (
         <Link
           aria-current={corpusKey === key ? "true" : undefined}
           className={cn(
-            "rounded-full px-3 py-2 text-sm font-bold transition focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--accent)] sm:px-4",
+            "px-2.5 py-2 text-xs font-bold transition focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--accent)] sm:px-4 sm:text-sm",
             corpusKey === key
               ? "bg-[var(--ink)] text-[var(--paper)]"
               : "text-[var(--muted)] hover:text-[var(--ink)]"

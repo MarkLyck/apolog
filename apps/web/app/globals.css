@@ -2,27 +2,29 @@
 @source "../../../packages/ui/src";
 
 :root {
-  --paper: #f7f5ef;
-  --surface: #fffdf8;
-  --surface-strong: #eeece4;
-  --ink: #17211e;
-  --muted: #606b66;
-  --line: #d8dcd5;
-  --accent: #d27a35;
-  --accent-strong: #9d4d1a;
-  --teal: #176a5b;
+  --paper: #f2efe7;
+  --surface: #fbfaf6;
+  --surface-strong: #e5e0d5;
+  --ink: #171818;
+  --muted: #5d605e;
+  --line: #c8c3b7;
+  --accent: #db3f27;
+  --accent-strong: #a92718;
+  --teal: #155d54;
+  --header: #ebe7dc;
 }
 
 .dark {
-  --paper: #101713;
-  --surface: #17201c;
-  --surface-strong: #202c27;
-  --ink: #f4f1e8;
-  --muted: #a8b3ad;
-  --line: #33413a;
-  --accent: #ee9d59;
-  --accent-strong: #ffc18a;
-  --teal: #70c5b4;
+  --paper: #111312;
+  --surface: #191c1a;
+  --surface-strong: #262a27;
+  --ink: #f1eee6;
+  --muted: #b2b5af;
+  --line: #3b403c;
+  --accent: #ff6a50;
+  --accent-strong: #ff8b76;
+  --teal: #62b8ab;
+  --header: #151816;
 }
 
 @theme inline {
@@ -43,27 +45,9 @@ body {
   min-height: 100dvh;
   flex-direction: column;
   margin: 0;
-  background:
-    radial-gradient(
-      circle at 8% 4%,
-      color-mix(in srgb, var(--accent) 11%, transparent),
-      transparent 28rem
-    ),
-    radial-gradient(
-      circle at 92% 22%,
-      color-mix(in srgb, var(--teal) 9%, transparent),
-      transparent 32rem
-    ),
-    var(--paper);
+  background: var(--paper);
   color: var(--ink);
-  font-family:
-    Inter,
-    ui-sans-serif,
-    system-ui,
-    -apple-system,
-    BlinkMacSystemFont,
-    "Segoe UI",
-    sans-serif;
+  font-family: "IBM Plex Sans Variable", ui-sans-serif, system-ui, sans-serif;
   text-rendering: optimizeLegibility;
 }
 
@@ -75,12 +59,8 @@ body {
 h1,
 h2,
 h3 {
-  font-family:
-    Iowan Old Style,
-    Baskerville,
-    "Times New Roman",
-    serif;
-  letter-spacing: -0.025em;
+  font-family: "Newsreader Variable", Georgia, serif;
+  letter-spacing: -0.035em;
 }
 
 ::selection {
@@ -99,18 +79,36 @@ textarea {
 }
 
 .editorial-grid {
-  background-image:
-    linear-gradient(
-      to right,
-      color-mix(in srgb, var(--line) 42%, transparent) 1px,
-      transparent 1px
-    ),
-    linear-gradient(
-      to bottom,
-      color-mix(in srgb, var(--line) 42%, transparent) 1px,
-      transparent 1px
-    );
-  background-size: 38px 38px;
+  background-image: linear-gradient(
+    to right,
+    transparent calc(50% - 0.5px),
+    color-mix(in srgb, var(--line) 36%, transparent) calc(50% - 0.5px),
+    color-mix(in srgb, var(--line) 36%, transparent) calc(50% + 0.5px),
+    transparent calc(50% + 0.5px)
+  );
+}
+
+.hero-rule {
+  position: relative;
+}
+
+.hero-rule::after {
+  position: absolute;
+  right: 0;
+  bottom: -1px;
+  left: 0;
+  height: 3px;
+  content: "";
+  background: var(--accent);
+  transform: scaleX(0);
+  transform-origin: left;
+  animation: rule-in 700ms cubic-bezier(0.16, 1, 0.3, 1) 120ms forwards;
+}
+
+@keyframes rule-in {
+  to {
+    transform: scaleX(1);
+  }
 }
 
 .prose-apolog p {
@@ -152,7 +150,7 @@ textarea {
 
 .debate-markdown h2,
 .debate-markdown h3 {
-  font-family: var(--font-display), Georgia, serif;
+  font-family: "Newsreader Variable", Georgia, serif;
   font-size: 1.15rem;
   line-height: 1.4;
 }
@@ -186,5 +184,9 @@ textarea {
     scroll-behavior: auto !important;
     transition-duration: 0.01ms !important;
     animation-duration: 0.01ms !important;
+  }
+
+  .hero-rule::after {
+    transform: scaleX(1);
   }
 }

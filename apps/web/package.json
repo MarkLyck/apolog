@@ -14,6 +14,8 @@
     "@apolog/shared": "workspace:*",
     "@apolog/ui": "workspace:*",
     "@convex-dev/auth": "0.0.94",
+    "@fontsource-variable/ibm-plex-sans": "5.3.0",
+    "@fontsource-variable/newsreader": "5.3.0",
     "@tiptap/core": "3.29.2",
     "@tiptap/extension-unique-id": "3.29.2",
     "@tiptap/pm": "3.29.2",

@@ -30,8 +30,8 @@ export function PrimaryNavigation({
       aria-label={isMobile ? "Primary mobile" : "Primary"}
       className={
         isMobile
-          ? "flex flex-wrap justify-center gap-1 px-3 pb-3 sm:px-5 xl:hidden"
-          : "hidden items-center gap-1 xl:flex"
+          ? "flex flex-wrap justify-center border-t border-[var(--line)] px-3 xl:hidden"
+          : "hidden items-center gap-5 xl:flex"
       }
     >
       {primaryNavigationLinks.map(({ href, label }) => (
@@ -39,8 +39,8 @@ export function PrimaryNavigation({
           aria-current={pathname.startsWith(href) ? "page" : undefined}
           className={
             isMobile
-              ? "rounded-full px-2.5 py-1.5 text-xs font-semibold text-[var(--muted)] transition hover:bg-[var(--surface)] hover:text-[var(--ink)] aria-[current=page]:bg-[var(--surface)] aria-[current=page]:text-[var(--accent-strong)]"
-              : "rounded-full px-3 py-2 text-sm font-semibold text-[var(--muted)] transition hover:bg-[var(--surface)] hover:text-[var(--ink)] aria-[current=page]:text-[var(--accent-strong)]"
+              ? "border-b-2 border-transparent px-3 py-2.5 text-xs font-semibold text-[var(--muted)] transition hover:text-[var(--ink)] aria-[current=page]:border-[var(--accent)] aria-[current=page]:text-[var(--ink)]"
+              : "border-b-2 border-transparent py-2 text-sm font-semibold text-[var(--muted)] transition hover:text-[var(--ink)] aria-[current=page]:border-[var(--accent)] aria-[current=page]:text-[var(--ink)]"
           }
           href={`${href}?text=${corpusKey}`}
           key={href}
@@ -70,13 +70,13 @@ export function SiteHeader({ initialCorpus }: { initialCorpus: CorpusKey }) {
   }, []);
 
   return (
-    <header className="sticky top-0 z-40 border-b border-[var(--line)] bg-[color:var(--paper)]/88 backdrop-blur-xl">
-      <div className="mx-auto flex max-w-[92rem] items-center gap-1 px-3 py-3 sm:gap-2 sm:px-5 md:gap-5 lg:px-8">
+    <header className="sticky top-0 z-40 border-b border-[var(--line)] bg-[var(--header)]">
+      <div className="mx-auto flex max-w-[92rem] items-center gap-1 px-3 py-2.5 sm:gap-2 sm:px-5 md:gap-4 lg:px-8">
         <Link
-          className="mr-auto flex items-center gap-3 rounded-md focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--accent)]"
+          className="mr-auto flex items-center gap-3 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--accent)]"
           href={`/?text=${corpusKey}`}
         >
-          <span className="grid size-10 place-items-center rounded-xl bg-[var(--ink)] font-display text-xl text-[var(--paper)]">
+          <span className="grid size-9 place-items-center bg-[var(--accent)] font-display text-xl font-semibold text-white">
             A
           </span>
           <span className="hidden font-display text-xl tracking-tight sm:inline">
@@ -96,7 +96,7 @@ export function SiteHeader({ initialCorpus }: { initialCorpus: CorpusKey }) {
         <SearchTrigger onOpen={openSearch} triggerRef={searchTriggerRef} />
         <Link
           aria-label="Open article editor"
-          className="grid size-10 place-items-center rounded-full border border-[var(--line)] text-[var(--muted)] transition hover:border-[var(--accent)] hover:text-[var(--ink)]"
+          className="hidden size-10 place-items-center border border-[var(--line)] text-[var(--muted)] transition hover:border-[var(--ink)] hover:text-[var(--ink)] sm:grid"
           href="/admin/articles"
           title="Article editor"
         >

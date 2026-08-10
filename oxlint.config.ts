@@ -11,6 +11,8 @@ export default defineConfig({
     "**/.next/**",
     "**/.turbo/**",
     "**/convex/_generated/**",
+    ".github/agents/impeccable-*.agent.md",
+    ".github/skills/impeccable/**",
   ],
   overrides: [
     ...(core.overrides ?? []),
