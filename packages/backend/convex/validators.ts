@@ -1,5 +1,11 @@
 import { v } from "convex/values";
 
+export const articleSourceValidator = v.object({
+  publisher: v.string(),
+  title: v.string(),
+  url: v.string(),
+});
+
 export const corpusKeyValidator = v.union(
   v.literal("bible"),
   v.literal("quran")

@@ -86,7 +86,19 @@ const inlineText = v.pipe(v.string(), v.minLength(1));
 const timestamp = v.pipe(v.number(), v.integer(), v.minValue(0));
 const corpusKeySchema = v.picklist(["bible", "quran"]);
 const url = v.pipe(v.string(), v.url());
+const httpUrl = v.pipe(
+  v.string(),
+  v.trim(),
+  v.url(),
+  v.regex(/^https?:\/\//iu, "Source URL must use HTTP or HTTPS")
+);
 const href = v.union([url, v.pipe(v.string(), v.regex(/^\/(?!\/)/u))]);
+
+export const articleSourceSchema = v.object({
+  publisher: requiredText,
+  title: requiredText,
+  url: httpUrl,
+});
 
 export const inlineContentSchema = v.pipe(
   v.array(
@@ -250,9 +262,7 @@ export const articleContentSchema = v.object({
   publishedAt: timestamp,
   readingMinutes: v.pipe(v.number(), v.integer(), v.minValue(1)),
   slug: requiredText,
-  sources: v.array(
-    v.object({ title: requiredText, publisher: requiredText, url })
-  ),
+  sources: v.array(articleSourceSchema),
   summary: requiredText,
   tags: v.pipe(
     v.array(requiredText),
@@ -306,6 +316,7 @@ export type InlineContent = v.InferOutput<typeof inlineContentSchema>;
 export type ContentBlock = v.InferOutput<typeof contentBlockSchema>;
 export type ArticleDocument = v.InferOutput<typeof articleDocumentSchema>;
 export type ArticlePlacement = v.InferOutput<typeof articlePlacementSchema>;
+export type ArticleSource = v.InferOutput<typeof articleSourceSchema>;
 export type ArticleContent = v.InferOutput<typeof articleContentSchema>;
 export type ArticleListItem = v.InferOutput<typeof articleListItemSchema>;
 export type DemoContent = v.InferOutput<typeof demoContentSchema>;

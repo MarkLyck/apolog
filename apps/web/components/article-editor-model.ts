@@ -1,4 +1,9 @@
-import type { ArticleDocument, CollectionKey, CorpusKey } from "@apolog/shared";
+import type {
+  ArticleDocument,
+  ArticleSource,
+  CollectionKey,
+  CorpusKey,
+} from "@apolog/shared";
 
 export type Status = "draft" | "published" | "archived";
 export type Placement = {
@@ -8,11 +13,8 @@ export type Placement = {
   isPrimary: boolean;
   position: number;
 };
-export type Source = {
+export type Source = ArticleSource & {
   editorId: string;
-  publisher: string;
-  title: string;
-  url: string;
 };
 export type EditorValues = {
   contentWarning: string;

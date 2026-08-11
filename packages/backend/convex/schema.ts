@@ -4,6 +4,7 @@ import { v } from "convex/values";
 
 import {
   articleDocumentValidator,
+  articleSourceValidator,
   collectionKeyValidator as collectionKey,
   corpusKeyValidator as corpusKey,
   publicationStatusValidator as status,
@@ -26,9 +27,7 @@ export default defineSchema({
     publishedAt: v.optional(v.number()),
     readingMinutes: v.number(),
     slug: v.string(),
-    sources: v.array(
-      v.object({ title: v.string(), publisher: v.string(), url: v.string() })
-    ),
+    sources: v.array(articleSourceValidator),
     status,
     summary: v.string(),
     title: v.string(),
