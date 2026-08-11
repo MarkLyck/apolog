@@ -83,6 +83,12 @@ describe("representative content fixtures", () => {
       },
     ],
     [
+      "non-HTTP source URLs",
+      (value: DemoContent) => {
+        first(first(value.articles).sources).url = "ftp://example.com/source";
+      },
+    ],
+    [
       "duplicate block IDs",
       (value: DemoContent) => {
         const blocks = first(value.articles).document.blocks;

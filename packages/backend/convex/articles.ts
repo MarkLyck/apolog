@@ -1,4 +1,5 @@
-import { articleDocumentSchema } from "@apolog/shared";
+import { articleDocumentSchema, articleSourceSchema } from "@apolog/shared";
+import type { ArticleSource } from "@apolog/shared";
 import { getAuthUserId } from "@convex-dev/auth/server";
 import { paginationOptsValidator } from "convex/server";
 import { ConvexError, v } from "convex/values";
@@ -14,16 +15,11 @@ import {
 } from "./articleViews";
 import {
   articleDocumentValidator,
+  articleSourceValidator,
   collectionKeyValidator,
   corpusKeyValidator,
   publicationStatusValidator,
 } from "./validators";
-
-const sourceValidator = v.object({
-  publisher: v.string(),
-  title: v.string(),
-  url: v.string(),
-});
 
 const placementInputValidator = v.object({
   collectionKey: collectionKeyValidator,
@@ -192,30 +188,14 @@ function validateEditorialInput(
   }
 }
 
-function cleanSources(
-  sources: { publisher: string; title: string; url: string }[]
-) {
-  const cleaned = sources.map((source) => ({
-    publisher: source.publisher.trim(),
-    title: source.title.trim(),
-    url: source.url.trim(),
-  }));
-  const invalid = cleaned.some((source) => {
-    if (!source.title || !source.publisher) {
-      return true;
-    }
-    try {
-      return !["http:", "https:"].includes(new URL(source.url).protocol);
-    } catch {
-      return true;
-    }
-  });
-  if (invalid) {
+function parseArticleSources(sources: ArticleSource[]) {
+  const result = valibot.safeParse(valibot.array(articleSourceSchema), sources);
+  if (!result.success) {
     throw new ConvexError(
       "Every source needs a title, publisher, and valid URL."
     );
   }
-  return cleaned;
+  return result.output;
 }
 
 function cleanEditorialFields(args: {
@@ -227,7 +207,7 @@ function cleanEditorialFields(args: {
   }[];
   readingMinutes: number;
   slug: string;
-  sources: { publisher: string; title: string; url: string }[];
+  sources: ArticleSource[];
   summary: string;
   tags: string[];
   title: string;
@@ -243,7 +223,13 @@ function cleanEditorialFields(args: {
     throw new ConvexError("Reading time must be at least one minute.");
   }
   validateEditorialInput(args.placements, slug, tags);
-  return { slug, sources: cleanSources(args.sources), summary, tags, title };
+  return {
+    slug,
+    sources: parseArticleSources(args.sources),
+    summary,
+    tags,
+    title,
+  };
 }
 
 function parseArticleDocument(document: Doc<"articles">["document"]) {
@@ -474,7 +460,7 @@ export const save = mutation({
     placements: v.array(placementInputValidator),
     readingMinutes: v.number(),
     slug: v.string(),
-    sources: v.array(sourceValidator),
+    sources: v.array(articleSourceValidator),
     status: publicationStatusValidator,
     summary: v.string(),
     tags: v.array(v.string()),

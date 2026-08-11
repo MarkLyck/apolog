@@ -72,30 +72,44 @@ describe("article management", () => {
     ).rejects.toThrow("Article content is invalid");
   });
 
-  test("validates and normalizes article sources", async () => {
+  test("validates sources without relying on URL.canParse", async () => {
     const { authenticated, t } = await setupUser("admin");
+    const canParseDescriptor = Object.getOwnPropertyDescriptor(URL, "canParse");
+    Object.defineProperty(URL, "canParse", {
+      configurable: true,
+      value: undefined,
+    });
 
-    for (const url of ["", "not-a-url", "ftp://example.com/source"]) {
-      await expect(
-        authenticated.mutation(save, {
-          ...validInput,
-          sources: [{ publisher: "Publisher", title: "Source", url }],
-        })
-      ).rejects.toThrow(
-        "Every source needs a title, publisher, and valid URL."
-      );
+    try {
+      for (const url of ["", "not-a-url", "ftp://example.com/source"]) {
+        await expect(
+          authenticated.mutation(save, {
+            ...validInput,
+            sources: [{ publisher: "Publisher", title: "Source", url }],
+          })
+        ).rejects.toThrow(
+          "Every source needs a title, publisher, and valid URL."
+        );
+      }
+
+      await authenticated.mutation(save, {
+        ...validInput,
+        sources: [
+          {
+            publisher: " Publisher ",
+            title: " Source ",
+            url: " https://example.com/source ",
+          },
+        ],
+      });
+    } finally {
+      if (canParseDescriptor) {
+        Object.defineProperty(URL, "canParse", canParseDescriptor);
+      } else {
+        Reflect.deleteProperty(URL, "canParse");
+      }
     }
 
-    await authenticated.mutation(save, {
-      ...validInput,
-      sources: [
-        {
-          publisher: " Publisher ",
-          title: " Source ",
-          url: " https://example.com/source ",
-        },
-      ],
-    });
     const article = await t.run((ctx) =>
       ctx.db
         .query("articles")
