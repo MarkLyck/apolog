@@ -72,6 +72,45 @@ describe("article management", () => {
     ).rejects.toThrow("Article content is invalid");
   });
 
+  test("validates and normalizes article sources", async () => {
+    const { authenticated, t } = await setupUser("admin");
+
+    for (const url of ["", "not-a-url", "ftp://example.com/source"]) {
+      await expect(
+        authenticated.mutation(save, {
+          ...validInput,
+          sources: [{ publisher: "Publisher", title: "Source", url }],
+        })
+      ).rejects.toThrow(
+        "Every source needs a title, publisher, and valid URL."
+      );
+    }
+
+    await authenticated.mutation(save, {
+      ...validInput,
+      sources: [
+        {
+          publisher: " Publisher ",
+          title: " Source ",
+          url: " https://example.com/source ",
+        },
+      ],
+    });
+    const article = await t.run((ctx) =>
+      ctx.db
+        .query("articles")
+        .withIndex("by_slug", (index) => index.eq("slug", validInput.slug))
+        .unique()
+    );
+    expect(article?.sources).toEqual([
+      {
+        publisher: "Publisher",
+        title: "Source",
+        url: "https://example.com/source",
+      },
+    ]);
+  });
+
   test("rebuilds projections, rejects stale saves, and cascades deletion", async () => {
     const { authenticated, t } = await setupUser("admin");
     const created = await authenticated.mutation(save, validInput);

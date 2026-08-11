@@ -153,6 +153,7 @@ export function SourcesSection({
                 onChange={(event) =>
                   changeSource(index, { title: event.target.value })
                 }
+                required
                 value={source.title}
               />
             </label>
@@ -163,6 +164,7 @@ export function SourcesSection({
                 onChange={(event) =>
                   changeSource(index, { publisher: event.target.value })
                 }
+                required
                 value={source.publisher}
               />
             </label>
@@ -176,6 +178,7 @@ export function SourcesSection({
                     changeSource(index, { url: event.target.value })
                   }
                   placeholder="https://…"
+                  required
                   type="url"
                   value={source.url}
                 />

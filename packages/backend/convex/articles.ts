@@ -201,10 +201,14 @@ function cleanSources(
     url: source.url.trim(),
   }));
   const invalid = cleaned.some((source) => {
-    if (!source.title || !source.publisher || !URL.canParse(source.url)) {
+    if (!source.title || !source.publisher) {
       return true;
     }
-    return !["http:", "https:"].includes(new URL(source.url).protocol);
+    try {
+      return !["http:", "https:"].includes(new URL(source.url).protocol);
+    } catch {
+      return true;
+    }
   });
   if (invalid) {
     throw new ConvexError(
