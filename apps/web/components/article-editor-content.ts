@@ -1,9 +1,11 @@
-import type {
-  ArticleDocument,
-  ContentBlock,
-  InlineContent,
+import {
+  inlineContentSchema,
+  type ArticleDocument,
+  type ContentBlock,
+  type InlineContent,
 } from "@apolog/shared";
 import type { JSONContent } from "@tiptap/core";
+import * as v from "valibot";
 
 export type ContradictionClaim = {
   content: InlineContent;
@@ -11,6 +13,35 @@ export type ContradictionClaim = {
   label: string;
   reference: string;
 };
+
+const contentIdAttributesSchema = v.object({
+  contentId: v.optional(v.string()),
+});
+const linkAttributesSchema = v.object({
+  contentId: v.optional(v.string()),
+  href: v.string(),
+});
+const calloutAttributesSchema = v.object({
+  title: v.optional(v.string()),
+});
+const scriptureAttributesSchema = v.object({
+  edition: v.optional(v.string()),
+  reference: v.optional(v.string()),
+});
+const storedContradictionClaimSchema = v.pipe(
+  v.object({
+    content: v.optional(inlineContentSchema),
+    id: v.optional(v.string()),
+    label: v.string(),
+    reference: v.string(),
+    text: v.optional(v.string()),
+  }),
+  v.check(
+    (claim) => claim.content !== undefined || claim.text !== undefined,
+    "A contradiction claim must have structured content or legacy text"
+  )
+);
+const storedContradictionClaimsSchema = v.array(storedContradictionClaimSchema);
 
 export function emptyContradictionClaim(index: number): ContradictionClaim {
   return {
@@ -116,8 +147,9 @@ export function replaceInlineContentText(
 }
 
 function nodeId(node: JSONContent, fallback: string) {
-  return typeof node.attrs?.contentId === "string" && node.attrs.contentId
-    ? node.attrs.contentId
+  const parsed = v.safeParse(contentIdAttributesSchema, node.attrs);
+  return parsed.success && parsed.output.contentId
+    ? parsed.output.contentId
     : fallback;
 }
 
@@ -215,21 +247,21 @@ function fromTiptapInline(
       continue;
     }
     const link = node.marks?.find((mark) => mark.type === "link");
-    if (link && typeof link.attrs?.href === "string") {
-      const contentId = link.attrs.contentId;
+    const linkAttributes = v.safeParse(linkAttributesSchema, link?.attrs);
+    if (linkAttributes.success) {
       result.push({
-        href: link.attrs.href,
-        id:
-          typeof contentId === "string" && contentId
-            ? contentId
-            : `${parentId}-link-${index}`,
+        href: linkAttributes.output.href,
+        id: linkAttributes.output.contentId || `${parentId}-link-${index}`,
         text: node.text,
         type: "link",
       });
       continue;
     }
     const contentId = node.marks?.find((mark) => mark.type === "contentId");
-    const textContentId = contentId?.attrs?.contentId;
+    const textAttributes = v.safeParse(
+      contentIdAttributesSchema,
+      contentId?.attrs
+    );
     const marks = node.marks
       ?.map((mark) => (mark.type === "strike" ? "strikethrough" : mark.type))
       .filter((mark): mark is "bold" | "italic" | "strikethrough" | "code" =>
@@ -237,9 +269,8 @@ function fromTiptapInline(
       );
     result.push({
       id:
-        typeof textContentId === "string" && textContentId
-          ? textContentId
-          : `${parentId}-text-${index}`,
+        (textAttributes.success && textAttributes.output.contentId) ||
+        `${parentId}-text-${index}`,
       marks: marks?.length ? [...new Set(marks)] : undefined,
       text: node.text,
       type: "text",
@@ -250,40 +281,25 @@ function fromTiptapInline(
     : [{ id: `${parentId}-text-0`, text: " ", type: "text" }];
 }
 
-function normalizeClaims(value: unknown): ContradictionClaim[] {
-  if (!Array.isArray(value)) {
+export function normalizeClaims(
+  value: v.InferInput<typeof storedContradictionClaimsSchema>
+): ContradictionClaim[] {
+  const parsed = v.safeParse(storedContradictionClaimsSchema, value);
+  if (!parsed.success) {
     return [];
   }
-  return value.flatMap((claim) => {
-    if (!claim || typeof claim !== "object") {
-      return [];
-    }
-    const item = claim as Record<string, unknown>;
-    if (
-      typeof item.label !== "string" ||
-      typeof item.reference !== "string" ||
-      !(Array.isArray(item.content) || typeof item.text === "string")
-    ) {
-      return [];
-    }
-    return [
+  return parsed.output.map((claim) => ({
+    content: claim.content ?? [
       {
-        content: Array.isArray(item.content)
-          ? (item.content as InlineContent)
-          : [
-              {
-                id: `${typeof item.id === "string" ? item.id : "claim"}-text-0`,
-                text:
-                  typeof item.text === "string" && item.text ? item.text : " ",
-                type: "text" as const,
-              },
-            ],
-        id: typeof item.id === "string" ? item.id : createId("claim"),
-        label: item.label,
-        reference: item.reference,
+        id: `${claim.id ?? "claim"}-text-0`,
+        text: claim.text || " ",
+        type: "text",
       },
-    ];
-  });
+    ],
+    id: claim.id ?? createId("claim"),
+    label: claim.label,
+    reference: claim.reference,
+  }));
 }
 
 function listBlock(node: JSONContent, fallbackId: string): ContentBlock | null {
@@ -348,28 +364,23 @@ function tiptapNodeToBlock(
       return listBlock(node, id);
     }
     case "callout": {
+      const attributes = v.safeParse(calloutAttributesSchema, node.attrs);
       return {
         content: fromTiptapInline(node.content, id),
         id,
-        title:
-          typeof node.attrs?.title === "string"
-            ? node.attrs.title
-            : "Key point",
+        title: (attributes.success && attributes.output.title) || "Key point",
         type: "callout",
       };
     }
     case "scripture": {
+      const attributes = v.safeParse(scriptureAttributesSchema, node.attrs);
       return {
         content: fromTiptapInline(node.content, id),
         edition:
-          typeof node.attrs?.edition === "string"
-            ? node.attrs.edition
-            : "Translation",
+          (attributes.success && attributes.output.edition) || "Translation",
         id,
         reference:
-          typeof node.attrs?.reference === "string"
-            ? node.attrs.reference
-            : "Reference",
+          (attributes.success && attributes.output.reference) || "Reference",
         type: "quote",
       };
     }

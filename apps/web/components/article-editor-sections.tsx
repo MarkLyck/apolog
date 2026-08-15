@@ -3,8 +3,10 @@ import {
   collectionRegistry,
   corpusKeys,
   corpusLabel,
+  parseCollection,
+  parseCorpus,
 } from "@apolog/shared";
-import type { ArticleDocument, CollectionKey, CorpusKey } from "@apolog/shared";
+import type { ArticleDocument } from "@apolog/shared";
 import { Button } from "@apolog/ui";
 import Link from "next/link";
 import type { ReactNode } from "react";
@@ -29,6 +31,11 @@ import { RichArticleEditor } from "./rich-article-editor";
 const inputClassName =
   "min-h-11 w-full rounded-xl border border-[var(--line)] bg-[var(--paper)] px-4 text-[var(--ink)] outline-none transition placeholder:text-[var(--muted)] focus:border-[var(--accent)] focus:ring-2 focus:ring-[color:var(--accent)]/20";
 const labelClassName = "grid gap-2 text-sm font-bold";
+const statuses = ["draft", "published", "archived"] as const;
+
+function parseStatus(value: string): Status | null {
+  return statuses.find((status) => status === value) ?? null;
+}
 
 function EditorSection({
   children,
@@ -311,7 +318,8 @@ export function PlacementSection({
                   className={inputClassName}
                   onChange={(event) =>
                     updatePlacement(index, {
-                      corpusKey: event.target.value as CorpusKey,
+                      corpusKey:
+                        parseCorpus(event.target.value) ?? placement.corpusKey,
                     })
                   }
                   value={placement.corpusKey}
@@ -329,7 +337,9 @@ export function PlacementSection({
                   className={inputClassName}
                   onChange={(event) =>
                     updatePlacement(index, {
-                      collectionKey: event.target.value as CollectionKey,
+                      collectionKey:
+                        parseCollection(event.target.value) ??
+                        placement.collectionKey,
                     })
                   }
                   value={placement.collectionKey}
@@ -496,7 +506,9 @@ export function EditorTopbar({
       <select
         aria-label="Publication status"
         className="min-h-11 rounded-full border border-[var(--line)] bg-[var(--surface)] px-4 text-sm font-bold outline-none focus:border-[var(--accent)]"
-        onChange={(event) => update("status", event.target.value as Status)}
+        onChange={(event) =>
+          update("status", parseStatus(event.target.value) ?? values.status)
+        }
         value={values.status}
       >
         <option value="draft">Draft</option>

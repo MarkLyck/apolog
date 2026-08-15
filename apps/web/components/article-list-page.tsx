@@ -2,7 +2,7 @@ import { collectionRegistry, corpusLabel } from "@apolog/shared";
 import type { CollectionKey } from "@apolog/shared";
 import { FiFilter, FiSearch } from "react-icons/fi";
 
-import { getPageCorpus } from "@/lib/corpus";
+import { firstSearchParam, getPageCorpus } from "@/lib/corpus";
 import type { PageSearchParams } from "@/lib/corpus";
 import { listArticles } from "@/lib/data";
 
@@ -20,9 +20,8 @@ export async function ArticleListPage({
     getPageCorpus(searchParams),
     searchParams,
   ]);
-  const query = typeof parameters.q === "string" ? parameters.q : "";
-  const requestedSort =
-    typeof parameters.sort === "string" ? parameters.sort : "";
+  const query = firstSearchParam(parameters.q);
+  const requestedSort = firstSearchParam(parameters.sort);
   const searchSort =
     requestedSort === "oldest" ||
     requestedSort === "relevance" ||
