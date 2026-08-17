@@ -20,9 +20,7 @@ export async function checkDependencyPolicy(root: string) {
     "{package.json,apps/*/package.json,packages/*/package.json}"
   );
   for await (const relativePath of glob.scan({ cwd: root, onlyFiles: true })) {
-    const manifest = (await Bun.file(
-      `${root}/${relativePath}`
-    ).json()) as Manifest;
+    const manifest: Manifest = await Bun.file(`${root}/${relativePath}`).json();
     for (const group of dependencyGroups) {
       for (const [name, version] of Object.entries(manifest[group] ?? {})) {
         if (version === "workspace:*") {
@@ -37,9 +35,7 @@ export async function checkDependencyPolicy(root: string) {
     }
   }
 
-  const rootManifest = (await Bun.file(
-    `${root}/package.json`
-  ).json()) as Manifest;
+  const rootManifest: Manifest = await Bun.file(`${root}/package.json`).json();
   if (!/^bun@\d+\.\d+\.\d+$/u.test(rootManifest.packageManager ?? "")) {
     errors.push(
       "package.json: packageManager must be an exact bun@x.y.z version"

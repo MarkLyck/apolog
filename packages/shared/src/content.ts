@@ -321,12 +321,16 @@ export type ArticleContent = v.InferOutput<typeof articleContentSchema>;
 export type ArticleListItem = v.InferOutput<typeof articleListItemSchema>;
 export type DemoContent = v.InferOutput<typeof demoContentSchema>;
 
-export function validateDemoContent(input: unknown): { success: boolean } {
+export type ContentValidationResult = { success: boolean };
+
+export function validateDemoContent(
+  input: v.InferInput<typeof demoContentSchema>
+): ContentValidationResult {
   return { success: v.safeParse(demoContentSchema, input).success };
 }
 
 export function parseArticleListResponse(
-  input: unknown
+  input: v.InferInput<typeof articleListResponseSchema>
 ): ArticleListItem[] | null {
   const parsed = v.safeParse(articleListResponseSchema, input);
   return parsed.success ? parsed.output.results : null;

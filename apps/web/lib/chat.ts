@@ -12,10 +12,18 @@ const chatRequestSchema = v.object({
   messages: v.pipe(v.array(messageSchema), v.minLength(1), v.maxLength(24)),
 });
 
+type JsonValue =
+  | boolean
+  | number
+  | string
+  | null
+  | JsonValue[]
+  | { [key: string]: JsonValue };
+
 export type ChatRequest = v.InferOutput<typeof chatRequestSchema>;
 
 export function validateChatRequest(
-  input: unknown
+  input: JsonValue
 ):
   | { success: true; output: ChatRequest }
   | { success: false; issues: string[] } {

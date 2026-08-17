@@ -19,6 +19,7 @@ import {
   FiList,
   FiMinus,
 } from "react-icons/fi";
+import * as v from "valibot";
 
 import {
   articleDocumentToTiptap,
@@ -30,6 +31,14 @@ import { articleEditorExtensions } from "./rich-article-editor-extensions";
 
 const fieldClassName =
   "w-full rounded-lg border border-[var(--line)] bg-[var(--paper)] px-3 py-2 text-sm text-[var(--ink)] outline-none focus:border-[var(--accent)]";
+const linkAttributesSchema = v.object({ href: v.optional(v.string()) });
+
+function currentLinkHref(
+  attributes: v.InferInput<typeof linkAttributesSchema>
+) {
+  const parsed = v.safeParse(linkAttributesSchema, attributes);
+  return parsed.success ? parsed.output.href : undefined;
+}
 
 function ToolbarButton({
   active = false,
@@ -106,9 +115,7 @@ export function RichArticleEditor({
       if ((event.metaKey || event.ctrlKey) && event.key.toLowerCase() === "k") {
         event.preventDefault();
         if (editor) {
-          const previous = editor.getAttributes("link").href as
-            | string
-            | undefined;
+          const previous = currentLinkHref(editor.getAttributes("link"));
           setLinkHref(previous ?? "https://");
           setLinkEditorOpen(true);
         }
@@ -123,7 +130,7 @@ export function RichArticleEditor({
   }
 
   const editLink = () => {
-    const previous = editor.getAttributes("link").href as string | undefined;
+    const previous = currentLinkHref(editor.getAttributes("link"));
     setLinkHref(previous ?? "https://");
     setLinkEditorOpen(true);
   };

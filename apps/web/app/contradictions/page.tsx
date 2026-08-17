@@ -3,7 +3,7 @@ import { FiSearch } from "react-icons/fi";
 
 import { ContradictionCard } from "@/components/contradiction-card";
 import { PageIntro } from "@/components/page-intro";
-import { getPageCorpus } from "@/lib/corpus";
+import { firstSearchParam, getPageCorpus } from "@/lib/corpus";
 import type { PageSearchParams } from "@/lib/corpus";
 import { listArticles } from "@/lib/data";
 
@@ -22,7 +22,7 @@ export default async function Page({
     getPageCorpus(searchParams),
     searchParams,
   ]);
-  const query = typeof parameters.q === "string" ? parameters.q : "";
+  const query = firstSearchParam(parameters.q);
   const articles = await listArticles(
     "contradictions",
     corpusKey,

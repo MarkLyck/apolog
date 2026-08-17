@@ -70,6 +70,7 @@ describe("representative content fixtures", () => {
     [
       "unknown content blocks",
       (value: DemoContent) => {
+        // SAFETY: This fixture deliberately violates the block union to test boundary rejection.
         first(value.articles).document.blocks[0] = {
           type: "video",
           url: 42,
@@ -138,6 +139,7 @@ describe("representative content fixtures", () => {
         if (comparison?.type !== "claimComparison") {
           throw new Error("Expected comparison fixture");
         }
+        // SAFETY: This fixture deliberately violates the claim schema to test boundary rejection.
         comparison.claims = [null] as never;
       },
     ],

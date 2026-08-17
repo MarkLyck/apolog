@@ -2,10 +2,10 @@ import { NodeViewWrapper } from "@tiptap/react";
 import type { NodeViewProps } from "@tiptap/react";
 import { FiColumns, FiMinus, FiPlus, FiTrash2 } from "react-icons/fi";
 
-import type { ContradictionClaim } from "./article-editor-content";
 import {
   emptyContradictionClaim,
   inlineContentText,
+  normalizeClaims,
   replaceInlineContentText,
 } from "./article-editor-content";
 
@@ -17,9 +17,7 @@ export function ContradictionView({
   node,
   updateAttributes,
 }: NodeViewProps) {
-  const rawClaims = Array.isArray(node.attrs.claims)
-    ? (node.attrs.claims as ContradictionClaim[])
-    : [];
+  const rawClaims = normalizeClaims(node.attrs.claims);
   const claims =
     rawClaims.length >= 2
       ? rawClaims

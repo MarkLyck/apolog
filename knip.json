@@ -1,4 +1,10 @@
 {
   "$schema": "https://unpkg.com/knip@6/schema.json",
-  "ignoreFiles": [".github/skills/impeccable/**"]
+  "ignoreFiles": [
+    ".agents/skills/install-anti-slop/**",
+    ".github/skills/impeccable/**"
+  ],
+  "ignoreIssues": {
+    "tools/oxlint/anti-slop/**": ["exports", "types"]
+  }
 }
