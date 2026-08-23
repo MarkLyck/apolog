@@ -79,7 +79,7 @@ export async function acquireSabContradictions(): Promise<SabAcquireResult> {
   return { catalog, failed };
 }
 
-export function catalogTypeScript(
+function catalogTypeScript(
   catalog: readonly SabContradictionEntry[]
 ): string {
   return `import type { SabContradictionEntry } from "./sab-contradictions";

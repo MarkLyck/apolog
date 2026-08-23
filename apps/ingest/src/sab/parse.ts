@@ -80,7 +80,7 @@ function isSabBookCode(value: string): value is SabBookCode {
   return Object.hasOwn(sabBookNames, value);
 }
 
-export type SabContradictionClaim = {
+type SabContradictionClaim = {
   label: string;
   references: string[];
 };
