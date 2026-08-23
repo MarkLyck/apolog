@@ -1,13 +1,16 @@
-import type { DemoContent } from "@apolog/shared";
+import type { ArticleContent, DemoContent } from "@apolog/shared";
 
 import { projectArticle } from "./article-projection";
 
-export function buildSeedDocuments(fixtures: DemoContent) {
-  const articles = fixtures.articles.map((fixture) => {
+export function buildPreparedArticles(
+  fixtures: readonly ArticleContent[],
+  importKeyPrefix: string
+) {
+  return fixtures.map((fixture) => {
     const { placements, tags, ...article } = fixture;
     const document = {
       ...article,
-      importKey: `demo:article:${article.slug}`,
+      importKey: `${importKeyPrefix}:${article.slug}`,
       status: "published" as const,
       version: 1,
     };
@@ -37,9 +40,11 @@ export function buildSeedDocuments(fixtures: DemoContent) {
       tagKeys: projection.tagKeys,
     };
   });
+}
 
+export function buildSeedDocuments(fixtures: DemoContent) {
   return {
-    articles,
+    articles: buildPreparedArticles(fixtures.articles, "demo:article"),
     corpora: fixtures.corpora.map((corpus) => ({
       ...corpus,
       enabled: true,

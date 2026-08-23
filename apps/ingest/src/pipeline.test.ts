@@ -11,8 +11,9 @@ describe("ingestion pipeline", () => {
   test("reports publishable fixture counts without mutating data", () => {
     const report = createDryRunReport();
     expect(report.valid).toBe(true);
-    expect(report.counts.articles).toBeGreaterThan(0);
+    expect(report.counts.articles).toBeGreaterThan(500);
     expect(report.counts.corpora).toBe(2);
+    expect(report.counts.sabContradictions).toBeGreaterThan(500);
     expect(report.mode).toBe("dry-run");
   });
 });

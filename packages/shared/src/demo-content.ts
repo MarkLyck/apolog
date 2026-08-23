@@ -349,7 +349,7 @@ export const contentFixtures = {
         ],
         schemaVersion: 1,
       },
-      placements: place(["bible"], ["contradictions"], 1),
+      placements: place(["bible"], ["contradictions"], 570),
       publishedAt: now,
       readingMinutes: 4,
       slug: "who-incited-davids-census",

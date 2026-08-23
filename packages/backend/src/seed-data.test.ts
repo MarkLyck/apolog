@@ -2,7 +2,7 @@ import { describe, expect, test } from "bun:test";
 
 import { contentFixtures } from "@apolog/shared/demo-content";
 
-import { buildSeedDocuments } from "./seed-data";
+import { buildPreparedArticles, buildSeedDocuments } from "./seed-data";
 
 describe("Convex seed preparation", () => {
   test("creates one indexed projection per article placement", () => {
@@ -28,6 +28,15 @@ describe("Convex seed preparation", () => {
           document.searchText.includes(document.title.toLowerCase())
       )
     ).toBe(true);
+  });
+
+  test("uses a caller-supplied import key prefix for prepared articles", () => {
+    const [article] = contentFixtures.articles;
+    if (!article) {
+      throw new Error("Expected a fixture article");
+    }
+    const [prepared] = buildPreparedArticles([article], "sab:contra");
+    expect(prepared?.document.importKey).toBe(`sab:contra:${article.slug}`);
   });
 
   test("uses globally stable article import keys", () => {

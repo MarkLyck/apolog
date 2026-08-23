@@ -1,9 +1,13 @@
 /* oxlint-disable unicorn/prefer-ternary -- Explicit branches keep reconciliation auditable. */
 import { contentFixtures } from "@apolog/shared/demo-content";
+import { sabContradictionCatalog } from "@apolog/shared/sab-contradiction-catalog";
+import { buildSabContradictionArticles } from "@apolog/shared/sab-contradictions";
+import { v } from "convex/values";
 
-import { buildSeedDocuments } from "../src/seed-data";
+import { buildPreparedArticles, buildSeedDocuments } from "../src/seed-data";
+import { internal } from "./_generated/api";
 import type { Doc, Id } from "./_generated/dataModel";
-import { internalMutation } from "./_generated/server";
+import { internalAction, internalMutation } from "./_generated/server";
 import type { MutationCtx } from "./_generated/server";
 
 type PreparedArticle = ReturnType<
@@ -75,6 +79,36 @@ async function reconcileArticleRelations(
   }
 }
 
+const SAB_BATCH_SIZE = 15;
+
+async function upsertPreparedArticles(
+  ctx: MutationCtx,
+  fixtures: ReturnType<typeof buildPreparedArticles>,
+  seededAt: number
+) {
+  for (const fixture of fixtures) {
+    const existing = await ctx.db
+      .query("articles")
+      .withIndex("by_import_key", (index) =>
+        index.eq("importKey", fixture.document.importKey)
+      )
+      .unique();
+    let articleId: Id<"articles">;
+    if (existing) {
+      await ctx.db.patch(existing._id, fixture.document);
+      articleId = existing._id;
+    } else {
+      articleId = await ctx.db.insert("articles", fixture.document);
+    }
+    const article = await ctx.db.get(articleId);
+    if (!article) {
+      throw new Error(`Could not read imported article ${articleId}`);
+    }
+    await reconcileArticleRelations(ctx, article, fixture, seededAt);
+  }
+  return fixtures.length;
+}
+
 export const seed = internalMutation({
   args: {},
   handler: async (ctx) => {
@@ -94,27 +128,51 @@ export const seed = internalMutation({
       }
     }
 
-    for (const fixture of prepared.articles) {
-      const existing = await ctx.db
-        .query("articles")
-        .withIndex("by_import_key", (index) =>
-          index.eq("importKey", fixture.document.importKey)
-        )
-        .unique();
-      let articleId: Id<"articles">;
-      if (existing) {
-        await ctx.db.patch(existing._id, fixture.document);
-        articleId = existing._id;
-      } else {
-        articleId = await ctx.db.insert("articles", fixture.document);
-      }
-      const article = await ctx.db.get(articleId);
-      if (!article) {
-        throw new Error(`Could not read seeded article ${articleId}`);
-      }
-      await reconcileArticleRelations(ctx, article, fixture, seededAt);
-    }
+    await upsertPreparedArticles(ctx, prepared.articles, seededAt);
 
-    return { articles: prepared.articles.length };
+    await ctx.scheduler.runAfter(0, internal.seed.seedSabCatalog);
+    return {
+      articles: prepared.articles.length,
+      sabScheduled: true,
+    };
+  },
+});
+
+export const seedSabBatch = internalMutation({
+  args: {
+    limit: v.number(),
+    offset: v.number(),
+  },
+  handler: async (ctx, args) => {
+    const slice = sabContradictionCatalog.slice(
+      args.offset,
+      args.offset + args.limit
+    );
+    const prepared = buildPreparedArticles(
+      buildSabContradictionArticles(slice),
+      "sab:contra"
+    );
+    const imported = await upsertPreparedArticles(ctx, prepared, Date.now());
+    return {
+      imported,
+      nextOffset: args.offset + slice.length,
+    };
+  },
+});
+
+export const seedSabCatalog = internalAction({
+  args: {},
+  handler: async (ctx) => {
+    let offset = 0;
+    let imported = 0;
+    while (offset < sabContradictionCatalog.length) {
+      const result = await ctx.runMutation(internal.seed.seedSabBatch, {
+        limit: SAB_BATCH_SIZE,
+        offset,
+      });
+      imported += result.imported;
+      offset = result.nextOffset;
+    }
+    return { articles: imported };
   },
 });

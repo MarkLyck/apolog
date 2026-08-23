@@ -6,6 +6,8 @@
   "scripts": {
     "dry-run": "bun run src/cli.ts dry-run",
     "seed": "bun run src/cli.ts seed",
+    "acquire-sab": "bun run src/cli.ts acquire-sab",
+    "import-sab": "bun run src/cli.ts import-sab",
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {

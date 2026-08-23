@@ -27,6 +27,7 @@ export default defineConfig({
     ".roo/**",
     ".windsurf/**",
     "tools/oxlint/anti-slop/**",
+    "packages/shared/src/sab-contradiction-catalog.ts",
   ],
   jsPlugins: [
     {

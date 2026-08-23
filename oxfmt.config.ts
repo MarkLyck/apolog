@@ -20,5 +20,6 @@ export default {
     ".roo/**",
     ".windsurf/**",
     "tools/oxlint/anti-slop/**",
+    "packages/shared/src/sab-contradiction-catalog.ts",
   ],
 };

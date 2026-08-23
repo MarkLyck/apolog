@@ -45,7 +45,10 @@ describe("published content queries", () => {
       slug: "who-incited-davids-census",
     });
     expect(article?.placements[0]).toEqual(
-      expect.objectContaining({ collectionKey: "contradictions", position: 1 })
+      expect.objectContaining({
+        collectionKey: "contradictions",
+        position: 570,
+      })
     );
     expect(article?.document.blocks[0]?.type).toBe("claimComparison");
   });
@@ -71,6 +74,21 @@ describe("published content queries", () => {
     );
     expect(results[0]).not.toHaveProperty("article");
     expect(results[0]).not.toHaveProperty("score");
+  });
+
+  test("imports SAB contradictions as ranked Bible articles", async () => {
+    const t = convexTest(schema, modules);
+    const seedSabBatch = makeFunctionReference<"mutation">("seed:seedSabBatch");
+    await t.mutation(seedSabBatch, { limit: 1, offset: 0 });
+    const article = await t.query(getBySlug, { slug: "sab-heaven" });
+    expect(article?.title).toBe("When was heaven created?");
+    expect(article?.placements[0]).toEqual(
+      expect.objectContaining({
+        collectionKey: "contradictions",
+        corpusKey: "bible",
+        position: 1,
+      })
+    );
   });
 
   test("keeps contradiction card metadata in the canonical search projection", async () => {
