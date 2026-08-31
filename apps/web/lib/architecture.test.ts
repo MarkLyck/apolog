@@ -19,6 +19,14 @@ describe("server data boundaries", () => {
     expect(source).toContain("ARTICLE_LIST_PAGE_SIZE");
   });
 
+  test("loads later browse pages through a JSON list route", async () => {
+    const route = await read("../app/api/articles/list/route.ts");
+    const list = await read("../components/paginated-article-list.tsx");
+    expect(route).toContain("listArticlePage");
+    expect(list).toContain("/api/articles/list");
+    expect(list).not.toContain("use server");
+  });
+
   test("uses the durable backend rate limiter", async () => {
     const source = await read("../app/api/chat/route.ts");
     expect(source).not.toContain("apologRateLimits");

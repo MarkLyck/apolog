@@ -1,13 +1,13 @@
 "use client";
 
 import type { ArticleListItem, CollectionKey, CorpusKey } from "@apolog/shared";
-import { useState, useTransition } from "react";
+import { useState } from "react";
 
 import {
   browseListStatus,
+  parsePaginatedArticleListResponse,
   type ArticleListBrowseSort,
 } from "@/lib/article-list";
-import { loadMoreArticles } from "@/lib/article-list-actions";
 
 import { ArticleCard } from "./article-card";
 import { ContradictionCard } from "./contradiction-card";
@@ -113,31 +113,40 @@ export function PaginatedArticleList({
   const [cursor, setCursor] = useState(continueCursor);
   const [complete, setComplete] = useState(isDone);
   const [error, setError] = useState<string | null>(null);
-  const [isPending, startTransition] = useTransition();
+  const [isPending, setIsPending] = useState(false);
 
-  function handleLoadMore() {
+  async function handleLoadMore() {
     setError(null);
-    startTransition(async () => {
-      try {
-        const next = await loadMoreArticles({
-          collectionKey,
-          corpusKey,
-          cursor,
-          sort,
-        });
-        setArticles((current) => {
-          const seen = new Set(current.map((article) => article.id));
-          return [
-            ...current,
-            ...next.articles.filter((article) => !seen.has(article.id)),
-          ];
-        });
-        setCursor(next.continueCursor);
-        setComplete(next.isDone);
-      } catch {
-        setError("Could not load more articles. Try again.");
+    setIsPending(true);
+    try {
+      const params = new URLSearchParams({
+        collection: collectionKey,
+        cursor,
+        sort,
+        text: corpusKey,
+      });
+      const response = await fetch(`/api/articles/list?${params}`);
+      if (!response.ok) {
+        throw new Error(`List request failed with ${response.status}`);
       }
-    });
+      const next = parsePaginatedArticleListResponse(await response.json());
+      if (next === null) {
+        throw new Error("List returned an invalid response");
+      }
+      setArticles((current) => {
+        const seen = new Set(current.map((article) => article.id));
+        return [
+          ...current,
+          ...next.articles.filter((article) => !seen.has(article.id)),
+        ];
+      });
+      setCursor(next.continueCursor);
+      setComplete(next.isDone);
+    } catch {
+      setError("Could not load more articles. Try again.");
+    } finally {
+      setIsPending(false);
+    }
   }
 
   return (

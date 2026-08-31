@@ -4,6 +4,7 @@ import {
   ARTICLE_LIST_PAGE_SIZE,
   browseListStatus,
   parseArticleListBrowseSort,
+  parsePaginatedArticleListResponse,
   searchListStatus,
   searchReachedCap,
 } from "./article-list";
@@ -42,5 +43,35 @@ describe("article list pagination copy", () => {
     ).toBe("24 ranked comparisons for “heaven”");
     expect(searchReachedCap(ARTICLE_LIST_PAGE_SIZE)).toBe(true);
     expect(searchReachedCap(ARTICLE_LIST_PAGE_SIZE - 1)).toBe(false);
+  });
+
+  test("accepts a paginated list payload and rejects a bare results array", () => {
+    const article = {
+      collectionKey: "contradictions",
+      comparisonReferences: ["Genesis 1:1"],
+      finding: "contradicted",
+      id: "article-1",
+      position: 1,
+      publishedAt: 1,
+      readingMinutes: 2,
+      slug: "sab-heaven",
+      summary: "Conflicting answers about when heaven was created.",
+      tags: ["contradiction"],
+      title: "When was heaven created?",
+    };
+    expect(
+      parsePaginatedArticleListResponse({
+        articles: [article],
+        continueCursor: "cursor-2",
+        isDone: false,
+      })
+    ).toEqual({
+      articles: [article],
+      continueCursor: "cursor-2",
+      isDone: false,
+    });
+    expect(
+      parsePaginatedArticleListResponse({ results: [article] })
+    ).toBeNull();
   });
 });

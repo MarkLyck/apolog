@@ -1,4 +1,27 @@
+import { articleListItemSchema } from "@apolog/shared";
+import type { ArticleListItem } from "@apolog/shared";
+import * as v from "valibot";
+
 export const ARTICLE_LIST_PAGE_SIZE = 24;
+
+const paginatedArticleListSchema = v.object({
+  articles: v.array(articleListItemSchema),
+  continueCursor: v.string(),
+  isDone: v.boolean(),
+});
+
+export type PaginatedArticleListResponse = {
+  articles: ArticleListItem[];
+  continueCursor: string;
+  isDone: boolean;
+};
+
+export function parsePaginatedArticleListResponse(
+  input: v.InferInput<typeof paginatedArticleListSchema>
+): PaginatedArticleListResponse | null {
+  const parsed = v.safeParse(paginatedArticleListSchema, input);
+  return parsed.success ? parsed.output : null;
+}
 
 export type ArticleListBrowseSort = "newest" | "oldest" | "ranked";
 
