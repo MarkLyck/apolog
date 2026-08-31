@@ -11,6 +11,14 @@ describe("server data boundaries", () => {
     expect(source).not.toContain("catch {");
   });
 
+  test("preserves Convex list cursors for public browse pagination", async () => {
+    const source = await read("./data.ts");
+    expect(source).toContain("listArticlePage");
+    expect(source).toContain("continueCursor");
+    expect(source).toContain("isDone");
+    expect(source).toContain("ARTICLE_LIST_PAGE_SIZE");
+  });
+
   test("uses the durable backend rate limiter", async () => {
     const source = await read("../app/api/chat/route.ts");
     expect(source).not.toContain("apologRateLimits");

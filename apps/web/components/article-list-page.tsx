@@ -2,12 +2,19 @@ import { collectionRegistry, corpusLabel } from "@apolog/shared";
 import type { CollectionKey } from "@apolog/shared";
 import { FiFilter, FiSearch } from "react-icons/fi";
 
+import { searchListStatus, searchReachedCap } from "@/lib/article-list";
 import { firstSearchParam, getPageCorpus } from "@/lib/corpus";
 import type { PageSearchParams } from "@/lib/corpus";
-import { listArticles } from "@/lib/data";
+import { listArticlePage, listArticles } from "@/lib/data";
 
 import { ArticleCard } from "./article-card";
 import { PageIntro } from "./page-intro";
+import { PaginatedArticleList } from "./paginated-article-list";
+
+const noun = {
+  plural: "published results",
+  singular: "published result",
+};
 
 export async function ArticleListPage({
   collectionKey,
@@ -29,13 +36,16 @@ export async function ArticleListPage({
       ? requestedSort
       : "relevance";
   const browseSort = requestedSort === "oldest" ? "oldest" : "newest";
-  const articles = await listArticles(
-    collectionKey,
-    corpusKey,
-    query
-      ? { mode: "search", query, sort: searchSort }
-      : { mode: "browse", sort: browseSort }
-  );
+  const searchResults = query
+    ? await listArticles(collectionKey, corpusKey, {
+        mode: "search",
+        query,
+        sort: searchSort,
+      })
+    : null;
+  const browsePage = query
+    ? null
+    : await listArticlePage(collectionKey, corpusKey, browseSort);
   const pageCopy = collectionRegistry[collectionKey].page;
 
   return (
@@ -77,33 +87,60 @@ export async function ArticleListPage({
             Apply
           </button>
         </form>
-        <div className="mb-8 mt-5 flex items-center justify-between text-sm text-[var(--muted)]">
-          <p aria-live="polite">
-            {articles.length} published{" "}
-            {articles.length === 1 ? "result" : "results"}
-            {query ? ` for “${query}”` : ""}
-          </p>
-          <p className="hidden md:block">Scoped to {corpusLabel(corpusKey)}</p>
-        </div>
-        {articles.length ? (
-          <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
-            {articles.map((article) => (
-              <ArticleCard
-                article={article}
-                corpusKey={corpusKey}
-                key={article.slug}
-              />
-            ))}
-          </div>
-        ) : (
-          <div className="rounded-[1.5rem] border border-dashed border-[var(--line)] p-12 text-center">
-            <h2 className="text-3xl">No published matches</h2>
-            <p className="mx-auto mt-3 max-w-lg text-[var(--muted)]">
-              Try a broader query or clear the search. Results never borrow
-              records from the other corpus.
-            </p>
-          </div>
-        )}
+        {searchResults ? (
+          <>
+            <div className="mb-8 mt-5 flex items-center justify-between text-sm text-[var(--muted)]">
+              <p aria-live="polite">
+                {searchListStatus({
+                  noun,
+                  query,
+                  shown: searchResults.length,
+                })}
+              </p>
+              <p className="hidden md:block">
+                Scoped to {corpusLabel(corpusKey)}
+              </p>
+            </div>
+            {searchReachedCap(searchResults.length) ? (
+              <p className="mb-6 text-sm text-[var(--muted)]">
+                Search is limited to 24 matches. Narrow the query to see a
+                different set.
+              </p>
+            ) : null}
+            {searchResults.length ? (
+              <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+                {searchResults.map((article) => (
+                  <ArticleCard
+                    article={article}
+                    corpusKey={corpusKey}
+                    key={article.slug}
+                  />
+                ))}
+              </div>
+            ) : (
+              <div className="rounded-[1.5rem] border border-dashed border-[var(--line)] p-12 text-center">
+                <h2 className="text-3xl">No published matches</h2>
+                <p className="mx-auto mt-3 max-w-lg text-[var(--muted)]">
+                  Try a broader query or clear the search. Results never borrow
+                  records from the other corpus.
+                </p>
+              </div>
+            )}
+          </>
+        ) : browsePage ? (
+          <PaginatedArticleList
+            aside={`Scoped to ${corpusLabel(corpusKey)}`}
+            collectionKey={collectionKey}
+            continueCursor={browsePage.continueCursor}
+            corpusKey={corpusKey}
+            isDone={browsePage.isDone}
+            key={`${corpusKey}:${browseSort}`}
+            noun={noun}
+            page={browsePage.articles}
+            sort={browseSort}
+            variant="article"
+          />
+        ) : null}
       </section>
     </>
   );
