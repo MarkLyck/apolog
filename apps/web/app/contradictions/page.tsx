@@ -3,9 +3,16 @@ import { FiSearch } from "react-icons/fi";
 
 import { ContradictionCard } from "@/components/contradiction-card";
 import { PageIntro } from "@/components/page-intro";
+import { PaginatedArticleList } from "@/components/paginated-article-list";
+import { searchListStatus, searchReachedCap } from "@/lib/article-list";
 import { firstSearchParam, getPageCorpus } from "@/lib/corpus";
 import type { PageSearchParams } from "@/lib/corpus";
-import { listArticles } from "@/lib/data";
+import { listArticlePage, listArticles } from "@/lib/data";
+
+const noun = {
+  plural: "ranked comparisons",
+  singular: "ranked comparison",
+};
 
 export const metadata: Metadata = {
   description:
@@ -23,13 +30,16 @@ export default async function Page({
     searchParams,
   ]);
   const query = firstSearchParam(parameters.q);
-  const articles = await listArticles(
-    "contradictions",
-    corpusKey,
-    query
-      ? { mode: "search", query, sort: "relevance" }
-      : { mode: "browse", sort: "ranked" }
-  );
+  const searchResults = query
+    ? await listArticles("contradictions", corpusKey, {
+        mode: "search",
+        query,
+        sort: "relevance",
+      })
+    : null;
+  const browsePage = query
+    ? null
+    : await listArticlePage("contradictions", corpusKey, "ranked");
   return (
     <>
       <PageIntro
@@ -58,22 +68,47 @@ export default async function Page({
             Search
           </button>
         </form>
-        <div
-          className="mb-8 mt-5 text-sm text-[var(--muted)]"
-          aria-live="polite"
-        >
-          {articles.length} ranked{" "}
-          {articles.length === 1 ? "comparison" : "comparisons"}
-        </div>
-        <div className="grid gap-4 md:grid-cols-2">
-          {articles.map((article) => (
-            <ContradictionCard
-              article={article}
-              corpusKey={corpusKey}
-              key={article.slug}
-            />
-          ))}
-        </div>
+        {searchResults ? (
+          <>
+            <div
+              className="mb-8 mt-5 text-sm text-[var(--muted)]"
+              aria-live="polite"
+            >
+              {searchListStatus({
+                noun,
+                query,
+                shown: searchResults.length,
+              })}
+            </div>
+            {searchReachedCap(searchResults.length) ? (
+              <p className="mb-6 text-sm text-[var(--muted)]">
+                Search is limited to 24 matches. Narrow the query to see a
+                different set.
+              </p>
+            ) : null}
+            <div className="grid gap-4 md:grid-cols-2">
+              {searchResults.map((article) => (
+                <ContradictionCard
+                  article={article}
+                  corpusKey={corpusKey}
+                  key={article.slug}
+                />
+              ))}
+            </div>
+          </>
+        ) : browsePage ? (
+          <PaginatedArticleList
+            collectionKey="contradictions"
+            continueCursor={browsePage.continueCursor}
+            corpusKey={corpusKey}
+            isDone={browsePage.isDone}
+            key={corpusKey}
+            noun={noun}
+            page={browsePage.articles}
+            sort="ranked"
+            variant="contradiction"
+          />
+        ) : null}
       </section>
     </>
   );

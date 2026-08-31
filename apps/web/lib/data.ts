@@ -2,10 +2,21 @@ import { api } from "@apolog/backend/api";
 import type { ArticleListItem, CollectionKey, CorpusKey } from "@apolog/shared";
 import { fetchQuery } from "convex/nextjs";
 
+import {
+  ARTICLE_LIST_PAGE_SIZE,
+  type ArticleListBrowseSort,
+} from "./article-list";
+
 type SearchSort = "newest" | "oldest" | "relevance";
 type ArticleListRequest =
-  | { mode: "browse"; sort: "newest" | "oldest" | "ranked" }
+  | { mode: "browse"; sort: ArticleListBrowseSort }
   | { mode: "search"; query: string; sort: SearchSort };
+
+export type ArticleListPage = {
+  articles: ArticleListItem[];
+  continueCursor: string;
+  isDone: boolean;
+};
 
 export async function searchArticles(
   corpusKey: CorpusKey,
@@ -26,6 +37,25 @@ export async function searchArticles(
   });
 }
 
+export async function listArticlePage(
+  collectionKey: CollectionKey,
+  corpusKey: CorpusKey,
+  sort: ArticleListBrowseSort,
+  cursor: string | null = null
+): Promise<ArticleListPage> {
+  const result = await fetchQuery(api.articles.list, {
+    collectionKey,
+    corpusKey,
+    paginationOpts: { cursor, numItems: ARTICLE_LIST_PAGE_SIZE },
+    sort,
+  });
+  return {
+    articles: result.page,
+    continueCursor: result.continueCursor,
+    isDone: result.isDone,
+  };
+}
+
 export async function listArticles(
   collectionKey: CollectionKey,
   corpusKey: CorpusKey,
@@ -35,18 +65,13 @@ export async function listArticles(
     return searchArticles(
       corpusKey,
       request.query,
-      24,
+      ARTICLE_LIST_PAGE_SIZE,
       collectionKey,
       request.sort
     );
   }
-  const result = await fetchQuery(api.articles.list, {
-    collectionKey,
-    corpusKey,
-    paginationOpts: { cursor: null, numItems: 24 },
-    sort: request.sort,
-  });
-  return result.page;
+  const result = await listArticlePage(collectionKey, corpusKey, request.sort);
+  return result.articles;
 }
 
 export function getArticle(slug: string) {
