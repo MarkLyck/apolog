@@ -88,10 +88,14 @@ describe("contradiction pagination", () => {
     expect(html).not.toContain("comparisons loaded");
   });
 
-  test("renders repeated passage references only once per card", () => {
+  test("makes the entire card one link and renders each passage only once", () => {
     const html = renderToStaticMarkup(
       <ContradictionCard article={article(1)} corpusKey="bible" />
     );
+    expect(html).toStartWith('<a aria-label="Comparison 1"');
+    expect(html).toEndWith("</a>");
+    expect(html.match(/<a\s/gu)).toHaveLength(1);
+    expect(html).toContain("from=contradictions&amp;text=bible");
     expect(html.match(/Genesis 1:1/gu)).toHaveLength(1);
     expect(html.match(/Genesis 2:1/gu)).toHaveLength(1);
   });
