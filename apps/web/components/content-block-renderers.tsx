@@ -122,21 +122,18 @@ export function ClaimComparisonBlock({
   block: Extract<ContentBlock, { type: "claimComparison" }>;
 }) {
   return (
-    <section
-      className="not-prose my-10 border-y border-[var(--line)] bg-[var(--surface-strong)]/55 py-8"
-      aria-label="Claims compared"
-    >
-      <div className="grid gap-4 md:grid-cols-2">
+    <section className="not-prose" aria-label="Claims compared">
+      <div className="grid gap-4 sm:grid-cols-2">
         {block.claims.map((claim) => (
           <div
-            className="rounded-[1.5rem] border border-[var(--line)] bg-[var(--surface)] p-7"
+            className="min-w-0 rounded-xl border border-[var(--line)] bg-[var(--surface)] p-5 sm:p-6"
             key={claim.id}
           >
-            <div className="text-xs font-bold uppercase tracking-[0.2em] text-[var(--accent-strong)]">
+            <div className="text-sm font-medium leading-5 text-[var(--accent-strong)] sm:min-h-10">
               {claim.label}
             </div>
-            <h2 className="mt-5 text-3xl">{claim.reference}</h2>
-            <p className="mt-4 leading-7 text-[var(--muted)]">
+            <h2 className="mt-3 text-3xl leading-tight">{claim.reference}</h2>
+            <p className="mt-3 text-base leading-7 text-[var(--muted)]">
               <RichText content={claim.content} />
             </p>
           </div>

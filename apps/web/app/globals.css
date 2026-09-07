@@ -28,8 +28,8 @@
 }
 
 @theme inline {
-  --font-sans: var(--font-sans);
-  --font-display: var(--font-display);
+  --font-sans: "IBM Plex Sans Variable", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Newsreader Variable", Georgia, serif;
 }
 
 * {
@@ -55,12 +55,13 @@ body {
   flex: 1 0 auto;
 }
 
-.font-display,
-h1,
-h2,
-h3 {
-  font-family: "Newsreader Variable", Georgia, serif;
-  letter-spacing: -0.035em;
+@layer base {
+  h1,
+  h2,
+  h3 {
+    font-family: "Newsreader Variable", Georgia, serif;
+    letter-spacing: -0.035em;
+  }
 }
 
 ::selection {
@@ -111,25 +112,37 @@ textarea {
   }
 }
 
-.prose-apolog p {
+.prose-apolog > * + * {
+  margin-top: 1.5rem;
+}
+
+.prose-apolog > p {
   color: var(--muted);
   font-size: 1.08rem;
   line-height: 1.85;
 }
 
-.prose-apolog h2 {
+.prose-apolog > h2 {
   margin-top: 2.5rem;
   font-size: clamp(1.8rem, 3vw, 2.45rem);
   line-height: 1.15;
 }
 
-.prose-apolog ul {
+.prose-apolog > ul {
   display: grid;
   gap: 0.8rem;
   margin: 1.5rem 0;
   padding-left: 1.25rem;
   color: var(--muted);
   line-height: 1.7;
+}
+
+.prose-apolog > :first-child {
+  margin-top: 0;
+}
+
+.prose-apolog > :last-child {
+  margin-bottom: 0;
 }
 
 .debate-markdown > :first-child {
