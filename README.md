@@ -34,4 +34,12 @@ bun run --cwd apps/ingest dry-run
 
 `bun test` runs the unit and contract suite. `bun run check` additionally runs Oxfmt, Oxlint, Ultracite, React Doctor, Knip, exact-dependency validation, and TypeScript across every workspace. Run `bun run build` for the production build gate.
 
+## App icons
+
+`favicon.svg` is the source artwork: the header's white Newsreader semibold A, converted to paths, on Apolog's `#db3f27` accent. It needs no font at runtime. After editing it, run `bun run icons:generate` and include the generated files in your change.
+
+The generator writes `apps/web/public/favicon.svg`, a 16/32/48px `favicon.ico`, the opaque 180px `apple-touch-icon.png` for iOS and iPadOS, and 192px/512px Android icons. `icon-maskable-512.png` adds padding for Android launcher masks. The root layout declares browser and Apple icons; `apps/web/app/manifest.ts` supplies the Android home-screen metadata.
+
+The repository-root SVG lets [Conductor discover the icon](https://www.conductor.build/docs/faq#where-does-conductor-get-the-repo-icon) even though the web app lives in a monorepo. `t3.json` explicitly selects the same file for [T3 Code](https://github.com/pingdotgg/t3code/blob/main/packages/contracts/src/t3ProjectFile.ts). These files must be present in the checkout each tool opens. Existing installed home-screen shortcuts may need to be removed and added again to replace cached icons.
+
 The bundled seed content is demonstrative. Fixture quotations that need licensed editorial verification are marked as such in their provenance metadata and must not be treated as publication-ready source text.
