@@ -4,7 +4,14 @@ import type { CorpusKey } from "@apolog/shared";
 import { Button } from "@apolog/ui";
 import type { SyntheticEvent } from "react";
 import { useState } from "react";
-import { FiArrowUp, FiCopy, FiMessageCircle, FiUser } from "react-icons/fi";
+import {
+  FiArrowUp,
+  FiArrowUpRight,
+  FiBookOpen,
+  FiCopy,
+  FiMessageCircle,
+  FiUser,
+} from "react-icons/fi";
 import * as v from "valibot";
 
 import { AssistantMessage } from "./assistant-message";
@@ -98,8 +105,9 @@ export function DebateClient({ corpusKey }: { corpusKey: CorpusKey }) {
   };
 
   return (
-    <div className="overflow-hidden rounded-[1.7rem] border border-[var(--line)] bg-[var(--surface)] shadow-[0_30px_90px_-50px_rgba(0,0,0,0.4)]">
-      <div className="border-b border-[var(--line)] px-5 py-4 text-sm text-[var(--muted)]">
+    <div className="debate-shell">
+      <div className="debate-status">
+        <FiBookOpen aria-hidden="true" />
         Active library:{" "}
         <strong className="text-[var(--ink)]">
           {corpusKey === "bible" ? "Bible" : "Quran"}
@@ -108,24 +116,24 @@ export function DebateClient({ corpusKey }: { corpusKey: CorpusKey }) {
       </div>
       <div className="min-h-[28rem] p-5 sm:p-7">
         {messages.length === 0 ? (
-          <div className="mx-auto grid max-w-2xl place-items-center py-12 text-center">
+          <div className="debate-empty">
             <span className="grid size-14 place-items-center rounded-2xl bg-[var(--surface-strong)] text-2xl text-[var(--accent-strong)]">
               <FiMessageCircle aria-hidden="true" />
             </span>
-            <h2 className="mt-6 text-3xl">Build a clear, sourced response.</h2>
+            <h2 className="text-3xl">Build a clear, sourced response.</h2>
             <p className="mt-3 max-w-xl text-sm leading-6 text-[var(--muted)]">
               Ask about a claim or paste an argument. The response starts
               concise, then preserves reasoning and caveats.
             </p>
-            <div className="mt-8 grid w-full gap-2 sm:grid-cols-3">
+            <div className="mt-8 grid w-full gap-3 sm:grid-cols-3">
               {prompts.map((prompt) => (
                 <button
-                  className="rounded-xl border border-[var(--line)] p-3 text-left text-xs font-semibold leading-5 hover:border-[var(--accent)] hover:bg-[var(--surface-strong)]"
+                  className="debate-prompt"
                   key={prompt}
                   onClick={() => setInput(prompt)}
                   type="button"
                 >
-                  {prompt}
+                  {prompt} <FiArrowUpRight aria-hidden="true" />
                 </button>
               ))}
             </div>
@@ -173,9 +181,12 @@ export function DebateClient({ corpusKey }: { corpusKey: CorpusKey }) {
         className="border-t border-[var(--line)] p-4 sm:p-5"
         onSubmit={handleSubmit}
       >
-        <label className="flex items-end gap-3 rounded-[1.3rem] bg-[var(--surface-strong)] p-2 pl-4">
-          <span className="sr-only">Debate message</span>
+        <div className="debate-composer">
+          <label className="sr-only" htmlFor="debate-message">
+            Debate message
+          </label>
           <textarea
+            id="debate-message"
             className="max-h-40 min-h-11 flex-1 resize-none bg-transparent py-3 text-sm outline-none placeholder:text-[var(--muted)]"
             maxLength={4000}
             onChange={(event) => setInput(event.target.value)}
@@ -197,9 +208,14 @@ export function DebateClient({ corpusKey }: { corpusKey: CorpusKey }) {
           >
             <FiArrowUp aria-hidden="true" />
           </Button>
-        </label>
+        </div>
         {error ? (
-          <p className="mt-3 text-sm font-semibold text-red-600">{error}</p>
+          <p
+            role="alert"
+            className="mt-3 text-sm font-medium text-red-700 dark:text-red-300"
+          >
+            {error}
+          </p>
         ) : null}
         <p className="mt-3 text-xs text-[var(--muted)]">
           AI can be wrong. Follow the visible sources and verify important

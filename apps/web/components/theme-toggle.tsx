@@ -17,7 +17,7 @@ export function ThemeToggle() {
   return (
     <button
       aria-label={presentation.label}
-      className="grid size-10 place-items-center border border-[var(--line)] bg-[var(--surface)] text-[var(--ink)] transition hover:border-[var(--ink)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--accent)]"
+      className="theme-toggle grid size-10 shrink-0 rounded-lg place-items-center border border-[var(--line)] bg-[var(--surface)] text-[var(--ink)] transition hover:border-[var(--ink)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--accent)]"
       onClick={() => setTheme(presentation.nextTheme)}
       type="button"
     >

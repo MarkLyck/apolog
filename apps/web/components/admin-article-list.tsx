@@ -44,7 +44,7 @@ export function AdminArticleList() {
   }, [articles, filter, query]);
 
   return (
-    <div className="mx-auto max-w-6xl px-5 py-12 lg:px-8 lg:py-16">
+    <div className="page-container editor-page">
       <header className="flex flex-col gap-6 border-b border-[var(--line)] pb-10 sm:flex-row sm:items-end sm:justify-between">
         <div>
           <p className="text-xs font-bold uppercase tracking-[0.2em] text-[var(--accent-strong)]">
@@ -98,7 +98,7 @@ export function AdminArticleList() {
           Loading articles…
         </p>
       ) : filtered.length === 0 ? (
-        <div className="mt-10 rounded-3xl border border-dashed border-[var(--line)] bg-[var(--surface)] px-6 py-20 text-center">
+        <div className="mt-10 rounded-2xl border border-dashed border-[var(--line)] bg-[var(--surface)] px-6 py-20 text-center">
           <FiFileText
             aria-hidden="true"
             className="mx-auto text-4xl text-[var(--muted)]"
@@ -111,7 +111,7 @@ export function AdminArticleList() {
           </p>
         </div>
       ) : (
-        <div className="mt-8 overflow-hidden rounded-3xl border border-[var(--line)] bg-[var(--surface)]">
+        <div className="mt-8 overflow-hidden rounded-2xl border border-[var(--line)] bg-[var(--surface)]">
           {filtered.map((article) => (
             <Link
               className="group grid gap-4 border-b border-[var(--line)] p-5 transition last:border-b-0 hover:bg-[var(--surface-strong)]/55 sm:grid-cols-[1fr_auto] sm:items-center sm:p-6"

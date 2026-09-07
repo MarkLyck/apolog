@@ -85,7 +85,7 @@ export function CalloutBlock({
 }) {
   return (
     <div
-      className="my-8 rounded-[1.3rem] border border-[var(--accent)]/40 bg-[color:var(--accent)]/8 p-6"
+      className="my-8 rounded-2xl border border-[var(--accent)]/40 bg-[color:var(--accent)]/8 p-6"
       role="note"
     >
       <div className="flex items-center gap-2 text-sm font-bold text-[var(--accent-strong)]">
@@ -104,7 +104,7 @@ export function QuoteBlock({
   block: Extract<ContentBlock, { type: "quote" }>;
 }) {
   return (
-    <figure className="my-8 rounded-[1.3rem] border-l-4 border-[var(--teal)] bg-[var(--surface-strong)] p-6">
+    <figure className="my-8 rounded-2xl border-l-4 border-[var(--teal)] bg-[var(--surface-strong)] p-6">
       <FiBookOpen aria-hidden="true" className="mb-4 text-[var(--teal)]" />
       <blockquote className="m-0 font-display text-xl leading-8">
         <RichText content={block.content} />

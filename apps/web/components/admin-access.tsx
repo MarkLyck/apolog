@@ -11,7 +11,7 @@ export function AdminAccess({ children }: { children: ReactNode }) {
 
   if (access === undefined) {
     return (
-      <div className="mx-auto max-w-6xl px-5 py-24 lg:px-8">
+      <div className="page-container status-page">
         <p aria-live="polite" className="text-sm text-[var(--muted)]">
           Checking editorial access…
         </p>
@@ -21,12 +21,12 @@ export function AdminAccess({ children }: { children: ReactNode }) {
 
   if (!access.authorized) {
     return (
-      <section className="mx-auto max-w-xl px-5 py-24 text-center lg:px-8">
+      <section className="page-container status-page">
         <span className="mx-auto grid size-14 place-items-center rounded-2xl bg-[var(--surface-strong)] text-2xl text-[var(--accent-strong)]">
           <FiLock aria-hidden="true" />
         </span>
         <h1 className="mt-6 text-4xl">Editorial access</h1>
-        <p className="mt-4 leading-7 text-[var(--muted)]">
+        <p className="mt-4 max-w-md text-sm leading-7 text-[var(--muted)]">
           {access.authenticated
             ? "Your account is signed in, but it does not have administrator access."
             : "Sign in with an administrator account to write and manage articles."}

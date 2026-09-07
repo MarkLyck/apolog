@@ -70,51 +70,53 @@ export function SiteHeader({ initialCorpus }: { initialCorpus: CorpusKey }) {
   }, []);
 
   return (
-    <header className="sticky top-0 z-40 border-b border-[var(--line)] bg-[var(--header)]">
-      <div className="mx-auto flex max-w-[92rem] items-center gap-1 px-3 py-2.5 sm:gap-2 sm:px-5 md:gap-4 lg:px-8">
-        <Link
-          className="mr-auto flex items-center gap-3 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--accent)]"
-          href={`/?text=${corpusKey}`}
-        >
-          <span className="grid size-9 place-items-center bg-[var(--accent)] font-display text-xl font-semibold text-white">
-            A
-          </span>
-          <span className="hidden font-display text-xl tracking-tight sm:inline">
-            Apolog
-          </span>
-        </Link>
+    <>
+      <header data-landing={pathname === "/"} className="site-header">
+        <div className="site-header-row">
+          <Link
+            className="mr-auto flex items-center gap-3 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--accent)]"
+            href={`/?text=${corpusKey}`}
+          >
+            <span className="site-brand-mark grid size-9 place-items-center bg-[var(--accent)] font-display text-xl font-semibold text-white">
+              A
+            </span>
+            <span className="site-brand-name hidden font-display text-xl tracking-tight sm:inline">
+              Apolog
+            </span>
+          </Link>
+          <PrimaryNavigation
+            corpusKey={corpusKey}
+            pathname={pathname}
+            variant="desktop"
+          />
+          <CorpusSwitch
+            corpusKey={corpusKey}
+            pathname={pathname}
+            search={serialized}
+          />
+          <SearchTrigger onOpen={openSearch} triggerRef={searchTriggerRef} />
+          <Link
+            aria-label="Open article editor"
+            className="site-editor-link hidden size-10 place-items-center rounded-lg border border-[var(--line)] text-[var(--muted)] transition hover:border-[var(--ink)] hover:text-[var(--ink)] sm:grid"
+            href="/admin/articles"
+            title="Article editor"
+          >
+            <FiEdit3 aria-hidden="true" />
+          </Link>
+          {pathname === "/" ? null : <ThemeToggle />}
+        </div>
         <PrimaryNavigation
           corpusKey={corpusKey}
           pathname={pathname}
-          variant="desktop"
+          variant="mobile"
         />
-        <CorpusSwitch
-          corpusKey={corpusKey}
-          pathname={pathname}
-          search={serialized}
-        />
-        <SearchTrigger onOpen={openSearch} triggerRef={searchTriggerRef} />
-        <Link
-          aria-label="Open article editor"
-          className="hidden size-10 place-items-center border border-[var(--line)] text-[var(--muted)] transition hover:border-[var(--ink)] hover:text-[var(--ink)] sm:grid"
-          href="/admin/articles"
-          title="Article editor"
-        >
-          <FiEdit3 aria-hidden="true" />
-        </Link>
-        <ThemeToggle />
-      </div>
-      <PrimaryNavigation
-        corpusKey={corpusKey}
-        pathname={pathname}
-        variant="mobile"
-      />
+      </header>
       <SearchPalette
         initialCorpus={initialCorpus}
         isOpen={isSearchOpen}
         onClose={closeSearch}
         onToggle={toggleSearch}
       />
-    </header>
+    </>
   );
 }

@@ -22,7 +22,7 @@ export function ArticleCard({
           <FiClock aria-hidden="true" /> {article.readingMinutes} min read
         </Badge>
       </div>
-      <h2 className="font-display text-2xl leading-tight text-[var(--ink)]">
+      <h2 className="text-2xl leading-tight text-[var(--ink)]">
         {article.title}
       </h2>
       <p className="mt-3 flex-1 text-sm leading-6 text-[var(--muted)]">
@@ -36,7 +36,7 @@ export function ArticleCard({
         ))}
       </div>
       <Link
-        className="mt-6 inline-flex items-center gap-2 text-sm font-bold text-[var(--accent-strong)] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--accent)]"
+        className="mt-6 inline-flex items-center gap-2 text-sm font-medium text-[var(--accent-strong)] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--accent)]"
         href={withCorpus(
           `/articles/${article.slug}?from=${article.collectionKey}`,
           corpusKey

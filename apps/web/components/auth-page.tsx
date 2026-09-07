@@ -1,4 +1,5 @@
 import type { ReactNode } from "react";
+import { FiBookOpen } from "react-icons/fi";
 
 import { AuthForm } from "./auth-form";
 
@@ -14,13 +15,27 @@ export function AuthPage({
   title: string;
 }) {
   return (
-    <section className="editorial-grid px-5 py-16 sm:py-24 lg:px-8">
-      <div className="mx-auto max-w-lg rounded-[2rem] border border-[var(--line)] bg-[var(--surface)] p-7 shadow-[0_24px_80px_color-mix(in_srgb,var(--ink)_10%,transparent)] sm:p-10">
-        <div className="text-xs font-bold uppercase tracking-[0.2em] text-[var(--accent-strong)]">
+    <section className="auth-page">
+      <div className="auth-intro night-surface">
+        <div className="page-eyebrow">
+          <FiBookOpen aria-hidden="true" /> A little curiosity. A closer look.
+        </div>
+        <h2>
+          Every question
+          <br />
+          opens <em>a new perspective.</em>
+        </h2>
+        <p>
+          A source-led library for exploring faith, questioning claims, and
+          following the evidence.
+        </p>
+      </div>
+      <div className="auth-card">
+        <div className="text-[10px] font-medium uppercase tracking-[0.16em] text-[var(--accent-strong)]">
           Account access
         </div>
-        <h1 className="mt-4 text-5xl leading-none">{title}</h1>
-        <p className="mb-8 mt-5 leading-7 text-[var(--muted)]">{description}</p>
+        <h1>{title}</h1>
+        <p>{description}</p>
         <AuthForm mode={mode} redirectTo={redirectTo} />
       </div>
     </section>

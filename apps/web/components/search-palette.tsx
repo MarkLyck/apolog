@@ -32,7 +32,11 @@ export function SearchPalette({
   const [query, setQuery] = useState("");
   const [search, setSearch] = useState<SearchState>({ status: "idle" });
   const inputRef = useRef<HTMLInputElement>(null);
-  const closeFromKeyboard = useEffectEvent(onClose);
+  const closeIfOpen = useEffectEvent(() => {
+    if (isOpen) {
+      onClose();
+    }
+  });
   const toggleFromKeyboard = useEffectEvent(onToggle);
 
   useEffect(() => {
@@ -42,7 +46,7 @@ export function SearchPalette({
         toggleFromKeyboard();
       }
       if (event.key === "Escape") {
-        closeFromKeyboard();
+        closeIfOpen();
       }
     };
     window.addEventListener("keydown", onKeyDown);
@@ -93,7 +97,7 @@ export function SearchPalette({
     };
   }, [corpusKey, isOpen, query]);
 
-  useEffect(() => onClose(), [pathname, onClose]);
+  useEffect(() => closeIfOpen(), [pathname]);
 
   if (!isOpen) {
     return null;
@@ -154,7 +158,10 @@ export function SearchPalette({
             </p>
           ) : null}
           {search.status === "error" ? (
-            <p className="p-6 text-sm font-semibold text-red-700" role="alert">
+            <p
+              className="p-6 text-sm font-medium text-red-700 dark:text-red-300"
+              role="alert"
+            >
               {search.message}
             </p>
           ) : null}
@@ -174,7 +181,7 @@ export function SearchPalette({
                   <div className="mb-1 text-[0.65rem] font-bold uppercase tracking-[0.18em] text-[var(--accent-strong)]">
                     {result.collectionKey}
                   </div>
-                  <div className="font-display text-lg">{result.title}</div>
+                  <div className="text-lg">{result.title}</div>
                   <p className="mt-1 line-clamp-2 text-sm text-[var(--muted)]">
                     {result.summary}
                   </p>

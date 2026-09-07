@@ -1,12 +1,18 @@
 import { corpusLabel } from "@apolog/shared";
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
-import type { IconType } from "react-icons";
 import {
+  FiArrowDown,
   FiArrowRight,
+  FiArrowUpRight,
   FiBookOpen,
   FiCompass,
+  FiFeather,
+  FiGitPullRequest,
   FiMessageCircle,
+  FiSearch,
+  FiShield,
 } from "react-icons/fi";
 
 import { ArticleCard } from "@/components/article-card";
@@ -17,59 +23,41 @@ import { getFeatured } from "@/lib/data";
 
 export const metadata: Metadata = {
   description:
-    "Trace passages, evidence, and moral arguments to their sources.",
-  title: "Examine the claim",
+    "A little curiosity. A closer look. Explore Biblical and Quranic claims through passages, evidence, and thoughtful analysis.",
+  title: "Room for better questions",
 };
 
-const categoryCards = [
+const collections = [
   {
     description:
-      "Test historical and factual claims against evidence that could confirm or challenge them.",
+      "Put historical and factual claims to the test. See what holds up.",
     href: "/debunked",
     label: "Debunked",
+    detail: "Look beyond the claim",
+    icon: FiSearch,
   },
   {
     description:
-      "Apply explicit ethical standards while preserving textual and historical context.",
+      "Difficult passages deserve an honest look at the ethics behind them.",
     href: "/immoral",
     label: "Immoral",
+    detail: "Ask the harder questions",
+    icon: FiShield,
   },
   {
-    description:
-      "Understand the methods behind geology, evolution, archaeology, and chronology.",
+    description: "Follow the methods of science, archaeology, and history.",
     href: "/evidence",
     label: "Evidence",
+    detail: "Let the sources lead",
+    icon: FiCompass,
   },
   {
     description:
-      "Examine talking animals, strange miracles, and stories whose narrative logic is simply hard to take seriously.",
+      "Talking animals. Strange miracles. Some stories invite a second look.",
     href: "/silly",
     label: "Silly",
-  },
-] as const;
-
-const principles: {
-  icon: IconType;
-  title: string;
-  copy: (label: string) => string;
-}[] = [
-  {
-    copy: () =>
-      "Every material claim should resolve to a passage or external source.",
-    icon: FiBookOpen,
-    title: "Source-led",
-  },
-  {
-    copy: (label) =>
-      `Every result is explicitly scoped to the active ${label} corpus.`,
-    icon: FiCompass,
-    title: "Scope-aware",
-  },
-  {
-    copy: () =>
-      "Turn the research into a concise, copy-ready response with caveats intact.",
-    icon: FiMessageCircle,
-    title: "Debate-ready",
+    detail: "Keep your curiosity",
+    icon: FiFeather,
   },
 ];
 
@@ -83,112 +71,164 @@ export default async function Home({
   const label = corpusLabel(corpusKey);
 
   return (
-    <>
-      <section className="editorial-grid hero-rule border-b border-[var(--line)]">
-        <div className="mx-auto grid min-h-[42rem] max-w-[92rem] gap-16 px-5 py-16 lg:grid-cols-[minmax(0,1.35fr)_minmax(18rem,0.65fr)] lg:items-end lg:px-8 lg:py-24">
-          <div>
-            <div className="mb-10 flex items-center gap-3 text-sm font-semibold text-[var(--muted)]">
-              <span className="size-2 bg-[var(--accent)]" aria-hidden="true" />
-              {label} library selected
-            </div>
-            <h1 className="max-w-4xl text-[clamp(4rem,8vw,6rem)] leading-[0.88]">
-              Examine
-              <br />
-              the claim.
-            </h1>
-            <p className="mt-9 max-w-[65ch] text-lg leading-8 text-[var(--muted)] md:text-xl">
-              Read the passage. Follow the evidence. See the strongest response.
-              Apolog makes critical inquiry legible without flattening
-              uncertainty.
-            </p>
-            <div className="mt-10 flex flex-wrap gap-3">
-              <Link
-                className="inline-flex min-h-12 items-center gap-3 border border-[var(--ink)] bg-[var(--ink)] px-6 text-sm font-bold text-[var(--paper)] transition hover:border-[var(--accent-strong)] hover:bg-[var(--accent-strong)]"
-                href={`/contradictions?text=${corpusKey}`}
-              >
-                Start with contradictions <FiArrowRight aria-hidden="true" />
-              </Link>
-              <Link
-                className="inline-flex min-h-12 items-center border border-[var(--ink)] px-6 text-sm font-bold transition hover:bg-[var(--surface)]"
-                href={`/evidence?text=${corpusKey}`}
-              >
-                Explore evidence
-              </Link>
-            </div>
+    <div className="landing-page">
+      <section className="landing-hero" aria-labelledby="hero-title">
+        <Image
+          alt=""
+          className="landing-landscape"
+          src="/images/apolog-mountains.webp"
+          fill
+          preload
+          sizes="100vw"
+        />
+        <div className="landing-hero-shade" />
+        <div className="landing-hero-content">
+          <div className="landing-eyebrow">
+            <span /> A little curiosity. A closer look.
           </div>
-
-          <div className="border-t-2 border-[var(--ink)] lg:border-l lg:border-t-0 lg:pl-8">
-            <h2 className="py-5 font-sans text-sm font-bold uppercase tracking-[0.14em] lg:pt-0">
-              A working method
-            </h2>
-            <ol className="border-b border-[var(--line)]">
-              {[
-                "Quote precisely",
-                "Separate claim types",
-                "Show uncertainty",
-                "Cite at claim level",
-              ].map((item, index) => (
-                <li
-                  className="grid grid-cols-[2rem_1fr] gap-3 border-t border-[var(--line)] py-4"
-                  key={item}
-                >
-                  <span className="text-xs font-bold text-[var(--accent-strong)]">
-                    {index + 1}
-                  </span>
-                  <span className="font-semibold">{item}</span>
-                </li>
-              ))}
-            </ol>
-          </div>
-        </div>
-      </section>
-
-      <section className="mx-auto max-w-[92rem] px-5 py-20 lg:px-8 lg:py-28">
-        <h2 className="max-w-4xl text-4xl leading-[0.98] sm:text-5xl lg:text-6xl">
-          Choose the question,
-          <br className="hidden sm:block" /> not the conclusion.
-        </h2>
-        <div className="mt-12 grid border-b border-[var(--line)] md:grid-cols-2">
-          {categoryCards.map((card) => (
+          <h1 id="hero-title">
+            Give your questions
+            <br />
+            <em>room to go deeper.</em>
+          </h1>
+          <p>
+            Explore faith, question the claims, and follow the evidence.
+            <br className="landing-desktop-break" /> A source-led library for an
+            open mind.
+          </p>
+          <div className="landing-actions">
             <Link
-              className="group grid min-h-48 gap-6 border-t border-[var(--line)] py-7 transition hover:bg-[var(--surface)] md:grid-cols-[minmax(8rem,0.45fr)_1fr] md:px-6 md:even:border-l"
-              href={`${card.href}?text=${corpusKey}`}
-              key={card.href}
+              className="landing-button landing-button-primary"
+              href="#explore"
             >
-              <h3 className="flex items-start justify-between text-3xl">
-                {card.label}
-                <FiArrowRight
-                  aria-hidden="true"
-                  className="mt-2 text-base text-[var(--accent-strong)] transition group-hover:translate-x-1"
-                />
-              </h3>
-              <p className="max-w-sm text-sm leading-6 text-[var(--muted)]">
-                {card.description}
-              </p>
+              Explore the library <FiArrowRight aria-hidden="true" />
             </Link>
-          ))}
+            <Link
+              className="landing-button landing-button-glass"
+              href={`/evidence?text=${corpusKey}`}
+            >
+              <FiCompass aria-hidden="true" /> Follow the evidence
+            </Link>
+          </div>
+          <div className="landing-hero-note">
+            <FiBookOpen aria-hidden="true" /> Two texts. Many perspectives. Your
+            conclusions.
+          </div>
+        </div>
+        <div className="landing-hero-bottom">
+          <span>AN OPEN INVITATION TO THINK</span>
+          <a href="#explore" aria-label="Scroll to explore the library">
+            <FiArrowDown aria-hidden="true" />
+          </a>
+          <span>
+            <span className="landing-status-dot" /> EXPLORING THE{" "}
+            {label.toUpperCase()}
+          </span>
         </div>
       </section>
 
-      <section className="border-y border-[var(--line)] bg-[var(--surface-strong)] py-20 lg:py-24">
-        <div className="mx-auto grid max-w-[92rem] gap-10 px-5 lg:grid-cols-[minmax(15rem,0.5fr)_minmax(0,1fr)] lg:px-8">
-          <div>
-            <h2 className="text-4xl leading-none sm:text-5xl">
-              Featured
+      <div className="landing-method-bar">
+        <span>Inquiry, with a little more care.</span>
+        <span>
+          <FiBookOpen aria-hidden="true" /> Sources you can trace
+        </span>
+        <span>
+          <FiGitPullRequest aria-hidden="true" /> Context kept intact
+        </span>
+        <span>
+          <FiMessageCircle aria-hidden="true" /> Room for uncertainty
+        </span>
+      </div>
+
+      <div className="landing-library">
+        <section
+          className="landing-section"
+          id="explore"
+          aria-labelledby="explore-title"
+        >
+          <div className="landing-section-heading">
+            <div>
+              <p className="landing-kicker">THE LIBRARY</p>
+              <h2 id="explore-title">
+                Where does your
+                <br />
+                <em>curiosity take you?</em>
+              </h2>
+            </div>
+            <p>
+              Start with a question. Read the passage.
               <br />
-              contradictions
-            </h2>
-            <p className="mt-5 max-w-xs text-sm leading-6 text-[var(--muted)]">
-              Parallel accounts placed side by side, ranked for focused review.
+              Find a perspective you haven’t considered.
             </p>
+          </div>
+          <div className="landing-collections">
             <Link
-              className="mt-8 inline-flex items-center gap-2 border-b border-[var(--ink)] pb-1 text-sm font-bold"
+              className="landing-collection landing-collection-featured"
               href={`/contradictions?text=${corpusKey}`}
             >
-              View all <FiArrowRight aria-hidden="true" />
+              <div className="landing-collection-top">
+                <FiGitPullRequest aria-hidden="true" />
+                <FiArrowUpRight aria-hidden="true" />
+              </div>
+              <div>
+                <span className="landing-kicker">
+                  TWO ACCOUNTS. ONE QUESTION.
+                </span>
+                <h3>Contradictions</h3>
+                <p>
+                  When the passages don’t agree, put them side by side. Examine
+                  the context and weigh the strongest responses.
+                </p>
+                <span className="landing-collection-link">
+                  Compare the accounts <FiArrowRight aria-hidden="true" />
+                </span>
+              </div>
+            </Link>
+            {collections.map(
+              ({ href, label: title, description, detail, icon: Icon }) => (
+                <Link
+                  className="landing-collection"
+                  href={`${href}?text=${corpusKey}`}
+                  key={href}
+                >
+                  <div className="landing-collection-top">
+                    <Icon aria-hidden="true" />
+                    <FiArrowUpRight aria-hidden="true" />
+                  </div>
+                  <div>
+                    <h3>{title}</h3>
+                    <p>{description}</p>
+                    <span className="landing-collection-detail">{detail}</span>
+                  </div>
+                </Link>
+              )
+            )}
+          </div>
+        </section>
+      </div>
+
+      {featured.contradictions.length > 0 ? (
+        <section
+          className="landing-section landing-featured"
+          aria-labelledby="featured-title"
+        >
+          <div className="landing-section-heading">
+            <div>
+              <p className="landing-kicker">A CLOSER LOOK</p>
+              <h2 id="featured-title">
+                Read both sides.
+                <br />
+                <em>Think for yourself.</em>
+              </h2>
+            </div>
+            <Link
+              className="landing-text-link"
+              href={`/contradictions?text=${corpusKey}`}
+            >
+              All contradictions <FiArrowUpRight aria-hidden="true" />
             </Link>
           </div>
-          <div className="grid max-w-3xl gap-4">
+          <div className="landing-article-grid">
             {featured.contradictions.map((article) => (
               <ContradictionCard
                 article={article}
@@ -197,48 +237,64 @@ export default async function Home({
               />
             ))}
           </div>
-        </div>
-      </section>
+        </section>
+      ) : null}
 
-      <section className="mx-auto max-w-[92rem] px-5 py-20 lg:px-8 lg:py-28">
-        <div className="mb-12 grid gap-5 border-b-2 border-[var(--ink)] pb-7 md:grid-cols-[1fr_0.7fr] md:items-end">
-          <h2 className="text-4xl leading-none sm:text-5xl">
-            Evidence before argument
-          </h2>
-          <p className="text-sm leading-6 text-[var(--muted)] md:justify-self-end">
-            Methods, predictions, and cross-checks that make a claim testable.
-          </p>
-        </div>
-        <div className="grid gap-4 md:grid-cols-2">
-          {featured.articles.map((article) => (
-            <ArticleCard
-              article={article}
-              corpusKey={corpusKey}
-              key={article.slug}
-            />
-          ))}
-        </div>
-      </section>
-
-      <section className="bg-[var(--ink)] text-[var(--paper)]">
-        <div className="mx-auto grid max-w-[92rem] md:grid-cols-3">
-          {principles.map(({ icon: Icon, title, copy }) => (
-            <div
-              className="border-b border-[color:var(--paper)]/20 px-5 py-10 last:border-b-0 md:border-b-0 md:border-r md:last:border-r-0 lg:px-8 lg:py-14"
-              key={title}
-            >
-              <Icon
-                aria-hidden="true"
-                className="text-xl text-[var(--accent)]"
-              />
-              <h3 className="mt-8 text-2xl">{title}</h3>
-              <p className="mt-3 max-w-sm text-sm leading-6 opacity-70">
-                {copy(label)}
-              </p>
+      {featured.articles.length > 0 ? (
+        <section
+          className="landing-section landing-evidence"
+          aria-labelledby="evidence-title"
+        >
+          <div className="landing-section-heading">
+            <div>
+              <p className="landing-kicker">FOLLOW THE THREAD</p>
+              <h2 id="evidence-title">Evidence before argument.</h2>
             </div>
-          ))}
-        </div>
+            <Link
+              className="landing-text-link"
+              href={`/evidence?text=${corpusKey}`}
+            >
+              Explore the evidence <FiArrowUpRight aria-hidden="true" />
+            </Link>
+          </div>
+          <div className="landing-article-grid">
+            {featured.articles.map((article) => (
+              <ArticleCard
+                article={article}
+                corpusKey={corpusKey}
+                key={article.slug}
+              />
+            ))}
+          </div>
+        </section>
+      ) : null}
+
+      <section
+        className="landing-invitation"
+        aria-labelledby="invitation-title"
+      >
+        <FiMessageCircle
+          className="landing-invitation-icon"
+          aria-hidden="true"
+        />
+        <p className="landing-kicker">THINK IT THROUGH</p>
+        <h2 id="invitation-title">
+          A good question
+          <br />
+          is only <em>the beginning.</em>
+        </h2>
+        <p>
+          Bring a claim. Explore the arguments.
+          <br />
+          Build a response with sources you can return to.
+        </p>
+        <Link
+          className="landing-button landing-button-primary"
+          href={`/debate?text=${corpusKey}`}
+        >
+          Start a conversation <FiArrowUpRight aria-hidden="true" />
+        </Link>
       </section>
-    </>
+    </div>
   );
 }
