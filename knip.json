@@ -2,6 +2,11 @@
   "$schema": "https://unpkg.com/knip@6/schema.json",
   "ignore": [".agents/skills/**"],
   "ignoreFiles": [".github/skills/impeccable/**"],
+  "workspaces": {
+    "apps/ingest": {
+      "entry": ["src/refresh-contradictions.ts"]
+    }
+  },
   "ignoreIssues": {
     "tools/oxlint/anti-slop/**": ["exports", "types"]
   }

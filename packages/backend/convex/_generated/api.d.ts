@@ -11,6 +11,7 @@
 import type * as articleViews from "../articleViews.js";
 import type * as articles from "../articles.js";
 import type * as auth from "../auth.js";
+import type * as contradictionImport from "../contradictionImport.js";
 import type * as crons from "../crons.js";
 import type * as email from "../email.js";
 import type * as home from "../home.js";
@@ -32,6 +33,7 @@ declare const fullApi: ApiFromModules<{
   articleViews: typeof articleViews;
   articles: typeof articles;
   auth: typeof auth;
+  contradictionImport: typeof contradictionImport;
   crons: typeof crons;
   email: typeof email;
   home: typeof home;

@@ -43,7 +43,7 @@ async function requireAdmin(ctx: QueryCtx | MutationCtx) {
   return userId;
 }
 
-async function removeArticleRelations(
+export async function removeArticleRelations(
   ctx: MutationCtx,
   articleId: Id<"articles">
 ) {
@@ -66,7 +66,7 @@ async function removeArticleRelations(
   }
 }
 
-async function rebuildArticleRelations(
+export async function rebuildArticleRelations(
   ctx: MutationCtx,
   article: Doc<"articles">,
   placements: {
@@ -92,7 +92,6 @@ async function rebuildArticleRelations(
       comparisonReferences: projection.comparisonReferences,
       corpusKey: placement.corpusKey,
       position: placement.position,
-      publishedAt: article.publishedAt,
       status: article.status,
       tags,
       updatedAt: article.updatedAt,
@@ -100,6 +99,7 @@ async function rebuildArticleRelations(
     await ctx.db.insert("articlePlacements", {
       ...common,
       articleCreatedAt: article._creationTime,
+      publishedAt: article.publishedAt,
       isPrimary: placement.isPrimary,
     });
     await ctx.db.insert("searchDocuments", {
