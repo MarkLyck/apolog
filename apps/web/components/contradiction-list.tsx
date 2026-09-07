@@ -6,6 +6,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 
 import { loadContradictions } from "@/app/contradictions/actions";
 import { ContradictionCard } from "@/components/contradiction-card";
+import { mergeArticlePage } from "@/lib/article-pagination";
 
 export function ContradictionList({
   corpusKey,
@@ -30,16 +31,7 @@ export function ContradictionList({
         corpusKey,
         cursor: result.continueCursor,
       });
-      setResult((previous) => {
-        const seen = new Set(previous.page.map((article) => article.id));
-        return {
-          ...next,
-          page: [
-            ...previous.page,
-            ...next.page.filter((article) => !seen.has(article.id)),
-          ],
-        };
-      });
+      setResult((previous) => mergeArticlePage(previous, next));
       setStatus("idle");
     } catch {
       setStatus("error");
