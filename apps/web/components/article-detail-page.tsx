@@ -74,7 +74,7 @@ export async function ArticleDetailPage({
       </header>
       <div className="grid items-start gap-8 pt-8 sm:pt-10 lg:grid-cols-[minmax(0,1fr)_15rem] lg:gap-10">
         <ContentBlocks blocks={article.document.blocks} />
-        <aside
+        <section
           aria-label="Article details"
           className="space-y-6 border-t border-[var(--line)] pt-6 lg:sticky lg:top-28 lg:border-l lg:border-t-0 lg:pl-6 lg:pt-0"
         >
@@ -119,7 +119,7 @@ export async function ArticleDetailPage({
               ))}
             </ol>
           </div>
-        </aside>
+        </section>
       </div>
     </article>
   );
