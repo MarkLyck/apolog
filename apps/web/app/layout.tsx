@@ -1,7 +1,7 @@
 import { ThemeProvider } from "@wrksz/themes/next";
 import "@fontsource-variable/ibm-plex-sans";
 import "@fontsource-variable/newsreader";
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Suspense } from "react";
 import type { ReactNode } from "react";
 
@@ -13,8 +13,20 @@ import { siteConfig } from "@/lib/site";
 import "./globals.css";
 
 export const metadata: Metadata = {
+  appleWebApp: {
+    capable: true,
+    statusBarStyle: "default",
+    title: siteConfig.name,
+  },
   applicationName: siteConfig.name,
   description: siteConfig.description,
+  icons: {
+    apple: { url: "/apple-touch-icon.png", sizes: "180x180" },
+    icon: [
+      { url: "/favicon.ico", sizes: "16x16 32x32 48x48" },
+      { url: "/favicon.svg", type: "image/svg+xml", sizes: "any" },
+    ],
+  },
   metadataBase: new URL(siteConfig.url),
   openGraph: {
     description: siteConfig.description,
@@ -27,6 +39,10 @@ export const metadata: Metadata = {
     template: "%s · Apolog",
   },
   twitter: { card: "summary_large_image" },
+};
+
+export const viewport: Viewport = {
+  themeColor: "#db3f27",
 };
 
 export default async function RootLayout({
