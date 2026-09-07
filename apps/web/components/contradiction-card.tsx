@@ -25,7 +25,7 @@ export function ContradictionCard({
           {article.position}
         </div>
         <div className="relative">
-          <div className="mb-5 text-xs font-bold uppercase tracking-[0.2em] text-[var(--accent-strong)]">
+          <div className="mb-5 text-[0.65rem] font-medium uppercase tracking-[0.16em] text-[var(--accent-strong)]">
             Ranked contradiction {article.position}
           </div>
           <h2 className="max-w-md text-2xl leading-tight">{article.title}</h2>
@@ -36,7 +36,7 @@ export function ContradictionCard({
             <div className="mt-5 flex flex-wrap gap-2">
               {[...new Set(article.comparisonReferences)].map((reference) => (
                 <span
-                  className="border border-[var(--line)] bg-[var(--surface-strong)] px-3 py-1.5 text-xs font-semibold"
+                  className="rounded-full border border-[var(--line)] bg-[var(--surface-strong)] px-3 py-1.5 text-xs font-medium"
                   key={reference}
                 >
                   {reference}
@@ -44,7 +44,7 @@ export function ContradictionCard({
               ))}
             </div>
           ) : null}
-          <span className="mt-6 inline-flex items-center gap-2 text-sm font-bold text-[var(--accent-strong)]">
+          <span className="mt-6 inline-flex items-center gap-2 text-sm font-medium text-[var(--accent-strong)]">
             Compare the accounts <FiArrowRight aria-hidden="true" />
           </span>
         </div>

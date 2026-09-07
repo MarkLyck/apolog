@@ -4,7 +4,7 @@ import { siteConfig } from "@/lib/site";
 
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    background_color: "#f2efe7",
+    background_color: "#f8f9fc",
     description: siteConfig.description,
     display: "standalone",
     icons: [
@@ -32,6 +32,6 @@ export default function manifest(): MetadataRoute.Manifest {
     scope: "/",
     short_name: siteConfig.name,
     start_url: "/",
-    theme_color: "#db3f27",
+    theme_color: "#12233e",
   };
 }

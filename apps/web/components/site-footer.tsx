@@ -12,8 +12,8 @@ export function SiteFooter({ initialCorpus }: { initialCorpus: CorpusKey }) {
   const corpusKey = parseCorpus(searchParams.get("text")) ?? initialCorpus;
   const links = getSiteFooterLinks(corpusKey);
   return (
-    <footer className="bg-[var(--ink)] text-[var(--paper)]">
-      <div className="mx-auto grid max-w-[92rem] gap-8 px-5 py-12 md:grid-cols-[1fr_auto] md:items-end lg:px-8">
+    <footer className="site-footer">
+      <div className="site-container grid gap-8 py-12 md:grid-cols-[1fr_auto] md:items-end">
         <div>
           <div className="font-display text-3xl">Apolog</div>
           <p className="mt-3 max-w-xl text-sm leading-6 opacity-70">

@@ -89,7 +89,10 @@ export function AuthForm({
 
   return (
     <form className="grid gap-5" onSubmit={handleSubmit}>
-      <label className="grid gap-2 text-sm font-bold" htmlFor={`${mode}-email`}>
+      <label
+        className="grid gap-2 text-sm font-medium"
+        htmlFor={`${mode}-email`}
+      >
         Email
         <input
           autoComplete="email"
@@ -103,7 +106,7 @@ export function AuthForm({
       </label>
 
       <label
-        className="grid gap-2 text-sm font-bold"
+        className="grid gap-2 text-sm font-medium"
         htmlFor={`${mode}-password`}
       >
         Password
@@ -120,7 +123,7 @@ export function AuthForm({
 
       {mode === "signup" ? (
         <label
-          className="grid gap-2 text-sm font-bold"
+          className="grid gap-2 text-sm font-medium"
           htmlFor="signup-confirm-password"
         >
           Confirm password

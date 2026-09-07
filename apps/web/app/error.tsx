@@ -2,7 +2,7 @@
 
 export default function ErrorPage({ reset }: { reset: () => void }) {
   return (
-    <section className="mx-auto grid min-h-[60vh] max-w-3xl place-items-center px-5 text-center">
+    <section className="page-container status-page">
       <div>
         <div className="text-xs font-bold uppercase tracking-[0.2em] text-[var(--accent-strong)]">
           Something interrupted the page

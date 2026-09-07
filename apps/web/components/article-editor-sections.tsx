@@ -30,7 +30,7 @@ import { RichArticleEditor } from "./rich-article-editor";
 
 const inputClassName =
   "min-h-11 w-full rounded-xl border border-[var(--line)] bg-[var(--paper)] px-4 text-[var(--ink)] outline-none transition placeholder:text-[var(--muted)] focus:border-[var(--accent)] focus:ring-2 focus:ring-[color:var(--accent)]/20";
-const labelClassName = "grid gap-2 text-sm font-bold";
+const labelClassName = "grid gap-2 text-sm font-medium";
 const statuses = ["draft", "published", "archived"] as const;
 
 function parseStatus(value: string): Status | null {
@@ -47,7 +47,7 @@ function EditorSection({
   title: string;
 }) {
   return (
-    <section className="rounded-3xl border border-[var(--line)] bg-[var(--surface)] p-5 sm:p-7">
+    <section className="editor-section">
       <h2 className="text-2xl">{title}</h2>
       {description ? (
         <p className="mt-2 text-sm leading-6 text-[var(--muted)]">
@@ -478,7 +478,7 @@ export function EditorTopbar({
   values: EditorValues;
 }) {
   return (
-    <header className="sticky top-[69px] z-30 -mx-4 flex flex-wrap items-center gap-3 border-y border-[var(--line)] bg-[color:var(--paper)]/94 px-4 py-3 backdrop-blur-xl sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8">
+    <header className="editor-topbar">
       <Link
         className="inline-flex items-center gap-2 text-sm font-bold text-[var(--muted)] hover:text-[var(--ink)]"
         href="/admin/articles"

@@ -21,11 +21,11 @@ export default async function Page({
     <>
       <PageIntro
         corpusKey={corpusKey}
-        description="Ask about a claim or paste an argument. Apolog retrieves only published material linked to the active corpus and keeps the answer evidence-first."
-        eyebrow="Text-only debate"
-        title="Make the response clear. Keep the caveats."
+        description="Bring a claim, follow the arguments, and build a response with sources you can return to."
+        eyebrow="Think it through"
+        title="Good questions start a conversation."
       />
-      <section className="mx-auto max-w-5xl px-5 lg:px-8">
+      <section className="page-container debate-page">
         <DebateClient corpusKey={corpusKey} />
       </section>
     </>

@@ -58,12 +58,12 @@ export function ContradictionList({
 
   return (
     <>
-      <div className="mb-8 mt-5 text-sm text-[var(--muted)]" aria-live="polite">
+      <div className="collection-results" aria-live="polite">
         {result.page.length} ranked{" "}
         {result.page.length === 1 ? "comparison" : "comparisons"}
         {result.isDone ? "" : " loaded"}
       </div>
-      <div className="grid gap-4 md:grid-cols-2">
+      <div className="grid gap-5 md:grid-cols-2">
         {result.page.map((article) => (
           <ContradictionCard
             article={article}
@@ -80,7 +80,7 @@ export function ContradictionList({
             </p>
           )}
           <button
-            className="border border-[var(--line)] px-6 py-3 text-sm font-bold disabled:opacity-60"
+            className="rounded-full border border-[var(--line)] bg-[var(--surface)] px-6 py-3 text-sm font-medium focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--accent)] disabled:opacity-60"
             disabled={status === "loading"}
             onClick={loadMore}
             type="button"

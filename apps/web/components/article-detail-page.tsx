@@ -38,9 +38,9 @@ export async function ArticleDetailPage({
   const collection = collectionRegistry[activePlacement.collectionKey];
 
   return (
-    <article className="mx-auto max-w-6xl px-5 pb-16 pt-8 sm:px-8 sm:pt-12">
-      <header className="border-b border-[var(--line)]">
-        <div className="pb-8 sm:pb-10">
+    <article className="article-reader page-container">
+      <header className="reader-header">
+        <div className="reader-heading">
           <Link
             className="inline-flex items-center gap-2 text-sm font-medium text-[var(--muted)] transition-colors hover:text-[var(--ink)]"
             href={`/${activePlacement.collectionKey}?text=${corpusKey}`}
@@ -72,11 +72,11 @@ export async function ArticleDetailPage({
           ) : null}
         </div>
       </header>
-      <div className="grid items-start gap-8 pt-8 sm:pt-10 lg:grid-cols-[minmax(0,1fr)_15rem] lg:gap-10">
+      <div className="grid items-start gap-8 pt-8 sm:pt-10 lg:grid-cols-[minmax(0,1fr)_18rem] lg:gap-10">
         <ContentBlocks blocks={article.document.blocks} />
         <section
           aria-label="Article details"
-          className="space-y-6 border-t border-[var(--line)] pt-6 lg:sticky lg:top-28 lg:border-l lg:border-t-0 lg:pl-6 lg:pt-0"
+          className="reader-details space-y-7 lg:sticky lg:top-32"
         >
           <div>
             <h2 className="font-sans text-xs font-semibold uppercase tracking-[0.12em] text-[var(--muted)]">
@@ -84,10 +84,7 @@ export async function ArticleDetailPage({
             </h2>
             <div className="mt-3 flex flex-wrap gap-2">
               {article.tags.map((tag) => (
-                <Badge
-                  className="rounded-md bg-transparent font-medium"
-                  key={tag}
-                >
+                <Badge className="bg-transparent font-medium" key={tag}>
                   {tag}
                 </Badge>
               ))}

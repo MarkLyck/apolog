@@ -214,10 +214,7 @@ function ArticleEditorForm({
   };
 
   return (
-    <form
-      action={handleSave}
-      className="mx-auto max-w-[92rem] px-4 py-8 sm:px-6 lg:px-8"
-    >
+    <form action={handleSave} className="page-container editor-page">
       <EditorTopbar
         dirty={dirty}
         isSaving={isSaving}
@@ -263,7 +260,10 @@ function ArticleEditorForm({
           <SourcesSection sources={values.sources} update={update} />
         </div>
 
-        <aside className="grid gap-7 xl:sticky xl:top-40">
+        <section
+          aria-label="Publication settings"
+          className="editor-settings grid gap-7 xl:sticky"
+        >
           <PublishingSection
             onSlugChange={(slug) => {
               slugWasEdited.current = true;
@@ -287,7 +287,7 @@ function ArticleEditorForm({
               onRequestDelete={() => setDeleteArmed(true)}
             />
           ) : null}
-        </aside>
+        </section>
       </div>
 
       {message ? (

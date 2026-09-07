@@ -44,7 +44,7 @@
   background: transparent;
   color: var(--muted);
   font-size: 0.76rem;
-  font-weight: 800;
+  font-weight: 500;
   cursor: pointer;
 }
 
@@ -83,7 +83,7 @@
   gap: 0.3rem;
   color: var(--muted);
   font-size: 0.72rem;
-  font-weight: 800;
+  font-weight: 500;
 }
 
 .editor-link-panel button {
@@ -94,7 +94,7 @@
   padding-inline: 0.9rem;
   color: var(--ink);
   font-size: 0.75rem;
-  font-weight: 800;
+  font-weight: 500;
   cursor: pointer;
 }
 
@@ -183,9 +183,9 @@
   display: grid;
   gap: 0.4rem;
   color: var(--muted);
-  font-family: Inter, ui-sans-serif, system-ui, sans-serif;
+  font-family: var(--font-sans);
   font-size: 0.72rem;
-  font-weight: 800;
+  font-weight: 500;
   letter-spacing: 0.04em;
 }
 
@@ -210,11 +210,7 @@
 }
 
 .editor-scripture .editor-special-content {
-  font-family:
-    Iowan Old Style,
-    Baskerville,
-    "Times New Roman",
-    serif;
+  font-family: var(--font-display);
   font-size: 1.25rem;
   line-height: 1.6;
 }
@@ -242,7 +238,7 @@
 
 .editor-contradiction-header span {
   font-size: 0.75rem;
-  font-weight: 800;
+  font-weight: 500;
   letter-spacing: 0.06em;
   text-transform: uppercase;
 }
@@ -280,7 +276,7 @@
   background: transparent;
   color: var(--muted);
   font-size: 0.75rem;
-  font-weight: 800;
+  font-weight: 500;
   cursor: pointer;
 }
 

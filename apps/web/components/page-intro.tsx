@@ -1,5 +1,6 @@
 import { corpusLabel } from "@apolog/shared";
 import type { CorpusKey } from "@apolog/shared";
+import Image from "next/image";
 
 export function PageIntro({
   eyebrow,
@@ -13,17 +14,23 @@ export function PageIntro({
   corpusKey: CorpusKey;
 }) {
   return (
-    <header className="mx-auto max-w-[92rem] px-5 pb-12 pt-16 lg:px-8 lg:pt-24">
-      <div className="mb-5 flex items-center gap-3 text-xs font-bold uppercase tracking-[0.2em] text-[var(--accent-strong)]">
-        <span className="h-px w-10 bg-[var(--accent)]" /> {eyebrow} ·{" "}
-        {corpusLabel(corpusKey)}
+    <header className="page-intro night-surface">
+      <Image
+        alt=""
+        className="page-intro-landscape"
+        src="/images/apolog-mountains.webp"
+        fill
+        preload
+        sizes="100vw"
+      />
+      <div className="site-container">
+        <div className="page-eyebrow">
+          <span aria-hidden="true" /> {eyebrow}{" "}
+          <span aria-hidden="true">/</span> {corpusLabel(corpusKey)} library
+        </div>
+        <h1>{title}</h1>
+        <p>{description}</p>
       </div>
-      <h1 className="max-w-5xl text-5xl leading-[0.98] sm:text-6xl lg:text-7xl">
-        {title}
-      </h1>
-      <p className="mt-7 max-w-2xl text-lg leading-8 text-[var(--muted)]">
-        {description}
-      </p>
     </header>
   );
 }

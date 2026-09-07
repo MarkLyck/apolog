@@ -1,0 +1,647 @@
+.landing-page {
+  --paper: #090e16;
+  --surface: #101722;
+  --surface-strong: #192331;
+  --ink: #f1f3f6;
+  --muted: #a9b2c1;
+  --line: #29323f;
+  --accent: #b9cce9;
+  --accent-strong: #bfd0ec;
+  color: var(--ink);
+}
+
+.landing-page {
+  background: var(--paper);
+}
+
+.landing-page h1,
+.landing-page h2,
+.landing-page h3 {
+  font-family: var(--font-sans);
+  font-weight: 400;
+  letter-spacing: -0.045em;
+}
+
+.landing-page em {
+  font-family: var(--font-display);
+  font-weight: 400;
+  color: #c6d4e9;
+}
+
+.landing-page a:focus-visible {
+  outline: 2px solid #c6d4e9;
+  outline-offset: 5px;
+}
+
+.landing-hero {
+  position: relative;
+  display: flex;
+  min-height: 820px;
+  height: min(960px, 100svh);
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.landing-landscape {
+  z-index: -3;
+  object-fit: cover;
+  object-position: center 48%;
+  filter: saturate(1.15);
+}
+
+.landing-hero-shade {
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  background: linear-gradient(
+    180deg,
+    #060f2533,
+    #0a142826 48%,
+    #090e1640 72%,
+    #090e16 100%
+  );
+}
+
+.landing-hero-content {
+  width: 100%;
+  padding: 90px 24px 80px;
+  text-align: center;
+  animation: landing-arrive 900ms ease-out both;
+}
+
+.landing-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  color: #dde5f1;
+  font-size: 13px;
+  letter-spacing: 0.045em;
+}
+
+.landing-eyebrow > span,
+.landing-status-dot {
+  display: inline-block;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: #c9d9eb;
+  box-shadow: 0 0 12px #ccddff80;
+}
+
+.landing-hero h1 {
+  margin: 24px 0 22px;
+  font-size: clamp(52px, 6.2vw, 88px);
+  line-height: 1.06;
+}
+
+.landing-hero h1 em {
+  line-height: 1.17;
+  letter-spacing: -0.055em;
+  color: #e1e8f5;
+}
+
+.landing-hero-content > p {
+  color: #d3deed;
+  font-size: 17px;
+  line-height: 1.7;
+}
+
+.landing-actions {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 31px;
+}
+
+.landing-button {
+  display: inline-flex;
+  min-height: 49px;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 0 21px;
+  border: 1px solid transparent;
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 500;
+  transition:
+    background 180ms,
+    transform 180ms,
+    box-shadow 180ms;
+}
+
+.landing-button:hover {
+  transform: translateY(-2px);
+}
+
+.landing-button-primary {
+  background: #edf1f7;
+  color: #182232;
+  box-shadow:
+    0 3px 12px #02081733,
+    inset 0 1px 0 white;
+}
+
+.landing-button-primary:hover {
+  background: white;
+  box-shadow: 0 5px 22px #b8cfff26;
+}
+
+.landing-button-glass {
+  border-color: #ffffff40;
+  background: #142b4f99;
+  backdrop-filter: blur(12px);
+  color: #f1f3f6;
+}
+
+.landing-button-glass:hover {
+  background: #18385ecc;
+}
+
+.landing-hero-note {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 21px;
+  color: #c5d0df;
+  font-size: 11px;
+}
+
+.landing-hero-bottom {
+  position: absolute;
+  right: 5%;
+  bottom: 32px;
+  left: 5%;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  gap: 20px;
+  color: #a9b2c1;
+  font-size: 9px;
+  letter-spacing: 0.15em;
+}
+
+.landing-hero-bottom > :last-child {
+  justify-self: end;
+}
+
+.landing-status-dot {
+  margin-right: 7px;
+}
+
+.landing-hero-bottom a {
+  display: grid;
+  width: 36px;
+  height: 36px;
+  place-items: center;
+  border: 1px solid #ffffff30;
+  border-radius: 50%;
+  color: #c7d2e1;
+  transition: background 180ms;
+}
+
+.landing-hero-bottom a:hover {
+  background: #ffffff15;
+}
+
+.landing-method-bar {
+  display: flex;
+  max-width: 1200px;
+  min-height: 100px;
+  margin: 0 auto;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  padding: 24px 0;
+  border-bottom: 1px solid #ffffff14;
+  color: #a9b2c1;
+  font-size: 12px;
+}
+
+.landing-method-bar > span {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.landing-method-bar > :first-child {
+  color: #e0e5ed;
+}
+
+.landing-method-bar svg {
+  font-size: 16px;
+  color: #b4c6e3;
+}
+
+.landing-section {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 100px 0 0;
+  scroll-margin-top: 32px;
+}
+
+.landing-section-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 28px;
+  margin-bottom: 38px;
+}
+
+.landing-kicker {
+  margin-bottom: 18px;
+  color: #a0b1cb;
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.17em;
+}
+
+.landing-section h2 {
+  font-size: clamp(34px, 3.5vw, 48px);
+  line-height: 1.12;
+}
+
+.landing-section-heading > p {
+  padding-bottom: 3px;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.8;
+}
+
+.landing-library {
+  --paper: #f8f9fc;
+  --surface: #ffffff;
+  --ink: #172131;
+  --muted: #586478;
+  --line: #dce1eb;
+  padding-bottom: 100px;
+  background: var(--paper);
+  color: var(--ink);
+}
+
+.landing-library .landing-section-heading {
+  margin-bottom: 48px;
+}
+
+.landing-library h2 {
+  font-size: clamp(36px, 4.2vw, 58px);
+}
+
+.landing-library em {
+  color: #526b9d;
+}
+
+.landing-library .landing-kicker {
+  color: #4d618b;
+}
+
+.landing-library a:focus-visible {
+  outline-color: #335bd6;
+}
+
+.landing-collections {
+  display: grid;
+  grid-template-columns: 1.15fr 1fr 1fr;
+  gap: 15px;
+}
+
+.landing-collection {
+  display: grid;
+  grid-template-rows: auto 1fr;
+  min-height: 238px;
+  gap: 30px;
+  padding: 28px;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  background: var(--surface);
+  transition:
+    background 200ms,
+    border-color 200ms,
+    transform 200ms;
+}
+
+.landing-collection:hover {
+  transform: translateY(-3px);
+  border-color: #9fafd0;
+  background-color: #eef2fa;
+}
+
+.landing-collection-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 20px;
+  color: #335bd6;
+}
+
+.landing-collection-top > :last-child {
+  font-size: 16px;
+  color: #687990;
+}
+
+.landing-collection h3 {
+  margin-bottom: 10px;
+  color: var(--ink);
+  font-size: 23px;
+}
+
+.landing-collection p {
+  max-width: 32ch;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.7;
+}
+
+.landing-collection-detail {
+  display: block;
+  margin-top: 18px;
+  color: #4b639b;
+  font-size: 11px;
+}
+
+.landing-collection-featured {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  --ink: #f1f3f6;
+  --muted: #bcc7d8;
+  --line: #263e64;
+  grid-row: span 2;
+  background:
+    linear-gradient(180deg, #16223d33, #0d1729 92%),
+    url("/images/apolog-mountains.webp") center / cover;
+}
+
+.landing-collection-featured:hover {
+  background-color: #263b55;
+}
+
+.landing-collection-featured .landing-collection-top,
+.landing-collection-featured .landing-collection-top > :last-child {
+  color: #b4c9eb;
+}
+
+.landing-library .landing-collection-featured .landing-kicker {
+  color: #b4c9eb;
+  display: block;
+  font-size: 9px;
+}
+
+.landing-collection-featured h3 {
+  font-size: 30px;
+}
+
+.landing-collection-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 28px;
+  color: #e1e9f5;
+  font-size: 12px;
+}
+
+.landing-featured,
+.landing-evidence {
+  padding-top: 100px;
+}
+
+.landing-text-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  padding-bottom: 7px;
+  color: #c4d2e7;
+  font-size: 12px;
+}
+
+.landing-text-link:hover {
+  color: white;
+}
+
+.landing-article-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.landing-article-grid article {
+  padding: 30px;
+  border-color: #ffffff17;
+  border-radius: 12px;
+  background: #101722;
+  box-shadow: none;
+}
+
+.landing-article-grid article:hover {
+  border-color: #ffffff40;
+  box-shadow: none;
+}
+
+.landing-article-grid h2 {
+  max-width: 440px;
+  font-size: 25px;
+  line-height: 1.25;
+  letter-spacing: -0.03em;
+}
+
+.landing-article-grid article span {
+  border-radius: 5px;
+}
+
+.landing-invitation {
+  position: relative;
+  margin-top: 110px;
+  padding: 95px 24px 110px;
+  overflow: hidden;
+  background:
+    linear-gradient(180deg, #090e16, #090e1680 45%, #090e16 100%),
+    url("/images/apolog-mountains.webp") center 65% / cover;
+  text-align: center;
+}
+
+.landing-invitation-icon {
+  margin: 0 auto 22px;
+  color: #c6d4e9;
+  font-size: 26px;
+}
+
+.landing-invitation h2 {
+  font-size: clamp(40px, 4.2vw, 60px);
+  line-height: 1.1;
+}
+
+.landing-invitation h2 + p {
+  margin: 22px 0 28px;
+  color: #b7c3d4;
+  font-size: 14px;
+  line-height: 1.8;
+}
+
+@keyframes landing-arrive {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 1300px) {
+}
+
+@media (max-width: 767px) {
+  .landing-hero {
+    min-height: 780px;
+    height: 100svh;
+    max-height: 950px;
+  }
+
+  .landing-hero-content {
+    padding: 150px 20px 90px;
+  }
+
+  .landing-hero h1 {
+    font-size: clamp(42px, 7.8vw, 60px);
+    margin: 23px 0;
+  }
+
+  .landing-hero-content > p {
+    max-width: 360px;
+    margin: 0 auto;
+    font-size: 15px;
+  }
+
+  .landing-eyebrow {
+    font-size: 11px;
+  }
+  .landing-desktop-break {
+    display: none;
+  }
+  .landing-hero-note {
+    font-size: 10px;
+  }
+  .landing-hero-bottom {
+    bottom: 23px;
+    font-size: 8px;
+    letter-spacing: 0.1em;
+  }
+  .landing-hero-bottom > :first-child {
+    max-width: 110px;
+  }
+  .landing-hero-bottom > :last-child {
+    max-width: 110px;
+    text-align: right;
+  }
+
+  .landing-method-bar {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px 14px;
+    margin: 0 24px;
+    padding: 27px 0;
+    font-size: 10px;
+  }
+
+  .landing-method-bar > span {
+    gap: 7px;
+  }
+  .landing-method-bar svg {
+    font-size: 13px;
+  }
+  .landing-section {
+    margin: 0 24px;
+    padding-top: 68px;
+  }
+  .landing-section-heading {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 22px;
+    margin-bottom: 28px;
+  }
+  .landing-section-heading > p {
+    font-size: 12px;
+  }
+  .landing-section h2 {
+    font-size: 36px;
+  }
+  .landing-kicker {
+    margin-bottom: 14px;
+    font-size: 9px;
+  }
+  .landing-library {
+    padding-bottom: 68px;
+  }
+
+  .landing-library .landing-section-heading {
+    margin-bottom: 30px;
+  }
+
+  .landing-collections {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+  }
+  .landing-collection {
+    min-height: 260px;
+    padding: 20px;
+    gap: 24px;
+  }
+  .landing-collection-featured {
+    grid-column: span 2;
+    grid-row: auto;
+    min-height: 320px;
+    background-position: center 65%;
+  }
+  .landing-collection-featured p {
+    max-width: 42ch;
+  }
+  .landing-collection h3 {
+    font-size: 22px;
+  }
+  .landing-collection p {
+    font-size: 12px;
+  }
+  .landing-collection-detail {
+    font-size: 10px;
+  }
+  .landing-article-grid {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+  .landing-article-grid article {
+    padding: 25px;
+  }
+  .landing-article-grid h2 {
+    font-size: 25px;
+  }
+  .landing-invitation {
+    margin-top: 68px;
+    padding: 80px 24px;
+  }
+}
+
+@media (max-width: 420px) {
+  .landing-actions {
+    flex-direction: column;
+    align-items: stretch;
+    max-width: 260px;
+    margin-right: auto;
+    margin-left: auto;
+  }
+  .landing-hero h1 {
+    font-size: clamp(34px, 10.5vw, 41px);
+  }
+  .landing-hero-content {
+    padding-top: 175px;
+  }
+  .landing-collection {
+    padding: 17px;
+  }
+}
