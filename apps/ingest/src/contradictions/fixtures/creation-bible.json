@@ -1,0 +1,96 @@
+{
+  "translation": "KJV: King James Version (1769) with Strongs Numbers and Morphology and CatchWords",
+  "books": [
+    {
+      "name": "Genesis",
+      "edition": "King James Version",
+      "chapters": [
+        {
+          "chapter": 1,
+          "verses": [
+            {
+              "verse": 1,
+              "text": "In the beginning God created the heaven and the earth."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Isaiah",
+      "edition": "King James Version",
+      "chapters": [
+        {
+          "chapter": 44,
+          "verses": [
+            {
+              "verse": 24,
+              "text": "Thus saith the Lord, thy redeemer, and he that formed thee from the womb, I am the Lord that maketh all things; that stretcheth forth the heavens alone; that spreadeth abroad the earth by myself;"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "John",
+      "edition": "King James Version",
+      "chapters": [
+        {
+          "chapter": 1,
+          "verses": [
+            {
+              "verse": 6,
+              "text": "There was a man sent from God, whose name was John."
+            },
+            {
+              "verse": 7,
+              "text": "The same came for a witness, to bear witness of the Light, that all men through him might believe."
+            },
+            {
+              "verse": 8,
+              "text": "He was not that Light, but was sent to bear witness of that Light."
+            },
+            {
+              "verse": 9,
+              "text": "That was the true Light, which lighteth every man that cometh into the world."
+            },
+            {
+              "verse": 10,
+              "text": "He was in the world, and the world was made by him, and the world knew him not."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "1 Corinthians",
+      "edition": "King James Version",
+      "chapters": [
+        {
+          "chapter": 8,
+          "verses": [
+            {
+              "verse": 6,
+              "text": "But to us there is but one God, the Father, of whom are all things, and we in him; and one Lord Jesus Christ, by whom are all things, and we by him."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Colossians",
+      "edition": "King James Version",
+      "chapters": [
+        {
+          "chapter": 1,
+          "verses": [
+            {
+              "verse": 16,
+              "text": "For by him were all things created, that are in heaven, and that are in earth, visible and invisible, whether they be thrones, or dominions, or principalities, or powers: all things were created by him, and for him:"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
