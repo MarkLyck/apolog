@@ -38,31 +38,31 @@ export async function ArticleDetailPage({
   const collection = collectionRegistry[activePlacement.collectionKey];
 
   return (
-    <article>
+    <article className="mx-auto max-w-6xl px-5 pb-16 pt-8 sm:px-8 sm:pt-12">
       <header className="border-b border-[var(--line)]">
-        <div className="mx-auto max-w-5xl px-5 py-16 lg:px-8 lg:py-24">
+        <div className="pb-8 sm:pb-10">
           <Link
-            className="inline-flex items-center gap-2 text-sm font-bold text-[var(--muted)]"
+            className="inline-flex items-center gap-2 text-sm font-medium text-[var(--muted)] transition-colors hover:text-[var(--ink)]"
             href={`/${activePlacement.collectionKey}?text=${corpusKey}`}
           >
             <FiArrowLeft aria-hidden="true" /> Back to {collection.label}
           </Link>
-          <div className="mt-10 flex flex-wrap gap-2">
-            <Badge className="border-[var(--accent)] text-[var(--accent-strong)]">
+          <div className="mt-8 flex flex-wrap items-center gap-x-4 gap-y-2 text-xs font-medium text-[var(--muted)] sm:mt-10">
+            <span className="font-semibold text-[var(--accent-strong)]">
               {collection.label}
-            </Badge>
+            </span>
             {activePlacement.position > 0 ? (
-              <Badge>Rank {activePlacement.position}</Badge>
+              <span>Rank {activePlacement.position}</span>
             ) : null}
-            <Badge>{corpusLabel(corpusKey)} context</Badge>
-            <Badge className="gap-1.5">
+            <span>{corpusLabel(corpusKey)} context</span>
+            <span className="inline-flex items-center gap-1.5">
               <FiClock aria-hidden="true" /> {article.readingMinutes} min read
-            </Badge>
+            </span>
           </div>
-          <h1 className="mt-7 max-w-4xl text-5xl leading-[0.98] sm:text-6xl lg:text-7xl">
+          <h1 className="mt-4 max-w-4xl text-pretty text-4xl leading-[1.08] sm:text-5xl lg:text-6xl">
             {article.title}
           </h1>
-          <p className="mt-7 max-w-3xl text-xl leading-8 text-[var(--muted)]">
+          <p className="mt-4 max-w-3xl text-lg leading-relaxed text-[var(--muted)] sm:mt-5 sm:text-xl">
             {article.summary}
           </p>
           {article.contentWarning ? (
@@ -72,42 +72,54 @@ export async function ArticleDetailPage({
           ) : null}
         </div>
       </header>
-      <div className="mx-auto grid max-w-5xl gap-12 px-5 py-14 lg:grid-cols-[minmax(0,1fr)_15rem] lg:px-8">
+      <div className="grid items-start gap-8 pt-8 sm:pt-10 lg:grid-cols-[minmax(0,1fr)_15rem] lg:gap-10">
         <ContentBlocks blocks={article.document.blocks} />
-        <div className="space-y-8 lg:sticky lg:top-28 lg:self-start">
+        <aside
+          aria-label="Article details"
+          className="space-y-6 border-t border-[var(--line)] pt-6 lg:sticky lg:top-28 lg:border-l lg:border-t-0 lg:pl-6 lg:pt-0"
+        >
           <div>
-            <h2 className="font-sans text-xs font-bold uppercase tracking-[0.18em] text-[var(--muted)]">
+            <h2 className="font-sans text-xs font-semibold uppercase tracking-[0.12em] text-[var(--muted)]">
               Topics
             </h2>
             <div className="mt-3 flex flex-wrap gap-2">
               {article.tags.map((tag) => (
-                <Badge key={tag}>{tag}</Badge>
+                <Badge
+                  className="rounded-md bg-transparent font-medium"
+                  key={tag}
+                >
+                  {tag}
+                </Badge>
               ))}
             </div>
           </div>
           <div>
-            <h2 className="font-sans text-xs font-bold uppercase tracking-[0.18em] text-[var(--muted)]">
+            <h2 className="font-sans text-xs font-semibold uppercase tracking-[0.12em] text-[var(--muted)]">
               Sources
             </h2>
             <ol className="mt-3 grid gap-3">
               {article.sources.map((source) => (
                 <li key={source.url}>
                   <a
-                    className="group block rounded-xl border border-[var(--line)] bg-[var(--surface)] p-3 text-sm font-semibold hover:border-[var(--accent)]"
+                    className="group block rounded-lg border border-[var(--line)] bg-[var(--surface)] p-4 text-sm font-medium leading-snug transition-colors hover:border-[var(--accent)]"
                     href={source.url}
                     rel="noreferrer"
                     target="_blank"
                   >
                     {source.title}
-                    <span className="mt-1 flex items-center gap-1 text-xs font-normal text-[var(--muted)]">
-                      {source.publisher} <FiExternalLink aria-hidden="true" />
+                    <span className="mt-2 flex items-start gap-2 text-xs font-normal leading-relaxed text-[var(--muted)]">
+                      {source.publisher}{" "}
+                      <FiExternalLink
+                        aria-hidden="true"
+                        className="mt-0.5 shrink-0"
+                      />
                     </span>
                   </a>
                 </li>
               ))}
             </ol>
           </div>
-        </div>
+        </aside>
       </div>
     </article>
   );
