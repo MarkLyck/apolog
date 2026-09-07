@@ -4,11 +4,13 @@ import {
   CollectionSearch,
   CollectionEmptyState,
 } from "@/components/collection-search";
-import { ContradictionCard } from "@/components/contradiction-card";
+import { ContradictionList } from "@/components/contradiction-list";
 import { PageIntro } from "@/components/page-intro";
 import { firstSearchParam, getPageCorpus } from "@/lib/corpus";
 import type { PageSearchParams } from "@/lib/corpus";
 import { listArticles } from "@/lib/data";
+
+import { loadContradictions } from "./actions";
 
 export const metadata: Metadata = {
   description:
@@ -26,13 +28,17 @@ export default async function Page({
     searchParams,
   ]);
   const query = firstSearchParam(parameters.q);
-  const articles = await listArticles(
-    "contradictions",
-    corpusKey,
-    query
-      ? { mode: "search", query, sort: "relevance" }
-      : { mode: "browse", sort: "ranked" }
-  );
+  const initialPage = query
+    ? {
+        page: await listArticles("contradictions", corpusKey, {
+          mode: "search",
+          query,
+          sort: "relevance",
+        }),
+        isDone: true,
+        continueCursor: "",
+      }
+    : await loadContradictions({ corpusKey, cursor: null });
   return (
     <>
       <PageIntro
@@ -48,27 +54,18 @@ export default async function Page({
           query={query}
           sort="ranked"
         />
-        <div className="collection-results" aria-live="polite">
-          {articles.length} ranked{" "}
-          {articles.length === 1 ? "comparison" : "comparisons"}
-        </div>
-        {articles.length ? (
-          <div className="grid gap-5 md:grid-cols-2">
-            {articles.map((article) => (
-              <ContradictionCard
-                article={article}
-                corpusKey={corpusKey}
-                key={article.slug}
-              />
-            ))}
-          </div>
-        ) : (
+        <ContradictionList
+          corpusKey={corpusKey}
+          initialPage={initialPage}
+          key={`${corpusKey}:${query}`}
+        />
+        {initialPage.isDone && initialPage.page.length === 0 ? (
           <CollectionEmptyState
             collectionKey="contradictions"
             corpusKey={corpusKey}
             query={query}
           />
-        )}
+        ) : null}
       </section>
     </>
   );

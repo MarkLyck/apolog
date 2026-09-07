@@ -24,7 +24,8 @@
     "deps:check": "bun run scripts/dependency-policy.ts",
     "check": "bun run lint && bun run react:doctor && bun run knip && bun test && bun run deps:check && bun run typecheck",
     "convex:deploy": "bunx convex deploy",
-    "convex:seed": "bunx convex run seed:seed"
+    "convex:seed": "bunx convex run seed:seed",
+    "contradictions:refresh": "bun apps/ingest/src/refresh-contradictions.ts"
   },
   "devDependencies": {
     "@oxlint/plugins": "1.78.0",

@@ -53,11 +53,18 @@ export function projectArticle({
   title: string;
 }) {
   return {
-    comparisonReferences: document.blocks.flatMap((block) =>
-      block.type === "claimComparison"
-        ? block.claims.map((claim) => claim.reference)
-        : []
-    ),
+    comparisonReferences: [
+      ...new Set(
+        document.blocks.flatMap((block, index) =>
+          block.type === "claimComparison"
+            ? block.claims.map((claim) => claim.reference)
+            : block.type === "quote" &&
+                document.blocks[index - 1]?.type !== "quote"
+              ? [block.reference]
+              : []
+        )
+      ),
+    ],
     searchText: [
       title,
       summary,

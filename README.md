@@ -43,3 +43,5 @@ The generator writes `apps/web/public/favicon.svg`, a 16/32/48px `favicon.ico`, 
 The repository-root SVG lets [Conductor discover the icon](https://www.conductor.build/docs/faq#where-does-conductor-get-the-repo-icon) even though the web app lives in a monorepo. `t3.json` explicitly selects the same file for [T3 Code](https://github.com/pingdotgg/t3code/blob/main/packages/contracts/src/t3ProjectFile.ts). These files must be present in the checkout each tool opens. Existing installed home-screen shortcuts may need to be removed and added again to replace cached icons.
 
 The bundled seed content is demonstrative. Fixture quotations that need licensed editorial verification are marked as such in their provenance metadata and must not be treated as publication-ready source text.
+
+To rebuild the contradiction collection with full passage quotations, use the [contradiction refresh script](docs/refresh-contradictions.md).
