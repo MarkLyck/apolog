@@ -80,6 +80,36 @@ const articles = artifact
     );
 
 describe("atomic contradiction replacement", () => {
+  test("replaces an already populated catalog", async () => {
+    const t = convexTest(schema, modules);
+    await t.mutation(replace, { articles, digest, expected: [] });
+    const before = await t.query(snapshot, {});
+    const revised = articles.map((article) => ({
+      ...article,
+      updatedAt: article.updatedAt + 1,
+    }));
+    const expected = before.map(
+      ({ id, version }: { id: string; version: number }) => ({ id, version })
+    );
+    expect(
+      await t.mutation(replace, {
+        articles: revised,
+        digest: "b".repeat(64),
+        expected,
+      })
+    ).toEqual({
+      deleted: articles.length,
+      inserted: articles.length,
+      unchanged: 0,
+    });
+    const after = await t.query(snapshot, {});
+    expect(after).toHaveLength(articles.length);
+    const oldIds = new Set(before.map((article: { id: string }) => article.id));
+    expect(
+      after.every((article: { id: string }) => !oldIds.has(article.id))
+    ).toBe(true);
+  });
+
   test("replaces old rows and relations, keeps other articles, and can be rerun", async () => {
     const t = convexTest(schema, modules);
     await t.mutation(seed, {});

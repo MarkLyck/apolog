@@ -43,7 +43,7 @@ async function requireAdmin(ctx: QueryCtx | MutationCtx) {
   return userId;
 }
 
-export async function removeArticleRelations(
+async function removeArticleRelations(
   ctx: MutationCtx,
   articleId: Id<"articles">
 ) {
@@ -66,7 +66,7 @@ export async function removeArticleRelations(
   }
 }
 
-export async function rebuildArticleRelations(
+async function rebuildArticleRelations(
   ctx: MutationCtx,
   article: Doc<"articles">,
   placements: {

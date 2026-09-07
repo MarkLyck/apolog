@@ -140,6 +140,13 @@ async function call(
       `Convex ${kind} failed: HTTP ${response.status}. ${await response.text()}`
     );
   }
+  const failure = v.safeParse(
+    v.object({ status: v.literal("error"), errorMessage: v.string() }),
+    await response.clone().json()
+  );
+  if (failure.success) {
+    throw new Error(failure.output.errorMessage);
+  }
   return response;
 }
 
