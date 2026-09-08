@@ -1,6 +1,54 @@
 import type { Doc, Id } from "./_generated/dataModel";
 import type { QueryCtx } from "./_generated/server";
 
+export async function getAdjacentArticle(
+  ctx: QueryCtx,
+  placement: Doc<"articlePlacements">,
+  direction: "previous" | "next"
+) {
+  const ranked = placement.collectionKey === "contradictions";
+  const ascending = ranked ? direction === "next" : direction === "previous";
+  const field = ranked ? "position" : "articleCreatedAt";
+  const candidates = ctx.db
+    .query("articlePlacements")
+    .withIndex(
+      ranked
+        ? "by_corpus_collection_status_position"
+        : "by_corpus_collection_status_created",
+      (index) => {
+        const scope = index
+          .eq("corpusKey", placement.corpusKey)
+          .eq("collectionKey", placement.collectionKey)
+          .eq("status", "published");
+        return ascending
+          ? scope.gte(field, placement[field])
+          : scope.lte(field, placement[field]);
+      }
+    )
+    .filter((filter) =>
+      filter.or(
+        ascending
+          ? filter.gt(filter.field(field), placement[field])
+          : filter.lt(filter.field(field), placement[field]),
+        filter.and(
+          filter.eq(filter.field(field), placement[field]),
+          ascending
+            ? filter.gt(filter.field("_creationTime"), placement._creationTime)
+            : filter.lt(filter.field("_creationTime"), placement._creationTime)
+        )
+      )
+    )
+    .order(ascending ? "asc" : "desc");
+
+  for await (const candidate of candidates) {
+    const article = await ctx.db.get(candidate.articleId);
+    if (article?.status === "published") {
+      return { slug: article.slug, title: article.title };
+    }
+  }
+  return null;
+}
+
 type ArticleListProjection = Pick<
   Doc<"articlePlacements">,
   "collectionKey" | "comparisonReferences" | "position" | "tags"

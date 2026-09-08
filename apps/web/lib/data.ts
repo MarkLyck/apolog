@@ -1,4 +1,5 @@
 import { api } from "@apolog/backend/api";
+import type { Id } from "@apolog/backend/data-model";
 import type { ArticleListItem, CollectionKey, CorpusKey } from "@apolog/shared";
 import { fetchQuery } from "convex/nextjs";
 
@@ -51,6 +52,18 @@ export async function listArticles(
 
 export function getArticle(slug: string) {
   return fetchQuery(api.articles.getBySlug, { slug });
+}
+
+export function getAdjacentArticles(
+  articleId: Id<"articles">,
+  collectionKey: CollectionKey,
+  corpusKey: CorpusKey
+) {
+  return fetchQuery(api.articles.getAdjacent, {
+    articleId,
+    collectionKey,
+    corpusKey,
+  });
 }
 
 export function getFeatured(corpusKey: CorpusKey) {

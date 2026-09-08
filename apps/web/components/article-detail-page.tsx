@@ -6,8 +6,9 @@ import { notFound, redirect } from "next/navigation";
 import { FiArrowLeft, FiClock, FiExternalLink } from "react-icons/fi";
 
 import { resolveArticlePlacement } from "@/lib/article-placement";
-import { getArticle } from "@/lib/data";
+import { getAdjacentArticles, getArticle } from "@/lib/data";
 
+import { ArticleNavigation } from "./article-navigation";
 import { ContentBlocks } from "./content-blocks";
 
 export async function ArticleDetailPage({
@@ -36,6 +37,11 @@ export async function ArticleDetailPage({
   }
   const activePlacement = resolved.placement;
   const collection = collectionRegistry[activePlacement.collectionKey];
+  const adjacent = await getAdjacentArticles(
+    article._id,
+    activePlacement.collectionKey,
+    corpusKey
+  );
 
   return (
     <article className="article-reader page-container">
@@ -72,6 +78,13 @@ export async function ArticleDetailPage({
           ) : null}
         </div>
       </header>
+      <div className="pt-8">
+        <ArticleNavigation
+          adjacent={adjacent}
+          collectionKey={activePlacement.collectionKey}
+          corpusKey={corpusKey}
+        />
+      </div>
       <div className="grid items-start gap-8 pt-8 sm:pt-10 lg:grid-cols-[minmax(0,1fr)_18rem] lg:gap-10">
         <ContentBlocks blocks={article.document.blocks} />
         <section
@@ -117,6 +130,13 @@ export async function ArticleDetailPage({
             </ol>
           </div>
         </section>
+      </div>
+      <div className="pt-10">
+        <ArticleNavigation
+          adjacent={adjacent}
+          collectionKey={activePlacement.collectionKey}
+          corpusKey={corpusKey}
+        />
       </div>
     </article>
   );
