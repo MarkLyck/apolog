@@ -18,10 +18,11 @@ export function PageIntro({
       <Image
         alt=""
         className="page-intro-landscape"
-        src="/images/apolog-mountains.webp"
+        src="/images/exalt-hero-sky.webp"
         fill
         preload
         sizes="100vw"
+        unoptimized
       />
       <div className="site-container">
         <div className="page-eyebrow">

@@ -3,35 +3,43 @@
 @import "./landing.css";
 @source "../../../packages/ui/src";
 
+@font-face {
+  font-family: "Asta Sans";
+  font-style: normal;
+  font-weight: 300 800;
+  font-display: swap;
+  src: url("/fonts/asta-sans-latin.woff2") format("woff2");
+}
+
 :root {
-  --paper: #f8f9fc;
-  --surface: #ffffff;
-  --surface-strong: #eaf0f8;
-  --ink: #172131;
-  --muted: #546176;
-  --line: #dce1eb;
-  --accent: #335bd6;
-  --accent-strong: #2849aa;
-  --teal: #245991;
-  --header: #f0f3fa;
+  --paper: #ffffff;
+  --surface: #f7f7f8;
+  --surface-strong: #efeff1;
+  --ink: #171519;
+  --muted: #68666c;
+  --line: #e5e4e7;
+  --accent: #164de5;
+  --accent-strong: #1543be;
+  --teal: #164de5;
+  --header: #ffffff;
 }
 
 .dark {
-  --paper: #090e16;
-  --surface: #101722;
-  --surface-strong: #192331;
-  --ink: #f1f3f6;
-  --muted: #a9b2c1;
-  --line: #293747;
-  --accent: #9dbbfa;
-  --accent-strong: #bfd0ec;
-  --teal: #8dbad8;
-  --header: #101b2d;
+  --paper: #141316;
+  --surface: #1d1c20;
+  --surface-strong: #29282d;
+  --ink: #f6f5f7;
+  --muted: #b2afb8;
+  --line: #39373e;
+  --accent: #9bb8ff;
+  --accent-strong: #bed0ff;
+  --teal: #9bb8ff;
+  --header: #141316;
 }
 
 @theme inline {
-  --font-sans: "IBM Plex Sans Variable", ui-sans-serif, system-ui, sans-serif;
-  --font-display: "Newsreader Variable", Georgia, serif;
+  --font-sans: "Asta Sans", Arial, sans-serif;
+  --font-display: "Asta Sans", Arial, sans-serif;
 }
 
 * {
@@ -49,8 +57,9 @@ body {
   margin: 0;
   background: var(--paper);
   color: var(--ink);
-  font-family: "IBM Plex Sans Variable", ui-sans-serif, system-ui, sans-serif;
+  font-family: "Asta Sans", Arial, sans-serif;
   text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
 }
 
 #main-content {
@@ -62,8 +71,8 @@ body {
   h2,
   h3 {
     font-family: var(--font-sans);
-    font-weight: 400;
-    letter-spacing: -0.04em;
+    font-weight: 600;
+    letter-spacing: -0.035em;
   }
 }
 
@@ -133,7 +142,7 @@ textarea {
 
 .debate-markdown h2,
 .debate-markdown h3 {
-  font-family: "Newsreader Variable", Georgia, serif;
+  font-family: "Asta Sans", Arial, sans-serif;
   font-size: 1.15rem;
   line-height: 1.4;
 }

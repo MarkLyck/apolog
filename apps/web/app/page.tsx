@@ -2,18 +2,7 @@ import { corpusLabel } from "@apolog/shared";
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import {
-  FiArrowDown,
-  FiArrowRight,
-  FiArrowUpRight,
-  FiBookOpen,
-  FiCompass,
-  FiFeather,
-  FiGitPullRequest,
-  FiMessageCircle,
-  FiSearch,
-  FiShield,
-} from "react-icons/fi";
+import { FiArrowUpRight, FiPlus } from "react-icons/fi";
 
 import { ArticleCard } from "@/components/article-card";
 import { ContradictionCard } from "@/components/contradiction-card";
@@ -23,41 +12,91 @@ import { getFeatured } from "@/lib/data";
 
 export const metadata: Metadata = {
   description:
-    "A little curiosity. A closer look. Explore Biblical and Quranic claims through passages, evidence, and thoughtful analysis.",
-  title: "Room for better questions",
+    "Examine Biblical and Quranic claims. Compare passages, investigate the evidence, and work through the arguments with Apolog.",
+  title: "Beliefs deserve a closer look",
 };
 
 const collections = [
   {
+    label: "Contradictions",
+    href: "/contradictions",
     description:
-      "Put historical and factual claims to the test. See what holds up.",
-    href: "/debunked",
+      "Put conflicting passages side by side. Read the context and weigh the responses.",
+  },
+  {
     label: "Debunked",
-    detail: "Look beyond the claim",
-    icon: FiSearch,
+    href: "/debunked",
+    description:
+      "Investigate historical and factual claims, and the evidence used to defend them.",
   },
   {
-    description:
-      "Difficult passages deserve an honest look at the ethics behind them.",
-    href: "/immoral",
     label: "Immoral",
-    detail: "Ask the harder questions",
-    icon: FiShield,
-  },
-  {
-    description: "Follow the methods of science, archaeology, and history.",
-    href: "/evidence",
-    label: "Evidence",
-    detail: "Let the sources lead",
-    icon: FiCompass,
-  },
-  {
+    href: "/immoral",
     description:
-      "Talking animals. Strange miracles. Some stories invite a second look.",
-    href: "/silly",
+      "Examine difficult teachings and the moral questions they raise.",
+  },
+  {
+    label: "Evidence",
+    href: "/evidence",
+    description:
+      "Explore what science, archaeology, and history can tell us about the texts.",
+  },
+  {
     label: "Silly",
-    detail: "Keep your curiosity",
-    icon: FiFeather,
+    href: "/silly",
+    description:
+      "Talking animals, strange miracles, and other stories worth a second look.",
+  },
+];
+
+const steps = [
+  {
+    title: "Read",
+    description:
+      "Start with the passage itself. Check what comes before and after it.",
+  },
+  {
+    title: "Compare",
+    description:
+      "Set related accounts alongside each other. Look for agreement and tension.",
+  },
+  {
+    title: "Investigate",
+    description:
+      "Follow the citations. Consider the evidence and the strongest counterarguments.",
+  },
+  {
+    title: "Discuss",
+    description:
+      "Bring your questions to the debate assistant and work through a response.",
+  },
+];
+
+const questions = [
+  {
+    title: "What is Apolog?",
+    answer:
+      "Apolog is a research library for examining factual and moral claims in the Bible and Quran. It brings passages, analysis, and sources together so you can evaluate an argument for yourself.",
+  },
+  {
+    title: "Can I explore both the Bible and Quran?",
+    answer:
+      "Yes. Use the Bible and Quran switch in the header. Your selection carries through the collections, search, and debate assistant.",
+  },
+  {
+    title: "Where should I start?",
+    answer:
+      "Pick a collection that interests you. Contradictions puts accounts side by side; Evidence focuses on scientific, historical, and archaeological claims.",
+  },
+  {
+    title: "Should I treat every article as a final answer?",
+    answer:
+      "No. Read the cited sources and check quotations in context. This is a developing library, and some demonstration content still needs editorial verification.",
+  },
+  {
+    title: "How does the debate assistant work?",
+    answer:
+      "Bring a question or claim to the assistant. It uses the library to help you explore arguments and prepare a response. Check its citations and reasoning, as AI can make mistakes.",
   },
 ];
 
@@ -68,7 +107,6 @@ export default async function Home({
 }) {
   const corpusKey = await getPageCorpus(searchParams);
   const featured = await getFeatured(corpusKey);
-  const label = corpusLabel(corpusKey);
 
   return (
     <div className="landing-page">
@@ -76,157 +114,88 @@ export default async function Home({
         <Image
           alt=""
           className="landing-landscape"
-          src="/images/apolog-mountains.webp"
+          src="/images/exalt-hero-sky.webp"
           fill
           preload
           sizes="100vw"
+          unoptimized
         />
-        <div className="landing-hero-shade" />
         <div className="landing-hero-content">
-          <div className="landing-eyebrow">
-            <span /> A little curiosity. A closer look.
-          </div>
+          <p className="landing-kicker">
+            A CLOSER LOOK AT THE BIBLE &amp; QURAN
+          </p>
           <h1 id="hero-title">
-            Give your questions
+            You have questions.
             <br />
-            <em>room to go deeper.</em>
+            Take a closer look.
           </h1>
-          <p>
-            Explore faith, question the claims, and follow the evidence.
-            <br className="landing-desktop-break" /> A source-led library for an
-            open mind.
+          <p className="landing-hero-description">
+            Explore the passages, test the claims, and follow the evidence. A
+            research library for understanding what you believe, and why.
           </p>
           <div className="landing-actions">
             <Link
               className="landing-button landing-button-primary"
               href="#explore"
             >
-              Explore the library <FiArrowRight aria-hidden="true" />
+              Explore the library
             </Link>
             <Link
               className="landing-button landing-button-glass"
-              href={`/evidence?text=${corpusKey}`}
+              href={`/debate?text=${corpusKey}`}
             >
-              <FiCompass aria-hidden="true" /> Follow the evidence
+              Start a conversation
             </Link>
-          </div>
-          <div className="landing-hero-note">
-            <FiBookOpen aria-hidden="true" /> Two texts. Many perspectives. Your
-            conclusions.
           </div>
         </div>
         <div className="landing-hero-bottom">
-          <span>AN OPEN INVITATION TO THINK</span>
-          <a href="#explore" aria-label="Scroll to explore the library">
-            <FiArrowDown aria-hidden="true" />
-          </a>
-          <span>
-            <span className="landing-status-dot" /> EXPLORING THE{" "}
-            {label.toUpperCase()}
+          <span className="landing-kicker">
+            CURRENTLY EXPLORING THE {corpusLabel(corpusKey).toUpperCase()}
           </span>
+          <Link href="#explore">
+            Follow your curiosity <span aria-hidden="true">↓</span>
+          </Link>
         </div>
       </section>
 
-      <div className="landing-method-bar">
-        <span>Inquiry, with a little more care.</span>
-        <span>
-          <FiBookOpen aria-hidden="true" /> Sources you can trace
-        </span>
-        <span>
-          <FiGitPullRequest aria-hidden="true" /> Context kept intact
-        </span>
-        <span>
-          <FiMessageCircle aria-hidden="true" /> Room for uncertainty
-        </span>
-      </div>
+      <section className="landing-statement" aria-label="Our approach">
+        <p>
+          A belief worth holding is worth examining. Read the original passages,
+          question the claims, and consider the strongest arguments.{" "}
+          <span>Make up your own mind.</span>
+        </p>
+      </section>
 
-      <div className="landing-library">
-        <section
-          className="landing-section"
-          id="explore"
-          aria-labelledby="explore-title"
-        >
-          <div className="landing-section-heading">
-            <div>
-              <p className="landing-kicker">THE LIBRARY</p>
-              <h2 id="explore-title">
-                Where does your
-                <br />
-                <em>curiosity take you?</em>
-              </h2>
-            </div>
-            <p>
-              Start with a question. Read the passage.
-              <br />
-              Find a perspective you haven’t considered.
-            </p>
-          </div>
-          <div className="landing-collections">
+      <section
+        className="landing-section"
+        id="explore"
+        aria-labelledby="explore-title"
+      >
+        <div className="landing-section-heading">
+          <p className="landing-kicker">THE LIBRARY</p>
+          <h2 id="explore-title">A place for your harder questions</h2>
+        </div>
+        <div className="landing-collections">
+          {collections.map(({ label, href, description }, index) => (
             <Link
-              className="landing-collection landing-collection-featured"
-              href={`/contradictions?text=${corpusKey}`}
+              className="landing-collection"
+              href={`${href}?text=${corpusKey}`}
+              key={href}
             >
-              <div className="landing-collection-top">
-                <FiGitPullRequest aria-hidden="true" />
-                <FiArrowUpRight aria-hidden="true" />
-              </div>
-              <div>
-                <span className="landing-kicker">
-                  TWO ACCOUNTS. ONE QUESTION.
-                </span>
-                <h3>Contradictions</h3>
-                <p>
-                  When the passages don’t agree, put them side by side. Examine
-                  the context and weigh the strongest responses.
-                </p>
-                <span className="landing-collection-link">
-                  Compare the accounts <FiArrowRight aria-hidden="true" />
-                </span>
-              </div>
+              <span className="landing-number">0{index + 1}</span>
+              <h3>{label}</h3>
+              <p>{description}</p>
+              <FiArrowUpRight aria-hidden="true" />
             </Link>
-            {collections.map(
-              ({ href, label: title, description, detail, icon: Icon }) => (
-                <Link
-                  className="landing-collection"
-                  href={`${href}?text=${corpusKey}`}
-                  key={href}
-                >
-                  <div className="landing-collection-top">
-                    <Icon aria-hidden="true" />
-                    <FiArrowUpRight aria-hidden="true" />
-                  </div>
-                  <div>
-                    <h3>{title}</h3>
-                    <p>{description}</p>
-                    <span className="landing-collection-detail">{detail}</span>
-                  </div>
-                </Link>
-              )
-            )}
-          </div>
-        </section>
-      </div>
+          ))}
+        </div>
+      </section>
 
       {featured.contradictions.length > 0 ? (
-        <section
-          className="landing-section landing-featured"
-          aria-labelledby="featured-title"
-        >
+        <section className="landing-section" aria-labelledby="featured-title">
           <div className="landing-section-heading">
-            <div>
-              <p className="landing-kicker">A CLOSER LOOK</p>
-              <h2 id="featured-title">
-                Read both sides.
-                <br />
-                <em>Think for yourself.</em>
-              </h2>
-            </div>
-            <Link
-              className="landing-text-link"
-              href={`/contradictions?text=${corpusKey}`}
-            >
-              All contradictions <FiArrowUpRight aria-hidden="true" />
-            </Link>
+            <p className="landing-kicker">A CLOSER LOOK</p>
+            <h2 id="featured-title">Two accounts. Read both sides.</h2>
           </div>
           <div className="landing-article-grid">
             {featured.contradictions.map((article) => (
@@ -237,25 +206,49 @@ export default async function Home({
               />
             ))}
           </div>
+          <Link
+            className="landing-text-link"
+            href={`/contradictions?text=${corpusKey}`}
+          >
+            All contradictions <FiArrowUpRight aria-hidden="true" />
+          </Link>
         </section>
       ) : null}
 
+      <section
+        className="landing-section"
+        id="approach"
+        aria-labelledby="approach-title"
+      >
+        <div className="landing-section-heading">
+          <p className="landing-kicker">THE APPROACH</p>
+          <h2 id="approach-title">
+            From a difficult question
+            <br />
+            to an informed perspective
+          </h2>
+          <p>
+            You do not need to have the answer before you start.
+            <br />
+            Take the argument one step at a time.
+          </p>
+        </div>
+        <ol className="landing-steps">
+          {steps.map(({ title, description }, index) => (
+            <li key={title}>
+              <span className="landing-number">0{index + 1}</span>
+              <h3>{title}</h3>
+              <p>{description}</p>
+            </li>
+          ))}
+        </ol>
+      </section>
+
       {featured.articles.length > 0 ? (
-        <section
-          className="landing-section landing-evidence"
-          aria-labelledby="evidence-title"
-        >
+        <section className="landing-section" aria-labelledby="evidence-title">
           <div className="landing-section-heading">
-            <div>
-              <p className="landing-kicker">FOLLOW THE THREAD</p>
-              <h2 id="evidence-title">Evidence before argument.</h2>
-            </div>
-            <Link
-              className="landing-text-link"
-              href={`/evidence?text=${corpusKey}`}
-            >
-              Explore the evidence <FiArrowUpRight aria-hidden="true" />
-            </Link>
+            <p className="landing-kicker">FOLLOW THE SOURCES</p>
+            <h2 id="evidence-title">Evidence before argument.</h2>
           </div>
           <div className="landing-article-grid">
             {featured.articles.map((article) => (
@@ -266,33 +259,61 @@ export default async function Home({
               />
             ))}
           </div>
+          <Link
+            className="landing-text-link"
+            href={`/evidence?text=${corpusKey}`}
+          >
+            Explore the evidence <FiArrowUpRight aria-hidden="true" />
+          </Link>
         </section>
       ) : null}
+
+      <section
+        className="landing-section landing-faq"
+        id="questions"
+        aria-labelledby="questions-title"
+      >
+        <div>
+          <p className="landing-kicker">FAQ</p>
+          <h2 id="questions-title">
+            Common
+            <br />
+            questions
+          </h2>
+        </div>
+        <div>
+          {questions.map(({ title, answer }) => (
+            <details key={title}>
+              <summary>
+                {title}
+                <FiPlus aria-hidden="true" />
+              </summary>
+              <p>{answer}</p>
+            </details>
+          ))}
+        </div>
+      </section>
 
       <section
         className="landing-invitation"
         aria-labelledby="invitation-title"
       >
-        <FiMessageCircle
-          className="landing-invitation-icon"
-          aria-hidden="true"
-        />
-        <p className="landing-kicker">THINK IT THROUGH</p>
+        <p className="landing-kicker">LET&apos;S THINK IT THROUGH</p>
         <h2 id="invitation-title">
-          A good question
+          Have a question
           <br />
-          is only <em>the beginning.</em>
+          you keep coming back to?
         </h2>
         <p>
-          Bring a claim. Explore the arguments.
+          Bring a claim, a passage, or a doubt.
           <br />
-          Build a response with sources you can return to.
+          Explore the arguments and see where the evidence takes you.
         </p>
         <Link
           className="landing-button landing-button-primary"
           href={`/debate?text=${corpusKey}`}
         >
-          Start a conversation <FiArrowUpRight aria-hidden="true" />
+          Start a conversation
         </Link>
       </section>
     </div>

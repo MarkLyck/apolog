@@ -5,7 +5,7 @@ import type { CorpusKey } from "@apolog/shared";
 import Link from "next/link";
 import { usePathname, useSearchParams } from "next/navigation";
 import { useCallback, useRef, useState } from "react";
-import { FiEdit3 } from "react-icons/fi";
+import { FiEdit3, FiMenu } from "react-icons/fi";
 
 import { primaryNavigationLinks } from "@/lib/public-routes";
 
@@ -84,11 +84,20 @@ export function SiteHeader({ initialCorpus }: { initialCorpus: CorpusKey }) {
               Apolog
             </span>
           </Link>
-          <PrimaryNavigation
-            corpusKey={corpusKey}
-            pathname={pathname}
-            variant="desktop"
-          />
+          {pathname === "/" ? (
+            <nav aria-label="Primary" className="landing-navigation">
+              <Link href="#explore">The library</Link>
+              <Link href="#approach">Our approach</Link>
+              <Link href={`/evidence?text=${corpusKey}`}>Evidence</Link>
+              <Link href="#questions">FAQ</Link>
+            </nav>
+          ) : (
+            <PrimaryNavigation
+              corpusKey={corpusKey}
+              pathname={pathname}
+              variant="desktop"
+            />
+          )}
           <CorpusSwitch
             corpusKey={corpusKey}
             pathname={pathname}
@@ -103,13 +112,37 @@ export function SiteHeader({ initialCorpus }: { initialCorpus: CorpusKey }) {
           >
             <FiEdit3 aria-hidden="true" />
           </Link>
-          {pathname === "/" ? null : <ThemeToggle />}
+          {pathname === "/" ? (
+            <details className="landing-mobile-menu">
+              <summary aria-label="Open navigation">
+                <FiMenu aria-hidden="true" />
+              </summary>
+              <nav aria-label="Primary mobile">
+                <Link href="#explore">The library</Link>
+                <Link href="#approach">Our approach</Link>
+                <Link href={`/evidence?text=${corpusKey}`}>Evidence</Link>
+                <Link href="#questions">FAQ</Link>
+                <Link href={`/debate?text=${corpusKey}`}>
+                  Start a conversation
+                </Link>
+              </nav>
+            </details>
+          ) : (
+            <>
+              <ThemeToggle />
+              <details className="site-mobile-menu" key={pathname}>
+                <summary aria-label="Open navigation">
+                  <FiMenu aria-hidden="true" />
+                </summary>
+                <PrimaryNavigation
+                  corpusKey={corpusKey}
+                  pathname={pathname}
+                  variant="mobile"
+                />
+              </details>
+            </>
+          )}
         </div>
-        <PrimaryNavigation
-          corpusKey={corpusKey}
-          pathname={pathname}
-          variant="mobile"
-        />
       </header>
       <SearchPalette
         initialCorpus={initialCorpus}

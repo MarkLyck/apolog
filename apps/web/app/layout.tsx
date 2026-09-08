@@ -1,5 +1,4 @@
 import { ThemeProvider } from "@wrksz/themes/next";
-import "@fontsource-variable/ibm-plex-sans";
 import "@fontsource-variable/newsreader";
 import type { Metadata, Viewport } from "next";
 import { Suspense } from "react";
@@ -42,7 +41,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#12233e",
+  themeColor: "#0749dc",
 };
 
 export default async function RootLayout({
@@ -55,7 +54,7 @@ export default async function RootLayout({
     <html data-scroll-behavior="smooth" lang="en" suppressHydrationWarning>
       <body>
         <ThemeProvider
-          defaultTheme="system"
+          defaultTheme="light"
           disableTransitionOnChange
           storage="hybrid"
           storageKey="apolog-theme"
