@@ -279,6 +279,25 @@ async function getExistingArticleForSave(
   return existing;
 }
 
+export const count = query({
+  args: {
+    collectionKey: collectionKeyValidator,
+    corpusKey: corpusKeyValidator,
+  },
+  handler: async (ctx, args) => {
+    const placements = await ctx.db
+      .query("articlePlacements")
+      .withIndex("by_corpus_collection_status_position", (index) =>
+        index
+          .eq("corpusKey", args.corpusKey)
+          .eq("collectionKey", args.collectionKey)
+          .eq("status", "published")
+      )
+      .collect();
+    return placements.length;
+  },
+});
+
 export const list = query({
   args: {
     collectionKey: collectionKeyValidator,

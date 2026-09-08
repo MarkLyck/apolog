@@ -1,3 +1,5 @@
+import { api } from "@apolog/backend/api";
+import { fetchQuery } from "convex/nextjs";
 import type { Metadata } from "next";
 
 import {
@@ -8,7 +10,6 @@ import { ContradictionList } from "@/components/contradiction-list";
 import { PageIntro } from "@/components/page-intro";
 import { firstSearchParam, getPageCorpus } from "@/lib/corpus";
 import type { PageSearchParams } from "@/lib/corpus";
-import { listArticles } from "@/lib/data";
 
 import { loadContradictions } from "./actions";
 
@@ -27,18 +28,14 @@ export default async function Page({
     getPageCorpus(searchParams),
     searchParams,
   ]);
-  const query = firstSearchParam(parameters.q);
-  const initialPage = query
-    ? {
-        page: await listArticles("contradictions", corpusKey, {
-          mode: "search",
-          query,
-          sort: "relevance",
-        }),
-        isDone: true,
-        continueCursor: "",
-      }
-    : await loadContradictions({ corpusKey, cursor: null });
+  const query = firstSearchParam(parameters.q).trim();
+  const [initialPage, totalCount] = await Promise.all([
+    loadContradictions({ corpusKey, cursor: null, query }),
+    fetchQuery(api.articles.count, {
+      collectionKey: "contradictions",
+      corpusKey,
+    }),
+  ]);
   return (
     <>
       <PageIntro
@@ -57,6 +54,8 @@ export default async function Page({
         <ContradictionList
           corpusKey={corpusKey}
           initialPage={initialPage}
+          query={query}
+          totalCount={totalCount}
           key={`${corpusKey}:${query}`}
         />
         {initialPage.isDone && initialPage.page.length === 0 ? (
