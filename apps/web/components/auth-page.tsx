@@ -2,13 +2,16 @@ import type { ReactNode } from "react";
 import { FiBookOpen } from "react-icons/fi";
 
 import { AuthForm } from "./auth-form";
+import { AuthFormLoading } from "./route-loading";
 
 export function AuthPage({
+  loading = false,
   description,
   mode,
   redirectTo,
   title,
 }: {
+  loading?: boolean;
   description: ReactNode;
   mode: "login" | "signup";
   redirectTo?: string;
@@ -36,7 +39,11 @@ export function AuthPage({
         </div>
         <h1>{title}</h1>
         <p>{description}</p>
-        <AuthForm mode={mode} redirectTo={redirectTo} />
+        {loading ? (
+          <AuthFormLoading mode={mode} />
+        ) : (
+          <AuthForm mode={mode} redirectTo={redirectTo} />
+        )}
       </div>
     </section>
   );

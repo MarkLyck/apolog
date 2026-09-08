@@ -12,6 +12,7 @@
     "dev:convex": "bunx convex dev",
     "dev:web": "bun --env-file=../../.env --cwd=apps/web run dev",
     "build": "dotenv -e .env -- turbo run build",
+    "images:generate": "bun scripts/generate-hero-mobile.mjs",
     "icons:generate": "bun scripts/generate-icons.mjs",
     "test": "bun test",
     "typecheck": "turbo run typecheck",

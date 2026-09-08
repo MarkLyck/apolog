@@ -1,6 +1,6 @@
 import { ThemeProvider } from "@wrksz/themes/next";
-import "@fontsource-variable/newsreader";
 import type { Metadata, Viewport } from "next";
+import localFont from "next/font/local";
 import { Suspense } from "react";
 import type { ReactNode } from "react";
 
@@ -10,6 +10,13 @@ import { getInitialCorpus } from "@/lib/corpus";
 import { siteConfig } from "@/lib/site";
 
 import "./globals.css";
+
+const astaSans = localFont({
+  src: "../public/fonts/asta-sans-latin.woff2",
+  variable: "--font-asta",
+  display: "optional",
+  weight: "300 800",
+});
 
 export const metadata: Metadata = {
   appleWebApp: {
@@ -51,7 +58,12 @@ export default async function RootLayout({
 }) {
   const initialCorpus = await getInitialCorpus();
   return (
-    <html data-scroll-behavior="smooth" lang="en" suppressHydrationWarning>
+    <html
+      className={astaSans.variable}
+      data-scroll-behavior="smooth"
+      lang="en"
+      suppressHydrationWarning
+    >
       <body>
         <ThemeProvider
           defaultTheme="light"
@@ -67,7 +79,9 @@ export default async function RootLayout({
           </a>
           <Suspense
             fallback={
-              <div className="h-[70px] border-b border-[var(--line)]" />
+              <div className="site-header" aria-hidden="true">
+                <div className="site-header-row" />
+              </div>
             }
           >
             <SiteHeader initialCorpus={initialCorpus} />

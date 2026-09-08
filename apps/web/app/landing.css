@@ -7,7 +7,7 @@
   --line: #e5e4e7;
   --accent: #164de5;
   --accent-strong: #1543be;
-  --font-sans: "Asta Sans", Arial, sans-serif;
+  --font-sans: var(--font-asta), Arial, sans-serif;
   background: var(--paper);
   color: var(--ink);
   font-family: var(--font-sans);
@@ -54,7 +54,6 @@
   flex: 1;
   width: 100%;
   padding: 80px 0 262px;
-  animation: landing-arrive 700ms ease-out both;
 }
 
 .landing-kicker,
@@ -328,7 +327,10 @@
 
 .landing-invitation {
   padding: 140px 24px;
-  background: #0749dc url("/images/exalt-hero-sky.webp") center / cover;
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  background: #0749dc;
   color: #fff;
   text-align: center;
 }
@@ -359,7 +361,7 @@
   box-shadow: none;
   backdrop-filter: none;
   transform: none;
-  font-family: "Asta Sans", Arial, sans-serif;
+  font-family: var(--font-asta), Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
 }
 
@@ -369,7 +371,7 @@
 }
 
 .site-header[data-landing="true"] .site-brand-name {
-  font-family: "Asta Sans", Arial, sans-serif;
+  font-family: var(--font-asta), Arial, sans-serif;
   font-size: 24px;
   font-weight: 600;
   color: white;
@@ -429,17 +431,6 @@
 
 .landing-mobile-menu {
   display: none;
-}
-
-@keyframes landing-arrive {
-  from {
-    opacity: 0;
-    transform: translateY(12px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
 }
 
 @media (min-width: 1600px) {
@@ -609,4 +600,9 @@
     padding-inline: 12px;
     font-size: 13px;
   }
+}
+
+.landing-invitation-landscape {
+  z-index: -1;
+  object-fit: cover;
 }

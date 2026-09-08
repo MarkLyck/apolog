@@ -11,7 +11,7 @@ export function PageIntro({
   eyebrow: string;
   title: string;
   description: string;
-  corpusKey: CorpusKey;
+  corpusKey?: CorpusKey;
 }) {
   return (
     <header className="page-intro night-surface">
@@ -21,13 +21,15 @@ export function PageIntro({
         src="/images/exalt-hero-sky.webp"
         fill
         preload
-        sizes="100vw"
-        unoptimized
+        sizes="(max-width: 767px) max(150vw, 1100px), 100vw"
       />
       <div className="site-container">
         <div className="page-eyebrow">
           <span aria-hidden="true" /> {eyebrow}{" "}
-          <span aria-hidden="true">/</span> {corpusLabel(corpusKey)} library
+          <span aria-hidden="true">/</span>{" "}
+          <span className={corpusKey ? undefined : "invisible"}>
+            {corpusLabel(corpusKey ?? "bible")} library
+          </span>
         </div>
         <h1>{title}</h1>
         <p>{description}</p>

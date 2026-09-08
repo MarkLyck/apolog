@@ -6,17 +6,13 @@ import Link from "next/link";
 import type { ReactNode } from "react";
 import { FiLock } from "react-icons/fi";
 
+import { AdminAccessLoading } from "./route-loading";
+
 export function AdminAccess({ children }: { children: ReactNode }) {
   const access = useQuery(api.articles.canManage);
 
   if (access === undefined) {
-    return (
-      <div className="page-container status-page">
-        <p aria-live="polite" className="text-sm text-[var(--muted)]">
-          Checking editorial access…
-        </p>
-      </div>
-    );
+    return <AdminAccessLoading />;
   }
 
   if (!access.authorized) {

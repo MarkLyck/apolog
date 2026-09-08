@@ -1,11 +1,13 @@
-import { corpusLabel } from "@apolog/shared";
+import type { CorpusKey } from "@apolog/shared";
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
+import { Suspense } from "react";
 import { FiArrowUpRight, FiPlus } from "react-icons/fi";
 
 import { ArticleCard } from "@/components/article-card";
 import { ContradictionCard } from "@/components/contradiction-card";
+import { HomeHero } from "@/components/home-hero";
 import { getPageCorpus } from "@/lib/corpus";
 import type { PageSearchParams } from "@/lib/corpus";
 import { getFeatured } from "@/lib/data";
@@ -100,63 +102,98 @@ const questions = [
   },
 ];
 
+async function FeaturedContradictions({
+  featuredPromise,
+  corpusKey,
+}: {
+  featuredPromise: ReturnType<typeof getFeatured>;
+  corpusKey: CorpusKey;
+}) {
+  const featured = await featuredPromise;
+  return featured.contradictions.length > 0 ? (
+    <section className="landing-section" aria-labelledby="featured-title">
+      <div className="landing-section-heading">
+        <p className="landing-kicker">A CLOSER LOOK</p>
+        <h2 id="featured-title">Two accounts. Read both sides.</h2>
+      </div>
+      <div className="landing-article-grid">
+        {featured.contradictions.map((article) => (
+          <ContradictionCard
+            article={article}
+            corpusKey={corpusKey}
+            key={article.slug}
+          />
+        ))}
+      </div>
+      <Link
+        className="landing-text-link"
+        href={`/contradictions?text=${corpusKey}`}
+      >
+        All contradictions <FiArrowUpRight aria-hidden="true" />
+      </Link>
+    </section>
+  ) : null;
+}
+
+async function FeaturedArticles({
+  featuredPromise,
+  corpusKey,
+}: {
+  featuredPromise: ReturnType<typeof getFeatured>;
+  corpusKey: CorpusKey;
+}) {
+  const featured = await featuredPromise;
+  return featured.articles.length > 0 ? (
+    <section className="landing-section" aria-labelledby="evidence-title">
+      <div className="landing-section-heading">
+        <p className="landing-kicker">FOLLOW THE SOURCES</p>
+        <h2 id="evidence-title">Evidence before argument.</h2>
+      </div>
+      <div className="landing-article-grid">
+        {featured.articles.map((article) => (
+          <ArticleCard
+            article={article}
+            corpusKey={corpusKey}
+            key={article.slug}
+          />
+        ))}
+      </div>
+      <Link className="landing-text-link" href={`/evidence?text=${corpusKey}`}>
+        Explore the evidence <FiArrowUpRight aria-hidden="true" />
+      </Link>
+    </section>
+  ) : null;
+}
+
+function FeaturedLoading({ title }: { title: string }) {
+  return (
+    <section className="landing-section" aria-busy="true">
+      <div className="landing-section-heading">
+        <p className="landing-kicker">
+          <output>Loading the library…</output>
+        </p>
+        <h2>{title}</h2>
+      </div>
+      <div className="landing-article-grid" aria-hidden="true">
+        {[0, 1, 2].map((item) => (
+          <div className="skeleton h-80" key={item} />
+        ))}
+      </div>
+    </section>
+  );
+}
+
 export default async function Home({
   searchParams,
 }: {
   searchParams: PageSearchParams;
 }) {
   const corpusKey = await getPageCorpus(searchParams);
-  const featured = await getFeatured(corpusKey);
+  const featured = getFeatured(corpusKey);
 
   return (
     <div className="landing-page">
-      <section className="landing-hero" aria-labelledby="hero-title">
-        <Image
-          alt=""
-          className="landing-landscape"
-          src="/images/exalt-hero-sky.webp"
-          fill
-          preload
-          sizes="100vw"
-          unoptimized
-        />
-        <div className="landing-hero-content">
-          <p className="landing-kicker">
-            A CLOSER LOOK AT THE BIBLE &amp; QURAN
-          </p>
-          <h1 id="hero-title">
-            You have questions.
-            <br />
-            Take a closer look.
-          </h1>
-          <p className="landing-hero-description">
-            Explore the passages, test the claims, and follow the evidence. A
-            research library for understanding what you believe, and why.
-          </p>
-          <div className="landing-actions">
-            <Link
-              className="landing-button landing-button-primary"
-              href="#explore"
-            >
-              Explore the library
-            </Link>
-            <Link
-              className="landing-button landing-button-glass"
-              href={`/debate?text=${corpusKey}`}
-            >
-              Start a conversation
-            </Link>
-          </div>
-        </div>
-        <div className="landing-hero-bottom">
-          <span className="landing-kicker">
-            CURRENTLY EXPLORING THE {corpusLabel(corpusKey).toUpperCase()}
-          </span>
-          <Link href="#explore">
-            Follow your curiosity <span aria-hidden="true">↓</span>
-          </Link>
-        </div>
-      </section>
+      <HomeHero corpusKey={corpusKey} />
 
       <section className="landing-statement" aria-label="Our approach">
         <p>
@@ -191,29 +228,14 @@ export default async function Home({
         </div>
       </section>
 
-      {featured.contradictions.length > 0 ? (
-        <section className="landing-section" aria-labelledby="featured-title">
-          <div className="landing-section-heading">
-            <p className="landing-kicker">A CLOSER LOOK</p>
-            <h2 id="featured-title">Two accounts. Read both sides.</h2>
-          </div>
-          <div className="landing-article-grid">
-            {featured.contradictions.map((article) => (
-              <ContradictionCard
-                article={article}
-                corpusKey={corpusKey}
-                key={article.slug}
-              />
-            ))}
-          </div>
-          <Link
-            className="landing-text-link"
-            href={`/contradictions?text=${corpusKey}`}
-          >
-            All contradictions <FiArrowUpRight aria-hidden="true" />
-          </Link>
-        </section>
-      ) : null}
+      <Suspense
+        fallback={<FeaturedLoading title="Two accounts. Read both sides." />}
+      >
+        <FeaturedContradictions
+          featuredPromise={featured}
+          corpusKey={corpusKey}
+        />
+      </Suspense>
 
       <section
         className="landing-section"
@@ -244,29 +266,11 @@ export default async function Home({
         </ol>
       </section>
 
-      {featured.articles.length > 0 ? (
-        <section className="landing-section" aria-labelledby="evidence-title">
-          <div className="landing-section-heading">
-            <p className="landing-kicker">FOLLOW THE SOURCES</p>
-            <h2 id="evidence-title">Evidence before argument.</h2>
-          </div>
-          <div className="landing-article-grid">
-            {featured.articles.map((article) => (
-              <ArticleCard
-                article={article}
-                corpusKey={corpusKey}
-                key={article.slug}
-              />
-            ))}
-          </div>
-          <Link
-            className="landing-text-link"
-            href={`/evidence?text=${corpusKey}`}
-          >
-            Explore the evidence <FiArrowUpRight aria-hidden="true" />
-          </Link>
-        </section>
-      ) : null}
+      <Suspense
+        fallback={<FeaturedLoading title="Evidence before argument." />}
+      >
+        <FeaturedArticles featuredPromise={featured} corpusKey={corpusKey} />
+      </Suspense>
 
       <section
         className="landing-section landing-faq"
@@ -298,6 +302,13 @@ export default async function Home({
         className="landing-invitation"
         aria-labelledby="invitation-title"
       >
+        <Image
+          alt=""
+          src="/images/exalt-hero-sky.webp"
+          fill
+          sizes="100vw"
+          className="landing-invitation-landscape"
+        />
         <p className="landing-kicker">LET&apos;S THINK IT THROUGH</p>
         <h2 id="invitation-title">
           Have a question

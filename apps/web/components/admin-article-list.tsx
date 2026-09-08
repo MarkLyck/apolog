@@ -6,13 +6,10 @@ import { Badge } from "@apolog/ui";
 import { usePaginatedQuery } from "convex/react";
 import Link from "next/link";
 import { useMemo, useState } from "react";
-import {
-  FiArrowRight,
-  FiEdit3,
-  FiFileText,
-  FiPlus,
-  FiSearch,
-} from "react-icons/fi";
+import { FiArrowRight, FiEdit3, FiFileText, FiSearch } from "react-icons/fi";
+
+import { AdminListHeading } from "./admin-list-heading";
+import { AdminRowsLoading } from "./route-loading";
 
 const actionClassName =
   "inline-flex min-h-11 items-center justify-center gap-2 rounded-full bg-[var(--ink)] px-5 text-sm font-bold text-[var(--paper)] transition hover:-translate-y-0.5 hover:bg-[var(--accent-strong)] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--accent)]";
@@ -45,20 +42,7 @@ export function AdminArticleList() {
 
   return (
     <div className="page-container editor-page">
-      <header className="flex flex-col gap-6 border-b border-[var(--line)] pb-10 sm:flex-row sm:items-end sm:justify-between">
-        <div>
-          <p className="text-xs font-bold uppercase tracking-[0.2em] text-[var(--accent-strong)]">
-            Publishing desk
-          </p>
-          <h1 className="mt-3 text-5xl">Articles</h1>
-          <p className="mt-4 max-w-2xl leading-7 text-[var(--muted)]">
-            Draft, edit, publish, and organize every article from one place.
-          </p>
-        </div>
-        <Link className={actionClassName} href="/admin/articles/new">
-          <FiPlus aria-hidden="true" /> New article
-        </Link>
-      </header>
+      <AdminListHeading />
 
       <div className="mt-8 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
         <fieldset className="flex flex-wrap gap-2">
@@ -94,9 +78,7 @@ export function AdminArticleList() {
       </div>
 
       {paginationStatus === "LoadingFirstPage" ? (
-        <p className="py-20 text-center text-[var(--muted)]">
-          Loading articles…
-        </p>
+        <AdminRowsLoading />
       ) : filtered.length === 0 ? (
         <div className="mt-10 rounded-2xl border border-dashed border-[var(--line)] bg-[var(--surface)] px-6 py-20 text-center">
           <FiFileText
