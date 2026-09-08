@@ -67,13 +67,13 @@ describe("contradiction pagination", () => {
         }}
       />
     );
-    expect(html).toContain("550 ranked comparisons · 24 loaded");
+    expect(html).toContain("550 ranked comparisons</div>");
     expect(html).toContain("Load more comparisons");
     expect(html).toContain("Ranked contradiction 24");
     expect(html).toContain("from=contradictions&amp;text=quran");
   });
 
-  test("distinguishes loaded search matches from the full collection", () => {
+  test("hides partial search counts while more results are available", () => {
     const html = renderToStaticMarkup(
       <ContradictionList
         corpusKey="bible"
@@ -87,7 +87,8 @@ describe("contradiction pagination", () => {
       />
     );
     expect(html).toContain("550 ranked comparisons");
-    expect(html).toContain("24 matching comparisons loaded");
+    expect(html).not.toContain("matching comparisons");
+    expect(html).not.toContain("loaded");
     expect(html).toContain("Load more comparisons");
   });
 
