@@ -1,4 +1,5 @@
 import { normalizeSearchQuery } from "@apolog/shared/search";
+import { paginationOptsValidator } from "convex/server";
 import { v } from "convex/values";
 
 import { query } from "./_generated/server";
@@ -74,5 +75,36 @@ export const keywordArticles = query({
       .slice(0, boundedLimit)
       .map(({ article, hit }) => toPublishedArticleListItem(article, hit))
       .filter((article) => article !== null);
+  },
+});
+
+export const collectionPage = query({
+  args: {
+    collectionKey: collectionKeyValidator,
+    corpusKey: corpusKeyValidator,
+    query: v.string(),
+    paginationOpts: paginationOptsValidator,
+  },
+  handler: async (ctx, args) => {
+    const normalized = normalizeSearchQuery(args.query);
+    if (!normalized) {
+      return { page: [], isDone: true, continueCursor: "" };
+    }
+    const hits = await ctx.db
+      .query("searchDocuments")
+      .withSearchIndex("search_articles", (index) =>
+        index
+          .search("searchText", normalized)
+          .eq("corpusKey", args.corpusKey)
+          .eq("collectionKey", args.collectionKey)
+          .eq("status", "published")
+      )
+      .paginate(args.paginationOpts);
+    const page = await Promise.all(
+      hits.page.map(async (hit) =>
+        toPublishedArticleListItem(await ctx.db.get(hit.articleId), hit)
+      )
+    );
+    return { ...hits, page: page.filter((article) => article !== null) };
   },
 });

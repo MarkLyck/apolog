@@ -11,8 +11,12 @@ import { mergeArticlePage } from "@/lib/article-pagination";
 export function ContradictionList({
   corpusKey,
   initialPage,
+  query = "",
+  totalCount,
 }: {
   corpusKey: CorpusKey;
+  query?: string;
+  totalCount: number;
   initialPage: PaginationResult<ArticleListItem>;
 }) {
   const [result, setResult] = useState(initialPage);
@@ -29,6 +33,7 @@ export function ContradictionList({
     try {
       const next = await loadContradictions({
         corpusKey,
+        query,
         cursor: result.continueCursor,
       });
       setResult((previous) => mergeArticlePage(previous, next));
@@ -38,7 +43,7 @@ export function ContradictionList({
     } finally {
       pending.current = false;
     }
-  }, [corpusKey, result.continueCursor, result.isDone]);
+  }, [corpusKey, query, result.continueCursor, result.isDone]);
 
   useEffect(() => {
     if (result.isDone || status !== "idle" || !sentinel.current) {
@@ -59,9 +64,17 @@ export function ContradictionList({
   return (
     <>
       <div className="collection-results" aria-live="polite">
-        {result.page.length} ranked{" "}
-        {result.page.length === 1 ? "comparison" : "comparisons"}
-        {result.isDone ? "" : " loaded"}
+        {totalCount} ranked {totalCount === 1 ? "comparison" : "comparisons"}
+        {query ? (
+          <>
+            {" "}
+            · {result.page.length} matching{" "}
+            {result.page.length === 1 ? "comparison" : "comparisons"}
+            {result.isDone ? "" : " loaded"}
+          </>
+        ) : result.isDone ? null : (
+          <> · {result.page.length} loaded</>
+        )}
       </div>
       <div className="grid gap-5 md:grid-cols-2">
         {result.page.map((article) => (

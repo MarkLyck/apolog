@@ -59,6 +59,7 @@ describe("contradiction pagination", () => {
     const html = renderToStaticMarkup(
       <ContradictionList
         corpusKey="quran"
+        totalCount={550}
         initialPage={{
           page: Array.from({ length: 24 }, (_, index) => article(index + 1)),
           continueCursor: "next",
@@ -66,16 +67,35 @@ describe("contradiction pagination", () => {
         }}
       />
     );
-    expect(html).toContain("24 ranked comparisons loaded");
+    expect(html).toContain("550 ranked comparisons · 24 loaded");
     expect(html).toContain("Load more comparisons");
     expect(html).toContain("Ranked contradiction 24");
     expect(html).toContain("from=contradictions&amp;text=quran");
+  });
+
+  test("distinguishes loaded search matches from the full collection", () => {
+    const html = renderToStaticMarkup(
+      <ContradictionList
+        corpusKey="bible"
+        query="angels"
+        totalCount={550}
+        initialPage={{
+          page: Array.from({ length: 24 }, (_, index) => article(index + 1)),
+          continueCursor: "next",
+          isDone: false,
+        }}
+      />
+    );
+    expect(html).toContain("550 ranked comparisons");
+    expect(html).toContain("24 matching comparisons loaded");
+    expect(html).toContain("Load more comparisons");
   });
 
   test("removes the load control when the server says the list is complete", () => {
     const html = renderToStaticMarkup(
       <ContradictionList
         corpusKey="bible"
+        totalCount={1}
         initialPage={{
           page: [article(1)],
           continueCursor: "end",
