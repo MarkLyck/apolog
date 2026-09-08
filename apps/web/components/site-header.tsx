@@ -74,13 +74,10 @@ export function SiteHeader({ initialCorpus }: { initialCorpus: CorpusKey }) {
       <header data-landing={pathname === "/"} className="site-header">
         <div className="site-header-row">
           <Link
-            className="mr-auto flex items-center gap-3 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--accent)]"
+            className="mr-auto flex items-center focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--accent)]"
             href={`/?text=${corpusKey}`}
           >
-            <span className="site-brand-mark grid size-9 place-items-center bg-[var(--accent)] font-display text-xl font-semibold text-white">
-              A
-            </span>
-            <span className="site-brand-name hidden font-display text-xl tracking-tight sm:inline">
+            <span className="site-brand-name font-display text-xl tracking-tight">
               Apolog
             </span>
           </Link>
