@@ -25,6 +25,7 @@ import {
   SourcesSection,
   StorySection,
 } from "./article-editor-sections";
+import { EditorLoading } from "./route-loading";
 
 function ArticleEditorForm({
   id,
@@ -308,11 +309,7 @@ export function ArticleEditor({ articleId }: { articleId?: string }) {
   const article = useQuery(api.articles.getForAdmin, id ? { id } : "skip");
 
   if (id && article === undefined) {
-    return (
-      <p className="mx-auto max-w-6xl px-5 py-24 text-[var(--muted)]">
-        Loading article…
-      </p>
-    );
+    return <EditorLoading />;
   }
   if (id && article === null) {
     return (

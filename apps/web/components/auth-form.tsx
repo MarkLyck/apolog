@@ -9,6 +9,7 @@ import type { FormEvent } from "react";
 
 import { authFormConfig, passwordConfirmationError } from "./auth-form-model";
 import type { AuthMode } from "./auth-form-model";
+import { AuthFormLoading } from "./route-loading";
 
 const fieldClassName =
   "min-h-12 w-full rounded-xl border border-[var(--line)] bg-[var(--paper)] px-4 text-[var(--ink)] outline-none transition placeholder:text-[var(--muted)] focus:border-[var(--accent)] focus:ring-2 focus:ring-[color:var(--accent)]/20";
@@ -67,11 +68,7 @@ export function AuthForm({
   };
 
   if (isLoading) {
-    return (
-      <p aria-live="polite" className="text-sm text-[var(--muted)]">
-        Checking your session…
-      </p>
-    );
+    return <AuthFormLoading mode={mode} />;
   }
 
   if (isAuthenticated) {

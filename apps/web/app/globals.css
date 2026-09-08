@@ -3,14 +3,6 @@
 @import "./landing.css";
 @source "../../../packages/ui/src";
 
-@font-face {
-  font-family: "Asta Sans";
-  font-style: normal;
-  font-weight: 300 800;
-  font-display: swap;
-  src: url("/fonts/asta-sans-latin.woff2") format("woff2");
-}
-
 :root {
   --paper: #ffffff;
   --surface: #f7f7f8;
@@ -38,8 +30,8 @@
 }
 
 @theme inline {
-  --font-sans: "Asta Sans", Arial, sans-serif;
-  --font-display: "Asta Sans", Arial, sans-serif;
+  --font-sans: var(--font-asta), Arial, sans-serif;
+  --font-display: var(--font-asta), Arial, sans-serif;
 }
 
 * {
@@ -57,7 +49,7 @@ body {
   margin: 0;
   background: var(--paper);
   color: var(--ink);
-  font-family: "Asta Sans", Arial, sans-serif;
+  font-family: var(--font-asta), Arial, sans-serif;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
 }
@@ -142,7 +134,7 @@ textarea {
 
 .debate-markdown h2,
 .debate-markdown h3 {
-  font-family: "Asta Sans", Arial, sans-serif;
+  font-family: var(--font-asta), Arial, sans-serif;
   font-size: 1.15rem;
   line-height: 1.4;
 }
@@ -176,5 +168,23 @@ textarea {
     scroll-behavior: auto !important;
     transition-duration: 0.01ms !important;
     animation-duration: 0.01ms !important;
+  }
+}
+
+.skeleton {
+  border-radius: 8px;
+  background: var(--surface-strong);
+  animation: skeleton-pulse 1.8s ease-in-out infinite;
+}
+
+@keyframes skeleton-pulse {
+  50% {
+    opacity: 0.55;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .skeleton {
+    animation: none;
   }
 }
