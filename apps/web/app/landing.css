@@ -1,11 +1,3 @@
-@font-face {
-  font-family: "Asta Sans";
-  font-style: normal;
-  font-weight: 300 800;
-  font-display: swap;
-  src: url("/fonts/asta-sans-latin.woff2") format("woff2");
-}
-
 .landing-page {
   --paper: #fff;
   --surface: #f7f7f8;
@@ -353,6 +345,10 @@
 }
 
 .site-header[data-landing="true"] {
+  --ink: #fff;
+  --muted: #fff;
+  --surface-strong: #ffffff26;
+  position: absolute;
   top: 0;
   left: 0;
   width: 100%;
@@ -374,6 +370,7 @@
 
 .site-header[data-landing="true"] .site-brand-mark {
   background: transparent;
+  font-family: "Newsreader Variable", Georgia, serif;
   font-size: 30px;
   width: 24px;
 }
@@ -435,19 +432,6 @@
 .site-header[data-landing="true"] [data-search-trigger] kbd,
 .site-header[data-landing="true"] .site-editor-link {
   display: none;
-}
-
-body:has(.landing-page) .site-footer {
-  --ink: #171519;
-  --muted: #68666c;
-  background: #fff;
-  color: var(--ink);
-  font-family: "Asta Sans", Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-}
-
-body:has(.landing-page) .site-footer .site-container {
-  max-width: 1360px;
 }
 
 .landing-mobile-menu {

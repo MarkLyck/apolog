@@ -23,7 +23,7 @@ export function AuthPage({
         <h2>
           Every question
           <br />
-          opens <em>a new perspective.</em>
+          deserves a closer look.
         </h2>
         <p>
           A source-led library for exploring faith, questioning claims, and

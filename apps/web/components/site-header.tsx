@@ -128,16 +128,21 @@ export function SiteHeader({ initialCorpus }: { initialCorpus: CorpusKey }) {
               </nav>
             </details>
           ) : (
-            <ThemeToggle />
+            <>
+              <ThemeToggle />
+              <details className="site-mobile-menu" key={pathname}>
+                <summary aria-label="Open navigation">
+                  <FiMenu aria-hidden="true" />
+                </summary>
+                <PrimaryNavigation
+                  corpusKey={corpusKey}
+                  pathname={pathname}
+                  variant="mobile"
+                />
+              </details>
+            </>
           )}
         </div>
-        {pathname === "/" ? null : (
-          <PrimaryNavigation
-            corpusKey={corpusKey}
-            pathname={pathname}
-            variant="mobile"
-          />
-        )}
       </header>
       <SearchPalette
         initialCorpus={initialCorpus}
