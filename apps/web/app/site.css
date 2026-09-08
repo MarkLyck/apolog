@@ -36,15 +36,6 @@
   padding: 12px 40px;
 }
 
-.site-brand-mark {
-  flex-shrink: 0;
-  width: 24px;
-  background: transparent;
-  color: inherit;
-  font-family: "Newsreader Variable", Georgia, serif;
-  font-size: 30px;
-}
-
 .site-brand-name {
   display: inline;
   font-family: var(--font-sans);
@@ -714,9 +705,6 @@ select option {
 }
 
 @media (max-width: 420px) {
-  .site-header:not([data-landing="true"]) .site-brand-mark {
-    display: none;
-  }
   .site-header:not([data-landing="true"]) .site-brand-name {
     font-size: 22px;
   }

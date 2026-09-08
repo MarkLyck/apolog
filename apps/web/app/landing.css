@@ -368,13 +368,6 @@
   padding: 12px 40px;
 }
 
-.site-header[data-landing="true"] .site-brand-mark {
-  background: transparent;
-  font-family: "Newsreader Variable", Georgia, serif;
-  font-size: 30px;
-  width: 24px;
-}
-
 .site-header[data-landing="true"] .site-brand-name {
   font-family: "Asta Sans", Arial, sans-serif;
   font-size: 24px;
@@ -603,9 +596,6 @@
 }
 
 @media (max-width: 380px) {
-  .site-header[data-landing="true"] .site-brand-mark {
-    display: none;
-  }
   .site-header[data-landing="true"] .site-header-row {
     gap: 6px;
   }
