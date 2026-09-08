@@ -65,15 +65,12 @@ export function ContradictionList({
     <>
       <div className="collection-results" aria-live="polite">
         {totalCount} ranked {totalCount === 1 ? "comparison" : "comparisons"}
-        {query ? (
+        {query && result.isDone && (
           <>
             {" "}
             · {result.page.length} matching{" "}
             {result.page.length === 1 ? "comparison" : "comparisons"}
-            {result.isDone ? "" : " loaded"}
           </>
-        ) : result.isDone ? null : (
-          <> · {result.page.length} loaded</>
         )}
       </div>
       <div className="grid gap-5 md:grid-cols-2">

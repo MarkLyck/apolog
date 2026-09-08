@@ -30,7 +30,7 @@ export function CollectionSearch({
           defaultValue={query}
           name="q"
           type="search"
-          placeholder={`Search ${corpusLabel(corpusKey)} ${label.toLowerCase()}…`}
+          placeholder={`Search ${corpusLabel(corpusKey)} ${label.toLowerCase()}...`}
         />
       </label>
       {sort === "ranked" ? null : (
