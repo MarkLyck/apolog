@@ -10,6 +10,7 @@ import type { Doc, Id } from "./_generated/dataModel";
 import { mutation, query } from "./_generated/server";
 import type { MutationCtx, QueryCtx } from "./_generated/server";
 import {
+  getAdjacentArticle,
   getArticleTagLabels,
   toPublishedArticleListItem,
 } from "./articleViews";
@@ -368,6 +369,34 @@ export const getBySlug = query({
       ),
       tags: await getArticleTagLabels(ctx, article._id),
     };
+  },
+});
+
+export const getAdjacent = query({
+  args: {
+    articleId: v.id("articles"),
+    collectionKey: collectionKeyValidator,
+    corpusKey: corpusKeyValidator,
+  },
+  handler: async (ctx, args) => {
+    const article = await ctx.db.get(args.articleId);
+    const placement = await ctx.db
+      .query("articlePlacements")
+      .withIndex("by_article_placement", (index) =>
+        index
+          .eq("articleId", args.articleId)
+          .eq("corpusKey", args.corpusKey)
+          .eq("collectionKey", args.collectionKey)
+      )
+      .unique();
+    if (article?.status !== "published" || placement?.status !== "published") {
+      return { previous: null, next: null };
+    }
+    const [previous, next] = await Promise.all([
+      getAdjacentArticle(ctx, placement, "previous"),
+      getAdjacentArticle(ctx, placement, "next"),
+    ]);
+    return { previous, next };
   },
 });
 

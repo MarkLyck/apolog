@@ -3,6 +3,7 @@ import { describe, expect, test } from "bun:test";
 import { convexTest } from "convex-test";
 import { makeFunctionReference } from "convex/server";
 
+import { api } from "./_generated/api";
 import schema from "./schema";
 
 const modules = {
@@ -50,6 +51,93 @@ async function setupUser(role: "admin" | "user") {
 }
 
 describe("article management", () => {
+  test.each(["contradictions", "evidence"] as const)(
+    "%s neighbors follow the public list and stay within published placements",
+    async (collectionKey) => {
+      const { authenticated, t } = await setupUser("admin");
+      for (const [index, position] of [5, 1, 5, 20].entries()) {
+        await authenticated.mutation(save, {
+          ...validInput,
+          slug: `neighbor-${index}`,
+          status: "published",
+          placements: [
+            {
+              collectionKey,
+              corpusKey: "bible",
+              isPrimary: true,
+              position: collectionKey === "contradictions" ? position : 0,
+            },
+          ],
+        });
+      }
+      const draft = await authenticated.mutation(save, {
+        ...validInput,
+        slug: "excluded-draft",
+        placements: [
+          {
+            collectionKey,
+            corpusKey: "bible",
+            isPrimary: true,
+            position: collectionKey === "contradictions" ? 6 : 0,
+          },
+        ],
+      });
+      await authenticated.mutation(save, {
+        ...validInput,
+        slug: "other-corpus",
+        status: "published",
+        placements: [
+          {
+            collectionKey,
+            corpusKey: "quran",
+            isPrimary: true,
+            position: collectionKey === "contradictions" ? 6 : 0,
+          },
+        ],
+      });
+      await authenticated.mutation(save, {
+        ...validInput,
+        slug: "other-collection",
+        status: "published",
+        placements: [
+          {
+            collectionKey: "silly",
+            corpusKey: "bible",
+            isPrimary: true,
+            position: 0,
+          },
+        ],
+      });
+      const { page } = await t.query(api.articles.list, {
+        collectionKey,
+        corpusKey: "bible",
+        sort: collectionKey === "contradictions" ? "ranked" : "newest",
+        paginationOpts: { cursor: null, numItems: 100 },
+      });
+      expect(page).toHaveLength(4);
+      for (const [index, article] of page.entries()) {
+        const neighbors = await t.query(api.articles.getAdjacent, {
+          articleId: article.id,
+          collectionKey,
+          corpusKey: "bible",
+        });
+        expect(neighbors.previous?.slug ?? null).toBe(
+          page[index - 1]?.slug ?? null
+        );
+        expect(neighbors.next?.slug ?? null).toBe(
+          page[index + 1]?.slug ?? null
+        );
+      }
+      expect(
+        await t.query(api.articles.getAdjacent, {
+          articleId: draft.id,
+          collectionKey,
+          corpusKey: "bible",
+        })
+      ).toEqual({ previous: null, next: null });
+    }
+  );
+
   test("requires an authenticated administrator", async () => {
     const anonymous = convexTest(schema, modules);
     expect(anonymous.mutation(save, validInput)).rejects.toThrow(
