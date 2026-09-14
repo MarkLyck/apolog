@@ -3,11 +3,13 @@ import type { CollectionKey, CorpusKey } from "@apolog/shared";
 import { Badge } from "@apolog/ui";
 import Link from "next/link";
 import { notFound, redirect } from "next/navigation";
+import { Suspense } from "react";
 import { FiArrowLeft, FiClock, FiExternalLink } from "react-icons/fi";
 
 import { resolveArticlePlacement } from "@/lib/article-placement";
 import { getAdjacentArticles, getArticle } from "@/lib/data";
 
+import { ArticleEditButton } from "./article-edit-button";
 import { ArticleNavigation } from "./article-navigation";
 import { ContentBlocks } from "./content-blocks";
 
@@ -47,12 +49,17 @@ export async function ArticleDetailPage({
     <article className="article-reader page-container">
       <header className="reader-header">
         <div className="reader-heading">
-          <Link
-            className="inline-flex items-center gap-2 text-sm font-medium text-[var(--muted)] transition-colors hover:text-[var(--ink)]"
-            href={`/${activePlacement.collectionKey}?text=${corpusKey}`}
-          >
-            <FiArrowLeft aria-hidden="true" /> Back to {collection.label}
-          </Link>
+          <div className="flex flex-wrap items-center justify-between gap-4">
+            <Link
+              className="inline-flex items-center gap-2 text-sm font-medium text-[var(--muted)] transition-colors hover:text-[var(--ink)]"
+              href={`/${activePlacement.collectionKey}?text=${corpusKey}`}
+            >
+              <FiArrowLeft aria-hidden="true" /> Back to {collection.label}
+            </Link>
+            <Suspense fallback={null}>
+              <ArticleEditButton articleId={article._id} />
+            </Suspense>
+          </div>
           <div className="mt-8 flex flex-wrap items-center gap-x-4 gap-y-2 text-xs font-medium text-[var(--muted)] sm:mt-10">
             <span className="font-semibold text-[var(--accent-strong)]">
               {collection.label}
