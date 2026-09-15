@@ -17,7 +17,7 @@ export const contradictionKinds = {
       "The alleged conflict needs substantial assumptions, such as treating an omission as a denial or figurative language as literal.",
   },
   "not-demonstrated": {
-    label: "No demonstrated contradiction",
+    label: "Weak contradiction",
     description:
       "The supplied passages do not establish incompatible claims. Different events, meanings, or conditions may account for the difference.",
   },

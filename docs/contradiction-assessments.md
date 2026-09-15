@@ -7,17 +7,17 @@ Comparison cards and article headers show two separate judgments: the inference 
 | Direct contradiction | Explicit incompatible claims about the same subject and conditions, with little additional inference. |
 | Interpretive tension | A substantive disagreement that depends on wording, scope, or narrative interpretation. |
 | Weak tension | A conflict that needs substantial assumptions, such as treating omissions as denials. |
-| No demonstrated contradiction | The supplied passages do not establish incompatible claims. |
+| Weak contradiction | The supplied passages do not establish incompatible claims. |
 
 Importance has five separate levels: incidental, minor, supporting, major, and foundational. A conflicting accession age can be direct with minor importance. The creation-order comparison has foundational importance while requiring an interpretation of the chronology in Genesis 2.
 
 ## Reviewed catalog
 
-`packages/backend/src/contradiction-assessments.json` contains 567 reviewed assessments with an explicit classification, importance, reason, and source digest. It draws on the existing ranking review. Strength 5 initially maps to direct, 3–4 to interpretive, 2 to weak, and 0–1 to no demonstrated contradiction. This mapping is a starting point for editorial review, not runtime logic or a new ranking formula.
+`packages/backend/src/contradiction-assessments.json` contains 567 reviewed assessments with an explicit classification, importance, reason, and source digest. It draws on the existing ranking review. Strength 5 initially maps to direct, 3–4 to interpretive, 2 to weak, and 0–1 to weak contradiction. This mapping is a starting point for editorial review, not runtime logic or a new ranking formula.
 
 Six previously highest-strength entries were classified as interpretive after reviewing the inference they require: `bible-accounts`, `bible-humans`, `bible-abes-sons`, `bible-jehovah`, `bible-solomons-reign`, and `bible-flying`. Their reasons name the relevant tense, scope, chronology, or exception. Importance and reading order were retained.
 
-The resulting catalog has 51 direct contradictions, 248 interpretive tensions, 121 weak tensions, and 147 entries with no demonstrated contradiction. Those last entries remain accessible as comparisons; their labels do not assert that a contradiction has been established.
+The resulting catalog has 51 direct contradictions, 248 interpretive tensions, 121 weak tensions, and 147 weak contradictions. The weak-contradiction description explains that the supplied passages do not establish incompatible claims.
 
 ## Matching assessments to content
 

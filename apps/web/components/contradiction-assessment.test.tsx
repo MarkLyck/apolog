@@ -42,7 +42,7 @@ describe("comparison assessment labels", () => {
           }}
         />
       )
-    ).toContain("No demonstrated contradiction");
+    ).toContain("Weak contradiction");
     const changed = renderToStaticMarkup(
       <ContradictionAssessmentPanel assessment={{ status: "changed" }} />
     );
@@ -60,7 +60,7 @@ describe("comparison assessment labels", () => {
       "Direct contradiction",
       "Interpretive tension",
       "Weak tension",
-      "No demonstrated contradiction",
+      "Weak contradiction",
     ]) {
       expect(html).toContain(label);
     }
