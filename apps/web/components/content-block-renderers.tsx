@@ -2,6 +2,8 @@ import type { ContentBlock, InlineContent } from "@apolog/shared";
 import type { ReactNode } from "react";
 import { FiAlertTriangle, FiBookOpen } from "react-icons/fi";
 
+import { QuoteContext } from "./quote-context";
+
 function applyMarks(content: ReactNode, marks: string[] | undefined) {
   let result = content;
   for (const mark of marks ?? []) {
@@ -109,9 +111,7 @@ export function QuoteBlock({
       <blockquote className="m-0 font-display text-xl leading-8">
         <RichText content={block.content} />
       </blockquote>
-      <figcaption className="mt-4 text-xs font-bold uppercase tracking-[0.14em] text-[var(--muted)]">
-        {block.reference} · {block.edition}
-      </figcaption>
+      <QuoteContext reference={block.reference} edition={block.edition} />
     </figure>
   );
 }
