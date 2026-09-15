@@ -55,6 +55,7 @@ describe("quote context", () => {
   test("does not guess sources for unidentified editions or unsupported references", () => {
     for (const reference of [
       "Genesis 0:1",
+      "Genesis 1-2:3",
       "Genesis 2:7-3",
       "Genesis 2:7-1:8",
       "Genesis 1:1-999:9",
@@ -72,6 +73,35 @@ describe("quote context", () => {
     ).toEqual([]);
   });
 
+  test("rejects nonexistent chapters using the quoted edition's book limits", () => {
+    for (const reference of [
+      "Jude 2:1",
+      "Genesis 51:1",
+      "Genesis 50-51",
+      "Genesis 50:1-51:3",
+      "Daniel 13:1",
+      "Esther 11:1",
+    ]) {
+      expect(fullChapterLinks(reference, kjv)).toEqual([]);
+    }
+    const douay = "Douay-Rheims, Challoner revision";
+    for (const reference of [
+      "Daniel 15:1",
+      "Esther 17:1",
+      "Tobit 15:1",
+      "Ecclesiasticus 52:1",
+    ]) {
+      expect(fullChapterLinks(reference, douay)).toEqual([]);
+    }
+    expect(fullChapterLinks("Genesis 50:1", kjv)[0]?.label).toBe("Genesis 50");
+    expect(fullChapterLinks("Jude 1:1", kjv)[0]?.label).toBe("Jude 1");
+    expect(fullChapterLinks("Daniel 14:1", douay)[0]?.label).toBe("Daniel 14");
+    expect(fullChapterLinks("Esther 16:1", douay)[0]?.label).toBe("Esther 16");
+    expect(
+      fullChapterLinks("Moses 9:1", "Pearl of Great Price, Book of Moses")
+    ).toEqual([]);
+  });
+
   test("matches notes only where the cited verses overlap, including chapter crossings", () => {
     expect(
       scriptureNotes("Genesis 2:18-22", kjv).map((note) => note.kind)
@@ -79,6 +109,7 @@ describe("quote context", () => {
     expect(
       scriptureNotes("Genesis 1:26-2:5", kjv).map((note) => note.kind)
     ).toEqual(["context"]);
+    expect(scriptureNotes("Genesis 1-2:3", kjv)).toEqual([]);
     expect(scriptureNotes("Genesis 2:20-25", kjv)).toEqual([]);
     expect(scriptureNotes("Genesis 2:19", "Supplied quotation")).toEqual([]);
     expect(scriptureNotes("Proverbs 26:4", kjv)[0]?.sources[0]?.label).toBe(

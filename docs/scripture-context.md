@@ -4,7 +4,7 @@ Every quote footer shows its stored translation or edition. Recognized Bible ref
 
 A supplied quotation without an identified edition keeps that label and displays a notice. It gets no guessed translation link. A KJV quotation with supplied clarification links to the unmodified KJV and explains the difference. Unsupported editions or reference formats keep their original labels and show that no verified chapter link is available.
 
-`apps/web/lib/scripture-reference.ts` owns reference parsing, edition identification, and chapter URLs. It accepts named books with a chapter, verse range, chapter range, or a range crossing chapters. It deliberately does not interpret abbreviated citations or multi-book references.
+`apps/web/lib/scripture-reference.ts` owns reference parsing, edition identification, and chapter URLs. It accepts named books with a chapter, verse range, chapter range, or a range crossing chapters. It checks chapter limits for each book and edition, including the longer Douay-Rheims forms of Esther and Daniel. It deliberately does not interpret abbreviated citations, multi-book references, or mixed ranges that omit the starting verse, such as `Genesis 1-2:3`.
 
 ## Wording and context notes
 
