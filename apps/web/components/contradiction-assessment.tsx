@@ -91,7 +91,7 @@ export function ContradictionAssessmentPanel({
 
 export function ContradictionAssessmentGuide() {
   return (
-    <details className="mb-6 rounded-xl border border-[var(--line)] bg-[var(--surface)] px-5 py-4 text-sm">
+    <details className="my-6 rounded-xl border border-[var(--line)] bg-[var(--surface)] px-5 py-4 text-sm">
       <summary className="cursor-pointer font-semibold">
         How to read the labels
       </summary>
