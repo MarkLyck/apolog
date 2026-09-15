@@ -69,7 +69,7 @@ describe("contradiction pagination", () => {
     );
     expect(html).toContain("550 ranked comparisons</div>");
     expect(html).toContain("Load more comparisons");
-    expect(html).toContain("Ranked contradiction 24");
+    expect(html).toContain("Reading order 24");
     expect(html).toContain("from=contradictions&amp;text=quran");
   });
 

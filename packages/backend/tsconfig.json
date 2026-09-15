@@ -4,5 +4,10 @@
     "allowJs": true,
     "checkJs": false
   },
-  "include": ["convex/**/*.ts", "convex/**/*.js", "src/**/*.ts"]
+  "include": [
+    "convex/**/*.ts",
+    "convex/**/*.js",
+    "src/**/*.ts",
+    "scripts/**/*.ts"
+  ]
 }
