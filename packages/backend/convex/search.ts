@@ -71,10 +71,12 @@ export const keywordArticles = query({
         left.relevanceRank - right.relevanceRank
       );
     });
-    return results
-      .slice(0, boundedLimit)
-      .map(({ article, hit }) => toPublishedArticleListItem(article, hit))
-      .filter((article) => article !== null);
+    const projected = await Promise.all(
+      results
+        .slice(0, boundedLimit)
+        .map(({ article, hit }) => toPublishedArticleListItem(article, hit))
+    );
+    return projected.filter((article) => article !== null);
   },
 });
 

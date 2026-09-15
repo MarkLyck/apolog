@@ -4,6 +4,8 @@ import { Badge, Card } from "@apolog/ui";
 import Link from "next/link";
 import { FiArrowUpRight, FiClock } from "react-icons/fi";
 
+import { ContradictionAssessmentLabels } from "./contradiction-assessment";
+
 export function ArticleCard({
   article,
   corpusKey,
@@ -36,6 +38,11 @@ export function ArticleCard({
         <p className="mt-3 flex-1 text-sm leading-6 text-[var(--muted)]">
           {article.summary}
         </p>
+        {article.collectionKey === "contradictions" && (
+          <div className="mt-4">
+            <ContradictionAssessmentLabels assessment={article.assessment} />
+          </div>
+        )}
         <div className="mt-5 flex flex-wrap gap-2">
           {article.tags.slice(0, 3).map((tag) => (
             <span key={tag} className="text-xs text-[var(--muted)]">

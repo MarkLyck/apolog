@@ -4,6 +4,8 @@ import { Card } from "@apolog/ui";
 import Link from "next/link";
 import { FiArrowRight } from "react-icons/fi";
 
+import { ContradictionAssessmentLabels } from "./contradiction-assessment";
+
 export function ContradictionCard({
   article,
   corpusKey,
@@ -26,12 +28,15 @@ export function ContradictionCard({
         </div>
         <div className="relative">
           <div className="mb-5 text-[0.65rem] font-medium uppercase tracking-[0.16em] text-[var(--accent-strong)]">
-            Ranked contradiction {article.position}
+            Reading order {article.position}
           </div>
           <h2 className="max-w-md text-2xl leading-tight">{article.title}</h2>
           <p className="mt-3 text-sm leading-6 text-[var(--muted)]">
             {article.summary}
           </p>
+          <div className="mt-4">
+            <ContradictionAssessmentLabels assessment={article.assessment} />
+          </div>
           {article.comparisonReferences.length > 0 ? (
             <div className="mt-5 flex flex-wrap gap-2">
               {[...new Set(article.comparisonReferences)].map((reference) => (

@@ -10,7 +10,8 @@
     "./seed-data": "./src/seed-data.ts"
   },
   "scripts": {
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "assessments:verify": "bun scripts/verify-contradiction-assessments.ts"
   },
   "dependencies": {
     "@apolog/shared": "workspace:*",

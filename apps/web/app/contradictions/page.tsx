@@ -6,6 +6,7 @@ import {
   CollectionSearch,
   CollectionEmptyState,
 } from "@/components/collection-search";
+import { ContradictionAssessmentGuide } from "@/components/contradiction-assessment";
 import { ContradictionList } from "@/components/contradiction-list";
 import { PageIntro } from "@/components/page-intro";
 import { firstSearchParam, getPageCorpus } from "@/lib/corpus";
@@ -40,7 +41,7 @@ export default async function Page({
     <>
       <PageIntro
         corpusKey={corpusKey}
-        description="Compare the precise claims, their passage references, the point of conflict, and the strongest common reconciliation."
+        description="Compare the passages and see which conflicts are direct, which require interpretation, and why the difference matters."
         eyebrow="Claim against claim"
         title="Where the accounts pull apart."
       />
@@ -51,6 +52,7 @@ export default async function Page({
           query={query}
           sort="ranked"
         />
+        <ContradictionAssessmentGuide />
         <ContradictionList
           corpusKey={corpusKey}
           initialPage={initialPage}

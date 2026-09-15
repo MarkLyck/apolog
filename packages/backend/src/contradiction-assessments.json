@@ -1,0 +1,3971 @@
+[
+  {
+    "slug": "bible-accounts",
+    "sourceDigest": "904d895ac2617bad2772c9ceb55ad44446c37ed492a6ef2fbec13fc6f51ddb03",
+    "kind": "interpretive",
+    "importance": 5,
+    "reason": "The animal-order comparison depends on reading Genesis 2 as a chronological sequence. Genesis 2:19 says \"formed\" in the KJV and \"had formed\" in the NIV, so the timing requires an interpretive choice."
+  },
+  {
+    "slug": "bible-iniquity",
+    "sourceDigest": "2e0d32ccc76c6eba5df3dbd8a723d480800b3e56ee5de9e8287f03bb98c7c63c",
+    "kind": "direct",
+    "importance": 5,
+    "reason": "Explicit denial that children bear parental iniquity conflicts with statements making parental offenses the reason children are killed."
+  },
+  {
+    "slug": "bible-humans",
+    "sourceDigest": "8fc9946296cb45ab0ec260814fe7d3c7029c39abb269d06440e713f7fed8e1b6",
+    "kind": "interpretive",
+    "importance": 5,
+    "reason": "Genesis 1 places animals before humans. Treating Genesis 2 as placing their creation after the man depends on narrative order and the tense chosen for Genesis 2:19."
+  },
+  {
+    "slug": "bible-abes-sons",
+    "sourceDigest": "bf340c27fe38cc172e015ae848f9044f4e5c7ffaa95aab6456ccf09e56c15fe9",
+    "kind": "interpretive",
+    "importance": 4,
+    "reason": "Calling Isaac Abraham's only son conflicts with Ishmael's earlier birth if \"only\" means his sole biological son. The argument depends on whether the description instead concerns Isaac's role as the promised heir."
+  },
+  {
+    "slug": "bible-jehovah",
+    "sourceDigest": "d19691b0ca9d231f733bcdaaaeb69eb145d96ccc93b389e7cdafdd4ab462594e",
+    "kind": "interpretive",
+    "importance": 4,
+    "reason": "Abraham uses the divine name, while Exodus says the patriarchs did not know God by that name. Whether knowing the name means knowing the word or knowing God in a particular role affects the conflict."
+  },
+  {
+    "slug": "bible-solomons-reign",
+    "sourceDigest": "770dedf48111a6af98b0e9115aa933ba610f1f56523183eccce3b5e6dba45d73",
+    "kind": "interpretive",
+    "importance": 4,
+    "reason": "The chronological totals disagree when the periods are read as successive. The argument depends on the period covered by the 450 years in Acts 13 and whether the stated intervals overlap."
+  },
+  {
+    "slug": "bible-jehoiakim",
+    "sourceDigest": "d8d5c3101a6be34e2c41d1c4e856ce740021bbe86a0089f8a855385ba9f63a03",
+    "kind": "direct",
+    "importance": 4,
+    "reason": "A prediction that Jehoiakim has nobody on David's throne conflicts with the explicit accession of his son."
+  },
+  {
+    "slug": "bible-ephraim",
+    "sourceDigest": "61565d39243ab675f67ec74248a338824eb3985a47aec57050abcdb408573678",
+    "kind": "direct",
+    "importance": 4,
+    "reason": "Hosea predicts and denies Ephraim's return to Egypt in punishment, explicitly naming the same people and destination without differentiated dates or subgroups."
+  },
+  {
+    "slug": "bible-gen-ml",
+    "sourceDigest": "2329aec12f32ef2f09b6ad96a75fe7f000da8a3fd9c3c17e89488a3184cae319",
+    "kind": "direct",
+    "importance": 4,
+    "reason": "The genealogies attach different immediate fathers and divergent Davidic branches to Joseph without assigning either lineage to Mary."
+  },
+  {
+    "slug": "bible-enoch",
+    "sourceDigest": "7ad6029959d26d947691bd9d3734d7ce744a166fcc3a7ad277a55125550444e5",
+    "kind": "interpretive",
+    "importance": 5,
+    "reason": "John's sole exception to heavenly ascent meets Elijah's explicit ascent into heaven, with a possible distinction in heaven's sense not stated in the excerpts."
+  },
+  {
+    "slug": "bible-tempted",
+    "sourceDigest": "08ccdc0524f9c06b8fef1095772cf8d537b80566d5c25ed96176419a40036d72",
+    "kind": "interpretive",
+    "importance": 5,
+    "reason": "Parallel accounts assign the same census incitement to God and Satan without describing an intermediary relationship."
+  },
+  {
+    "slug": "bible-seen",
+    "sourceDigest": "245f26af53906dbfc9163eb67f741bd0964a361c0f45bd29f00a5a0f5c2aab8b",
+    "kind": "interpretive",
+    "importance": 5,
+    "reason": "Explicit reports of seeing God and surviving oppose categorical denials, although distinguishing divine manifestations from unmediated sight remains possible."
+  },
+  {
+    "slug": "bible-repent",
+    "sourceDigest": "f0a0442101f9664d8c60248295b72e4d036c858e1f2341ce01154d1a041f85ce",
+    "kind": "interpretive",
+    "importance": 5,
+    "reason": "Broad denials that God repents conflict with explicit regret and changed intentions, including opposing statements about Saul in the same book."
+  },
+  {
+    "slug": "bible-knows",
+    "sourceDigest": "38b0ba793f13accbd65a9e17a9da4d0b0461b78ae4f87eb6ddec6b8ea00aa408",
+    "kind": "interpretive",
+    "importance": 5,
+    "reason": "God investigates and tests so that he will know despite claims of knowing everything, creating a direct purpose-of-investigation tension."
+  },
+  {
+    "slug": "bible-desire",
+    "sourceDigest": "3f644131458fe9d215c68249e719507dacfbb288e9431472809136e7d5054ea9",
+    "kind": "interpretive",
+    "importance": 5,
+    "reason": "Explicit commands and favorable reception of sacrifices conflict with broad denials that God desired or required them, beyond the narrower rejections of corrupt worshippers."
+  },
+  {
+    "slug": "bible-slavery",
+    "sourceDigest": "be371fc3861d2bdd16ddea22679b9975adf157beb6a79000c13a44905392e6e4",
+    "kind": "interpretive",
+    "importance": 5,
+    "reason": "Express hereditary ownership of foreigners conflicts substantially with equal treatment and protections against oppression of strangers and fugitives."
+  },
+  {
+    "slug": "bible-kill",
+    "sourceDigest": "b339d3ab36050754d5ea7327f7fd1fff223b756021a65cfe48fcb437bd6c2fad",
+    "kind": "interpretive",
+    "importance": 5,
+    "reason": "Protection of innocent people conflicts substantially with commands to kill infants, beyond the weaker ambiguity between killing and murder."
+  },
+  {
+    "slug": "bible-curse-earth",
+    "sourceDigest": "7113eed39eb11d86003c914957aa937a1e07942ead7c22223bc1f9c3d5f1f429",
+    "kind": "interpretive",
+    "importance": 5,
+    "reason": "A promise not to curse the ground for humanity contrasts with renewed earth curses for human wrongdoing, though threat, scope, and devastation are not identical in every passage."
+  },
+  {
+    "slug": "bible-human-sacrifice",
+    "sourceDigest": "f5aa093fc66dd415cec9c97def0ba8ee17458ede941608d8d832b6d470c13df4",
+    "kind": "interpretive",
+    "importance": 5,
+    "reason": "God's command to offer Isaac as a burnt offering conflicts substantially with the condemnation of offering children to the Lord, despite different occasions."
+  },
+  {
+    "slug": "bible-lie",
+    "sourceDigest": "470ca75a759b10d6b8560e84c40c2b7b1924b8dae4aa4eaac12fde534c314e0f",
+    "kind": "interpretive",
+    "importance": 5,
+    "reason": "Categorical condemnation of lying conflicts substantially with God's explicit authorization of a lying spirit, while rescue narratives provide weaker supplementary evidence."
+  },
+  {
+    "slug": "bible-merciful",
+    "sourceDigest": "1d4858348fa95b89509ba9edc3b9aece0b0b974aa73c14b41ca95466a1584115",
+    "kind": "interpretive",
+    "importance": 5,
+    "reason": "Mercy over all God's works clashes with expressly merciless destruction of children, although general merciful character need not exclude every punishment."
+  },
+  {
+    "slug": "bible-nonbelievers",
+    "sourceDigest": "428c89caf2953d3373035bd401ce96b61cae052c15580acf0a53da20fb0d9ea6",
+    "kind": "interpretive",
+    "importance": 5,
+    "reason": "Killing a relative for religious persuasion substantially conflicts with love that does no harm, while separation alone is not incompatible with kindness."
+  },
+  {
+    "slug": "bible-god-lie",
+    "sourceDigest": "4dde515fadf0d4d58d015e548c44775e3b4438cb954a29dcf525b224dbe4eb2e",
+    "kind": "interpretive",
+    "importance": 5,
+    "reason": "Assertions that God cannot lie clash substantially with his acknowledged deception of prophets, though causing falsehood differs from personally uttering it."
+  },
+  {
+    "slug": "bible-anger",
+    "sourceDigest": "df9e21b99eb28e13d7f892ce0fb273cf0dc61999723e01cb6714abc0e903ac50",
+    "kind": "interpretive",
+    "importance": 5,
+    "reason": "God's refusal to retain anger forever conflicts with perpetual indignation against a named people, though audience and poetic scope complicate strict universality."
+  },
+  {
+    "slug": "bible-earth",
+    "sourceDigest": "93cde94addea3b041b4cea8d9b71cd2a247846d36644872db401d8c0a87e8113",
+    "kind": "interpretive",
+    "importance": 5,
+    "reason": "Perpetual endurance and the present earth passing away for a new earth give opposed cosmic outcomes, although the permanence language includes poetic statements."
+  },
+  {
+    "slug": "bible-godknows",
+    "sourceDigest": "97ddd180e9f91e88247a8724875211054ae94c6e3ddb4b1918fde1f402d5caa6",
+    "kind": "interpretive",
+    "importance": 5,
+    "reason": "God tests people so that he may know their hearts despite declarations that he already knows every heart, with the test's purpose carrying the conflict."
+  },
+  {
+    "slug": "bible-take-pleasure",
+    "sourceDigest": "1b3b370e4a4f3ddff9087aacbac46c871e566acecb88e65af30b6e56f45e14c3",
+    "kind": "interpretive",
+    "importance": 5,
+    "reason": "God's explicit rejoicing in destruction conflicts with denying pleasure in wicked people's death, despite differing addressed communities."
+  },
+  {
+    "slug": "bible-first",
+    "sourceDigest": "24595c0c222012a2641a612a3fdd2b2a8caa68ef40654f71f2c099bd07e6d98b",
+    "kind": "interpretive",
+    "importance": 5,
+    "reason": "Jesus' stated priority in rising from death conflicts with explicit earlier revivals, although the scope of resurrection priority requires ordinary interpretation."
+  },
+  {
+    "slug": "bible-sin",
+    "sourceDigest": "8d4af0b28bc908b10b7d839c47b5fe208698debb80e9fb9718e1136aa4cbe701",
+    "kind": "interpretive",
+    "importance": 5,
+    "reason": "The same epistle rejects present sinlessness yet characterizes those born of God as unable to sin, with habitual conduct a possible semantic qualification."
+  },
+  {
+    "slug": "bible-jezreel",
+    "sourceDigest": "112bcc6e7c4af956ffbdefc029e545c2164e0438f66e118441c323b98ae2087c",
+    "kind": "interpretive",
+    "importance": 5,
+    "reason": "God rewards Jehu's dynastic bloodshed and later punishes his house for Jezreel's blood, with some uncertainty over the precise victims in Hosea."
+  },
+  {
+    "slug": "bible-wicked-live",
+    "sourceDigest": "b1c3eed46588584a1c6284fde0d93c796d558538e543586c030d182e9d353abc",
+    "kind": "interpretive",
+    "importance": 5,
+    "reason": "Ezekiel's explicit destruction of righteous and wicked together conflicts with individual conduct determining survival under divine judgment."
+  },
+  {
+    "slug": "bible-wicked-livelong",
+    "sourceDigest": "69cce7da5588ec8a3b1fa792c3f72865cfb24ad5c1d87ea7eba494e66462f9d7",
+    "kind": "interpretive",
+    "importance": 5,
+    "reason": "The explicit observation that wicked people grow old conflicts with general assurances that their wickedness prevents long life."
+  },
+  {
+    "slug": "bible-rejoice",
+    "sourceDigest": "271249d55a32d8fe49b75076f38f3d91b72e6532c238f8e1d348c2d2af3fc84f",
+    "kind": "interpretive",
+    "importance": 5,
+    "reason": "Celebrating vengeance against the wicked conflicts with the unqualified ban on rejoicing when an enemy falls wherever those groups overlap."
+  },
+  {
+    "slug": "bible-faithalone",
+    "sourceDigest": "5d6a6c760201110397ba3d37cf5dc2a566c20029de6ce589abb97e12670a62df",
+    "kind": "interpretive",
+    "importance": 5,
+    "reason": "James explicitly denies justification by faith alone against faith-apart-from-works formulas, though distinctions among law observance, living faith, and judgment leave interpretive room."
+  },
+  {
+    "slug": "bible-shithappens",
+    "sourceDigest": "a61e5048fef4d9aecd9850252b38477ab21b82d8536f80e53dd2665751b82a2e",
+    "kind": "interpretive",
+    "importance": 5,
+    "reason": "Sweeping promises that evil cannot reach the just conflict with explicit righteous suffering, although evil's sense can be narrowed."
+  },
+  {
+    "slug": "bible-all-saved",
+    "sourceDigest": "349ae66811ad09fe09962f4f88c1cfcda167d6623184ee2386905b3387b47744",
+    "kind": "interpretive",
+    "importance": 5,
+    "reason": "Universal desire for salvation conflicts with God deliberately preventing conversion and sending delusion toward condemnation, although prior wrongdoing supplies a stated punitive context."
+  },
+  {
+    "slug": "bible-davids-sons",
+    "sourceDigest": "50714f67f124b56c1fafdc861ac2ee8560a1243861a795443785d4bb598de199",
+    "kind": "interpretive",
+    "importance": 5,
+    "reason": "Both genealogies attach competing Davidic branches and immediate fathers to Joseph, without identifying one as maternal or providing different kinds of descent."
+  },
+  {
+    "slug": "bible-jesus-god",
+    "sourceDigest": "412d61dcf4c53c5c32cf48dac5b30ce60abf0e7f1c2a7c163a2cf57c61a668b2",
+    "kind": "interpretive",
+    "importance": 5,
+    "reason": "Direct divine identifications conflict substantially with Jesus' susceptibility to temptation and subordination, without a supplied account reconciling those attributes."
+  },
+  {
+    "slug": "bible-divorce",
+    "sourceDigest": "73f58d9858f2cf9156f29fe07ce3184ec11e9dbb979de96f9bb1410422f4a0ec",
+    "kind": "interpretive",
+    "importance": 5,
+    "reason": "Permitted remarriage and adultery judgments supply materially different rules, with differing exceptions that alter what people facing divorce may do."
+  },
+  {
+    "slug": "bible-jesus-knew",
+    "sourceDigest": "3bd8b8c8f0592b825930c5e9590a6575b8ea785d51685a1bd0aec95664a640bb",
+    "kind": "interpretive",
+    "importance": 5,
+    "reason": "Followers attribute all knowledge to Jesus while he explicitly excludes the coming day and hour, though the universal claim belongs to his followers."
+  },
+  {
+    "slug": "bible-unforgivable",
+    "sourceDigest": "89c58fe7e94222fe2ca3aa74dfcd0320343d3640e4b361497e635896c8f3ad00",
+    "kind": "interpretive",
+    "importance": 5,
+    "reason": "A permanent unforgivable offense conflicts with comprehensive forgiveness upon confession unless an unstated exclusion limits those promises."
+  },
+  {
+    "slug": "bible-words",
+    "sourceDigest": "e7ec40f3461d1ad0fb61c24ec04700c8da300fd3e00a3c63f50f3d1d510c7eb7",
+    "kind": "interpretive",
+    "importance": 5,
+    "reason": "General judgment formulas make conduct and belief decisive in different ways, yielding conflicting outcomes for cases where those criteria diverge."
+  },
+  {
+    "slug": "bible-righteousness",
+    "sourceDigest": "ffb43b44bb98f2c09f2aaf9edfc80a230c3f299f28a5e142a1b27cc2e6a57a58",
+    "kind": "interpretive",
+    "importance": 5,
+    "reason": "Justification promised to doers of the law conflicts substantially with rejecting the law as the source of righteousness."
+  },
+  {
+    "slug": "bible-judge-jesus",
+    "sourceDigest": "91f8dad1a4eae060997269213c30a31907b72fa5f887a2c7c7a6ccf41c95a0eb",
+    "kind": "interpretive",
+    "importance": 5,
+    "reason": "Jesus says he came for judgment and elsewhere says he came not to judge, exceeding a simple present-versus-future distinction."
+  },
+  {
+    "slug": "bible-fall-from",
+    "sourceDigest": "9210b6f894c9a4b91e5b3a51353104505e05285899f4007b4a56011026880235",
+    "kind": "interpretive",
+    "importance": 5,
+    "reason": "Actual falling from grace and apostasy conflict substantially with promises that Jesus' recipients never perish, although the boundaries of those groups remain uncertain."
+  },
+  {
+    "slug": "bible-joseph",
+    "sourceDigest": "b0d5c565e5d62887c46764e2f2cc3ecdcc014319809862b474f2f628416d7e32",
+    "kind": "direct",
+    "importance": 3,
+    "reason": "Matthew makes Jacob Joseph's father while Luke names Heli in that same immediate genealogical position."
+  },
+  {
+    "slug": "bible-flying",
+    "sourceDigest": "0f0df096b87a081f0bf2fbcdcf43bea225ee0682b773ecd9e589dd1670a9424b",
+    "kind": "interpretive",
+    "importance": 3,
+    "reason": "One rule broadly forbids flying creeping creatures while another permits named kinds. A contradiction depends on whether the broad rule is universal or admits the specific dietary exceptions."
+  },
+  {
+    "slug": "bible-jesse-sons",
+    "sourceDigest": "ad4b7241960403c2ac5390b0d6fa2532c1407ca1e5631c8da8f646b98f8f179f",
+    "kind": "direct",
+    "importance": 3,
+    "reason": "David is explicitly seventh in one genealogy but follows seven older brothers in the eight-son account."
+  },
+  {
+    "slug": "bible-inquired",
+    "sourceDigest": "cf568cf82f980e622e20d88df3fa5eab24f8ddb4f6284779099bb17fd1c50b41",
+    "kind": "direct",
+    "importance": 3,
+    "reason": "Samuel explicitly says Saul inquired without receiving an answer whereas Chronicles says he did not inquire at all."
+  },
+  {
+    "slug": "bible-david-sin",
+    "sourceDigest": "1fb7447f0ded5427e28fd1aa43d141ee6a7e72062272ed5b1538ed8bbb526297",
+    "kind": "direct",
+    "importance": 3,
+    "reason": "The lifetime obedience claim explicitly permits only the Uriah exception, whereas David's separate census is expressly confessed as a great sin."
+  },
+  {
+    "slug": "bible-famine",
+    "sourceDigest": "1d70209b9fbcfb5f0a5cdd3572541a56d69841ed7dd117104fd2146ff336188b",
+    "kind": "direct",
+    "importance": 3,
+    "reason": "Gad offers seven years of famine in one account and three in the corresponding three-option punishment speech."
+  },
+  {
+    "slug": "bible-josiah",
+    "sourceDigest": "5e8fb273116a67ebc038c5d200df79fa173415331f54078ba14b38b070a67340",
+    "kind": "direct",
+    "importance": 3,
+    "reason": "Kings transports Josiah already dead from Megiddo whereas Chronicles brings him wounded to Jerusalem before his death."
+  },
+  {
+    "slug": "bible-jairus-daughter",
+    "sourceDigest": "dde405105148a114548f6a1a4cd0d5dd5611ed8e04794f8d7df9b8a484e822c1",
+    "kind": "direct",
+    "importance": 3,
+    "reason": "The daughter is already dead versus still dying at the father's initial appeal, an explicit conflict about a supporting scene's initial state."
+  },
+  {
+    "slug": "bible-fig-temple",
+    "sourceDigest": "42c9a38a64c74682733a9b4b222d5767466fb27198080357c7dcf1cb19a53216",
+    "kind": "direct",
+    "importance": 3,
+    "reason": "The parallel journeys explicitly reverse the fig-tree curse and temple expulsion, but the disputed sequence is a supporting narrative detail."
+  },
+  {
+    "slug": "bible-judas",
+    "sourceDigest": "0327a41190a8ffbf6aea02cae318d47281fd640020f935668b018b7dbaa86323",
+    "kind": "interpretive",
+    "importance": 4,
+    "reason": "The accounts differ materially in Judas' hanging versus headlong bodily rupture and in disposition of the money and field purchase."
+  },
+  {
+    "slug": "bible-hour",
+    "sourceDigest": "7282fd43094bf0bfc2d7aa5b9eb1b5ac5bb2424992f6ff0223ac2358e743c0da",
+    "kind": "interpretive",
+    "importance": 4,
+    "reason": "Mark crucifies Jesus at the third hour whereas John still has him before Pilate around the sixth, assuming the same ordinary hour reckoning."
+  },
+  {
+    "slug": "bible-eat",
+    "sourceDigest": "5a998c4a0dbaa79554bc1959080f9d9b27fbc8a9f00df19fabec8448b2d44396",
+    "kind": "interpretive",
+    "importance": 4,
+    "reason": "Restricted animal categories and broad permissions or denial of food defilement establish materially changed dietary standards, despite differing communities and circumstances."
+  },
+  {
+    "slug": "bible-noah-enter",
+    "sourceDigest": "e4447426e02e8ffce7469429f6f9671e42c71bc9004302a6d8de287091b8aa18",
+    "kind": "interpretive",
+    "importance": 4,
+    "reason": "The same family's entry precedes a seven-day interval in one sequence and coincides with the flood-opening day in another, with the first interval inferred from narration."
+  },
+  {
+    "slug": "bible-circum",
+    "sourceDigest": "d6ab9c033f58fdaa9e30f8ac9eef064ab81c4bff0e66c77b4b89ae360e202957",
+    "kind": "interpretive",
+    "importance": 4,
+    "reason": "An everlasting bodily covenant requirement is displaced by instructions not to seek circumcision and warnings of losing Christ's benefit, despite changed communities and religious aims."
+  },
+  {
+    "slug": "bible-oaths",
+    "sourceDigest": "4fdbc2db3f77d565b4b86e49e0a676aaeae6794f46831b9ae0ebee3f93aea0fc",
+    "kind": "interpretive",
+    "importance": 4,
+    "reason": "Commands permitting truthful religious oaths differ clearly from the later prohibition of swearing any oath."
+  },
+  {
+    "slug": "bible-images",
+    "sourceDigest": "e77266178317e379534806a3926739183898dd5efe419a1607a845424bcc906e",
+    "kind": "interpretive",
+    "importance": 4,
+    "reason": "Broad likeness-making prohibitions conflict with express commands to make cherubim and a serpent, though purpose and worship affect the rule's scope."
+  },
+  {
+    "slug": "bible-driveout",
+    "sourceDigest": "3aac3eb0b004750d46ff064e1d1ff890a7659d0c4a2630464970fc63a5d226a1",
+    "kind": "interpretive",
+    "importance": 4,
+    "reason": "Comprehensive possession and enemy removal conflict with explicit inability to expel inhabitants and nations deliberately left in place, beyond a mere omitted conquest detail."
+  },
+  {
+    "slug": "bible-congregation",
+    "sourceDigest": "dc29b1c8792cba0a74514b2cfb70313d3863e15001c931ba4daefd4c5c59dcf5",
+    "kind": "interpretive",
+    "importance": 4,
+    "reason": "The supplied laws address unwitting communal wrongdoing but prescribe different sin-offering animals and different uses for the bull without identifying a differentiating offense."
+  },
+  {
+    "slug": "bible-blood",
+    "sourceDigest": "450807514358437717da739c21ea157899a26d54a5d35fd966504403055e382c",
+    "kind": "interpretive",
+    "importance": 4,
+    "reason": "The law promises forgiveness through animal atonement while Hebrews denies animal sacrifices can remove sins; distinguishing those effects requires a theological qualification."
+  },
+  {
+    "slug": "bible-sabbath",
+    "sourceDigest": "108d4fb6c1bb7b90ab2816123ae2ddeae65686787e3eabd92038b77592095929",
+    "kind": "interpretive",
+    "importance": 4,
+    "reason": "A perpetual compulsory covenant contrasts with freedom from judgment over Sabbath observance, beyond disputes about permissible activities."
+  },
+  {
+    "slug": "bible-eunuch",
+    "sourceDigest": "df09d655654c79de8c1cda434d6f72b8091002232d629ce54ef4447c8bb28815",
+    "kind": "interpretive",
+    "importance": 4,
+    "reason": "Bodily exclusion from the congregation contrasts with faithful eunuchs promised a place in God's house, although baptism and priestly service involve distinct institutions."
+  },
+  {
+    "slug": "bible-newmoon",
+    "sourceDigest": "efa2483c8b3705c72a010138d69f82f351e198fce4fe34f266e2e69c806de108",
+    "kind": "interpretive",
+    "importance": 4,
+    "reason": "The same named observance receives explicit different bull and lamb requirements, showing changed ritual rules rather than mere omission."
+  },
+  {
+    "slug": "bible-otlaw",
+    "sourceDigest": "16dadb028081449af0031145dd817e15bbb186fa912787a62457a06f7406e04c",
+    "kind": "interpretive",
+    "importance": 4,
+    "reason": "Assurances that the law's details endure conflict substantially with explicit release from its authority, despite uncertainty about the exact obligations retained."
+  },
+  {
+    "slug": "bible-remarry",
+    "sourceDigest": "c68c55e42a003b7f7a8b417f886fd6ed376a472a3178549f169c3c567c6e27af",
+    "kind": "interpretive",
+    "importance": 4,
+    "reason": "A divorced woman's subsequent marriage is explicitly permitted in one legal teaching and classified as adultery in the other."
+  },
+  {
+    "slug": "bible-josiah-death",
+    "sourceDigest": "29757c2d9a6025a847a4c09ea8bf46d93ae1b577a740687a6db6c487a58de677",
+    "kind": "interpretive",
+    "importance": 4,
+    "reason": "The promised peaceful grave conflicts with Josiah's violent end under ordinary reading, though burial peace and death mechanism are distinguishable."
+  },
+  {
+    "slug": "bible-david-cap",
+    "sourceDigest": "afa219cf51c038adda855324ea8f3c2b4a5130d4a033b84386d6b28612da15d0",
+    "kind": "interpretive",
+    "importance": 4,
+    "reason": "Matthew's claim about all fourteen generations accompanies omissions of four intervening royal links, so its exhaustive count conflicts with the fuller succession."
+  },
+  {
+    "slug": "bible-fool",
+    "sourceDigest": "6f030b19912abc1240b6930857f29a036410f0a504c1ba36d22096edf09cc2fa",
+    "kind": "interpretive",
+    "importance": 4,
+    "reason": "Jesus and Paul use the direct fool address that Matthew threatens with hell fire, with a residual question about the warning's scope."
+  },
+  {
+    "slug": "bible-this-or-thou",
+    "sourceDigest": "a3c2ec2eee509c3c204629b987ecdfb82f4bff952175580602a20a158fb57bf4",
+    "kind": "interpretive",
+    "importance": 4,
+    "reason": "Parallel baptism announcements quote different direct addressees without reporting two speeches, despite agreeing on divine sonship."
+  },
+  {
+    "slug": "bible-add",
+    "sourceDigest": "4e6caa34d7fbd75a857ff05129358941d1615424048a2455647426afc7d2584f",
+    "kind": "interpretive",
+    "importance": 4,
+    "reason": "A prohibition on altering Mosaic commands conflicts with later authoritative expansions and reversals, particularly the replacement of regulated oaths with no oaths."
+  },
+  {
+    "slug": "bible-secret",
+    "sourceDigest": "9f246620a95c78b8152a616d776bbb0dee4887fdd9931181dafc1b65f647ad19",
+    "kind": "interpretive",
+    "importance": 4,
+    "reason": "The unrestricted denial of secret speech conflicts with explicitly private explanations reserved for disciples."
+  },
+  {
+    "slug": "bible-tantrum",
+    "sourceDigest": "98a0e282721bbb66f0cd1e7e109b57414cffc9595703a86b9932b7659f9b8a12",
+    "kind": "interpretive",
+    "importance": 4,
+    "reason": "Distinctive temple expulsions occupy different ministry stages, and Matthew and Mark differ over the intervening night in the entry sequence."
+  },
+  {
+    "slug": "bible-do-what",
+    "sourceDigest": "fb13aaa8ec29b1168fb3092fdf4f087d24b7685b9c2382c3574a8d0cc3bdf5db",
+    "kind": "interpretive",
+    "importance": 4,
+    "reason": "Obedience to everything the Pharisees teach conflicts with warning against their doctrine; distinguishing approved words from bad conduct does not address both texts."
+  },
+  {
+    "slug": "bible-field",
+    "sourceDigest": "2e5e9e3aaa1b1ff6f83eeee3da70859d70d66086f12660192c9593b1496adb80",
+    "kind": "interpretive",
+    "importance": 4,
+    "reason": "Matthew makes the priests the field's purchasers whereas Acts credits Judas, leaving a substantial difference in transaction agency."
+  },
+  {
+    "slug": "bible-reviled",
+    "sourceDigest": "660a2dbaf1aa79f58e51ce01238bc662799600ba2203b1d6996c47167213aa35",
+    "kind": "interpretive",
+    "importance": 4,
+    "reason": "Parallel crucifixion portraits make both prisoners mockers in one account and one a defender in another without narrating a conversion."
+  },
+  {
+    "slug": "bible-silver",
+    "sourceDigest": "d93bc548690b3e26b6c1fee3ece40e35df8a114d9f428d5abbf1f7b79743de7f",
+    "kind": "interpretive",
+    "importance": 4,
+    "reason": "Judas is portrayed as acquiring property with his reward and as discarding it before death, requiring an unstated transaction to connect the accounts."
+  },
+  {
+    "slug": "bible-who-created",
+    "sourceDigest": "7ebdec5189c51c16f831905d0ad2b1c0c0b1453ea808957673e0efda28737b0b",
+    "kind": "interpretive",
+    "importance": 5,
+    "reason": "Solitary creation contrasts with creation through Jesus, but whether the latter is another being or differentiated divine agency is a substantive theological uncertainty."
+  },
+  {
+    "slug": "bible-fowl",
+    "sourceDigest": "4d73b7c312959d5ebff3a92de3239683375e8f86bf0a42e15f08b57f4c5d95a5",
+    "kind": "interpretive",
+    "importance": 5,
+    "reason": "Genesis explicitly forms birds from ground in one account but only ambiguously associates their material origin with water in the other."
+  },
+  {
+    "slug": "bible-animals",
+    "sourceDigest": "fa84db666ee2a17c8c0fdb5b07f6df43e4a655ac915f5a80e48d8906d6b9d97c",
+    "kind": "interpretive",
+    "importance": 5,
+    "reason": "Birds connect the water command with formation from ground, but the first account does not explicitly assign every animal a watery material origin."
+  },
+  {
+    "slug": "bible-gods",
+    "sourceDigest": "8d71e8edb5e6b97e597a0bcc2a114312ee80ec80eb1f428f95ad71db68f4099b",
+    "kind": "interpretive",
+    "importance": 5,
+    "reason": "Denials of other gods conflict with divine assemblies and commands to gods, but the identity and rhetorical status of those gods remain uncertain."
+  },
+  {
+    "slug": "bible-tree",
+    "sourceDigest": "38e7a901d5f3b7d6f817d280d4ddd1e927a940f3f453c14d77d0db12038cdd02",
+    "kind": "interpretive",
+    "importance": 5,
+    "reason": "The broad food grant and lethal tree prohibition appear to overlap, but the prohibited tree is not expressly identified as seed-bearing."
+  },
+  {
+    "slug": "bible-plants",
+    "sourceDigest": "76ad4cc8c8b125ff065a89fd2d2a878548dca34f43b1e839d664a9b91418a4d8",
+    "kind": "interpretive",
+    "importance": 5,
+    "reason": "The creation sequences differ, but Genesis 2's field plants and garden are narrower categories than all vegetation."
+  },
+  {
+    "slug": "bible-spirit",
+    "sourceDigest": "c0f04df72afc9eadbb2a3b2bcb29a15d97e2b16c8e7620faa43ec199c1085367",
+    "kind": "interpretive",
+    "importance": 5,
+    "reason": "Concrete divine bodily portrayals conflict with incorporeal spirit when read literally, but representation and manifestation remain meaningful distinctions."
+  },
+  {
+    "slug": "bible-die",
+    "sourceDigest": "c48904548885c355b74581c8cc1adbee723604fc28e311296b88d5d229ebd513",
+    "kind": "interpretive",
+    "importance": 5,
+    "reason": "Enoch is an explicit death exemption, but Hebrews itself preserves that exception beside the ordinary human appointment to die, leaving the universal rule's scope uncertain."
+  },
+  {
+    "slug": "bible-righteous",
+    "sourceDigest": "ad13db5469ed58fe62b66fd479a7dc96c46191d893b9dcd6783bf69742293ad3",
+    "kind": "interpretive",
+    "importance": 5,
+    "reason": "Romans' sweeping denial contrasts with explicit righteous individuals, but the collection also treats righteousness as relative and compatible with later sin, leaving the moral standard uncertain."
+  },
+  {
+    "slug": "bible-twos",
+    "sourceDigest": "d4330c1acb0fd12d9bcab8c0ecd8847d0c8799408c37aa603cbbf85d4a238e17",
+    "kind": "interpretive",
+    "importance": 5,
+    "reason": "The general two-of-each instruction and later clean-animal sevens differ, but no exclusive maximum prevents reading the latter as a specific qualification; paired entry adds no conflict."
+  },
+  {
+    "slug": "bible-incest",
+    "sourceDigest": "319c58f7f8b8eb288b93901806cfc2ff629162441140cd41a528c9b212064190",
+    "kind": "interpretive",
+    "importance": 5,
+    "reason": "The blessed ancestral marriages involve the exact kinships later forbidden, but the quotations do not establish that the later laws already applied."
+  },
+  {
+    "slug": "bible-cando",
+    "sourceDigest": "8ab2db1c2b3b22cca72454c08107935d4912aad7df60747a1e8f541b3b133fc3",
+    "kind": "interpretive",
+    "importance": 5,
+    "reason": "Unqualified ability to do anything meets an explicit inability to lie, though moral impossibility and lack of power need not mean the same thing."
+  },
+  {
+    "slug": "bible-lot-righteous",
+    "sourceDigest": "44918db70b721f9f495cee60a09ad696057cd54820d0ebc4488015cb558daf56",
+    "kind": "interpretive",
+    "importance": 5,
+    "reason": "Lot's deliberate offer of his daughters conflicts morally with his righteous characterization without constituting a claim of absolute sinlessness."
+  },
+  {
+    "slug": "bible-tempted-by-god",
+    "sourceDigest": "ad18d61dd88c179f0d78a7f8fa8e0f276123083419b6319dc831be69942daadc",
+    "kind": "interpretive",
+    "importance": 5,
+    "reason": "Divine incitement toward David's census strains the denial of temptation, but the quotations omit its sinful verdict and Abraham's temptation can mean testing."
+  },
+  {
+    "slug": "bible-lifespan",
+    "sourceDigest": "936169b535a473ed1f70d0c7e718dcbbcc7211b9d52291a64c8e0be191325d65",
+    "kind": "interpretive",
+    "importance": 5,
+    "reason": "Later lifespans exceed 120, but the strength depends on reading Genesis' assigned years as a universal lifespan ceiling."
+  },
+  {
+    "slug": "bible-steal",
+    "sourceDigest": "d735abbe3e00d26a67f3c8b8cd7093be75411b348df3df8d17c928d0ff0fd54c",
+    "kind": "interpretive",
+    "importance": 5,
+    "reason": "Authorized retaliatory plunder strains broad property prohibitions, though warfare and willingly transferred goods introduce legal distinctions."
+  },
+  {
+    "slug": "bible-hardened",
+    "sourceDigest": "5b48269fca714da3bef268f3185cab4ccd415a24658efda63d8db8df44f5d9ef",
+    "kind": "interpretive",
+    "importance": 5,
+    "reason": "God deliberately causes resistance for which Pharaoh is condemned, creating a responsibility tension rather than exclusive competing agents."
+  },
+  {
+    "slug": "bible-peace",
+    "sourceDigest": "95921f60c0b0bff1ddc59679192a88bc5c3c0269930360d0b7d7b8971380d4ea",
+    "kind": "interpretive",
+    "importance": 5,
+    "reason": "God's celebration as warrior and giver of peace produces a substantial moral tension without an explicit prohibition on all divine force."
+  },
+  {
+    "slug": "bible-parents",
+    "sourceDigest": "b50a8cfed999ec5fc60f68bc69aef3398e22f08bae9688c8af1e5fe9234cf98d",
+    "kind": "interpretive",
+    "importance": 5,
+    "reason": "Honoring parents sits uneasily beside family hatred and refusal of burial delay, though the discipleship language's scope complicates a literal opposition."
+  },
+  {
+    "slug": "bible-holy",
+    "sourceDigest": "ec5cf6c0a779e6067f163092cd2b1c9d020c7bb7c17af1e02e414a034ac34762",
+    "kind": "interpretive",
+    "importance": 5,
+    "reason": "God-only holiness contrasts with expressly holy people, but consecration, conduct, and divine holiness carry meaningful semantic differences."
+  },
+  {
+    "slug": "bible-canaanites",
+    "sourceDigest": "11cb333bc6e9f26543b55d183ce327bc8f67e4993fb745023430259f93704f14",
+    "kind": "interpretive",
+    "importance": 5,
+    "reason": "Gradual expulsion and total killing differ sharply in conquest policy, but can apply to stages, while Ezekiel does not identify its resident strangers as those same enemies."
+  },
+  {
+    "slug": "bible-census",
+    "sourceDigest": "8f84d79c05783f18fae6ac88a376f57f2df114194d6b008683da5cec39c1e695",
+    "kind": "interpretive",
+    "importance": 5,
+    "reason": "Authorized counting contrasts with punishment for David's count and God's instigation, but the supplied laws already make census conditions relevant and David's precise offense remains unstated."
+  },
+  {
+    "slug": "bible-weary",
+    "sourceDigest": "8cb04907a07f52cf98df94f02aa57a3cae1cadb3b044a76f78c9729f06cbc151",
+    "kind": "interpretive",
+    "importance": 5,
+    "reason": "Rest and refreshment strain divine inexhaustibility, while emotional exasperation in other verses is a distinct sense of weariness."
+  },
+  {
+    "slug": "bible-judge",
+    "sourceDigest": "93da67f47d03e21b7341467f9f6fcce0b37fc6270866398745dee933bf4534f5",
+    "kind": "interpretive",
+    "importance": 5,
+    "reason": "Absolute-sounding bans on judgment meet explicit duties to judge, but scope, grounds, and timing distinguish many cases."
+  },
+  {
+    "slug": "bible-love",
+    "sourceDigest": "0eb5d31158f8c250aa4db1f73cb594b6a1adc64db01e84dd99792ae9b36dbbb4",
+    "kind": "interpretive",
+    "importance": 5,
+    "reason": "Required hatred of family conflicts with commands to love them under a literal emotional reading, but comparative allegiance or rhetorical degree remains a substantial ambiguity."
+  },
+  {
+    "slug": "bible-god-hates",
+    "sourceDigest": "ac0e20ffc6068d8f8c9b9023bd7fb4804e67007f74718f49d03d2388a3770828",
+    "kind": "interpretive",
+    "importance": 5,
+    "reason": "Explicit hatred and withdrawal of love challenge universal divine love, but loving the world need not assert perpetual identical love for each individual."
+  },
+  {
+    "slug": "bible-eye",
+    "sourceDigest": "ddd6e60f213f22a3bf4e5243c3f5085248bd2b20f4480d27fe3c9596d248389d",
+    "kind": "interpretive",
+    "importance": 5,
+    "reason": "Jesus expressly answers the retaliation formula with nonretaliation, but the injured person's response and judicial imposition of penalties need not have identical scope."
+  },
+  {
+    "slug": "bible-feargod",
+    "sourceDigest": "85fbd8a200f6806b41ed7636446ce5c9490aa18cad6fd56ff0a10483687ad34f",
+    "kind": "interpretive",
+    "importance": 5,
+    "reason": "Commands to fear divine punishment overlap with the tormenting fear that perfect love removes, though some passages address different kinds of fear."
+  },
+  {
+    "slug": "bible-meek",
+    "sourceDigest": "24cc9823bae0a62a2abddf78dae088f4035a1bc0bf90d0d9bdb841aff8980986",
+    "kind": "interpretive",
+    "importance": 5,
+    "reason": "Moses' ruthless orders toward captives conflict with a gentle reading of meekness, though the adjective may concern humility instead."
+  },
+  {
+    "slug": "bible-free",
+    "sourceDigest": "57fd54e683af833a5c1b18190c321a85c217ebc83afc1837434e8ba36480e524",
+    "kind": "interpretive",
+    "importance": 5,
+    "reason": "Commands to choose and moral accountability conflict in purpose with divinely determined belief and hardening, without directly proving incompatible definitions of free choice."
+  },
+  {
+    "slug": "bible-lord",
+    "sourceDigest": "abcb366f5a11f3136a9d1632db1dd11351694bfda3e954cb2438451e43a8a5c7",
+    "kind": "interpretive",
+    "importance": 5,
+    "reason": "Universal divine rule contrasts with hostile worldly authority, but subordinate or competing effective power does not explicitly deny ultimate sovereignty."
+  },
+  {
+    "slug": "bible-death",
+    "sourceDigest": "53b46d6f8a477f3aafc77227117159d284dd3b6df0a36610896f43d8ae258451",
+    "kind": "interpretive",
+    "importance": 5,
+    "reason": "Job's no-return language creates substantial tension with resurrection, but poetic lament, ordinary earthly finality, and temporary silence do not unambiguously deny eventual life beyond death."
+  },
+  {
+    "slug": "bible-forgive",
+    "sourceDigest": "49f65ecd874e59d69c634a484c990a269c2252f48c1b8728fe2e6c3bd618b144",
+    "kind": "interpretive",
+    "importance": 5,
+    "reason": "Promises of forgiveness contrast with Joshua's categorical refusal, but the audiences and conditions are not securely identical."
+  },
+  {
+    "slug": "bible-iron",
+    "sourceDigest": "9c11c299d7ded54bd50b1bc7123169d801b13b4337db2543868779e4ae784295",
+    "kind": "interpretive",
+    "importance": 5,
+    "reason": "Iron chariots defeat Judah despite divine support but fail against God elsewhere, creating a power tension across different battles rather than one incompatible outcome."
+  },
+  {
+    "slug": "bible-test",
+    "sourceDigest": "12cf8d94b129a28c5f2eb35921776ff3230254f97cc1017c18e15b7398b98c95",
+    "kind": "interpretive",
+    "importance": 5,
+    "reason": "God cooperates with deliberately requested evidence despite broad bans on testing him, but acceptable requests and hostile demands may differ."
+  },
+  {
+    "slug": "bible-help",
+    "sourceDigest": "10ec6b7a35dc853f6d63c9fc2148641d90871019227a8021a8d99a344a1c843d",
+    "kind": "interpretive",
+    "importance": 5,
+    "reason": "Assurances of divine help contrast with unanswered cries, though punitive refusals and different moments limit a universal comparison."
+  },
+  {
+    "slug": "bible-greatest",
+    "sourceDigest": "866c6285b4cad07981a888dcceafe1b4cae00fcd219feeab2389e67f47b9015c",
+    "kind": "interpretive",
+    "importance": 5,
+    "reason": "Solomon's unmatched wisdom meets a greater-than-Solomon claim, but the other superlatives rank different qualities and populations."
+  },
+  {
+    "slug": "bible-temples",
+    "sourceDigest": "f5cb064e3a80615a4e2e09420309097c94ca9de1d10c74665060bf60aa39e472",
+    "kind": "interpretive",
+    "importance": 5,
+    "reason": "A permanent divine dwelling conflicts with categorical denial of inhabiting human temples, but special presence and physical containment may differ."
+  },
+  {
+    "slug": "bible-evil",
+    "sourceDigest": "7cf23af411a1b9b144f03e68d8df623ad077c3ca2fa65743aa13a7d7bbff222a",
+    "kind": "interpretive",
+    "importance": 5,
+    "reason": "Deliberate destructive harm creates a moral tension with divine love, but calamity and wickedness are different senses of evil rather than a direct lexical contradiction."
+  },
+  {
+    "slug": "bible-do-good",
+    "sourceDigest": "903e94aa1eea6c7dc3132d907a7be2cd96625ef77fd1b4f096deb022d283b037",
+    "kind": "interpretive",
+    "importance": 5,
+    "reason": "Categorical moral-corruption language contrasts with people credited with good deeds, but the rhetoric may assess overall righteousness rather than deny every comparatively good act."
+  },
+  {
+    "slug": "bible-found",
+    "sourceDigest": "26638cca55fa565d56c0e759a4956787f17425b49eaa38fa8d892ab09a44f902",
+    "kind": "interpretive",
+    "importance": 5,
+    "reason": "Universal-sounding promises that seekers find meet explicit unsuccessful seekers, while objects and conditions of seeking vary."
+  },
+  {
+    "slug": "bible-wonders",
+    "sourceDigest": "9242c4797e38bc804d6d6513155c495064fd2f8abfa69c230e079b68b2813315",
+    "kind": "interpretive",
+    "importance": 5,
+    "reason": "Satan's wonders challenge God's exclusive agency only if lying describes their message rather than counterfeit events."
+  },
+  {
+    "slug": "bible-justified",
+    "sourceDigest": "4f670614d673af856945f80e72a273d74c36d1f9a10bbc01c89509fdaa16ee47",
+    "kind": "interpretive",
+    "importance": 5,
+    "reason": "The psalm excludes justification for living people while Matthew allows vindication by words, with meaningful uncertainty over the judgments compared."
+  },
+  {
+    "slug": "bible-no-enemies",
+    "sourceDigest": "d8ad9f8ad9e941ca7c35ec9b46088cde898c41473dc60aae7d7d2f304cdecd80",
+    "kind": "interpretive",
+    "importance": 5,
+    "reason": "Promised peace with enemies contrasts with universal persecution of the godly, but the general maxim does not specify the same period or opponents."
+  },
+  {
+    "slug": "bible-hell",
+    "sourceDigest": "75c699d9669aa4e456c056ffd50177b89593d5e1f5c975b73796f7d6d46924e5",
+    "kind": "interpretive",
+    "importance": 5,
+    "reason": "Conscious punishment, destruction, and unaware death give divergent afterlife models, but metaphor, parable, and unspecified phases prevent an airtight collision."
+  },
+  {
+    "slug": "bible-call-on",
+    "sourceDigest": "638e79ea31f9c31b39d64338c15a144685ce3fc7c6dd120cf6d4bca5331c0fd8",
+    "kind": "interpretive",
+    "importance": 5,
+    "reason": "Broad promises to callers contrast with rejected appeals, but sincere invocation, mere address, and deliverance in different settings are not explicitly identical conditions."
+  },
+  {
+    "slug": "bible-enemies",
+    "sourceDigest": "5a55aba4d0899fa667346ec287c789ec344664fa5445ade063043ed696515a1c",
+    "kind": "interpretive",
+    "importance": 5,
+    "reason": "Commands to care for enemies oppose prayers for their destruction and their children's misery, but those prayers are not equivalent universal instructions from the same speaker."
+  },
+  {
+    "slug": "bible-sword",
+    "sourceDigest": "8b039b9a79cf993ff02eced25658c1b4e145098dc192c4d0861fa8a269ec9592",
+    "kind": "interpretive",
+    "importance": 5,
+    "reason": "Weapon acquisition and approved warfare strain the peaceful teaching, but division, inward peace, and immediate attack restraint have distinct scopes."
+  },
+  {
+    "slug": "bible-good",
+    "sourceDigest": "ae35aacd74e2a2c009978c944bb2084eeed8b1de028a17827d67932469b88916",
+    "kind": "interpretive",
+    "importance": 5,
+    "reason": "Reserving goodness to God contrasts with calling Joseph good, but absolute divine goodness and ordinary comparative moral praise need not use the same standard."
+  },
+  {
+    "slug": "bible-jews",
+    "sourceDigest": "221c5c6d2ee16e50ae6890f8fb2d68097c84f6f45bc40e2e5e35afa0c4a8b443",
+    "kind": "interpretive",
+    "importance": 5,
+    "reason": "Collective salvation and exclusion language conflict in tendency, but the excerpts do not establish identical populations or times."
+  },
+  {
+    "slug": "bible-capital",
+    "sourceDigest": "bcc34a56e3b61e4749016a8aac07bbda9e326572da0e56d801eb79deed8df5eb",
+    "kind": "interpretive",
+    "importance": 5,
+    "reason": "Prescribed executions contrast with Cain's protection and Jesus' condition on accusers, but neither contrasting scene establishes a universal ban under identical legal conditions."
+  },
+  {
+    "slug": "bible-jesus-good",
+    "sourceDigest": "993d111e182a31e2da06e88fdabc2436fc10cbebe4a4a8d104e02e0281d149a4",
+    "kind": "interpretive",
+    "importance": 5,
+    "reason": "The good-shepherd claim contrasts with restricting goodness to God, but questioning a form of address does not explicitly deny Jesus' goodness."
+  },
+  {
+    "slug": "bible-power",
+    "sourceDigest": "81a499dca7d8241877d69c04914a67a94d96e4d96b6a943b0c2e2d1294d74251",
+    "kind": "interpretive",
+    "importance": 5,
+    "reason": "Universal authority claims sit beside specific restrictions, but the passages need not describe identical moments or kinds of authority."
+  },
+  {
+    "slug": "bible-seejesus",
+    "sourceDigest": "98b21fe5bf8e59d4919b97869949571b7d0921840f037c15d62ad8fb1eff6031",
+    "kind": "interpretive",
+    "importance": 5,
+    "reason": "Universal future visibility conflicts with an unlimited reading of no more, whose temporal scope remains uncertain."
+  },
+  {
+    "slug": "bible-women-see",
+    "sourceDigest": "2fab2a9803e258fd9a17eb83e117be4a6cb4ac57c6fe6a08491696d0283a674f",
+    "kind": "interpretive",
+    "importance": 5,
+    "reason": "The combined tomb arrangements differ substantially, but human versus angelic descriptions, omitted figures, and movement prevent strict exclusivity."
+  },
+  {
+    "slug": "bible-tell",
+    "sourceDigest": "153b1d1a1c39b9ba01774b6bc639447821bf9b16c7da97bc1e1c965efcd4ec85",
+    "kind": "interpretive",
+    "importance": 5,
+    "reason": "The tomb departures lead to reported news and frightened silence, but Mark never specifies how long the silence lasts or excludes later communication."
+  },
+  {
+    "slug": "bible-tarry",
+    "sourceDigest": "47d51e249ad4c9a037d3608045ecadf4cf27051cf3bdf6307b579c91da341e31",
+    "kind": "interpretive",
+    "importance": 5,
+    "reason": "Galilee travel and remaining in Jerusalem oppose each other if concurrent, but the supplied commands lack a complete shared timetable."
+  },
+  {
+    "slug": "bible-of-god",
+    "sourceDigest": "795ada0e2253a3314a0fdc3535539fd302bd8b0f6a9bacf4d10cf00ab6a0aa57",
+    "kind": "interpretive",
+    "importance": 5,
+    "reason": "Demons voice the identity confession presented as evidence of belonging to God, although confession's intended scope remains uncertain."
+  },
+  {
+    "slug": "bible-ghost",
+    "sourceDigest": "05072527b9a16e194e8dbf418eb9ea41e5269535c272857c673e931377def6e8",
+    "kind": "interpretive",
+    "importance": 5,
+    "reason": "The Spirit is received before Jesus' glorification despite John's not-yet-given wording, though John addresses a particular future body of recipients."
+  },
+  {
+    "slug": "bible-touch",
+    "sourceDigest": "e328a947a7e6a016f6c952589613d7d0b131f069e7052e6abec942089f02dd7b",
+    "kind": "interpretive",
+    "importance": 5,
+    "reason": "The ascension-based reason for refusing Mary contact strains other invitations to touch, but her instruction is not explicitly universal."
+  },
+  {
+    "slug": "bible-law",
+    "sourceDigest": "cbd7ab51d0368101651818ec860f7050b663dd48d4406699ba4b5b0b9fcdfed4",
+    "kind": "interpretive",
+    "importance": 5,
+    "reason": "Divine priority permits resisting human commands where broad obedience-to-rulers language condemns resistance, with authority scope left unresolved."
+  },
+  {
+    "slug": "bible-husband",
+    "sourceDigest": "e757feaaa8149670582e72a200ade74d95ecc3b36d9c09793be725fb2801ab2c",
+    "kind": "interpretive",
+    "importance": 5,
+    "reason": "The broad household salvation promise contrasts with uncertainty about saving a spouse, while sanctification itself does not guarantee salvation."
+  },
+  {
+    "slug": "bible-abraham",
+    "sourceDigest": "2efa1e26604d828ff3258533d8679006a0a513a1bd1e9268f268c44a66f28e4f",
+    "kind": "interpretive",
+    "importance": 5,
+    "reason": "James attributes Abraham's justification to works while Romans denies a resulting boast before God, but the supplied conditional verse leaves the exact opposition uncertain."
+  },
+  {
+    "slug": "bible-must-women-be-silent",
+    "sourceDigest": "a4002744d56c3eecb829da5419dd6174843c788cc78ef4980543bda0798ec067",
+    "kind": "interpretive",
+    "importance": 5,
+    "reason": "Regulating women's prophecy conflicts with an unrestricted church-speaking ban if the earlier instruction governs the same congregational setting."
+  },
+  {
+    "slug": "bible-soldjoe",
+    "sourceDigest": "22af0cc056bcb2897c03623df76ed27f28bdf5fc28876c69b2ed96a02786b063",
+    "kind": "interpretive",
+    "importance": 3,
+    "reason": "The final sale to the same named buyer is assigned to different trader groups that the surrounding account distinguishes."
+  },
+  {
+    "slug": "bible-hidden",
+    "sourceDigest": "7773bee025e75816d545cd539c9912a429cd5139c48d3a61fe3fb023a10a5cc6",
+    "kind": "interpretive",
+    "importance": 3,
+    "reason": "The brothers' retelling places everyone's discovery at the inn where the narration reports only one before the collective discovery at home."
+  },
+  {
+    "slug": "bible-jacobs-clan",
+    "sourceDigest": "abf8dac1022fa521317ddffb96e0cf47a7c51472c367ec4fd138c57d85e549fa",
+    "kind": "interpretive",
+    "importance": 3,
+    "reason": "Seventy and seventy-five describe the same family migration, with some residual uncertainty over household and kindred counting scope."
+  },
+  {
+    "slug": "bible-jacob-buried",
+    "sourceDigest": "6713ce874542ebdaeb043db8ec4e0d7d9ae50181a7ae29e167446b09ab6c1e8b",
+    "kind": "interpretive",
+    "importance": 3,
+    "reason": "Genesis buries Jacob at Machpelah while Acts naturally includes him in the group buried at Sychem."
+  },
+  {
+    "slug": "bible-counted",
+    "sourceDigest": "d00aa24123c0ffb7736071462ae6914418db352dda81d49619ef903ca21d608c",
+    "kind": "interpretive",
+    "importance": 3,
+    "reason": "Numbers gives twenty-five and thirty as starting ages for tabernacle work, while later twenty-year thresholds concern changed settings and instructions."
+  },
+  {
+    "slug": "bible-hor",
+    "sourceDigest": "fb8b1bbe3277d9945296a7f540e8b6d35fd84143bf943a023aeb90cf0930c943",
+    "kind": "interpretive",
+    "importance": 3,
+    "reason": "Aaron's one death and Eleazar's succession are located at Mount Hor and Mosera without an established relationship between the places."
+  },
+  {
+    "slug": "bible-centurion",
+    "sourceDigest": "b307411408fdcf52d4c37e8315ff0c1b50a0174d56a941b2afe9153470805246",
+    "kind": "interpretive",
+    "importance": 3,
+    "reason": "Matthew presents the officer approaching and speaking personally, whereas Luke uses messengers and expressly says he considered himself unworthy to come."
+  },
+  {
+    "slug": "bible-balak",
+    "sourceDigest": "350d78f1903b7591b35740f7618a0d9beec133c208b680404c08ad9052c8b490",
+    "kind": "interpretive",
+    "importance": 3,
+    "reason": "Joshua explicitly says Balak warred against Israel while Judges' rhetorical question assumes that the same king did not fight them."
+  },
+  {
+    "slug": "bible-jacob-bought",
+    "sourceDigest": "392a5d406d161dfaf68410989146405a8730191d6d21d4b7c277ac854739af18",
+    "kind": "interpretive",
+    "importance": 3,
+    "reason": "The corresponding Shechem burial purchase is credited to Jacob and Abraham, though ground and tomb are not expressly identical deeds."
+  },
+  {
+    "slug": "bible-subdued",
+    "sourceDigest": "cef9ff77ab2b27564049e8d82b82c5a365b03bc110240cca35deb67f78da1929",
+    "kind": "interpretive",
+    "importance": 3,
+    "reason": "The stated end of Philistine incursions during Samuel's days conflicts with a later encampment while Samuel remains active."
+  },
+  {
+    "slug": "bible-saul-david",
+    "sourceDigest": "bd5ce40f3278068ba964b2f39f59795e7e8f7aac073c2f2007183d0ff8ceba9e",
+    "kind": "interpretive",
+    "importance": 3,
+    "reason": "Saul later seeks David's parentage after previously communicating with Jesse about David's service, creating a clear continuity problem."
+  },
+  {
+    "slug": "bible-saul-fam",
+    "sourceDigest": "2a04ced4306318d710e9db43325c524ca2e53b33b8e561528d874540b1d1fdc3",
+    "kind": "interpretive",
+    "importance": 3,
+    "reason": "Saul's surviving sons conflict with the statement that all his house died, unless that phrase has an unstated narrower scope."
+  },
+  {
+    "slug": "bible-jehoshaphat",
+    "sourceDigest": "52fd71f9a3414da115eed497d19dd94b99c7545967b203a782dd777cf709bb6c",
+    "kind": "interpretive",
+    "importance": 3,
+    "reason": "The king removes Judah's high places in one report while the reign summaries say they were not removed."
+  },
+  {
+    "slug": "bible-ahaziah-buried",
+    "sourceDigest": "180c68577c387aa7858d68f31116de47b4bc3a3d0f28f2fdda1c98e9dfaa8407",
+    "kind": "interpretive",
+    "importance": 3,
+    "reason": "Death after flight to Megiddo and burial by servants differs substantially from capture in Samaria, execution, and burial by captors."
+  },
+  {
+    "slug": "bible-asa",
+    "sourceDigest": "b0a1c0f0b0bd74cb6208715f8e002575cb29552349c9bfdb1e15a40a215d66e7",
+    "kind": "interpretive",
+    "importance": 3,
+    "reason": "Lifelong perfect devotion conflicts with explicit later failures of trust, persecution of a correcting seer, and oppression attributed to Asa."
+  },
+  {
+    "slug": "bible-sequence",
+    "sourceDigest": "895ee38b1a5786f951f8fda87e1ac4fd487e822a87d303050a89a5abc12a6388",
+    "kind": "interpretive",
+    "importance": 3,
+    "reason": "The same three distinctive temptations appear in explicitly narrated movements with the final two reversed."
+  },
+  {
+    "slug": "bible-peters-mil",
+    "sourceDigest": "19b9f1e49ba7978d7ff573c74ce172d308527854025dfb5d2ab442106442a187",
+    "kind": "interpretive",
+    "importance": 3,
+    "reason": "Recognizable accounts place the same household healing on opposite sides of the fishermen's departure to follow Jesus."
+  },
+  {
+    "slug": "bible-jericho",
+    "sourceDigest": "81999dda46b932d673b548523e1c01017ed26aeec4a0a3979e228f05ea184d9b",
+    "kind": "interpretive",
+    "importance": 3,
+    "reason": "The corresponding beggar encounter occurs on departure from Jericho in Mark and approach to Jericho in Luke."
+  },
+  {
+    "slug": "bible-voice",
+    "sourceDigest": "78b10f2274d44b254284233fd276045869e90b6427a878261e19478621f95374",
+    "kind": "interpretive",
+    "importance": 3,
+    "reason": "The same companions hear and do not hear the voice in parallel accounts, unless hearing carries different sound-versus-understanding senses."
+  },
+  {
+    "slug": "bible-ahaziah-age",
+    "sourceDigest": "1831b75687af51e66024e7a2de474beea88b03828a737e878fdbdc7e12ed0f95",
+    "kind": "direct",
+    "importance": 2,
+    "reason": "Matching royal notices give Ahaziah ages twenty two and forty two at the same accession."
+  },
+  {
+    "slug": "bible-jehoiachin",
+    "sourceDigest": "f83ef1502ac9854fdcd26faf048be47c145b77f3e25404a8b5b771ea8a9ee978",
+    "kind": "direct",
+    "importance": 2,
+    "reason": "Jehoiachin is explicitly eight and eighteen at the same accession in matching reign notices."
+  },
+  {
+    "slug": "bible-salah",
+    "sourceDigest": "e47e6d6d3a645e72f5577e168b2bc264b2a18442a327a8f37fdf73f9eadf186d",
+    "kind": "direct",
+    "importance": 2,
+    "reason": "Genesis dates Arphaxad's direct fathering of Salah, while Luke inserts Cainan between them."
+  },
+  {
+    "slug": "bible-jacob-leah",
+    "sourceDigest": "ca875bb801d06cdee20e3864b93a506cc37f5bffc60cb0d3f9cc1d29c25d356f",
+    "kind": "direct",
+    "importance": 2,
+    "reason": "The surviving named descendants of Leah total thirty-two while the stated sons-and-daughters subtotal is thirty-three."
+  },
+  {
+    "slug": "bible-levites",
+    "sourceDigest": "4bc18d445be0373247effcd2cedc67db9f500550bb5413864ba8ea2b97030fa7",
+    "kind": "direct",
+    "importance": 2,
+    "reason": "The three named Levite branches share the age threshold and total 22,300 against the declared overall count of 22,000."
+  },
+  {
+    "slug": "bible-sams-son",
+    "sourceDigest": "9b687cf4d36d71d91dcb926f9efa3f06b66b0a2b21e6de725207b54d37d0670d",
+    "kind": "direct",
+    "importance": 2,
+    "reason": "The same expressly identified firstborn position receives different names in the supplied edition's corresponding family lists."
+  },
+  {
+    "slug": "bible-horsemen",
+    "sourceDigest": "e99a1700f798b287b1bc86dc13bf5c9b80243be33092944ca1037d41ad578534",
+    "kind": "direct",
+    "importance": 2,
+    "reason": "The matching capture inventories give seven hundred versus seven thousand horsemen while agreeing on chariots and infantry."
+  },
+  {
+    "slug": "bible-soldiers",
+    "sourceDigest": "8651a84dfef707a7652efbc2705ff8188f7763176b48ad8317d7e2fe351ff391",
+    "kind": "direct",
+    "importance": 2,
+    "reason": "The same census report gives incompatible regional totals without defining distinct accounting categories."
+  },
+  {
+    "slug": "bible-overseers",
+    "sourceDigest": "ff3d274ee6f60df703831b1355a122f7fd650a9b6a6da8237c1347c000199ec4",
+    "kind": "direct",
+    "importance": 2,
+    "reason": "The same described work-supervision role receives incompatible totals of 3300 and 3600."
+  },
+  {
+    "slug": "bible-officers",
+    "sourceDigest": "c0819bb3522136b786012d545ef9117aae1c6c6cb8490aaeda7013328005efea",
+    "kind": "direct",
+    "importance": 2,
+    "reason": "Corresponding chief supervisory groups receive explicit totals of 550 and 250 without a stated difference in scope."
+  },
+  {
+    "slug": "bible-baasha",
+    "sourceDigest": "6770ec88c7e46bc2a05e2e2c6b67563e6a100f1a65091a4eba8683220a2128f1",
+    "kind": "direct",
+    "importance": 2,
+    "reason": "Baasha leads a campaign in Asa's thirty sixth year despite death and succession no later than Asa's twenty sixth year."
+  },
+  {
+    "slug": "bible-ahaziah",
+    "sourceDigest": "769b1ea872a2a8defef4760c99797e44039d4341a93ce7e852f0c1743df9cbfc",
+    "kind": "direct",
+    "importance": 2,
+    "reason": "The same accession is dated to both the eleventh and twelfth year of Joram without a different counting basis."
+  },
+  {
+    "slug": "bible-jotham",
+    "sourceDigest": "f890ea2c7fca0b37e88dab3c24e56f6f11f413ea114a2d64eafb77113d36672a",
+    "kind": "direct",
+    "importance": 2,
+    "reason": "An event dated to Jotham's twentieth year exceeds the same king's explicitly stated sixteen-year reign."
+  },
+  {
+    "slug": "bible-burned",
+    "sourceDigest": "89cf8805142388f2115aaac5859039ba6ea2bf24f53bd17f15e5eaf0d8c544e4",
+    "kind": "direct",
+    "importance": 2,
+    "reason": "The same official's arrival before Jerusalem's destruction is dated to the seventh and tenth days of the same month and regnal year."
+  },
+  {
+    "slug": "bible-prison",
+    "sourceDigest": "9f4b7baacea84323c52bcc34d3c44bb77e6da55a510c2a6606eef2de266958e1",
+    "kind": "direct",
+    "importance": 2,
+    "reason": "The same release within an otherwise identical chronological framework is dated two days apart."
+  },
+  {
+    "slug": "bible-zerub",
+    "sourceDigest": "bb4c6e89fca70419a085b0d3d208c181882b58779f046be8d68d7ecb92c2d7f0",
+    "kind": "direct",
+    "importance": 2,
+    "reason": "Direct corresponding genealogical identifications repeatedly assign Zerubbabel to Shealtiel but once assign him to Pedaiah without a different parental role."
+  },
+  {
+    "slug": "bible-arah",
+    "sourceDigest": "e1a871c42da3e2b8746240b918ccfadea295c19850f2bc4fe624d61e129ad500",
+    "kind": "direct",
+    "importance": 2,
+    "reason": "Parallel return entries count the same Arah family as exactly 775 versus 652 people."
+  },
+  {
+    "slug": "bible-azgad",
+    "sourceDigest": "78b3e4efee24b1f9771b415e962cde1a3bb031891b0e688432f2ea74cc365069",
+    "kind": "direct",
+    "importance": 2,
+    "reason": "Parallel exact counts assign Azgad's returning descendants 1,222 versus 2,322 people without a changed counting category."
+  },
+  {
+    "slug": "bible-bigvai",
+    "sourceDigest": "f5db4351512d6dcc16cf269b89674962af23db7e75071d6f10b7028f652ca453",
+    "kind": "direct",
+    "importance": 2,
+    "reason": "The same named return group receives incompatible exact totals of 2,056 and 2,067, with no stated change in membership."
+  },
+  {
+    "slug": "bible-adin",
+    "sourceDigest": "f747d20607b2ebd1f4075951728ce02f60fd90bfda7084d449e4e8ad07c5f67b",
+    "kind": "direct",
+    "importance": 2,
+    "reason": "Corresponding return-list entries assign Adin's family exact totals of 454 and 655 under the same counting formula."
+  },
+  {
+    "slug": "bible-bethlehem",
+    "sourceDigest": "80748678905c611331a303cb88248deef372f816637f5b381556bbec6364ce0c",
+    "kind": "direct",
+    "importance": 2,
+    "reason": "Ezra's two town counts sum to 179 whereas Nehemiah gives their combined total as 188, leaving a numerical disagreement after matching scope."
+  },
+  {
+    "slug": "bible-asaph",
+    "sourceDigest": "f6c36289778fe80c397bc371250f8a8124e039d4b34fead3d77c24b4b0786f3e",
+    "kind": "direct",
+    "importance": 2,
+    "reason": "The same returning singers identified by occupation and Asaph ancestry number exactly 128 in one list and 148 in the other."
+  },
+  {
+    "slug": "bible-delaiah",
+    "sourceDigest": "c7a1dd7da3f3a60d51efab0908a8579f490c1252789993527c8f3cf5d47c85d7",
+    "kind": "direct",
+    "importance": 2,
+    "reason": "The same combined three-family group receives exact totals of 652 and 642, with no difference in the stated counting scope."
+  },
+  {
+    "slug": "bible-barefoot",
+    "sourceDigest": "9b7e708b3437a61cb6aeacd022491034496cfffa42c84ad3dadcd5f761ff5900",
+    "kind": "direct",
+    "importance": 2,
+    "reason": "Parallel mission instructions expressly prohibit taking a staff in Luke and expressly permit one in Mark."
+  },
+  {
+    "slug": "bible-wisdom-good",
+    "sourceDigest": "ff0ab161125e4adeef73c84fc262a5801edd3ac3f62a5b3a94b65c92e576c900",
+    "kind": "interpretive",
+    "importance": 4,
+    "reason": "Wisdom is both divinely encouraged and targeted for destruction, but the scope and kind of wisdom remain insufficiently matched."
+  },
+  {
+    "slug": "bible-polygamy",
+    "sourceDigest": "90740aa0106b73b74cb1916a41031dbd610cabecd8ad6ef268ceaf8aaeffda05",
+    "kind": "interpretive",
+    "importance": 4,
+    "reason": "Regulated plural marriages conflict with restrictive marital ideals, but office-specific requirements do not establish a universal ban."
+  },
+  {
+    "slug": "bible-captivity",
+    "sourceDigest": "33ccfbbcc8c2fbc624c919a5be5a23c8b270ef08511cec0e81d19c69daaa52c8",
+    "kind": "interpretive",
+    "importance": 4,
+    "reason": "Four hundred and 430 years differ numerically, but the texts mix residence, affliction, covenant-to-law time, and undefined generations rather than fixed common endpoints."
+  },
+  {
+    "slug": "bible-borders",
+    "sourceDigest": "526a24fe33b4c146b495c120cdd739c29d11b672e1940fd97a27abbdbd866e80",
+    "kind": "interpretive",
+    "importance": 4,
+    "reason": "The Euphrates promise and Jordan inheritance boundaries differ materially, although the passages describe different territorial allocations rather than one identical survey."
+  },
+  {
+    "slug": "bible-burnt",
+    "sourceDigest": "e8cefc9bd92b69d210c583e3d360eea604aaa6a9cc7d2d66f017a9039c21c88c",
+    "kind": "interpretive",
+    "importance": 4,
+    "reason": "Jeremiah denies sacrificial commands at the exodus while Exodus records them, but the precise scope of the departure-day timing qualification remains uncertain."
+  },
+  {
+    "slug": "bible-who-wrote",
+    "sourceDigest": "88350e7c93441815e3cc6f11fdc270620325d50cba3a78558831e2e758a6824c",
+    "kind": "interpretive",
+    "importance": 4,
+    "reason": "God's explicit writing promise conflicts with a sequence naturally identifying Moses as writer, but the decisive pronoun remains ambiguous."
+  },
+  {
+    "slug": "bible-adultery-punishment",
+    "sourceDigest": "feb5969d36781e97c47a455f0f6b86d10396fef96a911c7f8f7682b28d549dfc",
+    "kind": "interpretive",
+    "importance": 4,
+    "reason": "Mandatory execution meets Jesus' additional condition of a sinless first accuser, but the supplied scene does not show acquittal or abolish the penalty."
+  },
+  {
+    "slug": "bible-hair",
+    "sourceDigest": "eed57c1f40fdeb2c2913ba37b5660e428d373b5e19c97add1057d474884cf879",
+    "kind": "interpretive",
+    "importance": 4,
+    "reason": "Paul's general claim that male long hair is shameful conflicts with its divinely required use in consecration, although different roles have different rules."
+  },
+  {
+    "slug": "bible-heart",
+    "sourceDigest": "ef80bcdbe3b0c2e64be0fad143984ba8b9a6f610dc2380cd0e45d10738538716",
+    "kind": "interpretive",
+    "importance": 4,
+    "reason": "Following heart and eyes is encouraged under judgment in Ecclesiastes and discouraged as unfaithfulness in Numbers, leaving a contextual ethical tension."
+  },
+  {
+    "slug": "bible-moab2",
+    "sourceDigest": "3b8846ffd47b00adff9459df38b597648b1162376b7f9cc4b08fe489f2e778fc",
+    "kind": "interpretive",
+    "importance": 4,
+    "reason": "Protected Moab later becomes a divinely enabled military target, but the commands concern different encounters and do not explicitly promise permanent immunity."
+  },
+  {
+    "slug": "bible-save-trees",
+    "sourceDigest": "b30ae8dd160fc54ade3a75e372b03c9dd8259f6bcd30c647f19ff7d393c72484",
+    "kind": "interpretive",
+    "importance": 4,
+    "reason": "A campaign's announced destruction opposes protection of food trees, but predicted conduct and an explicit command are not identical assertions."
+  },
+  {
+    "slug": "bible-castrated",
+    "sourceDigest": "65c1b66706ac0f885556a0a6be82538479558500e2034d34382112acbe364d1c",
+    "kind": "interpretive",
+    "importance": 4,
+    "reason": "Positive kingdom teaching about eunuchs contrasts with bodily exclusion from the congregation, though the institutions and literal sense of voluntary eunuch status differ."
+  },
+  {
+    "slug": "bible-moab3",
+    "sourceDigest": "319b4316514bd765a27ac1a8349e0ec0b9f3a340e40070f629eafcf48e18711b",
+    "kind": "interpretive",
+    "importance": 4,
+    "reason": "Ruth's blessed integration and lineage challenge inherited Moabite exclusion, but formal congregation membership is not explicitly narrated."
+  },
+  {
+    "slug": "bible-moab4",
+    "sourceDigest": "2452c30a1123bd2b4eab86d5d962e602be000498bc411696a89f0d29930b42dd",
+    "kind": "interpretive",
+    "importance": 4,
+    "reason": "Ruth's celebrated marriage conflicts with condemnation of Moabite marriages, though her nationality and identical governing conditions are not supplied in that excerpt."
+  },
+  {
+    "slug": "bible-amalekites",
+    "sourceDigest": "325a00fd2ab47ce0f646fd932345ffc5cd859803c70a125881e5a618df68a41f",
+    "kind": "interpretive",
+    "importance": 4,
+    "reason": "Repeated Amalekite populations challenge comprehensive destruction language, although everyone in a raided territory need not mean the entire people worldwide."
+  },
+  {
+    "slug": "bible-ahab",
+    "sourceDigest": "a9eb2cb8bce347e50e41fc751f5d4c741918e14d6b747decd0c7d7db98cb2455",
+    "kind": "interpretive",
+    "importance": 4,
+    "reason": "Ahab suffers divinely arranged death after postponed evil is promised, but the postponement specifically concerns his house rather than every personal judgment."
+  },
+  {
+    "slug": "bible-father",
+    "sourceDigest": "274f43926a1c0273ee0368684888b33dfb940c2fb83af158d9da10b8397c7861",
+    "kind": "interpretive",
+    "importance": 4,
+    "reason": "The broad prohibition on calling earthly men father overlaps with accepted human addresses, but the intended scope of the title remains uncertain."
+  },
+  {
+    "slug": "bible-perfectlaw",
+    "sourceDigest": "d35a5f4cd68ef7944f67e485757f33f7c6cb67b4cc98f01b5626433a94f7e189",
+    "kind": "interpretive",
+    "importance": 4,
+    "reason": "Perfect-law praise contrasts with a deficient first covenant, although the passages do not identify law and covenant as exactly the same object."
+  },
+  {
+    "slug": "bible-rich",
+    "sourceDigest": "6a67d6c7fdd6f3b51f2ca8c7e4d823b85bb8c4dcf206ff7e3e30710e9cebf4a2",
+    "kind": "interpretive",
+    "importance": 4,
+    "reason": "Prosperity receives markedly different moral evaluations, but neither collection makes wealth an exclusive universal test of character."
+  },
+  {
+    "slug": "bible-happy",
+    "sourceDigest": "ca17014701761740deb285a17282d2ffa8c8d4c894e2c2c4e486cc95dfdc019c",
+    "kind": "interpretive",
+    "importance": 4,
+    "reason": "Ecclesiastes commends enjoyment yet ranks sorrow above laughter, producing conflicting general advice whose application depends on occasion."
+  },
+  {
+    "slug": "bible-pray-for-everyone",
+    "sourceDigest": "02b54eb39cffba54137ba9e514b8bc0fef5590cc02687e1d0d3e45d14faa6948",
+    "kind": "interpretive",
+    "importance": 4,
+    "reason": "Universal intercession contrasts with explicit exceptions, although the instructions address different recipients and historical circumstances."
+  },
+  {
+    "slug": "bible-babylonian",
+    "sourceDigest": "533c6f78216952a058aab6a2da9004749d1e67a0fb8d9a89e96f425221836106",
+    "kind": "interpretive",
+    "importance": 4,
+    "reason": "Seventy years and seven generations describe the Babylonian wait differently, but no fixed generation-to-year conversion makes them directly incompatible totals."
+  },
+  {
+    "slug": "bible-john-recognize",
+    "sourceDigest": "6b335e35ad33bb22e0a3fde10a36d5451df8fd3b8753d720776161b81da401e3",
+    "kind": "interpretive",
+    "importance": 4,
+    "reason": "John's sign-based certainty gives way to inquiry about Jesus' identity, but a person's confidence can change between occasions."
+  },
+  {
+    "slug": "bible-elijah",
+    "sourceDigest": "27e93c6d77c87f64212d7e9e76d41685ec874b4f34b85d5aab1ab6a1af1106c1",
+    "kind": "interpretive",
+    "importance": 4,
+    "reason": "Jesus identifies John as Elijah while John denies it, but prophetic role and personal identity may give the designation different senses."
+  },
+  {
+    "slug": "bible-signs",
+    "sourceDigest": "1b226c22af94cab42750190db7673d7c172463d05c6bfbe0c49c9dae68fad653",
+    "kind": "interpretive",
+    "importance": 4,
+    "reason": "Mark's unrestricted refusal differs from the explicit Jonah exception, while refusing demanded signs need not deny other miracles."
+  },
+  {
+    "slug": "bible-passover-meal",
+    "sourceDigest": "6cf70bf919c2a9cfa189852effe6f412a640aa71967e0d21c6adc133bbcb249b",
+    "kind": "interpretive",
+    "importance": 4,
+    "reason": "The festival markers surrounding the supper and sentencing differ, but the supplied excerpts omit steps needed to establish the entire meal-to-crucifixion sequence."
+  },
+  {
+    "slug": "bible-lastwords",
+    "sourceDigest": "91167fd880e2b118949132e4df92dbe7af1fc61cc5921e2cea7a9c437c3a2e3b",
+    "kind": "interpretive",
+    "importance": 4,
+    "reason": "Luke and John place different sayings immediately before death, but neither excludes further words and Matthew leaves the final cry unquoted."
+  },
+  {
+    "slug": "bible-eleven-believe",
+    "sourceDigest": "2d7fd55e40b90efa46d43f5d3a49cfd82046e3f5e07e4fd64c1007cfe74a82d8",
+    "kind": "interpretive",
+    "importance": 4,
+    "reason": "Luke's group already affirms resurrection while Mark's rejects the pair's report, but belief in Simon's appearance is not expressly belief in that distinct report."
+  },
+  {
+    "slug": "bible-satan-entered",
+    "sourceDigest": "a4ba2a16f3cceed781e8346dd20f4b15b6c82399d6fa2ebeaf99a6ee6fca4af5",
+    "kind": "interpretive",
+    "importance": 4,
+    "reason": "The betrayal narratives attach Satan's entry to different stages, although neither explicitly rules out repeated possession."
+  },
+  {
+    "slug": "bible-jesus-witness",
+    "sourceDigest": "269002b98ffebc3650ebb075d69f642fb772d174594dda67595b3294a317bed2",
+    "kind": "interpretive",
+    "importance": 4,
+    "reason": "The self-testimony statements sound opposed, but both surrounding arguments invoke corroborating witnesses, leaving substantial ambiguity between factual truth and evidentiary validity."
+  },
+  {
+    "slug": "bible-true",
+    "sourceDigest": "e4afee24b4c30a28c6d9672ca4b5d652d41d7eee6f15e038126c2ed8468b0a3e",
+    "kind": "interpretive",
+    "importance": 4,
+    "reason": "Opposite evaluations of self-testimony create tension, but the Father's corroborating witness makes evidential validity distinct from factual truth a substantial contextual reading."
+  },
+  {
+    "slug": "bible-happy-sad",
+    "sourceDigest": "ae95fbb158c367a4b8b8c628cf3ae69d555dd0a697e0d7f7c5e9424da49ddc5a",
+    "kind": "interpretive",
+    "importance": 4,
+    "reason": "Matthew's Mary knows Jesus has risen before meeting him while John's Mary thinks the body was removed, but a complete common sequence is unstated."
+  },
+  {
+    "slug": "bible-meat",
+    "sourceDigest": "6b5a9e01133a6d9198520d337ca28577144197c0f8f3e4d7b3e324e4a4935900",
+    "kind": "interpretive",
+    "importance": 4,
+    "reason": "Paul's explicit conditional permissions contrast with Acts' blanket-sounding abstention rule, but knowledge and worship participation distinguish many cases."
+  },
+  {
+    "slug": "bible-phoebe",
+    "sourceDigest": "1e302730021de5fb7fb31af0aa6d8b21a1fe4876c6a58b6ce5b76109663e86b6",
+    "kind": "interpretive",
+    "importance": 4,
+    "reason": "Priscilla teaches a man despite the broad prohibition, although a private explanation and governing church instruction may have different scopes."
+  },
+  {
+    "slug": "bible-baptism",
+    "sourceDigest": "28ec17fc8463d0ca3fc7e9b10afb68b662ab25cb9215eef8e4e69782a5d9f12a",
+    "kind": "interpretive",
+    "importance": 4,
+    "reason": "Matthew's threefold naming instruction differs from Acts' Jesus-name descriptions, but Acts does not claim an exclusive formula or record every ceremonial word."
+  },
+  {
+    "slug": "bible-curse",
+    "sourceDigest": "08a3be038c433953318c5dc140d4df6f0f9dad880a48b01b496af0434886abc9",
+    "kind": "interpretive",
+    "importance": 4,
+    "reason": "Paul forbids cursing persecutors yet curses doctrinal opponents, creating a behavioral tension while the target categories are not expressly identical."
+  },
+  {
+    "slug": "bible-unclean",
+    "sourceDigest": "ae528e663e9351520af0821b79928acb91adeded55412b06c46ecb75150e5f19",
+    "kind": "interpretive",
+    "importance": 4,
+    "reason": "Preserving existing mixed marriages strains broad separation language, but the latter never expressly includes marriage."
+  },
+  {
+    "slug": "bible-timnah",
+    "sourceDigest": "9c9759703e4b76741583a448de56a529c41786e74c406363577b8923e4290f41",
+    "kind": "interpretive",
+    "importance": 2,
+    "reason": "Corresponding Eliphaz lists identify Timna as concubine and mother in one account but include the name under sons in the other."
+  },
+  {
+    "slug": "bible-bashemath",
+    "sourceDigest": "b33e126d49843d764f13e9514906024173131badd8b7f1d92280a9bd922ab04c",
+    "kind": "interpretive",
+    "importance": 2,
+    "reason": "Esau's wife Bashemath is assigned Elon versus Ishmael as father, alongside a changed name for Elon's daughter."
+  },
+  {
+    "slug": "bible-aijalon",
+    "sourceDigest": "0cba403306c557a4a29f95ab1bd2a1c3de2071950759e108b5e7552e1b07626b",
+    "kind": "interpretive",
+    "importance": 2,
+    "reason": "Parallel allocations assign Aijalon and Gath-rimmon to Dan versus Ephraim without describing a territorial reassignment."
+  },
+  {
+    "slug": "bible-sons-of-gideon",
+    "sourceDigest": "22912528d79f062db5a82589a4139dfb1b021cc50438a66b0e1b1e6084c57600",
+    "kind": "interpretive",
+    "importance": 2,
+    "reason": "Repeated attribution of seventy deaths conflicts with the seventy-son total and an explicit survivor, although the number may name the original group loosely."
+  },
+  {
+    "slug": "bible-kish-dad",
+    "sourceDigest": "3ace6f0159cd8820123ce0a9b30d239f70aaac20b7b87825444c4315255579bd",
+    "kind": "interpretive",
+    "importance": 2,
+    "reason": "The genealogical chains place Abiel and Ner immediately above Kish without a supplied connection between those paternal attributions."
+  },
+  {
+    "slug": "bible-davids-second-son",
+    "sourceDigest": "06c5d45b17a4f8dd89817f1becfda67074a6c27137bc41494d1aa32329001d46",
+    "kind": "interpretive",
+    "importance": 2,
+    "reason": "Father, mother, and birth order match exactly while the recorded names differ, with no alternate-name explanation supplied."
+  },
+  {
+    "slug": "bible-david-sons-hebron",
+    "sourceDigest": "da1904c791f651513bd71ca04b3fe8f0c689a045459cf4e6a63eb8f43d31251c",
+    "kind": "interpretive",
+    "importance": 2,
+    "reason": "The same mother and second position within matching six-son lists identify the child securely, yet one account names him Chileab and the other Daniel."
+  },
+  {
+    "slug": "bible-chariots",
+    "sourceDigest": "63aee6f23470e898f99bcd8a49af1d3478c8e3160fff247d6432a21bfe6ab130",
+    "kind": "interpretive",
+    "importance": 2,
+    "reason": "The matched battle assigns forty thousand casualties to cavalry versus infantry; chariot totals are less direct because vehicles and occupants are different units."
+  },
+  {
+    "slug": "bible-amasa",
+    "sourceDigest": "4c48d638fd28aba0d855bb3fe9411d78ef7b249387e178f19f631439d39a18fd",
+    "kind": "interpretive",
+    "importance": 2,
+    "reason": "The same mother and son anchor paternal descriptions that differ in both personal name and Israelite versus Ishmaelite affiliation."
+  },
+  {
+    "slug": "bible-huram",
+    "sourceDigest": "3207211a75b10b01de6c212f84ab60726f01d82e4544ffaff616b24cb16bca6a",
+    "kind": "interpretive",
+    "importance": 2,
+    "reason": "The matching Tyrian craftsman descriptions attach different tribal affiliations to the maternal side, with an unresolved ancestry-versus-residence distinction."
+  },
+  {
+    "slug": "bible-abijam",
+    "sourceDigest": "af278c89395b4c0bc1a6ced388f054a054b2d7f527c4eef2b05a58023450558d",
+    "kind": "interpretive",
+    "importance": 2,
+    "reason": "Matching accession and reign notices assign the king's mother different names and fathers without explaining the changed lineage."
+  },
+  {
+    "slug": "bible-jehoash",
+    "sourceDigest": "4f3e903a24f8334679b69ecfa0884f043427eda99abc992aa2db64c110d160d4",
+    "kind": "interpretive",
+    "importance": 2,
+    "reason": "The father's seventeen-year reign extends past the son's accession under the ordinary consecutive reading of the two royal dates."
+  },
+  {
+    "slug": "bible-bens-sons",
+    "sourceDigest": "e1791b68a3b06ce043934cbf8c76ebe2dce41ee9d944f8361e1fcb57c28bd99c",
+    "kind": "interpretive",
+    "importance": 2,
+    "reason": "The explicit three-son total and five sons in birth order give conflicting immediate family structures, although some lists also group broader descendants."
+  },
+  {
+    "slug": "bible-300or800",
+    "sourceDigest": "402282dd892a3a2d7afb55d5e7a44c478244a3c8cb734f4df47b766edd549b2a",
+    "kind": "interpretive",
+    "importance": 2,
+    "reason": "Parallel chief captain accounts give eight hundred versus three hundred victims in one encounter, although identifying the warrior requires matching roles despite different names."
+  },
+  {
+    "slug": "bible-cain",
+    "sourceDigest": "52ca7e27d24d6b95c8f7e7c7846be1ae805364b5d612a3f323ecb5bdb1274c49",
+    "kind": "interpretive",
+    "importance": 3,
+    "reason": "A sentence of wandering sits uneasily with residence and city building, although the narrative does not say Cain never wandered or remained there permanently."
+  },
+  {
+    "slug": "bible-dry",
+    "sourceDigest": "d3b37a6716169b9250e7201c84797e320d0c10f0e3b6ecb417b6a147442e1d1f",
+    "kind": "interpretive",
+    "importance": 3,
+    "reason": "Dryness is announced on two dates nearly two months apart, though the observed surface and fully dried earth can describe different stages."
+  },
+  {
+    "slug": "bible-moses-speaker",
+    "sourceDigest": "2a3e6bcf53fca5c44e0ef8c5daf3f50510cc92f3a91f5539c64802ebd6cfb92c",
+    "kind": "interpretive",
+    "importance": 3,
+    "reason": "Moses' mighty-words reputation contrasts with speech difficulty and an appointed spokesman, but verbal power need not equal eloquence."
+  },
+  {
+    "slug": "bible-mosesfil",
+    "sourceDigest": "32b7a33d6219de4b5d517ed6a6b25515ad0f99d702548c0a0b632bafd02fcfab",
+    "kind": "interpretive",
+    "importance": 3,
+    "reason": "Jethro, Reuel, and Hobab receive the father-in-law role without a supplied explanation of alternate names or the generational relationship."
+  },
+  {
+    "slug": "bible-angered-god",
+    "sourceDigest": "a54c493e777cea8dda18d49dd3741d0479fc39dd3eafa54d4033d2f57460b39d",
+    "kind": "interpretive",
+    "importance": 3,
+    "reason": "Moses' retelling attributes exclusion to the people while Numbers blames his own failure, but those causal contributions are not expressly exclusive."
+  },
+  {
+    "slug": "bible-midian",
+    "sourceDigest": "a933554c6c8187eefadfc55636001cb1517c883c8c057970579083a4a49c108d",
+    "kind": "interpretive",
+    "importance": 3,
+    "reason": "Midian's later military population challenges killing all males, but the conquest statement may concern the attacked group rather than the entire people everywhere."
+  },
+  {
+    "slug": "bible-moses120",
+    "sourceDigest": "b49e88b7756b664e44827efb0a2a2d1409ae4529e8f3ae528aa325a75ed72fca",
+    "kind": "interpretive",
+    "importance": 3,
+    "reason": "Undiminished vigor contrasts with inability to go out and come in, but that inability may concern leadership rather than physical decline."
+  },
+  {
+    "slug": "bible-anakim",
+    "sourceDigest": "bc5c17c2d38312750d661c341410b878a90e7c41ab149401761b0b5a4d143281",
+    "kind": "interpretive",
+    "importance": 3,
+    "reason": "Joshua's complete destruction of Hebron's Anakim overlaps uneasily with Caleb's expulsion of named descendants there, without fixed chronology or exclusive agency."
+  },
+  {
+    "slug": "bible-man-of-war",
+    "sourceDigest": "2d793a73c55713b5314feba9e76686ae2f2a9f4ae0d7134496ff619e3eb1145c",
+    "kind": "interpretive",
+    "importance": 3,
+    "reason": "David's warrior recommendation conflicts with the later emphasis on youthful inexperience, but the character assessments need not be infallible or identical in meaning."
+  },
+  {
+    "slug": "bible-davidkill",
+    "sourceDigest": "8ebef1d7b9adbe84c536c3d5ae4451f688c8ab9205db5adb79776144cf19c521",
+    "kind": "interpretive",
+    "importance": 3,
+    "reason": "The stone and sword are each credited with killing Goliath, although a summary followed by fuller action can explain the doubled endpoint without two deaths."
+  },
+  {
+    "slug": "bible-asa-high",
+    "sourceDigest": "333352c4ab93ff86eb5dc203fc3e8158c68cf14e91a90763319c4069c54638f9",
+    "kind": "interpretive",
+    "importance": 3,
+    "reason": "Asa's removal of Judah's high places conflicts with Kings' general nonremoval, but the parallel Chronicles exception specifies a different geographic label."
+  },
+  {
+    "slug": "bible-zechariah",
+    "sourceDigest": "e393f396715f0c2be283de486f91a344cc0f720158f5756187041e9fc3c76f5c",
+    "kind": "interpretive",
+    "importance": 3,
+    "reason": "Matthew combines a paternal name matching the prophet with a killing location matching Jehoiada's son, but the personal identification remains inferred."
+  },
+  {
+    "slug": "bible-wisdom-happy",
+    "sourceDigest": "f816c2b0607701700a77f8047e1826512f91eca74a2e05765aef91fd0c7d805f",
+    "kind": "interpretive",
+    "importance": 3,
+    "reason": "Wisdom receives opposing general emotional evaluations, although blessedness and grief can coexist in the same person."
+  },
+  {
+    "slug": "bible-before-birth",
+    "sourceDigest": "43769b249aa484140c7a2fcce2fbe7cfaf13a0e90cdfcf43d5073d62f7fe16c7",
+    "kind": "interpretive",
+    "importance": 3,
+    "reason": "Luke makes Nazareth an established home while Matthew introduces settlement after Egypt, but Matthew never explicitly locates the family's prebirth home elsewhere."
+  },
+  {
+    "slug": "bible-pharisees",
+    "sourceDigest": "f2240e44a02dfe7d2ffb885e7228f490bc996136c5154f125e69c2746b6fb0b2",
+    "kind": "interpretive",
+    "importance": 3,
+    "reason": "Matthew's baptism address implies participation, but arrival at the baptism does not explicitly contradict Luke's stated refusal."
+  },
+  {
+    "slug": "bible-calling",
+    "sourceDigest": "38cf37dbc6e70b9447ba392b9ac4db4d3b69a9e04f24a16144622004388c52cb",
+    "kind": "interpretive",
+    "importance": 3,
+    "reason": "The narratives give substantially different routes into discipleship, yet do not identify every meeting, summons, and commitment as the same exclusive first event."
+  },
+  {
+    "slug": "bible-drowned-pigs",
+    "sourceDigest": "7f65aedbbeb56a1e2c2b424e06dda586bd314ca4f14f9e999bd3a77b98563388",
+    "kind": "interpretive",
+    "importance": 3,
+    "reason": "The distinctive shared swine episode has different regional labels, but no supplied boundaries prove those geographical descriptions mutually exclusive."
+  },
+  {
+    "slug": "bible-levi",
+    "sourceDigest": "37e3f5b1880e1a3bc7aa63b1323cbe976b16738cf5c15d864e85a02a9aacf3de",
+    "kind": "interpretive",
+    "importance": 3,
+    "reason": "Matching tax-office summons narratives name Matthew and Levi differently without establishing whether those are separate men or alternate names."
+  },
+  {
+    "slug": "bible-apostles",
+    "sourceDigest": "40e0983e6d070ce9f36ec8f33ae1e9e86b82ea0b75b662e62a628301c263546e",
+    "kind": "interpretive",
+    "importance": 3,
+    "reason": "Full apostolic lists substitute Judas brother of James for Thaddeus without equating those names, leaving an unresolved membership identification."
+  },
+  {
+    "slug": "bible-herod",
+    "sourceDigest": "257986f49dbedf15e7f26ce515e4024a5c655d021ac96240233345513823e007",
+    "kind": "interpretive",
+    "importance": 3,
+    "reason": "Herod confidently identifies Jesus as John in two accounts but asks who he is in Luke, without a shared timeline fixing his changing belief."
+  },
+  {
+    "slug": "bible-peter-find-out",
+    "sourceDigest": "20f94d1fcd56e15f57391f86c7b1492c0453e9912f851b72a3a26a3e56a09642",
+    "kind": "interpretive",
+    "importance": 3,
+    "reason": "Peter receives Andrew's human announcement despite Jesus crediting divine revelation, but hearing a claim and recognizing its truth are distinct."
+  },
+  {
+    "slug": "bible-fig",
+    "sourceDigest": "8f3c3710b5f1277f25bc86a3b57d0dae16aa3712d3a01c773fcdbdb1b6cdefce",
+    "kind": "interpretive",
+    "importance": 3,
+    "reason": "Matthew stages immediate withering and amazement while Mark stages next-morning discovery, but delayed observation does not establish delayed death."
+  },
+  {
+    "slug": "bible-deny",
+    "sourceDigest": "213af7190c294e1e8a5e6d05be28729499d183bb0334cb28d88112310c47b2da",
+    "kind": "interpretive",
+    "importance": 3,
+    "reason": "Parallel stages of Peter's denials identify different accusers and grounds for recognition, but multiple speakers within each encounter are not excluded."
+  },
+  {
+    "slug": "bible-buried",
+    "sourceDigest": "42e5a2b16ac25c6f90eb3e1e4baad44bb97531d012986e2a17b2f1676a39b622",
+    "kind": "interpretive",
+    "importance": 3,
+    "reason": "Acts assigns condemnation and burial to one collective while Luke distinguishes Joseph from the condemnation; collective agency leaves room for different individuals."
+  },
+  {
+    "slug": "bible-dawn",
+    "sourceDigest": "ec83fea4afc4f0a32bacca5a55f0771cbe18c9a8e2c2f08a787b7b96d2cde0f5",
+    "kind": "interpretive",
+    "importance": 3,
+    "reason": "The corresponding opening tomb visit occurs while dark in John and at sunrise in Mark, though dawn terminology and possible separate arrivals limit precision."
+  },
+  {
+    "slug": "bible-generations",
+    "sourceDigest": "473d3f04e62f6c4491f8df9f962d90fbd2ef4366d6cea329d260d8ea19102eaa",
+    "kind": "interpretive",
+    "importance": 3,
+    "reason": "The lists differ by fifteen ancestral positions and by branches, but unequal listed lengths alone do not establish exhaustive biological generation counts."
+  },
+  {
+    "slug": "bible-allthings",
+    "sourceDigest": "0c8e7e34c15f308a8ad89d02d6fb24c595c98b0ce22c36ee156c89bef2cece39",
+    "kind": "interpretive",
+    "importance": 3,
+    "reason": "Completed disclosure of everything heard from the Father contrasts with much remaining unsaid, but the remaining teaching is not explicitly identified as that same set."
+  },
+  {
+    "slug": "bible-fall",
+    "sourceDigest": "2ccd344971967e658a12f1a22228a82b7fadde7afc99f876447271a12b969cad",
+    "kind": "interpretive",
+    "importance": 3,
+    "reason": "The companions stand in one conversion scene and fall in another, but the excerpts do not fix those postures to an identical instant."
+  },
+  {
+    "slug": "bible-please",
+    "sourceDigest": "a0b796c4333571b374ba66099814187c65446acd94b833db6183e709f224f71c",
+    "kind": "interpretive",
+    "importance": 3,
+    "reason": "Paul both commends and rejects pleasing people, with different stated purposes leaving the scope of the rejection uncertain."
+  },
+  {
+    "slug": "bible-stalls",
+    "sourceDigest": "bf8710f696712ac51a0ca06fb79a3b5ab1f1ba609e50b2d6607b0105694b1f57",
+    "kind": "direct",
+    "importance": 1,
+    "reason": "Corresponding royal inventories disagree tenfold on stalls while preserving the identical horseman total."
+  },
+  {
+    "slug": "bible-pillars",
+    "sourceDigest": "f442c51b1783d2774f6b51491d1bab093b0a145a28a6cb8d04a1bda6bd9e46c1",
+    "kind": "direct",
+    "importance": 1,
+    "reason": "Corresponding pillar dimensions disagree even if the thirty-five-cubit description is interpreted as a combined length."
+  },
+  {
+    "slug": "bible-baths",
+    "sourceDigest": "a2d44b5a30e633dbdd117e52113ef95b128b8849b1896499e5163f77f5bef260",
+    "kind": "direct",
+    "importance": 1,
+    "reason": "Matching descriptions of the same bronze basin give two thousand versus three thousand baths without stated different measurement conditions."
+  },
+  {
+    "slug": "bible-hiram",
+    "sourceDigest": "e264f71416dd2d9621920b922ba855249cdea39ce62fecce8f3568f35667c7f0",
+    "kind": "direct",
+    "importance": 1,
+    "reason": "The corresponding Ophir expedition delivers either 420 or 450 gold talents to Solomon in the same unit and transaction."
+  },
+  {
+    "slug": "bible-chapiter",
+    "sourceDigest": "b66a174475b8cfb0de587e5fd7c3563b4266956e8d0491db5af8917f5640870b",
+    "kind": "direct",
+    "importance": 1,
+    "reason": "The same bronze pillar capital is measured as five cubits and three cubits without distinguishing portions or alterations."
+  },
+  {
+    "slug": "bible-with-king",
+    "sourceDigest": "96bc6d10b9083c66ead9877b71197e360bc5a557880b3cdf7d808ca742aee30e",
+    "kind": "direct",
+    "importance": 1,
+    "reason": "Otherwise closely matching detention lists count the same royal-attendant category as five and seven."
+  },
+  {
+    "slug": "bible-pahathmoab",
+    "sourceDigest": "85e2b60bb1dbd4cf1238122f0c74293252cda26350b0c9bee742a84bd928e136",
+    "kind": "direct",
+    "importance": 1,
+    "reason": "Parallel records give the identically named Jeshua and Joab family grouping exact totals differing by six."
+  },
+  {
+    "slug": "bible-zattu",
+    "sourceDigest": "d9bdc17f047e1170806ba062d70fe50ac14a1123e58bf57e27e855db40271bb4",
+    "kind": "direct",
+    "importance": 1,
+    "reason": "Corresponding Zattu family entries give exact totals separated by one hundred without naming different subgroups or occasions."
+  },
+  {
+    "slug": "bible-bebai",
+    "sourceDigest": "9494745b9cfa940465a7cb73229735354908064988f05d724ac4bee284bd2894",
+    "kind": "direct",
+    "importance": 1,
+    "reason": "The exact return-list totals for the identically named Bebai family differ by five people, 623 versus 628."
+  },
+  {
+    "slug": "bible-adonikam",
+    "sourceDigest": "330ec772f0468e0f947a4da29de433c2d67a07b1a723a6e4fa8240a08e5e5dbc",
+    "kind": "direct",
+    "importance": 1,
+    "reason": "The same returning family is assigned the incompatible exact totals 666 and 667."
+  },
+  {
+    "slug": "bible-bezai",
+    "sourceDigest": "2b3f53def865937acd79af00b4a7a5580b26fbc01e9baa34f54b4f62ce76742d",
+    "kind": "direct",
+    "importance": 1,
+    "reason": "The corresponding Bezai return entries give exact totals of 323 and 324 without a different counting condition."
+  },
+  {
+    "slug": "bible-lod",
+    "sourceDigest": "798a29df452eb9696e0374c76eaced0615dd59779150e5c50b6d48868adf3eb5",
+    "kind": "direct",
+    "importance": 1,
+    "reason": "The same three-place return group receives exact totals of 725 and 721 without a stated change in scope."
+  },
+  {
+    "slug": "bible-senaah",
+    "sourceDigest": "67dbcb28200cfcce6c30b29a6ad4fef5c97d52b3eb8a720c50e45e8583fc380b",
+    "kind": "direct",
+    "importance": 1,
+    "reason": "Corresponding Senaah return-list entries give definite totals differing by three hundred."
+  },
+  {
+    "slug": "bible-porters",
+    "sourceDigest": "865eb17440f2fba954afdc3609f90dfa618b865b8f334bba38f98aaf2b3f6827",
+    "kind": "direct",
+    "importance": 1,
+    "reason": "The same six named gatekeeper families receive exact totals differing by one."
+  },
+  {
+    "slug": "bible-singers",
+    "sourceDigest": "bddc6d875b03a30125c4613b392bd4e7ecc0577847a18397a8107b31d5a32528",
+    "kind": "direct",
+    "importance": 1,
+    "reason": "Corresponding inventories disagree by forty-five singers while matching the neighboring servant total exactly."
+  },
+  {
+    "slug": "bible-heaven",
+    "sourceDigest": "daa4d905c5412c72d69dc47f843f823f2ab437334ab9afc09d5fefaa0ada90c9",
+    "kind": "weak",
+    "importance": 5,
+    "reason": "The alleged chronology combines a possible Genesis summary with distinct acts of preparing a kingdom and a place, rather than one clearly shared creation event."
+  },
+  {
+    "slug": "bible-stars-made",
+    "sourceDigest": "5351e072110a8a5f6d099df84597b6b5fecb6e6bed3502c7068e57db2a886b1d",
+    "kind": "weak",
+    "importance": 5,
+    "reason": "The apparent chronology requires treating singing morning stars in a poetic construction scene as a literal physical creation schedule."
+  },
+  {
+    "slug": "bible-marriage",
+    "sourceDigest": "83098c7e0288f4bd052df0adaff74a95af8b123a0f250d12b2e00df38ab554d1",
+    "kind": "weak",
+    "importance": 5,
+    "reason": "Praising marriage and valuing voluntary celibacy offer competing ideals without prescribing opposite rules for every person."
+  },
+  {
+    "slug": "bible-eve",
+    "sourceDigest": "017ae02dea4135322cc105df6549fdc8ad629e161d4e9a97899b881eb5f77cb6",
+    "kind": "weak",
+    "importance": 5,
+    "reason": "The paired creation summary never asserts simultaneity, so the later detailed sequence does not contradict an explicit date or order in the first quotation."
+  },
+  {
+    "slug": "bible-everyone",
+    "sourceDigest": "1ac02d675abda272a5c58f9f3bccf191e8b54ad92d9f04f00561ccccd1499ddd",
+    "kind": "weak",
+    "importance": 5,
+    "reason": "The purported ancestry exception depends on treating Hebrews' parentless priestly description as literal biology; divine-human offspring still have human mothers."
+  },
+  {
+    "slug": "bible-respect",
+    "sourceDigest": "35fe56108cb593a033ab8432fdc10692d1aac865614cf23bc661f590155f25c1",
+    "kind": "weak",
+    "importance": 5,
+    "reason": "Favorable regard and unjust partiality are different senses of respect, although inherited covenant preference leaves a narrower moral question."
+  },
+  {
+    "slug": "bible-sons",
+    "sourceDigest": "a755c603f1ddb84b0de980f3bc937d6855143132ebafc36f09e358566d5277e7",
+    "kind": "weak",
+    "importance": 5,
+    "reason": "Collective and adopted sonship differ from only begotten sonship, and the sharper royal begetting passage never identifies a distinct competing son."
+  },
+  {
+    "slug": "bible-babel",
+    "sourceDigest": "efd6e771dbc1f39f98bfedbbadf94efa1c5518b44eb6c9f446a8cee88a999d12",
+    "kind": "weak",
+    "importance": 5,
+    "reason": "Linguistic diversity appears before Babel in the written arrangement, but the genealogical summaries do not date it before the narrated language division."
+  },
+  {
+    "slug": "bible-wrestle",
+    "sourceDigest": "06220f30be5fad92a05c6ed178c860f60d14d6ef9a83c671bf2b9343b664cd61",
+    "kind": "weak",
+    "importance": 5,
+    "reason": "Hosea itself combines divine and angelic descriptions, so the titles do not expressly identify mutually exclusive opponents."
+  },
+  {
+    "slug": "bible-tempt-god",
+    "sourceDigest": "beaef793acb867e87f80f0b9127957848c64c7f0f03261c98db435d424365896",
+    "kind": "weak",
+    "importance": 5,
+    "reason": "Testing God is not inducing moral susceptibility, and equating Jesus' temptations with God's own requires an additional theological identification."
+  },
+  {
+    "slug": "bible-strangers",
+    "sourceDigest": "1492827b3ab8368bbdcb74248ce1075aff05a00dcfb3be7811fc149c0802ee3f",
+    "kind": "weak",
+    "importance": 5,
+    "reason": "Protected resident foreigners are not securely matched with unauthorized sacred personnel or conquered enemies."
+  },
+  {
+    "slug": "bible-face",
+    "sourceDigest": "cbca05405001368e68ae403e37fa64d667b93fb482288359e818a90a8675f416",
+    "kind": "weak",
+    "importance": 5,
+    "reason": "Face-to-face speech includes a comparison to friendly conversation, so it need not assert the literal visual access denied elsewhere in the same encounter."
+  },
+  {
+    "slug": "bible-gods-children",
+    "sourceDigest": "0388bc477607fd10ba2287937b300a0fe1ff77079a21b018087ae021778c220a",
+    "kind": "weak",
+    "importance": 5,
+    "reason": "Divine offspring by origin and divine children by belief or moral allegiance are different senses of kinship."
+  },
+  {
+    "slug": "bible-cursed",
+    "sourceDigest": "f2ea6a2aaadb6d49371307b9b4c24dfc9ac700586972e0bbfd8183fbe913879e",
+    "kind": "weak",
+    "importance": 5,
+    "reason": "A curse on those relying on law is compatible with a curse on failure if they fail its complete standard; the argument leaves that premise unstated rather than explicitly cursing obedience."
+  },
+  {
+    "slug": "bible-set-upon",
+    "sourceDigest": "de29ba1019e42bb4c147a695ff6c035b8e0b434a711cfb9765a26473d1867335",
+    "kind": "weak",
+    "importance": 5,
+    "reason": "Incompatible physical support models emerge only by treating poetic images of divine power as literal structural descriptions."
+  },
+  {
+    "slug": "bible-ripped",
+    "sourceDigest": "c560d7c68938652052e1a41cdb8e628b93d58c726f37795ac29e878f8cc484d6",
+    "kind": "weak",
+    "importance": 5,
+    "reason": "The quoted condemnation concerns different brutality, while atrocity predictions and narration do not straightforwardly constitute permission."
+  },
+  {
+    "slug": "bible-flourish",
+    "sourceDigest": "fd27451a44155d44bfb18b5ce3390318e0eb2f7784b9c68b5925056f4bbf2043",
+    "kind": "weak",
+    "importance": 5,
+    "reason": "Poetic flourishing and the righteous person's eventual death are compatible, though they convey contrasting expectations of divine protection."
+  },
+  {
+    "slug": "bible-sleep",
+    "sourceDigest": "fe740974dedb8b8d0d3fed306cf7f14ad6129b4eafb1c0c607beba5a4e222a15",
+    "kind": "weak",
+    "importance": 5,
+    "reason": "A suffering community's sleep metaphor protests perceived divine inaction rather than reporting physical sleep contrary to another psalm."
+  },
+  {
+    "slug": "bible-wicked",
+    "sourceDigest": "9f3b22e3dc8d8dff9375dd830db4ad9c136ff64c51136df69ec1e273e2c140e3",
+    "kind": "weak",
+    "importance": 5,
+    "reason": "Different ransom transactions are compatible, while an assumed righteous category supplies only an indirect version of the separate righteousness tension."
+  },
+  {
+    "slug": "bible-new",
+    "sourceDigest": "85d914876204b86ef5050bea561cf6a26dfc3dfb5fdd33c7ba02883fd94ef485",
+    "kind": "weak",
+    "importance": 5,
+    "reason": "Poetic denial of novelty and promises of renewal use new across different scopes, so a literal universal-event collision is uncertain."
+  },
+  {
+    "slug": "bible-messiah",
+    "sourceDigest": "236f29b226008e8b2d3ea60548e4de11b53c036e17f1d3163398c689904dc5a6",
+    "kind": "weak",
+    "importance": 5,
+    "reason": "Jesus questions how David's Lord is his son without explicitly denying descent, and status does not logically exclude ancestry."
+  },
+  {
+    "slug": "bible-majesty",
+    "sourceDigest": "0b370bf2379bd014f0fc88cd25829212e0a0eb246eddc1e6276b8fc409456415",
+    "kind": "weak",
+    "importance": 5,
+    "reason": "Universal sight of glory and a wicked person's failure to behold majesty are not explicitly the same occasion or kind of recognition."
+  },
+  {
+    "slug": "bible-furious",
+    "sourceDigest": "1eea2f4c3c37050853a5448f6e29eff7d9f9765c58a3a804757a5f9e0eb8e663",
+    "kind": "weak",
+    "importance": 5,
+    "reason": "A present denial of fury does not establish that God never feels the fury described at other times."
+  },
+  {
+    "slug": "bible-son-of-david",
+    "sourceDigest": "87f8faea37dfeec31abed7cbec6b7ab99fc30e7f73d53513fb99b8cfcea03366",
+    "kind": "weak",
+    "importance": 5,
+    "reason": "Jesus' question about David calling his descendant Lord challenges a title without explicitly denying Davidic ancestry."
+  },
+  {
+    "slug": "bible-jesus-born",
+    "sourceDigest": "5b74c85c98ab4bdf7859d3d55603bf4436c09391ff1b8ed3da2a3693eb1d287a",
+    "kind": "weak",
+    "importance": 5,
+    "reason": "The political date markers require external reign and governorship dates before their historical incompatibility can be demonstrated."
+  },
+  {
+    "slug": "bible-end",
+    "sourceDigest": "3c0af4c04d210e74e6e579d63136dd816cd4dba3ac36379ee893f7df86483a20",
+    "kind": "weak",
+    "importance": 5,
+    "reason": "Worldwide witness does not require completing every Israeli city, and the excerpts do not explicitly identify the coming with the end as one chronological event."
+  },
+  {
+    "slug": "bible-return",
+    "sourceDigest": "995288129853dda8af947c8c0412f2d67b2ea8f9ca9bdc05c096c5d6d8de8612",
+    "kind": "weak",
+    "importance": 5,
+    "reason": "The comparison equates the coming with the end and assumes worldwide witness requires visiting every Israelite city."
+  },
+  {
+    "slug": "bible-crucifixion",
+    "sourceDigest": "f9e8e4607f2f3f380c55471e7e85e96b829ed3f671454c5e89ff7bffd0333e28",
+    "kind": "weak",
+    "importance": 5,
+    "reason": "John's rhetorical response and the garden's conditional plea occur at different moments, so differing resolve does not establish a denial that Jesus ever requested escape."
+  },
+  {
+    "slug": "bible-women-discover",
+    "sourceDigest": "94a0ec50301adb286f2d34315dc9546c909ee15523718a2cc119c51bd5c41f9d",
+    "kind": "weak",
+    "importance": 5,
+    "reason": "The messenger accounts do not expressly deny that the women already noticed the absence before hearing its explanation."
+  },
+  {
+    "slug": "bible-recognize",
+    "sourceDigest": "7f89e2ffc5626aa97025a0fa1d62b35ac9cad3562e17bb00ad33ba13083bda8d",
+    "kind": "weak",
+    "importance": 5,
+    "reason": "Matthew's narrated worship does not specify the first instant of perception needed to exclude John's initial nonrecognition."
+  },
+  {
+    "slug": "bible-first-ap",
+    "sourceDigest": "078d8f51206b66dbdcf8759951de4c510d1ee7144a423201b6dbbac8507244d2",
+    "kind": "weak",
+    "importance": 5,
+    "reason": "Different opening witnesses in appearance reports do not establish rival first appearances because only Mark explicitly claims priority."
+  },
+  {
+    "slug": "bible-women-sepulchre",
+    "sourceDigest": "699ef80d53bc5f820d221896bc68a000e9fdeafb298e95c0b8fd838e77a95190",
+    "kind": "weak",
+    "importance": 5,
+    "reason": "Different named witness lists are not exact attendance totals, and none says only the named women attended."
+  },
+  {
+    "slug": "bible-sitting",
+    "sourceDigest": "e9537425d7491513d32583150c9cba25f9edcce774d72ffb095b42276af8642c",
+    "kind": "weak",
+    "importance": 5,
+    "reason": "Different tomb postures do not establish the same instant or exclude figures moving during an encounter."
+  },
+  {
+    "slug": "bible-visit",
+    "sourceDigest": "e529eb125ce87e06a76b4a04ee8aaed2db83f0c0afdab3bf91fed5c62568fe80",
+    "kind": "weak",
+    "importance": 5,
+    "reason": "The itinerary conflict requires identifying paradise with ascent to the Father, an equation neither quotation supplies."
+  },
+  {
+    "slug": "bible-thieves",
+    "sourceDigest": "4093e3f92cce416bc47320243052f64eddb7b5648eb0e24d07d06be54719865b",
+    "kind": "weak",
+    "importance": 5,
+    "reason": "The promised criminal expresses changed allegiance, and exclusion of thieves need not cover every person who formerly stole."
+  },
+  {
+    "slug": "bible-confusion",
+    "sourceDigest": "a4813a5029f233c804e9e472c52e1ca19d54d53eefab81cd827947f323b8f527",
+    "kind": "weak",
+    "importance": 5,
+    "reason": "Babel deliberately disrupts understanding, but Paul's denial of confusion concerns church order and need not describe every divine action or sense of confusion."
+  },
+  {
+    "slug": "bible-force",
+    "sourceDigest": "a3cf5a879bf49c6d91253e34239fd99787ea3b89afc395f076f27855e55d5989",
+    "kind": "weak",
+    "importance": 5,
+    "reason": "God and another spiritual agent can obstruct different people's belief, so the moral problem does not establish exclusive competing causes."
+  },
+  {
+    "slug": "bible-athand",
+    "sourceDigest": "07b9fbaf22e29f17fb99ad5874d18fcc2b8f7590ae403d5e85619d455d77f905",
+    "kind": "weak",
+    "importance": 5,
+    "reason": "Communal expectation of surviving to the return does not fix a date or deny the intervening conditions required by the second letter."
+  },
+  {
+    "slug": "bible-childbearing",
+    "sourceDigest": "313d718f112b82409f38374f6f4cb6764034199e47eb381239e3c8e4ff4732ea",
+    "kind": "weak",
+    "importance": 4,
+    "reason": "Commanded reproduction can also require ritual purification, and the sin offering does not expressly classify childbirth as a forbidden moral act."
+  },
+  {
+    "slug": "bible-god-work",
+    "sourceDigest": "3c62bc084a43a691cba1b015fce90b1579406eafa91d97cd11e6b6ed63860d04",
+    "kind": "weak",
+    "importance": 4,
+    "reason": "Rest from completed creation and ongoing later Sabbath activity describe different times and kinds of work."
+  },
+  {
+    "slug": "bible-flood-die",
+    "sourceDigest": "9fab80702cd4b1c37e90cf0ddf660a84f9cb5e9f8996d9de8c082e37c1898f53",
+    "kind": "weak",
+    "importance": 4,
+    "reason": "Later giants raise an ancestry question but the quotations identify no survivor outside the ark or necessary continuous giant lineage."
+  },
+  {
+    "slug": "bible-eat-blood",
+    "sourceDigest": "949a52d1e615f53c003e6e53482aef513b4d96b21fe04950396f1821e41aad7c",
+    "kind": "weak",
+    "importance": 4,
+    "reason": "The conflict requires reading John's life-and-indwelling language as literal blood consumption under the ordinary dietary prohibition rather than a religious figure."
+  },
+  {
+    "slug": "bible-wifes-sister",
+    "sourceDigest": "63302087c7933a0a55e11742ba82ecbfacb5bed73e3ed4ea27d06ca9ffe14b0d",
+    "kind": "weak",
+    "importance": 4,
+    "reason": "Jacob's earlier conduct is not an explicit approval under the later prohibition, and the divine sister pairing is expressly metaphorical."
+  },
+  {
+    "slug": "bible-tribes",
+    "sourceDigest": "aa6855f1940f29de541d59c5003f5e8d26a58ca154657190586b9affaacf08ec",
+    "kind": "weak",
+    "importance": 4,
+    "reason": "The rosters serve different genealogical, military, territorial, and symbolic functions rather than asserting one invariant classification."
+  },
+  {
+    "slug": "bible-cattle",
+    "sourceDigest": "390f2c6f5a514b70d3741fd36f00aa508eb616da15ce00ad859286db0d62e81d",
+    "kind": "weak",
+    "importance": 4,
+    "reason": "Later living cattle conflict with an unrestricted reading of all, but the initial warning expressly limits the affected livestock to animals in the field."
+  },
+  {
+    "slug": "bible-ignorance",
+    "sourceDigest": "e3aa7e1e35b0ecfa8a0fbb4cbf6d2f1d9033e0b0dc192bb33c579c091e876888",
+    "kind": "weak",
+    "importance": 4,
+    "reason": "Different sacrifices address a priest, sacred-property trespass, and a general inadvertent sin rather than clearly identical cases."
+  },
+  {
+    "slug": "bible-sacrifice",
+    "sourceDigest": "15e2f0d148ab526030fe7707a6de327fd1be1f8963e8de6fa58446917c7392e8",
+    "kind": "weak",
+    "importance": 4,
+    "reason": "Samuel's offering raises a procedural question, but the supplied ancestry never establishes that he was excluded from the authorized lineage."
+  },
+  {
+    "slug": "bible-pentateuch",
+    "sourceDigest": "dbe35840338c821a6600e7464cf57cfb3c1e0af72c67ae8254eb598806a30c41",
+    "kind": "weak",
+    "importance": 4,
+    "reason": "Posthumous narration challenges sole Mosaic authorship, but the cited attribution only says Moses wrote a law rather than every final sentence."
+  },
+  {
+    "slug": "bible-ammonites",
+    "sourceDigest": "58c42f028be945c012fc1a34bc655310768d218736638f4160d4f747ce4b0839",
+    "kind": "weak",
+    "importance": 4,
+    "reason": "Divinely protected Ammon later faces divinely supported warfare, but the earlier journey-specific restraint does not state a permanent prohibition on every future conflict."
+  },
+  {
+    "slug": "bible-bastard",
+    "sourceDigest": "9de6b36bddea445d642f2c9d099b08bac9b246769892421787224d4b8561df3f",
+    "kind": "weak",
+    "importance": 4,
+    "reason": "David falls within the calculated exclusion span only if Pharez fits the legal category, and the quotations neither classify him nor record David's admission."
+  },
+  {
+    "slug": "bible-edom",
+    "sourceDigest": "ebc3582a411c5d9f0220e7eff42b0d351c945ed0c4579f432bd0607ba4bffe26",
+    "kind": "weak",
+    "importance": 4,
+    "reason": "A prohibition on abhorring Edomites does not expressly prohibit military judgment or war, so the hostile treatments differ without opposite rules for one condition."
+  },
+  {
+    "slug": "bible-believe",
+    "sourceDigest": "3ab1acbd336221621089ace6fa1574ecfc1721a326d821fa46ada0deaa55db21",
+    "kind": "weak",
+    "importance": 4,
+    "reason": "Love's poetic description as believing all things conflicts with testing claims only if it becomes a literal instruction to accept every assertion."
+  },
+  {
+    "slug": "bible-astrology",
+    "sourceDigest": "167158d9142a5057186c5edafb703082b7db242e65b27ddaf839aa03e346c55e",
+    "kind": "weak",
+    "importance": 4,
+    "reason": "Approved celestial signs differ from condemned divination and heavenly worship, leaving selective interpretation rather than a direct permission for the prohibited practice."
+  },
+  {
+    "slug": "bible-42",
+    "sourceDigest": "9b3eabde1e27c24cd6d56f068fbee954f05faeda8ad2d7e17c997e918c1c56cb",
+    "kind": "weak",
+    "importance": 4,
+    "reason": "Forty one unique names differ from three fourteen-generation blocks, but shared boundary figures mean the blocks need not claim forty two distinct people."
+  },
+  {
+    "slug": "bible-egypt",
+    "sourceDigest": "3aee49ffd0dbafbaf9c888fabc800568fb9686d8814295921da0599131f23d3c",
+    "kind": "weak",
+    "importance": 4,
+    "reason": "Luke's compressed return transition omits Egypt but does not deny other travel, and the two quotations do not assign their journeys to the same time."
+  },
+  {
+    "slug": "bible-imprisonment",
+    "sourceDigest": "77c538219698042974afda2faa652198f0538dad2f726ce95a0330ce24132276",
+    "kind": "weak",
+    "importance": 4,
+    "reason": "Andrew's earlier introduction of Peter need not be the same event as the later lakeside summons after John's arrest."
+  },
+  {
+    "slug": "bible-public",
+    "sourceDigest": "f6ba2e2215eaff43a1eec67e5ab8907febe4a19765434d028d4eebf546bc83b9",
+    "kind": "weak",
+    "importance": 4,
+    "reason": "Matthew's private-prayer instruction targets conspicuous hypocrisy, while the approved public prayer states a different purpose."
+  },
+  {
+    "slug": "bible-material",
+    "sourceDigest": "0cfd57bd84b5c255883dccd4d17b965edd4799b95c67032da822d02458ca6d2f",
+    "kind": "weak",
+    "importance": 4,
+    "reason": "Warnings against anxiety about necessities do not forbid the actual household provision required by Timothy."
+  },
+  {
+    "slug": "bible-samaritans",
+    "sourceDigest": "2a162f4177f69f762e00a7b681238389587ab5f49e2275cf846ee37ad04dae10",
+    "kind": "weak",
+    "importance": 4,
+    "reason": "Geographically restricted commissions and later universal missions concern different stages rather than simultaneous incompatible instructions."
+  },
+  {
+    "slug": "bible-who-did-jesus-call-a-dog",
+    "sourceDigest": "40a0613c06426759048e2f795e2326401780dedca507e17899a3a7794df2a9f2",
+    "kind": "weak",
+    "importance": 4,
+    "reason": "The woman's identity labels are not demonstrably exclusive, while first versus Israel-only wording leaves a narrower mission-scope tension."
+  },
+  {
+    "slug": "bible-comingdeath",
+    "sourceDigest": "08fef00db18c0ebf93f61a879978b908025f15e8f6bb02222f781c0517ce4466",
+    "kind": "weak",
+    "importance": 4,
+    "reason": "Ignorance of the resurrection scripture is not a denial that Jesus predicted resurrection, although repeated warnings make the disciples' incomprehension striking."
+  },
+  {
+    "slug": "bible-transfig",
+    "sourceDigest": "3887076138df0e4969e74a6c75705eae590271484b21596633a897e25648d074",
+    "kind": "weak",
+    "importance": 4,
+    "reason": "Luke's approximate eight days can accommodate a different boundary-day count from the six-day interval."
+  },
+  {
+    "slug": "bible-women-watching",
+    "sourceDigest": "0d1e0b7ee9efb26f6579986fb7c3cacc2c05aa56fc949d518b6a050dd682c346",
+    "kind": "weak",
+    "importance": 4,
+    "reason": "Mary Magdalene is placed at different distances, but the accounts do not fix the same instant or exclude movement."
+  },
+  {
+    "slug": "bible-inside",
+    "sourceDigest": "3ace837c2f1b2014fd14ac23d12e8d26b4fe07b98d6cf4fde01fefb97d501d5b",
+    "kind": "weak",
+    "importance": 4,
+    "reason": "The tomb messengers appear inside or outside, but the excerpts do not establish the same stationary figure at the same moment."
+  },
+  {
+    "slug": "bible-ascend",
+    "sourceDigest": "7c30d18f9926ed6839bc005bf87c968c1401d7edc7234d0d131b63c54b63cd1f",
+    "kind": "weak",
+    "importance": 4,
+    "reason": "Acts specifies forty days, but the compact Gospel endings never explicitly place ascension on resurrection day, so the rival duration comes from narrative adjacency."
+  },
+  {
+    "slug": "bible-foundation",
+    "sourceDigest": "ccb0a6d62338317fbd94974ad48d4cc6e822cbad356a8398d5e4058515de9d73",
+    "kind": "weak",
+    "importance": 4,
+    "reason": "The foundation metaphors assign Christ and the apostles different roles, but their figurative wording and the meaning of the apostles' foundation remain flexible."
+  },
+  {
+    "slug": "bible-devil",
+    "sourceDigest": "7088eb7dd7a1c4b465603846ddcc4ec4063f540cf60b6486046d32dfefcee344",
+    "kind": "weak",
+    "importance": 4,
+    "reason": "Capture at the devil's will describes existing captives who may recover, not an explicit inability of anyone to resist as James instructs."
+  },
+  {
+    "slug": "bible-uz-hul-gether",
+    "sourceDigest": "b235391aaad0ae71427f02d650589e335615b37265826e3aef09e60054b5ac6a",
+    "kind": "interpretive",
+    "importance": 2,
+    "reason": "The lists differ by one generation under immediate-parent readings, but the compact sons heading may cover descendants."
+  },
+  {
+    "slug": "bible-laban",
+    "sourceDigest": "9a97493a102a17901ba6743a476b0093bbcd24a41ac8bcc57a5ce2ac581ec479",
+    "kind": "interpretive",
+    "importance": 2,
+    "reason": "Laban receives Bethuel and Nahor as paternal names, but the undefined scope of son leaves an ancestral-versus-immediate-parent ambiguity."
+  },
+  {
+    "slug": "bible-anah",
+    "sourceDigest": "57c6c616c8596f0e9c5c335af2dece07c66f642802f8c1db2eb485eddb1285af",
+    "kind": "interpretive",
+    "importance": 2,
+    "reason": "Anah's apparent daughter designation contrasts with male descent notices, but nested grammar and repeated names leave both gender and identity uncertain."
+  },
+  {
+    "slug": "bible-korah",
+    "sourceDigest": "1b5cea164a93fa257082c51c01477790f93a80d53391326db8361bf32d89543f",
+    "kind": "interpretive",
+    "importance": 2,
+    "reason": "The matching Duke Korah name shifts from Esau's son to Eliphaz's line, but separate people sharing the name remain unexcluded."
+  },
+  {
+    "slug": "bible-bens-sons-grandsons",
+    "sourceDigest": "48f605bde71ef871efdab6bbdebf4916d7609f4c3b4afafc55937b0f10b34759",
+    "kind": "interpretive",
+    "importance": 2,
+    "reason": "Ard and Naaman appear beside Bela as sons of Benjamin but elsewhere as Bela's sons; the tension depends on whether sons denotes immediate children."
+  },
+  {
+    "slug": "bible-ark",
+    "sourceDigest": "e1a6bc61c2ff7ef24a3845c17ecc3e049ff88d983827680cba9e475e1294d47e",
+    "kind": "interpretive",
+    "importance": 2,
+    "reason": "The ark's exclusive tablet inventory differs from Hebrews' added manna and rod, but the inventories are not explicitly dated to the same moment."
+  },
+  {
+    "slug": "bible-cities",
+    "sourceDigest": "ce2971331026ea045ba5480da31e1095c853c0ca4b9a0e1676e18dc1d0049ba2",
+    "kind": "interpretive",
+    "importance": 2,
+    "reason": "The same towns occur in Judah's and Dan's inheritance lists, but neither excerpt makes its assignment exclusive or rules out overlapping or successive possession."
+  },
+  {
+    "slug": "bible-david-sons",
+    "sourceDigest": "7ac0b12ddd4e55d310dc03171a80e9bf722f01bd2a68d92ef5b8f11528b09a39",
+    "kind": "interpretive",
+    "importance": 2,
+    "reason": "The Jerusalem lists vary in names and length, but a shorter inventory does not necessarily exclude additional sons and several differences may be name forms."
+  },
+  {
+    "slug": "bible-uzza",
+    "sourceDigest": "9d2c22dabef6cd83e930a3df55262823fb88e1be9f2ec70c6bb12953bab98424",
+    "kind": "interpretive",
+    "importance": 2,
+    "reason": "The same distinctive ark incident receives different threshing-floor names, though alternative names for one site are not excluded."
+  },
+  {
+    "slug": "bible-thresh",
+    "sourceDigest": "734439b3fe25c4a98bc1148de2696d04d79e65cbc31c925364acd28c72cc528a",
+    "kind": "interpretive",
+    "importance": 2,
+    "reason": "The payments differ drastically in amount and metal, but the later purchase's unspecified boundaries leave property scope uncertain."
+  },
+  {
+    "slug": "bible-heman",
+    "sourceDigest": "69fc0749a1c3db399602023dc68592d55cb33587ccca432f41a5fbc50ac0b5ab",
+    "kind": "interpretive",
+    "importance": 2,
+    "reason": "The matching Heman family clusters name Mahol and Zerah differently, but the separately identified singer is not securely the same man."
+  },
+  {
+    "slug": "bible-uzziah",
+    "sourceDigest": "48fb70193d6cb3f78b87282b398e3fdbdcc3d1cdd2c5afa57067c97fd05218a2",
+    "kind": "interpretive",
+    "importance": 2,
+    "reason": "Matthew omits demonstrable generations, but direct biological conflict depends on reading begat as immediate fatherhood in a compressed genealogy."
+  },
+  {
+    "slug": "bible-bani",
+    "sourceDigest": "2aa52b211291e1b50a1bb7ff722627ebf61010882b5721bcf56d7a1689944448",
+    "kind": "interpretive",
+    "importance": 2,
+    "reason": "The proposed parallel family entries differ by six, but Bani and Binnui are not explicitly established as the same family name."
+  },
+  {
+    "slug": "bible-best-seats",
+    "sourceDigest": "3ecd33efea076928166f930c55609d0529a7a5b45d4a8a37ce5d4ab833240299",
+    "kind": "interpretive",
+    "importance": 2,
+    "reason": "The parallel request is spoken by the brothers in Mark and their mother in Matthew, but Matthew includes the brothers and neither excludes a shared appeal."
+  },
+  {
+    "slug": "bible-color",
+    "sourceDigest": "84acbe01f38793167aa3b0a282873466b165bc14bc96c062b01fe38e948f4dd0",
+    "kind": "interpretive",
+    "importance": 2,
+    "reason": "The parallel mockery scene calls the robe scarlet versus purple, a descriptive discrepancy whose force depends on the precision and boundaries of color terms."
+  },
+  {
+    "slug": "bible-vinegar",
+    "sourceDigest": "599050b620d39df2d9e75a375f45ae4cc6b09cd2513413607562f15e6b3c11b0",
+    "kind": "interpretive",
+    "importance": 2,
+    "reason": "Parallel early drinks and later implements differ, but the descriptions do not exclude combined ingredients or several distinct offerings."
+  },
+  {
+    "slug": "bible-angels-sex",
+    "sourceDigest": "cc8f1fe1404ca1ced6d29bea82a8efdf507804ecbb5e2747e58752deb03a25b6",
+    "kind": "weak",
+    "importance": 3,
+    "reason": "The allegation equates divine sons with angels and heavenly nonmarriage with inability to reproduce, neither equivalence being explicit in the quotations."
+  },
+  {
+    "slug": "bible-sarah",
+    "sourceDigest": "2b46b1871443048fea85a69f76cd6a197eb8ef5765407b9bb1b99ac3cb6e7175",
+    "kind": "weak",
+    "importance": 3,
+    "reason": "An initial doubtful response can precede the later faith credited with conception; the accounts do not fix one simultaneous attitude."
+  },
+  {
+    "slug": "bible-ishmael",
+    "sourceDigest": "c4fa0a7efc041614cf8c6838cd638e642a9911464e6834ca66c1651a51de3688",
+    "kind": "weak",
+    "importance": 3,
+    "reason": "The abandonment scene suggests a small dependent child but gives no age and does not unambiguously place Ishmael on Hagar's shoulder."
+  },
+  {
+    "slug": "bible-fear",
+    "sourceDigest": "7625bdd73b70d23932f92b7a30a0ad44d2450ff7033d7e90e3b3441020e93555",
+    "kind": "weak",
+    "importance": 3,
+    "reason": "Moses' fearful flight clashes with Hebrews' fearless departure only if the two unspecified departure references describe the same occasion."
+  },
+  {
+    "slug": "bible-alcohol",
+    "sourceDigest": "57613163b93c50c7f15f2f9f6b168151d5e2c9c6def066ee1dc6df04c516ca1c",
+    "kind": "weak",
+    "importance": 3,
+    "reason": "Broad warnings against wine sit beside enjoyment, but role restrictions, drunken excess, poetic language, and ordinary drinking mostly concern different conditions."
+  },
+  {
+    "slug": "bible-who-made",
+    "sourceDigest": "03c21ec21bea4ced108ea46ac23b066f948719c5aa6e1d58c58b6a967efa8ab3",
+    "kind": "weak",
+    "importance": 3,
+    "reason": "Moses' claim to make the ark can include commissioned work by Bezaleel because neither attribution explicitly excludes delegated manufacture."
+  },
+  {
+    "slug": "bible-sex-menstruate",
+    "sourceDigest": "b8dc0b82e188f45b5d7344fb417d7b05050cca447b76cd0209922731292f0100",
+    "kind": "weak",
+    "importance": 3,
+    "reason": "Temporary ritual uncleanness and a further communal sanction can both apply because neither is declared the sole consequence."
+  },
+  {
+    "slug": "bible-moab",
+    "sourceDigest": "335c15a6e50ad4f5532f918afb690039a9efc2ffd0de54d3104dd4bf748327de",
+    "kind": "weak",
+    "importance": 3,
+    "reason": "Twenty-three thousand in one day need not equal the total plague deaths, and the short quotations do not independently establish the same bounded event."
+  },
+  {
+    "slug": "bible-korahs-children",
+    "sourceDigest": "391f9a4b5ff85e0c4802663c93c07e6d4ae6af54b27c762a0bd32447d0db6f9c",
+    "kind": "weak",
+    "importance": 3,
+    "reason": "The earlier destruction explicitly names other rebels' children, so including Korah's surviving children relies on extending its broad association language."
+  },
+  {
+    "slug": "bible-ai",
+    "sourceDigest": "89c317a7e99ca833a4a7d19a75f1a50dc461997853b02df3abf2356ece49ee23",
+    "kind": "weak",
+    "importance": 3,
+    "reason": "Later men associated with Ai do not explicitly establish rebuilt habitation, so the challenge to permanent desolation rests on a geographical label."
+  },
+  {
+    "slug": "bible-blessed",
+    "sourceDigest": "cc873c24b4e046d18fcc055b5e17c72791322db6b2d7cedd38ade598f3fffa7a",
+    "kind": "weak",
+    "importance": 3,
+    "reason": "Jael and Judith receive competing praise superlatives, but the speeches do not define one permanent ranking and Mary is only blessed among women."
+  },
+  {
+    "slug": "bible-agagite",
+    "sourceDigest": "b3a9ded05231bdcbded3c56c912fa6abea82dffc7366d9e82b671753e130902d",
+    "kind": "weak",
+    "importance": 3,
+    "reason": "Haman's Agagite label challenges a total extermination only if it identifies the same destroyed lineage, a connection the supplied passages leave inferred."
+  },
+  {
+    "slug": "bible-foreskins",
+    "sourceDigest": "19a7668c8f06ec2c090c443ef1971c26fd08976abd420702a23ec035b9fbce65",
+    "kind": "weak",
+    "importance": 3,
+    "reason": "A marriage price of one hundred and an actual delivery of two hundred need not describe the same exact quantity."
+  },
+  {
+    "slug": "bible-alone",
+    "sourceDigest": "96550930c9a6452fa801ed61513233b6fad999dfc56ad6983cadfa711ab47d2e",
+    "kind": "weak",
+    "importance": 3,
+    "reason": "David arrives alone in Samuel, but later companions receiving bread need not have stood beside him at the initial meeting."
+  },
+  {
+    "slug": "bible-saul",
+    "sourceDigest": "436d1c23b69dd90eb7f69c7c29c233609c43628b79f2ce0eec6ee0ee3ccfc414",
+    "kind": "weak",
+    "importance": 3,
+    "reason": "The conflicting death mechanism comes from an Amalekite's claim, whose truth the narrator does not endorse."
+  },
+  {
+    "slug": "bible-absalom-rebel",
+    "sourceDigest": "ad5db8c2050250f1f2ba26c2b511bbeffda5892aba26433c5562186fa2fa7c0c",
+    "kind": "weak",
+    "importance": 3,
+    "reason": "Forty years before the rebellion threatens the fit with David's forty-year reign, but the interval's starting event is unstated."
+  },
+  {
+    "slug": "bible-michal",
+    "sourceDigest": "fc87748b193a87dc1773e6050275dc98fef605612258f300aac71158c4f95dcb",
+    "kind": "weak",
+    "importance": 3,
+    "reason": "Calling five men Michal's sons raises tension with childlessness, but the supplied text specifies upbringing rather than childbirth."
+  },
+  {
+    "slug": "bible-last-words",
+    "sourceDigest": "750872926a25f446da76ec3c8ca66e872e51ef86f4a2e84e75ad53190e871bcb",
+    "kind": "weak",
+    "importance": 3,
+    "reason": "David's titled final poem and a near-death speech lack an explicit relative chronology proving incompatible final utterances."
+  },
+  {
+    "slug": "bible-mountain",
+    "sourceDigest": "df24a54c270d39d7c13a73cabf0fc298a7e2ae4004a08ca175e19502c4db647f",
+    "kind": "weak",
+    "importance": 3,
+    "reason": "Similar teaching is staged on a mountain and a plain, but the excerpts do not establish one unique sermon or incompatible geographic boundaries."
+  },
+  {
+    "slug": "bible-rejected",
+    "sourceDigest": "b06592b3e716b13ac4053e6b657576dc0a9beaacf4f3234a3fd952c5734d7804",
+    "kind": "weak",
+    "importance": 3,
+    "reason": "Different narrative placements do not establish one exclusive Nazareth visit, and Luke itself mentions previous Capernaum activity."
+  },
+  {
+    "slug": "bible-sixth",
+    "sourceDigest": "131176e8bba4f8d2deb752003f76c1c45ca8f02d3c30264c3403efc143cd1397",
+    "kind": "weak",
+    "importance": 3,
+    "reason": "Different unnumbered selections of commands do not disagree morally or claim to reproduce an exhaustive list."
+  },
+  {
+    "slug": "bible-blindmen",
+    "sourceDigest": "f0f39f51a5f0f4c92e3ca764d710104144bef6d94d319d5009bf4249753f44bd",
+    "kind": "weak",
+    "importance": 3,
+    "reason": "Naming one blind petitioner does not exclude Matthew's second; approach versus departure adds a setting tension without proving all excerpts describe one moment."
+  },
+  {
+    "slug": "bible-caiaphas",
+    "sourceDigest": "a712812586451e689608521a7f747f2ad9a11a5d7434ba24dca26f74260cfd00",
+    "kind": "weak",
+    "importance": 3,
+    "reason": "John explicitly adds Annas first, but the shorter accounts' move to the high priest does not assert an exhaustive itinerary."
+  },
+  {
+    "slug": "bible-cyrenian",
+    "sourceDigest": "9b4adea0adfb24572ce87bbf1a44137d3a4c9534a45771e09730599803dfab07",
+    "kind": "weak",
+    "importance": 3,
+    "reason": "Different carriers are named on the same journey, but neither is said to carry the cross throughout or without a handover."
+  },
+  {
+    "slug": "bible-eleven",
+    "sourceDigest": "8859c7cda1aa0b6a65b86f87d9e7247728853142870eb88845cff00e6d8d3df8",
+    "kind": "weak",
+    "importance": 3,
+    "reason": "The excerpts describe different meetings and use the twelve as a membership label, leaving no securely shared event with three explicit attendance counts."
+  },
+  {
+    "slug": "bible-curtain",
+    "sourceDigest": "8b49c97e86ef53b7e97d9fc5cc5ecc3faf675c9c51ee5a214a55dc8ef3a6b5e7",
+    "kind": "weak",
+    "importance": 3,
+    "reason": "The tearing appears before versus after death in narration, but neither excerpt explicitly fixes that relation as chronology rather than arranging simultaneous surrounding events."
+  },
+  {
+    "slug": "bible-ask",
+    "sourceDigest": "1e86d6f7d19c8f3e531cafa9047f44eb88f389312436fe2374b64b19ab1f8fed",
+    "kind": "weak",
+    "importance": 3,
+    "reason": "Peter previously asks Jesus' destination, but the later present-tense reproach says nobody asks now rather than denying any earlier question."
+  },
+  {
+    "slug": "bible-enoch-die",
+    "sourceDigest": "43d32c4936c9361bec4b2793183521f1e401fd3f06091af39404aaefcd3fd3b3",
+    "kind": "weak",
+    "importance": 3,
+    "reason": "Enoch's escape conflicts with these all died only if that pronoun includes him, and the quoted generalization does not settle its group boundaries."
+  },
+  {
+    "slug": "bible-how-many-rows",
+    "sourceDigest": "77afe89671ab26c679ae03a9c19bc39fdaee71a80b3eccbda917737d796e5f9a",
+    "kind": "interpretive",
+    "importance": 1,
+    "reason": "Forty-five pillars at fifteen per row imply three rows against the stated four, but the roofing supports may have a different counting scope."
+  },
+  {
+    "slug": "bible-dedan",
+    "sourceDigest": "88d94d45bf3b9f8e83a392db45fb0825c919dee75c7be571b4c43ca09d7dcbdc",
+    "kind": "weak",
+    "importance": 2,
+    "reason": "The repeated Sheba-Dedan pair has different fathers, but the excerpts never establish that these are the same people across the two genealogical branches."
+  },
+  {
+    "slug": "bible-terah",
+    "sourceDigest": "c455f51eb35b869338dbcc2a1b35a7e0f049f2564e8909052ef0d7f4bbd4bca2",
+    "kind": "weak",
+    "importance": 2,
+    "reason": "The competing calculated death age assumes Abram specifically was born when Terah was seventy, which the grouped birth notice does not establish."
+  },
+  {
+    "slug": "bible-abram-ishmael",
+    "sourceDigest": "7eedb45cda3052dd33856af1462a3bc9acdfdebafbf78a86064e78b2c3828a9e",
+    "kind": "weak",
+    "importance": 2,
+    "reason": "The competing age calculation assumes Abram individually was born when Terah was seventy, which the grouped birth notice does not specify."
+  },
+  {
+    "slug": "bible-keturah",
+    "sourceDigest": "5c342c2c641329095dfd3b51c4db5ac1b45c240ab39bdfa739accad760ea1f0c",
+    "kind": "weak",
+    "importance": 2,
+    "reason": "Wife and concubine classify Keturah differently, but the excerpts establish neither exclusive legal categories nor an unchanged status."
+  },
+  {
+    "slug": "bible-beersheba",
+    "sourceDigest": "57e84c0611b4b4793ba09a4e1a8b9ed5e35368eb456985e9de34f94a081f5614",
+    "kind": "weak",
+    "importance": 2,
+    "reason": "Two explanations repeat Beersheba's naming without specifying that both narrate its exclusive first naming."
+  },
+  {
+    "slug": "bible-bens-age",
+    "sourceDigest": "40fce12dfc5a7050616e3251abaddf432c204d56d16817ab4692dfe678795f4d",
+    "kind": "weak",
+    "importance": 2,
+    "reason": "Benjamin's childlike description contrasts with ten sons, but familial terms such as little one and lad do not state a numerical age."
+  },
+  {
+    "slug": "bible-zelophehad",
+    "sourceDigest": "f9a511c5f766fe3ec34d0521c12044ae95dfc18ceaac428b8c8d47881d4b8567",
+    "kind": "weak",
+    "importance": 2,
+    "reason": "The alleged alternative father depends on resolving an interrupted genealogical heading whose referent is uncertain."
+  },
+  {
+    "slug": "bible-sisera",
+    "sourceDigest": "fb031d279120ce452aafb5365a1f9cd8e0c4dc2bbacf7efa218eaadd29181588",
+    "kind": "weak",
+    "importance": 2,
+    "reason": "The victory song's falling imagery never explicitly says Sisera was awake before the blow described in prose."
+  },
+  {
+    "slug": "bible-sauls-sons",
+    "sourceDigest": "adfa101e07d8010c13125c819d7ef449f1a1bd85715fcb9c9ff3c540d42f9c86",
+    "kind": "weak",
+    "importance": 2,
+    "reason": "The family inventories differ, but neither says its named sons exhaust Saul's offspring or resolves alternative names."
+  },
+  {
+    "slug": "bible-saul-prophet",
+    "sourceDigest": "1afe7c75bed655ecee58f18a27256195653e411603a1a8634c9bc5127572792f",
+    "kind": "weak",
+    "importance": 2,
+    "reason": "The later episode can renew an existing proverb because only the earlier account explicitly describes its first emergence."
+  },
+  {
+    "slug": "bible-priest",
+    "sourceDigest": "0756eab9327d8937846a196c4a33f4f7509c9515c61c67d6a2bd50e276cc2c19",
+    "kind": "weak",
+    "importance": 2,
+    "reason": "Naming the priest David met and dating an event by a high priest are not mutually exclusive without additional succession evidence."
+  },
+  {
+    "slug": "bible-abiathar",
+    "sourceDigest": "8189f940428d21b204d4f65e249fc571b50e21f0b95db200dcdb6990117f22aa",
+    "kind": "weak",
+    "importance": 2,
+    "reason": "The priestly father-son names reverse, but the excerpts do not establish that the later Ahimelech is Abiathar's father rather than another generation."
+  },
+  {
+    "slug": "bible-absalom",
+    "sourceDigest": "6d23f6634f832b4a3d2499dde7d8639fc4f4f173285a2059da80bb261b823470",
+    "kind": "weak",
+    "importance": 2,
+    "reason": "The recorded sons contrast with Absalom's claim of having none, but the passages do not date the memorial against their births or survival."
+  },
+  {
+    "slug": "bible-abijam-asa",
+    "sourceDigest": "5c722412279ecbb2bcc190e076c0f72707a1098552825ab284e0e7435658bbb2",
+    "kind": "weak",
+    "importance": 2,
+    "reason": "Father and son receive the same maternal identification, an unexplained generational attribution that does not logically exclude their stated father-son relationship."
+  },
+  {
+    "slug": "bible-athaliah",
+    "sourceDigest": "90143957f6793782fc2c243f0de56b3b057edd0bc0850717c308e891b66f1843",
+    "kind": "weak",
+    "importance": 2,
+    "reason": "The alternative paternal notice does not name Athaliah and requires both an inferred identity and an immediate-parent meaning of daughter."
+  },
+  {
+    "slug": "bible-joash-buried",
+    "sourceDigest": "31a8da5532b7359e72733db48694c66d37512f09d912204721d61cf54a261bd9",
+    "kind": "weak",
+    "importance": 2,
+    "reason": "Burial with ancestors does not expressly specify royal tombs, so both accounts agree on the city while differing in burial honors."
+  },
+  {
+    "slug": "bible-ahaz",
+    "sourceDigest": "0765274bc250ced7dd8cd6459b350ae75d820625e64404f22a7a5f477039d813",
+    "kind": "weak",
+    "importance": 2,
+    "reason": "Burial with ancestors does not explicitly require the royal sepulchers that Chronicles excludes, leaving different levels of burial detail."
+  },
+  {
+    "slug": "bible-jeconiahs-dad",
+    "sourceDigest": "500364b6a5706a3dd4aef90af4c9bf838403536f2035578f71053e854e9869eb",
+    "kind": "weak",
+    "importance": 2,
+    "reason": "Matthew omits Jehoiakim but follows the same family descent, so incompatible immediate fatherhood depends on rejecting genealogical compression."
+  },
+  {
+    "slug": "bible-possessed",
+    "sourceDigest": "13c22b35c10846ae52ef97e92cabf2a53fae62337496fd08f020ab5a1fa84296",
+    "kind": "weak",
+    "importance": 2,
+    "reason": "One narrated possessed man does not explicitly exclude Matthew's second participant in the parallel scene."
+  },
+  {
+    "slug": "bible-one-or-two",
+    "sourceDigest": "7f02c683db2082abea146350246900fe725e9a434e8ad6c1ef55ae055735574a",
+    "kind": "weak",
+    "importance": 2,
+    "reason": "Matthew orders retrieval of two animals while Mark and Luke name one, but the shorter instructions do not expressly exclude the second animal."
+  },
+  {
+    "slug": "bible-crow",
+    "sourceDigest": "a8cd4248aa91013227268b7511d4eb240c618a8dcb80e49bcf527e932352cbde",
+    "kind": "weak",
+    "importance": 2,
+    "reason": "Before a second crow does not itself require any denial after a first crow; the supplied predictions alone do not establish incompatible fulfillment."
+  },
+  {
+    "slug": "bible-sign",
+    "sourceDigest": "a3e673285fee55342d852c7d94b41fdcebea9feebb22471f437e1fd64a940979",
+    "kind": "weak",
+    "importance": 2,
+    "reason": "Different inscription wordings retain one compatible accusation and can reflect excerpts rather than complete transcriptions."
+  },
+  {
+    "slug": "bible-cock",
+    "sourceDigest": "17746668eba5f96301891945423d12d20fce5e3cd6de6a4c9e143d86a0f20ffa",
+    "kind": "weak",
+    "importance": 2,
+    "reason": "Mark includes an early crow, while the other fulfillment scenes only report the final crow without explicitly excluding an earlier one."
+  },
+  {
+    "slug": "bible-oldabe",
+    "sourceDigest": "b96726f54b0a0158f734c3137088544f12e9911155eece15232418e7e26cb7b2",
+    "kind": "weak",
+    "importance": 2,
+    "reason": "The incompatible departure age depends on assuming Abram was born when Terah was seventy, which the collective birth notice does not establish."
+  },
+  {
+    "slug": "bible-peters-confession",
+    "sourceDigest": "56339bda144945edd666304616eb0b2d96aee58867755b7997789041964a68fb",
+    "kind": "weak",
+    "importance": 2,
+    "reason": "Luke's supposed Bethsaida location is inferred from the preceding scene rather than stated for Peter's confession."
+  },
+  {
+    "slug": "bible-light",
+    "sourceDigest": "e5d8124cab729ae8eda04b239830bc45794163756bb92a2246e9734081cbbfe2",
+    "kind": "not-demonstrated",
+    "importance": 5,
+    "reason": "Lights created on day four can continue a division first made on day one, since the later passage does not claim the first separation."
+  },
+  {
+    "slug": "bible-days",
+    "sourceDigest": "774764df6a09d59aa3ac2961bf1f44013c52d41bc5adc707e5e6b4fe48879e9a",
+    "kind": "not-demonstrated",
+    "importance": 5,
+    "reason": "The unnumbered expression in the day can mean the occasion of creation and does not expressly measure a single day against the detailed six-day account."
+  },
+  {
+    "slug": "bible-male-and-female",
+    "sourceDigest": "7df4d3c367a17e881ba24e775d6a34bfdce1d4351b0bfb22a8dbf336f5f7dc91",
+    "kind": "not-demonstrated",
+    "importance": 5,
+    "reason": "Creation of both sexes does not assert simultaneity and is compatible with a more detailed staged creation of the woman."
+  },
+  {
+    "slug": "bible-satisfied",
+    "sourceDigest": "d87db5fb1280e9a5783f16f84a61244ec2f283a692a54aabaf9c6076c428c344",
+    "kind": "not-demonstrated",
+    "importance": 5,
+    "reason": "Approval of the initial creation and regret after later human conduct concern a changed world at different times."
+  },
+  {
+    "slug": "bible-just",
+    "sourceDigest": "c49317e46911bbb8e334dcc09a06296b15dff99413283304bff8f6baafcc5e0d",
+    "kind": "not-demonstrated",
+    "importance": 5,
+    "reason": "Denying a sinless just person does not deny that people can be just while also sinning."
+  },
+  {
+    "slug": "bible-homosexuals",
+    "sourceDigest": "1ffa8f1af019be2730e164402d458dd23f997b0d1010defb23cb7a46851ab4d6",
+    "kind": "not-demonstrated",
+    "importance": 5,
+    "reason": "Removing people called sodomites does not securely identify their conduct or exclude execution under the separate sexual law."
+  },
+  {
+    "slug": "bible-dwell",
+    "sourceDigest": "6f082a5e1ca1c0b54788167c9be43af6f5efaf17fe2da95faa3275fbc8cf10ed",
+    "kind": "not-demonstrated",
+    "importance": 5,
+    "reason": "Darkness and inaccessible light are contrasting images of divine concealment, without establishing literal opposite conditions of the same space."
+  },
+  {
+    "slug": "bible-reason",
+    "sourceDigest": "5285deb385883adbf09423a0ee0a38cd0174e984d6a6010063d36e2ab6ab749e",
+    "kind": "not-demonstrated",
+    "importance": 5,
+    "reason": "Knowing particular divine attributes from creation is compatible with inability to comprehend God completely."
+  },
+  {
+    "slug": "bible-evildoers",
+    "sourceDigest": "22b355bb7ffa86dc88053541d1dc2b62c2e974c41aa850a84cd527efe57955e3",
+    "kind": "not-demonstrated",
+    "importance": 5,
+    "reason": "Present prosperity and future destruction can both describe wrongdoers because the prediction does not set an immediate deadline."
+  },
+  {
+    "slug": "bible-job-evil",
+    "sourceDigest": "5cc862a518a5ab47925b951dc9230022e22d45670dddd68de212a1811e0e8561",
+    "kind": "not-demonstrated",
+    "importance": 5,
+    "reason": "Satan's immediate infliction of boils and God's wider responsibility for calamity are compatible levels of agency."
+  },
+  {
+    "slug": "bible-zion",
+    "sourceDigest": "f7933565b800dae4d20a6aa769afd573f4be488bedc1755002cf4b04251308dd",
+    "kind": "not-demonstrated",
+    "importance": 5,
+    "reason": "Dwelling in Zion and heaven is not exclusive when neither passage limits God's presence to a single place."
+  },
+  {
+    "slug": "bible-first-last",
+    "sourceDigest": "975eaa217f041ab584cf2f94399db3cb47282403e40f615cc82849823d4bbb1d",
+    "kind": "not-demonstrated",
+    "importance": 5,
+    "reason": "Repeated first-and-last titles do not conflict unless the speakers are established as distinct beings claiming one exclusive chronological position."
+  },
+  {
+    "slug": "bible-jesus-dad",
+    "sourceDigest": "ac5131c769f1f75d6eed2045a6a5d13e59c3867982d836817e079f6fdc819de9",
+    "kind": "not-demonstrated",
+    "importance": 5,
+    "reason": "Bodily Davidic descent does not name Joseph as its biological link, so the affirmative half of Joseph's alleged paternity is absent."
+  },
+  {
+    "slug": "bible-will",
+    "sourceDigest": "cbd50371085452660ac700fc0cae9bfcbd8a0a1619041a844a0b9b4c32c9d3c1",
+    "kind": "not-demonstrated",
+    "importance": 5,
+    "reason": "Heavenly warfare does not establish that God's will fails, and the prayer never asserts that no resistance has ever occurred there."
+  },
+  {
+    "slug": "bible-open",
+    "sourceDigest": "9959dd14424ca1c72c31ef8b469d8c8a40353db2fe59ba4ab82633e2ed0dd6f8",
+    "kind": "not-demonstrated",
+    "importance": 5,
+    "reason": "Finding a moved tomb stone does not contradict an account of its removal that never explicitly places the women there during the opening."
+  },
+  {
+    "slug": "bible-jesus-went",
+    "sourceDigest": "6d6de73e3acfcaf3c0870ac88110d59041e20aa94966b7b7265088c124c11091",
+    "kind": "not-demonstrated",
+    "importance": 5,
+    "reason": "Different post-death locations lack an exclusive itinerary or fixed spatial relationship, so they need not describe incompatible destinations."
+  },
+  {
+    "slug": "bible-blind",
+    "sourceDigest": "f0e8cdc225ec6ab7c12306c854ec65ffac901112efcdd98e7069028ca1d24a9e",
+    "kind": "not-demonstrated",
+    "importance": 5,
+    "reason": "Divine creation or purpose and a spirit's immediate action concern different patients and need not be mutually exclusive causes."
+  },
+  {
+    "slug": "bible-raised",
+    "sourceDigest": "b9b5a30cc1dfb9a629e8a04c0ec55b6dd478b834d7ad4860645369ee013fc432",
+    "kind": "not-demonstrated",
+    "importance": 5,
+    "reason": "Different attributions of resurrection agency do not expressly exclude cooperation or shared action."
+  },
+  {
+    "slug": "bible-blame",
+    "sourceDigest": "574122844d79ad7a247ef6c46e49c67aedaf8eb8be07dc8031ce3b2e1b430108",
+    "kind": "not-demonstrated",
+    "importance": 5,
+    "reason": "Adam's lack of deception does not absolve him of wrongdoing, so the woman's deception and Adam's role in introducing sin can both hold."
+  },
+  {
+    "slug": "bible-firstborn",
+    "sourceDigest": "d7a7c610ee752f1e4a1e0a566d9ea0b18d254d62d9f1b53e5f27b3addd59848e",
+    "kind": "not-demonstrated",
+    "importance": 5,
+    "reason": "Firstborn describes peoples and Christ within different relationships rather than rival births in one literal family."
+  },
+  {
+    "slug": "bible-scripture",
+    "sourceDigest": "daaddeb5b01a6cf91b9dffd2ea4ac7881baaf3b0ca395c2088a45bef07629500",
+    "kind": "not-demonstrated",
+    "importance": 5,
+    "reason": "Inspiration does not expressly mean direct dictation or exclude the human judgment and stylistic limitations acknowledged by authors."
+  },
+  {
+    "slug": "bible-famous-confession",
+    "sourceDigest": "45d2cc13867c22cef1ce3b61aadf1a225f3de87cedc33f3e19ce5552f284e739",
+    "kind": "not-demonstrated",
+    "importance": 5,
+    "reason": "Peter's fuller identification of Jesus adds divine sonship without denying the shorter confessions that call him Christ."
+  },
+  {
+    "slug": "bible-flood",
+    "sourceDigest": "6a30db9948574c9c4bb4559707470447d8ddc9804c74546e6747d6f14d85d5cc",
+    "kind": "not-demonstrated",
+    "importance": 4,
+    "reason": "Forty days of rising floodwater and one hundred fifty days of prevailing water describe distinguishable phases rather than incompatible total durations."
+  },
+  {
+    "slug": "bible-owns",
+    "sourceDigest": "56e91f452c2996881a0e3e2f1080c42865eeaf736c87dca2f47bd3d9614b39c0",
+    "kind": "not-demonstrated",
+    "importance": 4,
+    "reason": "Divine ownership, a gift to humanity, and the devil's unverified claim to political power describe different kinds of control."
+  },
+  {
+    "slug": "bible-jews-many",
+    "sourceDigest": "e9c04d6010d5aaaf7a052d9ac3b0a38b311385d41f95c2da502b062c5758250e",
+    "kind": "not-demonstrated",
+    "importance": 4,
+    "reason": "Promised population growth and later conditional reduction concern different periods rather than simultaneous incompatible counts."
+  },
+  {
+    "slug": "bible-intermarriage",
+    "sourceDigest": "311001873af54f3cab85217f68bb711a019e6b0298fe529ac8db515dbcb1c553",
+    "kind": "not-demonstrated",
+    "importance": 4,
+    "reason": "The foreign spouses are not established as members of the particular prohibited peoples or as causes of the religious defection specified by the rule."
+  },
+  {
+    "slug": "bible-passover",
+    "sourceDigest": "71ae51f7acae6ddfc692cd94194fc97ffb8901262818dd86731de33d8122859b",
+    "kind": "not-demonstrated",
+    "importance": 4,
+    "reason": "Specifying six eating days before describing the seventh-day assembly does not prohibit unleavened bread on that final day."
+  },
+  {
+    "slug": "bible-gave-law",
+    "sourceDigest": "9e132bd9b506455629292b55ecd2718052cd245d322aa305abb4dd1f9b87eeca",
+    "kind": "not-demonstrated",
+    "importance": 4,
+    "reason": "God can be the law's source while angels mediate its transmission, and neither account explicitly excludes the other role."
+  },
+  {
+    "slug": "bible-sinai",
+    "sourceDigest": "562570e1f568bce03261c73ab44dbfcf4977ae29b379b087e08a0cbee0cf3a1e",
+    "kind": "not-demonstrated",
+    "importance": 4,
+    "reason": "Different mountain names do not establish distinct places without evidence excluding alternative geographical designations."
+  },
+  {
+    "slug": "bible-horeb",
+    "sourceDigest": "ed645d5c9466c64cc981322d51a364534c5ffa71b455f742da5bdfd86afac6ea",
+    "kind": "not-demonstrated",
+    "importance": 4,
+    "reason": "Face-to-face speech need not mean visual perception of a form, which the second passage expressly denies."
+  },
+  {
+    "slug": "bible-jeconiah",
+    "sourceDigest": "2976ffe692800213a715c22adfe345c5d27c8341f8d01ece53537193b572b2c1",
+    "kind": "not-demonstrated",
+    "importance": 4,
+    "reason": "Jeremiah itself mentions descendants and explains childlessness as failed dynastic rule, so later children do not directly negate its judgment."
+  },
+  {
+    "slug": "bible-devil-free",
+    "sourceDigest": "a3b06681614782143af0920926bd2d708004db4738ad3cce3d1099e06488bcaf",
+    "kind": "not-demonstrated",
+    "importance": 4,
+    "reason": "The chained angels are never identified as Satan, so his roaming does not contradict imprisonment of that particular group."
+  },
+  {
+    "slug": "bible-foolish",
+    "sourceDigest": "bc1eadd06741f71e559e0b7eccd5711fa2d6bbeaa073bdda3feb228e6634f85b",
+    "kind": "not-demonstrated",
+    "importance": 4,
+    "reason": "Foolishness by worldly standards is explicitly distinguished from the moral and practical foolishness condemned elsewhere."
+  },
+  {
+    "slug": "bible-think",
+    "sourceDigest": "9f9cbebf60c89cf939d4e689db0106d19676588ec5661e25250fbc4185edc385",
+    "kind": "not-demonstrated",
+    "importance": 4,
+    "reason": "Testing claims and pursuing understanding are compatible with relying on an acknowledged authority rather than one's unaided judgment."
+  },
+  {
+    "slug": "bible-serve",
+    "sourceDigest": "28f56d239c86e3cf3e15c8674b9ec8233dd84ef07b55a3c84f5e0fe2596ee23d",
+    "kind": "not-demonstrated",
+    "importance": 4,
+    "reason": "Exclusive worship and religious mastery differ from the expressly earthly service required elsewhere."
+  },
+  {
+    "slug": "bible-seegood",
+    "sourceDigest": "67da3501c7650c9572523a7a11ac71d20d62d2a64166b8b63b17c72ecaa9fb4b",
+    "kind": "not-demonstrated",
+    "importance": 4,
+    "reason": "The passages expressly distinguish visible conduct that glorifies God from conduct seeking the performer's own acclaim."
+  },
+  {
+    "slug": "bible-pray",
+    "sourceDigest": "27d80f2877fa599ed48aac166a1ebdf1e287dfcf3e30f1f0adc961366e02da00",
+    "kind": "not-demonstrated",
+    "importance": 4,
+    "reason": "Receiving a model prayer does not establish sufficient knowledge of every appropriate request in every circumstance."
+  },
+  {
+    "slug": "bible-publicans",
+    "sourceDigest": "5da02ce3036bca404267b2eae5d8586218c24d37dda514ed572ae739cab3e364",
+    "kind": "not-demonstrated",
+    "importance": 4,
+    "reason": "Outsider status in church discipline does not itself prohibit the meals with outsiders that Jesus practices."
+  },
+  {
+    "slug": "bible-judas-kiss",
+    "sourceDigest": "cf10a78e5aa575027fc79de9fa063af6f5ad704ae33dffe786baef3a6014ab4c",
+    "kind": "not-demonstrated",
+    "importance": 4,
+    "reason": "Jesus' self-identification in John does not explicitly deny Judas' kiss narrated in the other arrest accounts."
+  },
+  {
+    "slug": "bible-speech",
+    "sourceDigest": "eec338437b263b75f744ebe75cb877446658d769d91159e5c801f8667fe5fbb1",
+    "kind": "not-demonstrated",
+    "importance": 4,
+    "reason": "Silence toward accusations does not exclude Jesus speaking during a separate interview about kingship."
+  },
+  {
+    "slug": "bible-appear",
+    "sourceDigest": "e41f82604601c1700b05e857f31668bbd3eb13fb8890ab7fe8fac7415d862899",
+    "kind": "not-demonstrated",
+    "importance": 4,
+    "reason": "Different resurrection meeting settings are not identified as the same exclusive first appearance, and Matthew's supplied verse stops before an appearance occurs."
+  },
+  {
+    "slug": "bible-unseen",
+    "sourceDigest": "0835f4403489a948635d7009b1ba7f7c14880ac83bd521461152f6e787d35638",
+    "kind": "not-demonstrated",
+    "importance": 4,
+    "reason": "Praising faith without sight does not require approving the specific angel worship and pretensions condemned in Colossians."
+  },
+  {
+    "slug": "bible-burden",
+    "sourceDigest": "67acc140454dd32abf2b0bd1e764173d8c893d6eca4fda2306c309f27ce2b407",
+    "kind": "not-demonstrated",
+    "importance": 4,
+    "reason": "Bearing personal responsibility does not forbid receiving help, so the two instructions do not command and prohibit the same act."
+  },
+  {
+    "slug": "bible-mighty-men",
+    "sourceDigest": "f87da74cefb2b7db56595aa335824c71f3ce236a03ad4b27282baaaa15928489",
+    "kind": "weak",
+    "importance": 1,
+    "reason": "The roster's segmentation and overlapping ranks are uncertain, while the groups repeat one passage rather than give rival explicit totals."
+  },
+  {
+    "slug": "bible-bush",
+    "sourceDigest": "2ea5fd31610b5cdea9d7ca528648907cae5d118c330f12dcb622f3fb1cf68e07",
+    "kind": "not-demonstrated",
+    "importance": 3,
+    "reason": "An angel appearing and God speaking can describe the same encounter through different agents, and neither passage excludes the other presence."
+  },
+  {
+    "slug": "bible-water-rock",
+    "sourceDigest": "1c7ba90eace9bdea57cf67e0cc5ad0dc4de0330fb183f40190556600587620a3",
+    "kind": "not-demonstrated",
+    "importance": 3,
+    "reason": "Different water-producing instructions are not incompatible without identifying the two episodes as the same occasion."
+  },
+  {
+    "slug": "bible-occupy",
+    "sourceDigest": "980dd0cfb4f59a6788120d30aeaa3ef64cdbfff36a85cdb0bf55bbb94c22c84a",
+    "kind": "not-demonstrated",
+    "importance": 3,
+    "reason": "Caleb's individual speech does not exclude Joshua joining him in a subsequent appeal to enter Canaan."
+  },
+  {
+    "slug": "bible-gezer",
+    "sourceDigest": "8cf66fb4fc3cbca73101a72710ea3e48eddf7a19230e0a25c09c612580c92510",
+    "kind": "not-demonstrated",
+    "importance": 3,
+    "reason": "Destroying the king's expedition at Lachish does not state that every resident remaining in Gezer was killed."
+  },
+  {
+    "slug": "bible-jebusites",
+    "sourceDigest": "06e399f2e9a1657c3bf9f2bcaa8590278cb575db704cb285f082f3a7f0d6f72e",
+    "kind": "not-demonstrated",
+    "importance": 3,
+    "reason": "Judah's capture and burning do not assert complete permanent expulsion of the Jebusites whom Benjamin later leaves in residence."
+  },
+  {
+    "slug": "bible-abinadab",
+    "sourceDigest": "98285aba679b985a5d37cacbed9498ea28f46a27133257973b58a20a4898c794",
+    "kind": "not-demonstrated",
+    "importance": 3,
+    "reason": "The twenty years can describe elapsed residence rather than the ark's entire stay, so Saul's longer reign supplies no secure incompatible endpoint."
+  },
+  {
+    "slug": "bible-king",
+    "sourceDigest": "f7adf47ebb841bdc6edd858b6e585d988ddec6ca1775e8569e8b82e57254094a",
+    "kind": "not-demonstrated",
+    "importance": 3,
+    "reason": "Separate offenses can produce repeated condemnation of Saul, and neither account makes its reason exclusive."
+  },
+  {
+    "slug": "bible-sam-saw",
+    "sourceDigest": "5750ab2b6e9aa790073be5467ebb82d32cd8e36c478b92125b13889c2fabd98b",
+    "kind": "not-demonstrated",
+    "importance": 3,
+    "reason": "Samuel ceasing to visit Saul does not exclude Saul later arriving in Samuel's presence."
+  },
+  {
+    "slug": "bible-rend",
+    "sourceDigest": "2a2185c870805eb68e09da2f57b559631e0396d42964ebd50e510ae61978f045",
+    "kind": "not-demonstrated",
+    "importance": 3,
+    "reason": "Rejecting merely outward repentance does not forbid torn clothes accompanying the genuine humility praised elsewhere."
+  },
+  {
+    "slug": "bible-best-king",
+    "sourceDigest": "2ee9875de401e02d692f1efd6f6c507f4b2233049653223d0857f4871062e39a",
+    "kind": "not-demonstrated",
+    "importance": 3,
+    "reason": "The unmatched praise concerns different qualities, trust and comprehensive obedience, so neither king must outrank the other on the same criterion."
+  },
+  {
+    "slug": "bible-fearful",
+    "sourceDigest": "72ae39ab852e7f6358d00567e29aa7946c75aafbfbf6970e65c7934430e8388f",
+    "kind": "not-demonstrated",
+    "importance": 3,
+    "reason": "Predicting alarming heavenly signs does not command the fear that Jeremiah tells his audience to avoid."
+  },
+  {
+    "slug": "bible-jonah",
+    "sourceDigest": "985031366833f698b2c61cceaed84f77e2be69984be41b4dbb8e202edaf04ec3",
+    "kind": "not-demonstrated",
+    "importance": 3,
+    "reason": "Human agents throwing Jonah and his prayer attributing the ordeal to God need not be exclusive accounts of responsibility."
+  },
+  {
+    "slug": "bible-baptize",
+    "sourceDigest": "9bc749a33e2616be509c78dad02240e6af4fa277869c0cf13b93827fdcd8f496",
+    "kind": "not-demonstrated",
+    "importance": 3,
+    "reason": "John itself clarifies that the baptisms initially attributed to Jesus were physically performed by his disciples, while Spirit baptism is a different action."
+  },
+  {
+    "slug": "bible-cast-out",
+    "sourceDigest": "1669398a7a9ccb86842655c6e98a1f8de9266a3b99339932f4a3c4fb01a8ea51",
+    "kind": "not-demonstrated",
+    "importance": 3,
+    "reason": "A sign accompanying believers need not occur only among believers, and the rejected claimants do not refute that weaker prediction."
+  },
+  {
+    "slug": "bible-homeless",
+    "sourceDigest": "f10a7ea3237e56290b8f342ab7cb7f3b4865619dcf5288b6e4c76f2dcacacc2f",
+    "kind": "not-demonstrated",
+    "importance": 3,
+    "reason": "Temporary presence inside a house and an ambiguous possessive do not establish that Jesus owned a permanent home."
+  },
+  {
+    "slug": "bible-understand",
+    "sourceDigest": "f199f30df95e910d8db5e1f627564164be6f5c83520fae7393e6a31c3a8a1ce7",
+    "kind": "not-demonstrated",
+    "importance": 3,
+    "reason": "Grieving over a prediction does not establish the complete understanding that Luke denies."
+  },
+  {
+    "slug": "bible-christ",
+    "sourceDigest": "eec1155965cf63a77e62fcbaeffa3e910872d9f12f91bfec50dbe7b07b54881e",
+    "kind": "not-demonstrated",
+    "importance": 3,
+    "reason": "The indirect trial replies do not deny the identity affirmed by Mark's direct answer, so the variation in wording is not incompatible testimony."
+  },
+  {
+    "slug": "bible-centurion-call",
+    "sourceDigest": "a4c91508d761a1adcd82cb62938dfaea9905041b8c8d63facfbbb999afd52b77",
+    "kind": "not-demonstrated",
+    "importance": 3,
+    "reason": "Calling Jesus righteous and God's Son are compatible judgments; different reported declarations do not exclude the centurion saying both."
+  },
+  {
+    "slug": "bible-postbaptism",
+    "sourceDigest": "ef7cdc944e3b51319afa2dce5462e2098e8313498c3811228aa3e29377d3bc2d",
+    "kind": "not-demonstrated",
+    "importance": 3,
+    "reason": "John's quoted day sequence never anchors its beginning to the baptism, so the claimed forty-day overlap is not established."
+  },
+  {
+    "slug": "bible-devils",
+    "sourceDigest": "4cbf9d9953953ab98e124290d9e1708fc6b570585cc18783e4a23c115ca956d3",
+    "kind": "not-demonstrated",
+    "importance": 3,
+    "reason": "Exorcism accompanying belief does not make it exclusive to believers or sufficient for acceptance, and outsiders need not lack belief."
+  },
+  {
+    "slug": "bible-wash-feet",
+    "sourceDigest": "591108d7ec1a0953c06466c7f6b223409c68c968ba12d12999e5905dac25b2e7",
+    "kind": "not-demonstrated",
+    "importance": 3,
+    "reason": "Shared anointing details do not identify the different meal settings and women as one event."
+  },
+  {
+    "slug": "bible-wiser",
+    "sourceDigest": "ca3fbaec8bc1779bd982b2b4c8ba5fda5432928fc47261081a2caddd90d8da9b",
+    "kind": "not-demonstrated",
+    "importance": 3,
+    "reason": "Practical self-protective cleverness and morally upright wisdom are expressly evaluated on different standards."
+  },
+  {
+    "slug": "bible-everything",
+    "sourceDigest": "65ddb477663b16a9ec05cde184cc1b9a76930bb14877ef458f80883b1f548660",
+    "kind": "not-demonstrated",
+    "importance": 3,
+    "reason": "An account concerning all Jesus began to do need not claim exhaustive event-by-event coverage, and John's immeasurable books language is rhetorical."
+  },
+  {
+    "slug": "bible-paul-visit",
+    "sourceDigest": "8bfb230cd7b0994892c9855254e962099753f0c6d42be1b0d4ecdfbe6833915b",
+    "kind": "not-demonstrated",
+    "importance": 3,
+    "reason": "Acts' plural apostles can be Peter and James, so it does not contradict Paul's restricted list of contacts."
+  },
+  {
+    "slug": "bible-discuss",
+    "sourceDigest": "4c83eac80f6710b984c37b210460eb9d2ed3b54f95dd94c738183fb75ff04ad5",
+    "kind": "not-demonstrated",
+    "importance": 3,
+    "reason": "Readiness to explain hope to questioners does not require hosting rival teachers or participating in the particular kinds of talk forbidden elsewhere."
+  },
+  {
+    "slug": "bible-sheba",
+    "sourceDigest": "d315c59565b7233f33fac9e1c9d5bf523f0f409811c57f4b5f8cbcbd78fd3606",
+    "kind": "not-demonstrated",
+    "importance": 2,
+    "reason": "The genealogies do not establish that people sharing the name Sheba across separate branches are one individual."
+  },
+  {
+    "slug": "bible-dan",
+    "sourceDigest": "58c6d3721beaa0c2d97ea79673af70c30ef1c6716e880b8cd9011891257cd27b",
+    "kind": "not-demonstrated",
+    "importance": 2,
+    "reason": "An earlier story can use a later familiar place name without claiming it was already in use, and the excerpts do not explicitly identify both locations."
+  },
+  {
+    "slug": "bible-abe-moses",
+    "sourceDigest": "5797cc6757d13c767847e4edac5f1f9126290de3fa6b5fe46a6ff6daf69471c8",
+    "kind": "not-demonstrated",
+    "importance": 2,
+    "reason": "The fourth-generation return lacks the Abraham-to-Moses endpoints required to contradict the six genealogical links."
+  },
+  {
+    "slug": "bible-bethel",
+    "sourceDigest": "83a6ef8e4e1788b5b23ea2649dd90d4c37ab98287a619458b4e06fef93b0ebe2",
+    "kind": "not-demonstrated",
+    "importance": 2,
+    "reason": "The later naming already identifies the place as Bethel and describes another appearance, allowing a renewed commemoration rather than two incompatible first namings."
+  },
+  {
+    "slug": "bible-dishon",
+    "sourceDigest": "d2a9302972ac7a147ed8507331dd7e1a43182266ce8670ca53011c7a2cd58952",
+    "kind": "not-demonstrated",
+    "importance": 2,
+    "reason": "The lists preserve both placements without identifying the two Dishons as one individual, so repeated names do not establish conflicting fathers."
+  },
+  {
+    "slug": "bible-mahli",
+    "sourceDigest": "017ed0e0090edf3017425e0dec66a7729ef1df610c2c727109828b2627d79ef1",
+    "kind": "not-demonstrated",
+    "importance": 2,
+    "reason": "Ezra uses ancestor-group language and compresses Mahli's descent through Merari rather than securely denying that intermediate generation."
+  },
+  {
+    "slug": "bible-libni",
+    "sourceDigest": "e5ef369be123ca7e072214fd9fc5cfc8165b0adfc753da84da756de61237defd",
+    "kind": "not-demonstrated",
+    "importance": 2,
+    "reason": "A repeated Libni name in different family branches does not establish one person with incompatible fathers."
+  },
+  {
+    "slug": "bible-stones",
+    "sourceDigest": "9787ee61946c7e064bc67a45e487cef8421499eba6049a3c0512a59c201c6b36",
+    "kind": "not-demonstrated",
+    "importance": 2,
+    "reason": "Two groups of twelve memorial stones can occupy different places because the quotations do not identify them as one set."
+  },
+  {
+    "slug": "bible-jabin",
+    "sourceDigest": "65af51f2ec12d78097d6b5b6cdd981eef42f2faea0cd34371ac8d990be0b01d3",
+    "kind": "not-demonstrated",
+    "importance": 2,
+    "reason": "Kings named Jabin at Hazor in different periods are not securely identified as one individual who died twice."
+  },
+  {
+    "slug": "bible-achan",
+    "sourceDigest": "4f27fc231cafdcc436841d2f01a2a863da13fa311921aaf92db01d6bc35287ea",
+    "kind": "not-demonstrated",
+    "importance": 2,
+    "reason": "The shorter designation preserves Achan's actual ancestor Zerah, so it need not contradict the detailed line through Carmi and Zabdi."
+  },
+  {
+    "slug": "bible-slaughter",
+    "sourceDigest": "880f4a10593289f8104097a57543a691abc4653dfcbf21ff04ca3260c8b80398",
+    "kind": "not-demonstrated",
+    "importance": 2,
+    "reason": "First slaughter can designate the opening action of the present battle rather than Jonathan's first lifetime attack."
+  },
+  {
+    "slug": "bible-solomons-gift",
+    "sourceDigest": "62b737509404e50ffbce1b58950927765988f32d81fd2b928b74bdb7f16dcbe8",
+    "kind": "not-demonstrated",
+    "importance": 2,
+    "reason": "Annual household provisions and workers' rations concern different recipients, and the oil quantities use different units."
+  },
+  {
+    "slug": "bible-jehu",
+    "sourceDigest": "508dd0b7c20e498aff720171fa122017c4ce91e331a453adfd72fc923a2be7d0",
+    "kind": "not-demonstrated",
+    "importance": 2,
+    "reason": "The shorter son-of-Nimshi formula omits Jehoshaphat but remains consistent as an ancestral identification."
+  },
+  {
+    "slug": "bible-sons-of-heman",
+    "sourceDigest": "a57df2e64c73ef604fc2b6b0067657a08c4bc49dd9b8b1aac8ecd6632eaad460",
+    "kind": "not-demonstrated",
+    "importance": 2,
+    "reason": "Membership in Heman's descendant group does not establish immediate sonship at the generation named in the earlier list."
+  },
+  {
+    "slug": "bible-jehoiakim-death",
+    "sourceDigest": "0a67c607b1cc906b3dbf2bf7def148f3e848e2f50f516b4932a753274da3c384",
+    "kind": "not-demonstrated",
+    "importance": 2,
+    "reason": "Intended deportation does not establish death in Babylon, and disposal outside Jerusalem does not independently locate the death itself."
+  },
+  {
+    "slug": "bible-iddo",
+    "sourceDigest": "7cd041fef8365e348176c8aa27a116cdc9575a034822c0c6fd06a99bca6d44fd",
+    "kind": "not-demonstrated",
+    "importance": 2,
+    "reason": "Calling Zechariah Iddo's son can abbreviate the fuller descent through Berechiah without assigning an unrelated ancestry."
+  },
+  {
+    "slug": "bible-whale",
+    "sourceDigest": "fc694b9430e6ac333fce1c0fdd277fbf0f95d989136424ba82471c0d4dd61d0f",
+    "kind": "not-demonstrated",
+    "importance": 2,
+    "reason": "Great fish and whale are different English labels without a supplied technical classification making them exclusive."
+  },
+  {
+    "slug": "bible-ass-colt",
+    "sourceDigest": "b4f630b44a27a200f41500f317b226230f34cf754c16aab749ad31d264c7746b",
+    "kind": "not-demonstrated",
+    "importance": 2,
+    "reason": "Matthew brings two animals but does not clearly seat Jesus on both, and the other accounts do not deny another animal's presence."
+  },
+  {
+    "slug": "bible-fourteen",
+    "sourceDigest": "e1f47e108a1fa5e6b727f77b5965fcb17bcdc23846d8e25343e0ea3b1b552fc0",
+    "kind": "not-demonstrated",
+    "importance": 2,
+    "reason": "Matthew's fourteen is available by including Jechonias, so the apparent shortfall depends on an unstated exclusive counting convention."
+  },
+  {
+    "slug": "bible-dressed",
+    "sourceDigest": "c2b3c11e107ea3a6fb45466dcd42d36845fb02f081ebe4f52f1059c8dd9fee40",
+    "kind": "not-demonstrated",
+    "importance": 2,
+    "reason": "Luke places Herod's robing before the return to Pilate, allowing the later soldiers' robe as a distinct scene without an exclusive one-robe claim."
+  },
+  {
+    "slug": "bible-peters-home",
+    "sourceDigest": "455b90b9a05e6240bc58a7e8cc0c9fc6ebedc8c1a57f0835b13483da75f604fa",
+    "kind": "not-demonstrated",
+    "importance": 2,
+    "reason": "Bethsaida as the brothers' city does not exclude a later or additional household in Capernaum."
+  },
+  {
+    "slug": "bible-devils-go",
+    "sourceDigest": "93b8b4034ffbd980e8edbba47e9384ec4edc39b37bf282509bb20767b9ca7135",
+    "kind": "not-demonstrated",
+    "importance": 2,
+    "reason": "Avoiding expulsion from the country and avoiding the deep are compatible wishes, despite the different reported requests in the Legion encounter."
+  },
+  {
+    "slug": "bible-drink",
+    "sourceDigest": "a7c3292f4e9dba5a5b4cda46c9b683bf2045d52b961407df691cbd6d2fb70718",
+    "kind": "not-demonstrated",
+    "importance": 2,
+    "reason": "Accepting vinegar near death does not contradict refusing an earlier mixed drink, because neither excerpt identifies one exclusive offer."
+  },
+  {
+    "slug": "bible-gold",
+    "sourceDigest": "eea83ed62975a4f84d1e9d973c91cfeb170c895be796f11d7da31225af8e0c77",
+    "kind": "not-demonstrated",
+    "importance": 1,
+    "reason": "Nehemiah explicitly counts gifts from the rest of the people, so its smaller amounts are not securely rival totals for Ezra's donors."
+  },
+  {
+    "slug": "bible-adultery",
+    "sourceDigest": "35a6b9f153a900fae056c23bf7a7eef59d0bac2b2e8eee390418553ed08e5b7e",
+    "kind": "not-demonstrated",
+    "importance": 5,
+    "reason": "Marrying or loving an adulterous woman does not command adultery, and retaining captives does not explicitly prescribe the sexual act prohibited elsewhere."
+  },
+  {
+    "slug": "bible-ransom",
+    "sourceDigest": "fdd431c4ce8c87f08c2cca7e6f34ee61a8353574e2427c479dcb7746ac59749d",
+    "kind": "not-demonstrated",
+    "importance": 5,
+    "reason": "A ransom for many can include everyone because the Gospel wording never says only some benefit."
+  },
+  {
+    "slug": "bible-holyghost",
+    "sourceDigest": "246728c7eeed5e1284471cc26015caf0799264c65c650ed4af144f9f592d445a",
+    "kind": "not-demonstrated",
+    "importance": 5,
+    "reason": "Both sending accounts explicitly connect Jesus and the Father rather than deny either figure's participation."
+  },
+  {
+    "slug": "bible-rahab",
+    "sourceDigest": "e86a18fa8b842396311578603d789cdfbdc343816eb4588dcfb058620d450e4b",
+    "kind": "not-demonstrated",
+    "importance": 5,
+    "reason": "Both passages associate Rahab's reception of the spies with her favorable outcome and neither excludes faith or action."
+  },
+  {
+    "slug": "bible-flood-again",
+    "sourceDigest": "e229062d7f2aae1aa139ccdaf49dc1d118fdcf18e0acb5eab9abd4d44be2cd10",
+    "kind": "not-demonstrated",
+    "importance": 4,
+    "reason": "A threat against a particular place does not violate a covenant excluding another flood that destroys all flesh."
+  },
+  {
+    "slug": "bible-destroy",
+    "sourceDigest": "e7b1ee239332c4964c3bb7638b08c7e0b2fdfa661835f0cc19238b99748724d1",
+    "kind": "not-demonstrated",
+    "importance": 4,
+    "reason": "The messengers expressly say God commissioned their destruction, so attributing the action to them and to God describes compatible levels of agency."
+  },
+  {
+    "slug": "bible-name",
+    "sourceDigest": "8e6b1a1b8815362569532db3214653d219ae516ef5b273208a997c93151c079f",
+    "kind": "not-demonstrated",
+    "importance": 4,
+    "reason": "Multiple divine names and descriptive titles do not conflict without an assertion that only one designation can apply."
+  },
+  {
+    "slug": "bible-covet",
+    "sourceDigest": "a33121787616bf64f954057cadb4f7365f9f1c8391b36889421bf5b13d8b762b",
+    "kind": "not-demonstrated",
+    "importance": 4,
+    "reason": "Desiring spiritual abilities does not mean desiring a neighbor's possessions, so the shared English verb does not identify one act both required and forbidden."
+  },
+  {
+    "slug": "bible-sabbath-breakers",
+    "sourceDigest": "ab81fcafb4f60107324ba96ee5d271ff60eb467b86b90c091acbf7075faf26b2",
+    "kind": "not-demonstrated",
+    "importance": 4,
+    "reason": "Both groups explicitly prescribe death; cut off is not an exclusive alternative penalty in the repeated verse."
+  },
+  {
+    "slug": "bible-caleb",
+    "sourceDigest": "cbda273ecbf4a284935ccdf3b3e230d44e2fd321e9000ea045fb0eeb324383b9",
+    "kind": "not-demonstrated",
+    "importance": 4,
+    "reason": "The first promise excludes disobedient people without calling Caleb the only exception, so the fuller inclusion of faithful Joshua does not conflict."
+  },
+  {
+    "slug": "bible-goliath",
+    "sourceDigest": "a1bf4c14f7d60772e2aff7388f25e9a437eb0f169afd77b8f598c8e318eb7969",
+    "kind": "not-demonstrated",
+    "importance": 4,
+    "reason": "The supplied edition says Elhanan killed Goliath's brother and David killed Goliath, assigning different victims consistently."
+  },
+  {
+    "slug": "bible-gambling",
+    "sourceDigest": "ae13304969fdfc0df5954c946b354dcde54316f2df6865cb9343e4e025558d60",
+    "kind": "not-demonstrated",
+    "importance": 4,
+    "reason": "Warnings against greed neither prohibit every use of lots nor equate allocation by lot with wagering for profit."
+  },
+  {
+    "slug": "bible-money",
+    "sourceDigest": "d747f48000d844a68553d76ae1894abd601db010a8bcd051039dfb413a7823b6",
+    "kind": "not-demonstrated",
+    "importance": 4,
+    "reason": "Money's usefulness and the harmful love of money are compatible claims about different things."
+  },
+  {
+    "slug": "bible-sodom",
+    "sourceDigest": "e905e146f544f13994f9130cd92c7c095d9bb11187d2baaac77e4bc0b0b40410",
+    "kind": "not-demonstrated",
+    "importance": 4,
+    "reason": "Multiple offenses and later rhetorical comparisons coexist because none supplies an exclusive historical cause."
+  },
+  {
+    "slug": "bible-manger",
+    "sourceDigest": "958dd2bfab187df4fb57b8d5a9be5c3bf7b26724a0b4df516cb783c1e981b363",
+    "kind": "not-demonstrated",
+    "importance": 4,
+    "reason": "The newborn's placement in a manger and a later visit in a house do not specify incompatible birth locations."
+  },
+  {
+    "slug": "bible-withme",
+    "sourceDigest": "4b813c83a8fb27b03bfaf09ab5bff9f0b9cca65ee968ea77696297ab31fc512e",
+    "kind": "not-demonstrated",
+    "importance": 4,
+    "reason": "Under the same binary categories the sayings are contrapositives, and the differing practical settings do not create a logical opposition."
+  },
+  {
+    "slug": "bible-childish",
+    "sourceDigest": "b030907d018cd692f0c7c9cdfd0a573e71c0227f62d6d99c92c137527193175b",
+    "kind": "not-demonstrated",
+    "importance": 4,
+    "reason": "The texts commend receptivity and reject immature understanding, with Paul explicitly distinguishing dimensions of childhood rather than contradicting one uniform rule."
+  },
+  {
+    "slug": "bible-temple",
+    "sourceDigest": "574efd448a994f16df6ba6277f11d939ea0548f454c1ebeb39f8244b7f49348d",
+    "kind": "not-demonstrated",
+    "importance": 4,
+    "reason": "The false accusation changes both the destroyer and the temple's identity, so John's related saying does not validate it."
+  },
+  {
+    "slug": "bible-mary",
+    "sourceDigest": "7d3937e4827160a85e41fb001873c2a9f0594d7c58acc117b59418cd49017b5e",
+    "kind": "not-demonstrated",
+    "importance": 4,
+    "reason": "Blessing obedient hearers does not deny Mary's blessedness or say that she fails the stated condition."
+  },
+  {
+    "slug": "bible-frightened",
+    "sourceDigest": "c50e54258a15c032ae5dca9d559f5ba371bc74a6bc307c80a183b7ec86cbfba8",
+    "kind": "not-demonstrated",
+    "importance": 4,
+    "reason": "Fear before recognition and gladness after viewing wounds are compatible stages of the encounter."
+  },
+  {
+    "slug": "bible-jerusalem",
+    "sourceDigest": "0114ada05713608df11a87e6ce73600df1ed4c8bdea19ae2cd1011b58f463a8b",
+    "kind": "not-demonstrated",
+    "importance": 4,
+    "reason": "Acts' undated eventual Jerusalem arrival does not contradict Paul's initial travel to Arabia and Damascus."
+  },
+  {
+    "slug": "bible-was-noah-a-preacher",
+    "sourceDigest": "4d2d40e679b80672d0ec0659302ea18f346e41449891d76cf774336304d2eb7e",
+    "kind": "not-demonstrated",
+    "importance": 3,
+    "reason": "Farming and drunkenness do not exclude preaching, and an ark passenger list's silence supplies no denial."
+  },
+  {
+    "slug": "bible-haran",
+    "sourceDigest": "ef8bfe4182ab2120eeffb4071aeedade941c4ea28d6dffe9f4b5095001c1b16d",
+    "kind": "not-demonstrated",
+    "importance": 3,
+    "reason": "Leaving Haran as commanded does not date the first command after arrival there."
+  },
+  {
+    "slug": "bible-dancing",
+    "sourceDigest": "81c1a3628ad874edbb48f17802e76efe037c78f93a07bc02aba832b821c0f1ea",
+    "kind": "not-demonstrated",
+    "importance": 3,
+    "reason": "The negative stories condemn idolatry or lethal manipulation involving dances, without prohibiting the celebratory worship encouraged elsewhere."
+  },
+  {
+    "slug": "bible-waterrock",
+    "sourceDigest": "47632c2ccbb23d8abae6a904c54260238f1d5c898a0a3b5871f43a9244ad258a",
+    "kind": "not-demonstrated",
+    "importance": 3,
+    "reason": "The quotations explicitly distinguish itinerary stops and instructions, supporting separate miracles rather than conflicting locations for one."
+  },
+  {
+    "slug": "bible-usury",
+    "sourceDigest": "447e85da56b798a3d9ae8d6e3087ce14f310b4d7eed6b34d7e0a1aa1e226f23d",
+    "kind": "not-demonstrated",
+    "importance": 3,
+    "reason": "The purported prohibition concerns returning collateral clothing and says nothing about interest, so the opposing rule is absent."
+  },
+  {
+    "slug": "bible-daily",
+    "sourceDigest": "eba9f945b6daac82b294d3ae38c5e273f8349ef7ac33847e0b441b5ba5fd2d77",
+    "kind": "not-demonstrated",
+    "importance": 3,
+    "reason": "Exodus explicitly limits the bull ceremony to seven days and then prescribes the same continuing two-lamb schedule as Numbers."
+  },
+  {
+    "slug": "bible-balaam",
+    "sourceDigest": "9d86a4665d273a817534b913bfd4e46dcf53c78877659709fbd659df6ab55fcc",
+    "kind": "not-demonstrated",
+    "importance": 3,
+    "reason": "Both groups explicitly distinguish the unsuccessful commission to curse from Balaam's actual blessings."
+  },
+  {
+    "slug": "bible-become-enemies",
+    "sourceDigest": "ce9ce6dc906f6f6561afd73c4281bb037f78f917df6f219313b81dce5f6a3d5e",
+    "kind": "not-demonstrated",
+    "importance": 3,
+    "reason": "Initial jealousy and later intensified fear describe compatible stages of Saul's hostility, with the later passage explicitly saying he became more afraid."
+  },
+  {
+    "slug": "bible-elhanan",
+    "sourceDigest": "9ec24112aa534926a514abd0e9c758bf96b21305286c5c94e6ad4839077d0472",
+    "kind": "not-demonstrated",
+    "importance": 3,
+    "reason": "The supplied Samuel and Chronicles wording both identify Goliath's brother as Elhanan's victim, so the proposed victim contradiction is absent."
+  },
+  {
+    "slug": "bible-sundial",
+    "sourceDigest": "459bd3b00ca0620910cd00982cdeda4f98092a2a2f63544c8ee3c7e44d956ae0",
+    "kind": "not-demonstrated",
+    "importance": 3,
+    "reason": "A requested healing sign can also confirm extended life and protection, and omission of the request does not deny it."
+  },
+  {
+    "slug": "bible-zeds-eyes",
+    "sourceDigest": "2cd82e60941c52cdea06d32b63f0940abdbb91768788ea5982800086ee0db57e",
+    "kind": "not-demonstrated",
+    "importance": 3,
+    "reason": "Zedekiah can see the king before being blinded and transported; the quotations never require the opposite sequence."
+  },
+  {
+    "slug": "bible-pure",
+    "sourceDigest": "ca164076a912aa3d0872da437184442e3cc5c63130b95130e30a5e87ca225687",
+    "kind": "not-demonstrated",
+    "importance": 3,
+    "reason": "Purity of divine speech does not mean polite vocabulary, and some graphic quotations belong to hostile human speakers."
+  },
+  {
+    "slug": "bible-immediately",
+    "sourceDigest": "96b01ce5cf94864b2df792ef491e6a0ca5db170c8b9f1260707b793a128bf744",
+    "kind": "not-demonstrated",
+    "importance": 3,
+    "reason": "Matthew's confirmation after Jesus speaks does not deny the immediate cure and his own words already describe healing as accomplished."
+  },
+  {
+    "slug": "bible-parables",
+    "sourceDigest": "07420981332c25e9957ff273a0ecbbec574d3a4cadd5084570068ad70a92c8e1",
+    "kind": "not-demonstrated",
+    "importance": 3,
+    "reason": "Both supplied passages agree that the public teaching uses parables, and neither excludes private explanation."
+  },
+  {
+    "slug": "bible-bethsaida",
+    "sourceDigest": "9d0afd148832ccea440d8d4da9b224674b4e0de37679062f9d341a3190a727dd",
+    "kind": "not-demonstrated",
+    "importance": 3,
+    "reason": "The passages introduce different blind patients and healing procedures without identifying one shared event or limiting Jesus to one such cure."
+  },
+  {
+    "slug": "bible-sam-received",
+    "sourceDigest": "58f37b5459bad6add6a94c84b25be26c510206523f70571dbe1e472cf2b8d094",
+    "kind": "not-demonstrated",
+    "importance": 3,
+    "reason": "Different Samaritan communities on different visits can welcome and reject Jesus without disagreement."
+  },
+  {
+    "slug": "bible-spit",
+    "sourceDigest": "b39076f0a6dffc3e0f5de9180653e3021a379e5f77643f173106dec03702abcd",
+    "kind": "not-demonstrated",
+    "importance": 3,
+    "reason": "The accounts describe different blind men and do not claim that Jesus used only one healing method."
+  },
+  {
+    "slug": "bible-tongues",
+    "sourceDigest": "e7a6ca073b8d8dea8d45e64d32cf4810b74bc5d6b37d69ad083b0aeca011dbea",
+    "kind": "not-demonstrated",
+    "importance": 3,
+    "reason": "Permission for tongues is expressly qualified by interpretation and audience benefit, matching the criticism of unintelligible speech."
+  },
+  {
+    "slug": "bible-paul-see",
+    "sourceDigest": "9fb47e2fe147a8d9c0b1dcd378ba6d2e18b29dccd52231ba8e6fed1524317a08",
+    "kind": "not-demonstrated",
+    "importance": 3,
+    "reason": "Blindness after Paul rises does not deny an earlier appearance, whose exact timing his quoted letters do not specify."
+  },
+  {
+    "slug": "bible-enoch7",
+    "sourceDigest": "141235a28c296f6ff7091eba7f0ff196a0b8f05bfc410196327cea6c66af9f1a",
+    "kind": "not-demonstrated",
+    "importance": 2,
+    "reason": "The genealogy gives seven named people including Adam and six descent links, agreeing with Jude when the counting unit is kept consistent."
+  },
+  {
+    "slug": "bible-ham",
+    "sourceDigest": "f80a044768295a5f2697467182d4d540a15717ac886aba148826a5706fba2855",
+    "kind": "not-demonstrated",
+    "importance": 2,
+    "reason": "Ham's middle position in an unordered family list does not assert that he was born between his brothers."
+  },
+  {
+    "slug": "bible-float",
+    "sourceDigest": "8501d75e47c9f1b69c241d4188d7a7e18c54984815189ae3ce19c54a7ec238ab",
+    "kind": "not-demonstrated",
+    "importance": 2,
+    "reason": "An ark can rest on submerged ground before mountain tops become visible, so the dates describe compatible events."
+  },
+  {
+    "slug": "bible-abraham-buried",
+    "sourceDigest": "d2c6e6c226c8103b6cd6dadb4b27b92aa22cdaf77eeed6be8672e5dd2a96c10b",
+    "kind": "not-demonstrated",
+    "importance": 2,
+    "reason": "Acts names Abraham as the tomb's purchaser rather than its deceased occupant, so it supplies no competing burial place for him."
+  },
+  {
+    "slug": "bible-perfume",
+    "sourceDigest": "06714af1d767558b9d2e9f278e7b19c2c41ec11a8adc248450869eb2556fd54a",
+    "kind": "not-demonstrated",
+    "importance": 2,
+    "reason": "Restrictions on one sacred recipe and criticism of seduction do not contradict approving perfume in other circumstances."
+  },
+  {
+    "slug": "bible-number-levites",
+    "sourceDigest": "f329f74d992dca161598195413703988176a26cdbed240bb009d127ab02555e8",
+    "kind": "not-demonstrated",
+    "importance": 2,
+    "reason": "A separate count of Levites does not contradict their exclusion from the general Israelite census."
+  },
+  {
+    "slug": "bible-samuel-levite",
+    "sourceDigest": "326ad14e30ca4b8456481fec4e31d9fd01f7c7a96af536e1dffdad3a5ea60c97",
+    "kind": "not-demonstrated",
+    "importance": 2,
+    "reason": "The quotations neither connect the two Elkanahs securely nor establish that Ephrathite denotes descent rather than residence."
+  },
+  {
+    "slug": "bible-1000",
+    "sourceDigest": "6f25483e7298aa00ccd4ae32016729ae38d9a17c5a7d7577be8950e09ae45f7a",
+    "kind": "not-demonstrated",
+    "importance": 2,
+    "reason": "Both accounts credit Solomon with one thousand offerings; naming the congregation adds participants without contradicting any assertion of solitude."
+  },
+  {
+    "slug": "bible-jeroboam-die",
+    "sourceDigest": "0d9bc40165a8a07f389ac22fdcb3caebeba5b7a40eb817c09564155987b2c892",
+    "kind": "not-demonstrated",
+    "importance": 2,
+    "reason": "A death notice without a cause does not contradict Chronicles' attribution of that death to divine striking."
+  },
+  {
+    "slug": "bible-mantle",
+    "sourceDigest": "6c9bf8d451601029d5243a68a6ba80e31f42daa504fa784bdc1cbf63f17f168b",
+    "kind": "not-demonstrated",
+    "importance": 2,
+    "reason": "Casting the cloak on Elisha and his later retrieval of it are compatible actions without an exclusive permanent-transfer claim."
+  },
+  {
+    "slug": "bible-gehazi",
+    "sourceDigest": "85943d150a1c2168d24f7e93d3a27fe8800341c5019f59a751d64744892be65d",
+    "kind": "not-demonstrated",
+    "importance": 2,
+    "reason": "Gehazi's conversation with the king supplies no denial of his leprosy or statement that he was cured."
+  },
+  {
+    "slug": "bible-levi-moses",
+    "sourceDigest": "1cdf1b6b4f72f9f088f6484befca18d6f2666c67f24ecebc23c4ea73fc73c88d",
+    "kind": "not-demonstrated",
+    "importance": 2,
+    "reason": "Different families can have different generation lengths, so Joshua's longer ancestry supplies no competing Levi-to-Moses genealogy."
+  },
+  {
+    "slug": "bible-jesushchrist",
+    "sourceDigest": "52b5d39d81d2636d989dcae4270decc436e6ac78f1b1e3320ab5009f3226d731",
+    "kind": "not-demonstrated",
+    "importance": 2,
+    "reason": "Multiple titles coexist with a personal name, and a secret name does not imply that every other designation is secret."
+  },
+  {
+    "slug": "bible-jordan",
+    "sourceDigest": "38ec31dc2ac8330da632bcfba1fca96804750680d770f4c9f7103c50a1a6cf20",
+    "kind": "not-demonstrated",
+    "importance": 2,
+    "reason": "A river and a locality beyond it are not established as incompatible baptism sites, and no passage restricts John to one site."
+  },
+  {
+    "slug": "bible-believers",
+    "sourceDigest": "e3f90d39396796b60b66add7e418feb4dd20a37846a1a982ffe519f0d25fe225",
+    "kind": "not-demonstrated",
+    "importance": 2,
+    "reason": "A gathering of 120 disciples and a separate appearance to over 500 believers are not competing totals for the same population or event."
+  }
+]

@@ -1,5 +1,7 @@
 import * as v from "valibot";
 
+import { contradictionAssessmentSchema } from "./contradiction-assessment";
+
 export const collectionKeys = [
   "debunked",
   "immoral",
@@ -295,6 +297,7 @@ export const demoContentSchema = v.object({
 });
 
 export const articleListItemSchema = v.object({
+  assessment: v.optional(contradictionAssessmentSchema),
   collectionKey: v.picklist(collectionKeys),
   comparisonReferences: v.array(requiredText),
   finding: v.optional(requiredText),

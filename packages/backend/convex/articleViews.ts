@@ -1,3 +1,4 @@
+import { getContradictionAssessment } from "../src/contradiction-assessments";
 import type { Doc, Id } from "./_generated/dataModel";
 import type { QueryCtx } from "./_generated/server";
 
@@ -54,7 +55,7 @@ type ArticleListProjection = Pick<
   "collectionKey" | "comparisonReferences" | "position" | "tags"
 >;
 
-export function toPublishedArticleListItem(
+export async function toPublishedArticleListItem(
   article: Doc<"articles"> | null,
   projection: ArticleListProjection
 ) {
@@ -62,6 +63,10 @@ export function toPublishedArticleListItem(
     return null;
   }
   return {
+    assessment:
+      projection.collectionKey === "contradictions"
+        ? await getContradictionAssessment(article)
+        : undefined,
     collectionKey: projection.collectionKey,
     comparisonReferences: projection.comparisonReferences,
     finding: article.finding,

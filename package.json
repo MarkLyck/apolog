@@ -15,6 +15,7 @@
     "images:generate": "bun scripts/generate-hero-mobile.mjs",
     "icons:generate": "bun scripts/generate-icons.mjs",
     "test": "bun test",
+    "contradictions:verify-assessments": "bun packages/backend/scripts/verify-contradiction-assessments.ts",
     "typecheck": "turbo run typecheck",
     "lint": "bun run lint:ox && bun run format:check",
     "lint:ox": "oxlint --deny-warnings .",

@@ -6,6 +6,7 @@ import { ConvexError, v } from "convex/values";
 import * as valibot from "valibot";
 
 import { articleTagKey, projectArticle } from "../src/article-projection";
+import { getContradictionAssessment } from "../src/contradiction-assessments";
 import type { Doc, Id } from "./_generated/dataModel";
 import { mutation, query } from "./_generated/server";
 import type { MutationCtx, QueryCtx } from "./_generated/server";
@@ -377,6 +378,11 @@ export const getBySlug = query({
     }
     return {
       ...article,
+      assessment: placements.some(
+        (placement) => placement.collectionKey === "contradictions"
+      )
+        ? await getContradictionAssessment(article)
+        : undefined,
       corpusKeys: [...new Set(placements.map((item) => item.corpusKey))],
       placements: placements.map(
         ({ collectionKey, corpusKey, isPrimary, position }) => ({

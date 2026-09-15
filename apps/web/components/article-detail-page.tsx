@@ -12,6 +12,7 @@ import { getAdjacentArticles, getArticle } from "@/lib/data";
 import { ArticleEditButton } from "./article-edit-button";
 import { ArticleNavigation } from "./article-navigation";
 import { ContentBlocks } from "./content-blocks";
+import { ContradictionAssessmentPanel } from "./contradiction-assessment";
 
 export async function ArticleDetailPage({
   slug,
@@ -65,7 +66,7 @@ export async function ArticleDetailPage({
               {collection.label}
             </span>
             {activePlacement.position > 0 ? (
-              <span>Rank {activePlacement.position}</span>
+              <span>Reading order {activePlacement.position}</span>
             ) : null}
             <span>{corpusLabel(corpusKey)} context</span>
             <span className="inline-flex items-center gap-1.5">
@@ -78,6 +79,9 @@ export async function ArticleDetailPage({
           <p className="mt-4 max-w-3xl text-lg leading-relaxed text-[var(--muted)] sm:mt-5 sm:text-xl">
             {article.summary}
           </p>
+          {activePlacement.collectionKey === "contradictions" && (
+            <ContradictionAssessmentPanel assessment={article.assessment} />
+          )}
           {article.contentWarning ? (
             <div className="mt-8 rounded-xl border border-[var(--accent)]/50 bg-[color:var(--accent)]/8 px-5 py-4 text-sm font-semibold">
               Content notice: {article.contentWarning}
