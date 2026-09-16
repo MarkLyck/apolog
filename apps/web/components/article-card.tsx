@@ -27,7 +27,6 @@ export function ArticleCard({
         className="flex h-full flex-col"
       >
         <div className="mb-5 flex flex-wrap gap-2">
-          {article.finding ? <Badge>{article.finding}</Badge> : null}
           <Badge className="gap-1.5">
             <FiClock aria-hidden="true" /> {article.readingMinutes} min read
           </Badge>
