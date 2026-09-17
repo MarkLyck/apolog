@@ -34,7 +34,7 @@ export function AuthPage({
         </p>
       </div>
       <div className="auth-card">
-        <div className="text-[10px] font-medium uppercase tracking-[0.16em] text-[var(--accent-strong)]">
+        <div className="text-[10px] font-medium tracking-[0.16em] text-[var(--accent-strong)] uppercase">
           Account access
         </div>
         <h1>{title}</h1>

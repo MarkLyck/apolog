@@ -43,7 +43,7 @@ export function ContradictionAssessmentPanel({
             ? "Assessment needs review"
             : "Awaiting assessment"}
         </p>
-        <p className="mb-0 mt-2 text-sm text-[var(--muted)]">
+        <p className="mt-2 mb-0 text-sm text-[var(--muted)]">
           {assessment?.status === "changed"
             ? "This article has changed since its assessment. Its previous classification and importance are withheld until the updated argument is reviewed."
             : "This comparison has not yet been assessed for the inference it requires or its importance."}
@@ -78,10 +78,10 @@ export function ContradictionAssessmentPanel({
           </dd>
         </div>
       </dl>
-      <p className="mb-0 mt-5 border-t border-[var(--line)] pt-4 text-sm leading-6">
+      <p className="mt-5 mb-0 border-t border-[var(--line)] pt-4 text-sm leading-6">
         {assessment.reason}
       </p>
-      <p className="mb-0 mt-3 text-xs leading-5 text-[var(--muted)]">
+      <p className="mt-3 mb-0 text-xs leading-5 text-[var(--muted)]">
         An editorial assessment of the quoted passages. Importance describes the
         stakes; it does not increase certainty. Reading order weighs both.
       </p>
@@ -110,7 +110,7 @@ export function ContradictionAssessmentGuide() {
           </div>
         ))}
       </dl>
-      <p className="mb-0 mt-4 leading-6 text-[var(--muted)]">
+      <p className="mt-4 mb-0 leading-6 text-[var(--muted)]">
         Reading order weighs conflict and importance together. It is not a
         certainty score. Unreviewed or changed articles carry no assessment
         until reviewed.

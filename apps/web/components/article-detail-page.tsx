@@ -73,7 +73,7 @@ export async function ArticleDetailPage({
               <FiClock aria-hidden="true" /> {article.readingMinutes} min read
             </span>
           </div>
-          <h1 className="mt-4 max-w-4xl text-pretty text-4xl leading-[1.08] sm:text-5xl lg:text-6xl">
+          <h1 className="mt-4 max-w-4xl text-4xl leading-[1.08] text-pretty sm:text-5xl lg:text-6xl">
             {article.title}
           </h1>
           <p className="mt-4 max-w-3xl text-lg leading-relaxed text-[var(--muted)] sm:mt-5 sm:text-xl">
@@ -103,7 +103,7 @@ export async function ArticleDetailPage({
           className="reader-details space-y-7 lg:sticky lg:top-32"
         >
           <div>
-            <h2 className="font-sans text-xs font-semibold uppercase tracking-[0.12em] text-[var(--muted)]">
+            <h2 className="font-sans text-xs font-semibold tracking-[0.12em] text-[var(--muted)] uppercase">
               Topics
             </h2>
             <div className="mt-3 flex flex-wrap gap-2">
@@ -115,20 +115,20 @@ export async function ArticleDetailPage({
             </div>
           </div>
           <div>
-            <h2 className="font-sans text-xs font-semibold uppercase tracking-[0.12em] text-[var(--muted)]">
+            <h2 className="font-sans text-xs font-semibold tracking-[0.12em] text-[var(--muted)] uppercase">
               Sources
             </h2>
             <ol className="mt-3 grid gap-3">
               {article.sources.map((source) => (
                 <li key={source.url}>
                   <a
-                    className="group block rounded-lg border border-[var(--line)] bg-[var(--surface)] p-4 text-sm font-medium leading-snug transition-colors hover:border-[var(--accent)]"
+                    className="group block rounded-lg border border-[var(--line)] bg-[var(--surface)] p-4 text-sm leading-snug font-medium transition-colors hover:border-[var(--accent)]"
                     href={source.url}
                     rel="noreferrer"
                     target="_blank"
                   >
                     {source.title}
-                    <span className="mt-2 flex items-start gap-2 text-xs font-normal leading-relaxed text-[var(--muted)]">
+                    <span className="mt-2 flex items-start gap-2 text-xs leading-relaxed font-normal text-[var(--muted)]">
                       {source.publisher}{" "}
                       <FiExternalLink
                         aria-hidden="true"

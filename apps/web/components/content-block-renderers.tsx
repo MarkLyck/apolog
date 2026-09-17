@@ -93,7 +93,7 @@ export function CalloutBlock({
       <div className="flex items-center gap-2 text-sm font-bold text-[var(--accent-strong)]">
         <FiAlertTriangle aria-hidden="true" /> {block.title}
       </div>
-      <p className="mb-0 mt-3 text-base!">
+      <p className="mt-3 mb-0 text-base!">
         <RichText content={block.content} />
       </p>
     </div>
@@ -108,7 +108,7 @@ export function QuoteBlock({
   return (
     <figure className="my-8 rounded-2xl border-l-4 border-[var(--teal)] bg-[var(--surface-strong)] p-6">
       <FiBookOpen aria-hidden="true" className="mb-4 text-[var(--teal)]" />
-      <blockquote className="m-0 font-display text-xl leading-8">
+      <blockquote className="font-display m-0 text-xl leading-8">
         <RichText content={block.content} />
       </blockquote>
       <QuoteContext reference={block.reference} edition={block.edition} />
@@ -129,7 +129,7 @@ export function ClaimComparisonBlock({
             className="min-w-0 rounded-xl border border-[var(--line)] bg-[var(--surface)] p-5 sm:p-6"
             key={claim.id}
           >
-            <div className="text-sm font-medium leading-5 text-[var(--accent-strong)] sm:min-h-10">
+            <div className="text-sm leading-5 font-medium text-[var(--accent-strong)] sm:min-h-10">
               {claim.label}
             </div>
             <h2 className="mt-3 text-3xl leading-tight">{claim.reference}</h2>

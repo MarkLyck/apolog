@@ -150,13 +150,13 @@ export function DebateClient({ corpusKey }: { corpusKey: CorpusKey }) {
                   )}
                 </span>
                 <div className="min-w-0 flex-1">
-                  <div className="mb-1 text-xs font-bold uppercase tracking-wide text-[var(--muted)]">
+                  <div className="mb-1 text-xs font-bold tracking-wide text-[var(--muted)] uppercase">
                     {message.role === "user" ? "You" : "Apolog"}
                   </div>
                   {message.role === "assistant" && message.content ? (
                     <AssistantMessage content={message.content} />
                   ) : (
-                    <div className="whitespace-pre-wrap text-sm leading-7">
+                    <div className="text-sm leading-7 whitespace-pre-wrap">
                       {message.content || "Thinking through the evidence…"}
                     </div>
                   )}

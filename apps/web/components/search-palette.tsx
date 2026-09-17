@@ -138,7 +138,7 @@ export function SearchPalette({
         <div className="max-h-[60vh] overflow-y-auto p-3" id="search-results">
           {query.trim().length < 2 ? (
             <div className="p-2">
-              <p className="px-3 py-2 text-xs font-bold uppercase tracking-[0.18em] text-[var(--muted)]">
+              <p className="px-3 py-2 text-xs font-bold tracking-[0.18em] text-[var(--muted)] uppercase">
                 Go directly
               </p>
               {searchPaletteLinks.map(({ href, label }) => (
@@ -178,7 +178,7 @@ export function SearchPalette({
                   href={`/articles/${result.slug}?from=${result.collectionKey}&text=${corpusKey}`}
                   key={result.slug}
                 >
-                  <div className="mb-1 text-[0.65rem] font-bold uppercase tracking-[0.18em] text-[var(--accent-strong)]">
+                  <div className="mb-1 text-[0.65rem] font-bold tracking-[0.18em] text-[var(--accent-strong)] uppercase">
                     {result.collectionKey}
                   </div>
                   <div className="text-lg">{result.title}</div>

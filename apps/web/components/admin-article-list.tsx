@@ -51,7 +51,7 @@ export function AdminArticleList() {
             (status) => (
               <button
                 aria-pressed={filter === status}
-                className="rounded-full border border-[var(--line)] px-4 py-2 text-sm font-bold capitalize text-[var(--muted)] transition hover:border-[var(--accent)] aria-pressed:border-[var(--ink)] aria-pressed:bg-[var(--ink)] aria-pressed:text-[var(--paper)]"
+                className="rounded-full border border-[var(--line)] px-4 py-2 text-sm font-bold text-[var(--muted)] capitalize transition hover:border-[var(--accent)] aria-pressed:border-[var(--ink)] aria-pressed:bg-[var(--ink)] aria-pressed:text-[var(--paper)]"
                 key={status}
                 onClick={() => setFilter(status)}
                 type="button"
@@ -65,10 +65,10 @@ export function AdminArticleList() {
           <span className="sr-only">Search articles</span>
           <FiSearch
             aria-hidden="true"
-            className="absolute left-4 top-1/2 -translate-y-1/2 text-[var(--muted)]"
+            className="absolute top-1/2 left-4 -translate-y-1/2 text-[var(--muted)]"
           />
           <input
-            className="min-h-11 w-full rounded-full border border-[var(--line)] bg-[var(--surface)] pl-11 pr-4 outline-none focus:border-[var(--accent)] focus:ring-2 focus:ring-[color:var(--accent)]/20"
+            className="min-h-11 w-full rounded-full border border-[var(--line)] bg-[var(--surface)] pr-4 pl-11 outline-none focus:border-[var(--accent)] focus:ring-2 focus:ring-[color:var(--accent)]/20"
             onChange={(event) => setQuery(event.target.value)}
             placeholder="Search title or slug…"
             type="search"
