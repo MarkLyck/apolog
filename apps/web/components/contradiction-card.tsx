@@ -23,11 +23,11 @@ export function ContradictionCard({
       )}
     >
       <Card className="relative h-full overflow-hidden">
-        <div className="absolute -right-2 -top-5 font-display text-[7rem] leading-none text-[color:var(--line)]/55">
+        <div className="font-display absolute -top-5 -right-2 text-[7rem] leading-none text-[color:var(--line)]/55">
           {article.position}
         </div>
         <div className="relative">
-          <div className="mb-5 text-[0.65rem] font-medium uppercase tracking-[0.16em] text-[var(--accent-strong)]">
+          <div className="mb-5 text-[0.65rem] font-medium tracking-[0.16em] text-[var(--accent-strong)] uppercase">
             Reading order {article.position}
           </div>
           <h2 className="max-w-md text-2xl leading-tight">{article.title}</h2>

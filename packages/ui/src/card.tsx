@@ -15,7 +15,7 @@ export function Card({ eyebrow, className, children, ...props }: CardProps) {
       {...props}
     >
       {eyebrow ? (
-        <div className="mb-4 font-mono text-[0.68rem] font-medium uppercase tracking-wide text-[var(--muted)]">
+        <div className="mb-4 font-mono text-[0.68rem] font-medium tracking-wide text-[var(--muted)] uppercase">
           {eyebrow}
         </div>
       ) : null}

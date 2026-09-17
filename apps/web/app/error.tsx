@@ -4,7 +4,7 @@ export default function ErrorPage({ reset }: { reset: () => void }) {
   return (
     <section className="page-container status-page">
       <div>
-        <div className="text-xs font-bold uppercase tracking-[0.2em] text-[var(--accent-strong)]">
+        <div className="text-xs font-bold tracking-[0.2em] text-[var(--accent-strong)] uppercase">
           Something interrupted the page
         </div>
         <h1 className="mt-4 text-5xl">The evidence is still here.</h1>

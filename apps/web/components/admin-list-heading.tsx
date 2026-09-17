@@ -5,7 +5,7 @@ export function AdminListHeading() {
   return (
     <header className="flex flex-col gap-6 border-b border-[var(--line)] pb-10 sm:flex-row sm:items-end sm:justify-between">
       <div>
-        <p className="text-xs font-bold uppercase tracking-[0.2em] text-[var(--accent-strong)]">
+        <p className="text-xs font-bold tracking-[0.2em] text-[var(--accent-strong)] uppercase">
           Publishing desk
         </p>
         <h1 className="mt-3 text-5xl">Articles</h1>

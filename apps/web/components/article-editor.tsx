@@ -294,7 +294,7 @@ function ArticleEditorForm({
       {message ? (
         <div
           aria-live="polite"
-          className="fixed bottom-6 right-6 z-50 flex items-center gap-2 rounded-full bg-[var(--ink)] px-5 py-3 text-sm font-bold text-[var(--paper)] shadow-xl"
+          className="fixed right-6 bottom-6 z-50 flex items-center gap-2 rounded-full bg-[var(--ink)] px-5 py-3 text-sm font-bold text-[var(--paper)] shadow-xl"
         >
           <FiCheck aria-hidden="true" /> {message}
         </div>

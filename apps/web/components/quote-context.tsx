@@ -53,8 +53,8 @@ export function QuoteContext({
               ? "Wording affects the comparison"
               : "Context affects the comparison"}
           </summary>
-          <p className="mb-0 mt-3">{note.text}</p>
-          <ul className="mb-0 mt-3 flex list-none flex-wrap gap-x-4 gap-y-1 p-0">
+          <p className="mt-3 mb-0">{note.text}</p>
+          <ul className="mt-3 mb-0 flex list-none flex-wrap gap-x-4 gap-y-1 p-0">
             {note.sources.map((source) => (
               <li key={source.href}>
                 <a

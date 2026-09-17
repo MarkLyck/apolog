@@ -72,7 +72,7 @@ export default async function RootLayout({
           storageKey="apolog-theme"
         >
           <a
-            className="fixed left-3 top-3 z-[60] -translate-y-20 border border-[var(--ink)] bg-[var(--paper)] px-4 py-2 text-sm font-bold text-[var(--ink)] focus:translate-y-0"
+            className="fixed top-3 left-3 z-[60] -translate-y-20 border border-[var(--ink)] bg-[var(--paper)] px-4 py-2 text-sm font-bold text-[var(--ink)] focus:translate-y-0"
             href="#main-content"
           >
             Skip to content
