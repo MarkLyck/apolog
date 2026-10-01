@@ -15,7 +15,7 @@ export function ImageBlock({
       <a href={block.src} target="_blank" rel="noreferrer">
         <Image
           alt={block.alt}
-          className="h-auto w-full rounded-lg"
+          className="mx-auto h-auto max-h-[26rem] w-auto max-w-full rounded-lg"
           height={block.height}
           src={block.src}
           unoptimized
