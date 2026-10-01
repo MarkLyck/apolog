@@ -11,7 +11,6 @@ import { getAdjacentArticles, getArticle } from "@/lib/data";
 
 import { ArticleEditButton } from "./article-edit-button";
 import { ArticleNavigation } from "./article-navigation";
-import { ImageBlock } from "./content-block-renderers";
 import { ContentBlocks } from "./content-blocks";
 import { ContradictionAssessmentPanel } from "./contradiction-assessment";
 
@@ -41,11 +40,6 @@ export async function ArticleDetailPage({
   }
   const activePlacement = resolved.placement;
   const collection = collectionRegistry[activePlacement.collectionKey];
-  const firstBlock = article.document.blocks[0];
-  const coverImage = firstBlock?.type === "image" ? firstBlock : null;
-  const bodyBlocks = coverImage
-    ? article.document.blocks.slice(1)
-    : article.document.blocks;
   const adjacent = await getAdjacentArticles(
     article._id,
     activePlacement.collectionKey,
@@ -79,7 +73,6 @@ export async function ArticleDetailPage({
               <FiClock aria-hidden="true" /> {article.readingMinutes} min read
             </span>
           </div>
-          {coverImage && <ImageBlock block={coverImage} />}
           <h1 className="mt-4 max-w-4xl text-4xl leading-[1.08] text-pretty sm:text-5xl lg:text-6xl">
             {article.title}
           </h1>
@@ -104,7 +97,7 @@ export async function ArticleDetailPage({
         />
       </div>
       <div className="grid items-start gap-8 pt-8 sm:pt-10 lg:grid-cols-[minmax(0,1fr)_18rem] lg:gap-10">
-        <ContentBlocks blocks={bodyBlocks} />
+        <ContentBlocks blocks={article.document.blocks} />
         <section
           aria-label="Article details"
           className="reader-details space-y-7 lg:sticky lg:top-32"
