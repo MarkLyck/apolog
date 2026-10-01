@@ -12,6 +12,14 @@ import {
 const document: ArticleDocument = {
   blocks: [
     {
+      alt: "Tree-ring records kept the receipts.",
+      height: 1024,
+      id: "image-1",
+      src: "/images/tree-ring-meme.png",
+      type: "image",
+      width: 1024,
+    },
+    {
       content: [
         { id: "text-1", marks: ["bold"], text: "A claim ", type: "text" },
         {
@@ -70,7 +78,7 @@ describe("article editor content", () => {
   });
 
   test("preserves formatting around edits to contradiction claim text", () => {
-    const content = document.blocks[0];
+    const content = document.blocks.find((block) => block.type === "paragraph");
     if (content?.type !== "paragraph") {
       throw new Error("Expected paragraph fixture");
     }

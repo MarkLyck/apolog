@@ -55,6 +55,14 @@ export const inlineContentValidator = v.array(
 
 export const contentBlockValidator = v.union(
   v.object({
+    alt: v.string(),
+    height: v.number(),
+    id: v.string(),
+    src: v.string(),
+    type: v.literal("image"),
+    width: v.number(),
+  }),
+  v.object({
     content: inlineContentValidator,
     id: v.string(),
     type: v.literal("paragraph"),
