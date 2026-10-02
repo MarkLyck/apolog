@@ -7,6 +7,36 @@ import { CalloutView } from "./rich-article-callout-view";
 import { ContradictionView } from "./rich-article-contradiction-view";
 import { ScriptureView } from "./rich-article-scripture-view";
 
+const ArticleImage = Node.create({
+  addAttributes() {
+    return {
+      alt: { default: "" },
+      height: {
+        default: null,
+        parseHTML: (element) => Number(element.getAttribute("height")),
+      },
+      src: { default: null },
+      width: {
+        default: null,
+        parseHTML: (element) => Number(element.getAttribute("width")),
+      },
+    };
+  },
+  atom: true,
+  draggable: true,
+  group: "block",
+  name: "image",
+  parseHTML() {
+    return [{ tag: "img[src]" }];
+  },
+  renderHTML({ HTMLAttributes }) {
+    return [
+      "img",
+      mergeAttributes(HTMLAttributes, { class: "h-auto max-w-full" }),
+    ];
+  },
+});
+
 const Callout = Node.create({
   addAttributes() {
     return { title: { default: "Key point" } };
@@ -147,9 +177,11 @@ export const articleEditorExtensions = [
       "callout",
       "scripture",
       "contradiction",
+      "image",
     ],
   }),
   Callout,
   Scripture,
   Contradiction,
+  ArticleImage,
 ];

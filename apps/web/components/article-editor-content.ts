@@ -1,4 +1,5 @@
 import {
+  imageBlockSchema,
   inlineContentSchema,
   type ArticleDocument,
   type ContentBlock,
@@ -165,6 +166,18 @@ export function articleDocumentToTiptap(
   return {
     content: document.blocks.map((block) => {
       switch (block.type) {
+        case "image": {
+          return {
+            attrs: {
+              alt: block.alt,
+              contentId: block.id,
+              height: block.height,
+              src: block.src,
+              width: block.width,
+            },
+            type: "image",
+          };
+        }
         case "paragraph": {
           return {
             attrs: { contentId: block.id },
@@ -345,6 +358,14 @@ function tiptapNodeToBlock(
 ): ContentBlock | null {
   const id = nodeId(node, `${node.type ?? "block"}-${index}`);
   switch (node.type) {
+    case "image": {
+      const image = v.safeParse(imageBlockSchema, {
+        ...node.attrs,
+        id,
+        type: "image",
+      });
+      return image.success ? image.output : null;
+    }
     case "paragraph": {
       return {
         content: fromTiptapInline(node.content, id),

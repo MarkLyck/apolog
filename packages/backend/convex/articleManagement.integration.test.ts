@@ -51,6 +51,49 @@ async function setupUser(role: "admin" | "user") {
 }
 
 describe("article management", () => {
+  test("publishes image blocks and rejects invalid image data", async () => {
+    const { authenticated, t } = await setupUser("admin");
+    const image = {
+      alt: "Tree-ring records kept the receipts.",
+      height: 1254,
+      id: "tree-rings",
+      src: "/images/articles/noahs-ark-tree-ring-meme.png",
+      type: "image",
+      width: 1254,
+    };
+    for (const invalid of [
+      { ...image, src: "data:image/png;base64,aW52YWxpZA==" },
+      { ...image, height: 0 },
+      { ...image, alt: "" },
+    ]) {
+      await expect(
+        authenticated.mutation(save, {
+          ...validInput,
+          document: { blocks: [invalid], schemaVersion: 1 },
+        })
+      ).rejects.toThrow("Article content is invalid");
+    }
+    await authenticated.mutation(save, {
+      ...validInput,
+      document: {
+        blocks: [...validInput.document.blocks, image],
+        schemaVersion: 1,
+      },
+      status: "published",
+    });
+    const published = await t.query(api.articles.getBySlug, {
+      slug: "valid-article",
+    });
+    expect(published?.document.blocks[1]).toEqual({
+      alt: "Tree-ring records kept the receipts.",
+      height: 1254,
+      id: "tree-rings",
+      src: "/images/articles/noahs-ark-tree-ring-meme.png",
+      type: "image",
+      width: 1254,
+    });
+  });
+
   test.each(["contradictions", "evidence"] as const)(
     "%s neighbors follow the public list and stay within published placements",
     async (collectionKey) => {

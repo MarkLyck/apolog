@@ -1,8 +1,30 @@
 import type { ContentBlock, InlineContent } from "@apolog/shared";
+import Image from "next/image";
 import type { ReactNode } from "react";
 import { FiAlertTriangle, FiBookOpen } from "react-icons/fi";
 
 import { QuoteContext } from "./quote-context";
+
+export function ImageBlock({
+  block,
+}: {
+  block: Extract<ContentBlock, { type: "image" }>;
+}) {
+  return (
+    <figure className="my-8">
+      <a href={block.src} target="_blank" rel="noreferrer">
+        <Image
+          alt={block.alt}
+          className="mx-auto h-auto max-h-[26rem] w-auto max-w-full rounded-lg"
+          height={block.height}
+          src={block.src}
+          unoptimized
+          width={block.width}
+        />
+      </a>
+    </figure>
+  );
+}
 
 function applyMarks(content: ReactNode, marks: string[] | undefined) {
   let result = content;
