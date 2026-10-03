@@ -25,6 +25,8 @@ Add `--prod` to target the production deployment.
 
 ## Verify and maintain
 
+Use the [verify-apolog skill](.cursor/skills/verify-apolog/SKILL.md) to launch an isolated local backend and drive the web app with the T3 browser. Its [feature map](.cursor/skills/verify-apolog/features/README.md) covers browsing, search, article reading, contradictions, and debate. Use `/maintain-verification-skill` when those flows change.
+
 ```bash
 bun test
 bun run check
