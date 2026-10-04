@@ -1,14 +1,16 @@
 import { describe, expect, test } from "bun:test";
 
-import { articleContentSchema } from "@apolog/shared";
-import * as v from "valibot";
+import { articleContentSchema } from "@apolog/shared/content";
+import * as Schema from "effect/Schema";
 
 import { assessmentSourceDigest } from "./assessment-source";
 import { getContradictionAssessment } from "./contradiction-assessments";
 import manifest from "./contradiction-assessments.json";
 import fixtures from "./fixtures/assessment-articles.json";
 
-const articles = v.parse(v.array(articleContentSchema), fixtures);
+const articles = Schema.decodeUnknownSync(
+  Schema.mutable(Schema.Array(articleContentSchema))
+)(fixtures);
 const creation = articles.find((article) => article.slug === "bible-accounts");
 const age = articles.find((article) => article.slug === "bible-ahaziah-age");
 if (!creation || !age) {

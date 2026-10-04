@@ -1,240 +1,182 @@
-import * as v from "valibot";
+import * as Result from "effect/Result";
+import * as Schema from "effect/Schema";
+import * as Struct from "effect/Struct";
 
+import { collectionKeys } from "./collection";
 import { contradictionAssessmentSchema } from "./contradiction-assessment";
 
-export const collectionKeys = [
-  "debunked",
-  "immoral",
-  "evidence",
-  "silly",
-  "contradictions",
-] as const;
-export type CollectionKey = (typeof collectionKeys)[number];
-
-export const collectionRegistry = {
-  contradictions: {
-    cardLabel: "Contradiction",
-    description: "Structured claim-against-claim comparisons.",
-    href: "/contradictions",
-    label: "Contradictions",
-  },
-  debunked: {
-    cardLabel: "Claim review",
-    description: "Historical and factual claims tested against evidence.",
-    href: "/debunked",
-    label: "Debunked",
-    page: {
-      description:
-        "Historical and factual claims examined with explicit findings: contradicted, unsupported, anachronistic, or physically implausible.",
-      eyebrow: "Claims under review",
-      title: "What would the evidence look like?",
-    },
-  },
-  evidence: {
-    cardLabel: "Evidence guide",
-    description: "Guides to evidence, methods, uncertainty, and limitations.",
-    href: "/evidence",
-    label: "Evidence",
-    page: {
-      description:
-        "Accessible guides to evidence, uncertainty, cross-checks, and limitations across science, history, and archaeology.",
-      eyebrow: "Methods and findings",
-      title: "Understand how we know.",
-    },
-  },
-  immoral: {
-    cardLabel: "Moral analysis",
-    description: "Moral analysis using transparent ethical standards.",
-    href: "/immoral",
-    label: "Immoral",
-    page: {
-      description:
-        "Moral analysis that distinguishes narration, command, approval, punishment, and attributed speech before applying a transparent ethical framework.",
-      eyebrow: "Ethics in context",
-      title: "Name the standard. Read the whole passage.",
-    },
-  },
-  silly: {
-    cardLabel: "Silly story",
-    description: "Critical readings of strange and fanciful stories.",
-    href: "/silly",
-    label: "Silly",
-    page: {
-      description:
-        "Talking animals, impossible logistics, strange miracles, and narrative turns that can be examined critically without mocking the people who believe them.",
-      eyebrow: "The strange and silly",
-      title: "Some stories are hard to read with a straight face.",
-    },
-  },
-} as const satisfies Record<
-  CollectionKey,
-  {
-    cardLabel: string;
-    description: string;
-    href: `/${CollectionKey}`;
-    label: string;
-    page?: { description: string; eyebrow: string; title: string };
+const requiredText = Schema.Trim.check(Schema.isMinLength(1));
+const inlineText = Schema.String.check(Schema.isMinLength(1));
+const timestamp = Schema.Number.check(
+  Schema.isInt(),
+  Schema.isGreaterThanOrEqualTo(0)
+);
+const corpusKeySchema = Schema.Literals(["bible", "quran"]);
+function isUrl(value: string): boolean {
+  try {
+    return Boolean(new URL(value));
+  } catch {
+    return false;
   }
->;
-
-export function parseCollection(
-  value: string | null | undefined
-): CollectionKey | null {
-  return collectionKeys.find((key) => key === value) ?? null;
 }
 
-const requiredText = v.pipe(v.string(), v.trim(), v.minLength(1));
-const inlineText = v.pipe(v.string(), v.minLength(1));
-const timestamp = v.pipe(v.number(), v.integer(), v.minValue(0));
-const corpusKeySchema = v.picklist(["bible", "quran"]);
-const url = v.pipe(v.string(), v.url());
-const httpUrl = v.pipe(
-  v.string(),
-  v.trim(),
-  v.url(),
-  v.regex(/^https?:\/\//iu, "Source URL must use HTTP or HTTPS")
+const url = Schema.String.check(
+  Schema.makeFilter(isUrl, { message: "Invalid URL" })
 );
-const href = v.union([url, v.pipe(v.string(), v.regex(/^\/(?!\/)/u))]);
+const httpUrl = Schema.Trim.check(
+  Schema.makeFilter(isUrl, { message: "Invalid URL" }),
+  Schema.isPattern(/^https?:\/\//iu, {
+    message: "Source URL must use HTTP or HTTPS",
+  })
+);
+const href = Schema.Union([
+  url,
+  Schema.String.check(Schema.isPattern(/^\/(?!\/)/u)),
+]);
 
-export const articleSourceSchema = v.object({
+export const articleSourceSchema = Schema.Struct({
   publisher: requiredText,
   title: requiredText,
   url: httpUrl,
-});
+}).mapFields(Struct.map(Schema.mutableKey));
 
-export const inlineContentSchema = v.pipe(
-  v.array(
-    v.variant("type", [
-      v.object({
+export const inlineContentSchema = Schema.mutable(
+  Schema.Array(
+    Schema.Union([
+      Schema.Struct({
         id: requiredText,
-        marks: v.optional(
-          v.pipe(
-            v.array(v.picklist(["bold", "italic", "strikethrough", "code"])),
-            v.check(
-              (marks) => new Set(marks).size === marks.length,
-              "Inline marks must be unique"
+        marks: Schema.optional(
+          Schema.mutable(
+            Schema.Array(
+              Schema.Literals(["bold", "italic", "strikethrough", "code"])
             )
+          ).check(
+            Schema.makeFilter((marks) => new Set(marks).size === marks.length, {
+              message: "Inline marks must be unique",
+            })
           )
         ),
         text: inlineText,
-        type: v.literal("text"),
-      }),
-      v.object({
+        type: Schema.Literal("text"),
+      }).mapFields(Struct.map(Schema.mutableKey)),
+      Schema.Struct({
         href,
         id: requiredText,
         text: inlineText,
-        type: v.literal("link"),
-      }),
+        type: Schema.Literal("link"),
+      }).mapFields(Struct.map(Schema.mutableKey)),
     ])
-  ),
-  v.minLength(1),
-  v.check(
+  )
+).check(
+  Schema.isMinLength(1),
+  Schema.makeFilter(
     (nodes) => nodes.some((node) => node.text.trim().length > 0),
-    "Inline content must contain visible text"
+    { message: "Inline content must contain visible text" }
   ),
-  v.check(
+  Schema.makeFilter(
     (nodes) => new Set(nodes.map((node) => node.id)).size === nodes.length,
-    "Inline content IDs must be unique"
+    { message: "Inline content IDs must be unique" }
   )
 );
 
-const listItemSchema = v.object({
+const listItemSchema = Schema.Struct({
   content: inlineContentSchema,
   id: requiredText,
-});
+}).mapFields(Struct.map(Schema.mutableKey));
 
-const comparisonClaimSchema = v.object({
+const comparisonClaimSchema = Schema.Struct({
   content: inlineContentSchema,
   id: requiredText,
   label: requiredText,
   reference: requiredText,
-});
+}).mapFields(Struct.map(Schema.mutableKey));
 
-export const contentBlockSchema = v.variant("type", [
-  v.object({
+export const contentBlockSchema = Schema.Union([
+  Schema.Struct({
     content: inlineContentSchema,
     id: requiredText,
-    type: v.literal("paragraph"),
-  }),
-  v.object({
+    type: Schema.Literal("paragraph"),
+  }).mapFields(Struct.map(Schema.mutableKey)),
+  Schema.Struct({
     content: inlineContentSchema,
     id: requiredText,
-    level: v.picklist([2, 3]),
-    type: v.literal("heading"),
-  }),
-  v.object({
+    level: Schema.Literals([2, 3]),
+    type: Schema.Literal("heading"),
+  }).mapFields(Struct.map(Schema.mutableKey)),
+  Schema.Struct({
     content: inlineContentSchema,
     id: requiredText,
     title: requiredText,
-    type: v.literal("callout"),
-  }),
-  v.object({
+    type: Schema.Literal("callout"),
+  }).mapFields(Struct.map(Schema.mutableKey)),
+  Schema.Struct({
     content: inlineContentSchema,
     edition: requiredText,
     id: requiredText,
     reference: requiredText,
-    type: v.literal("quote"),
-  }),
-  v.object({
+    type: Schema.Literal("quote"),
+  }).mapFields(Struct.map(Schema.mutableKey)),
+  Schema.Struct({
     id: requiredText,
-    items: v.pipe(
-      v.array(listItemSchema),
-      v.minLength(1),
-      v.check(
+    items: Schema.mutable(Schema.Array(listItemSchema)).check(
+      Schema.isMinLength(1),
+      Schema.makeFilter(
         (items) => new Set(items.map((item) => item.id)).size === items.length,
-        "List item IDs must be unique"
+        { message: "List item IDs must be unique" }
       )
     ),
-    type: v.literal("list"),
-  }),
-  v.object({
-    claims: v.pipe(
-      v.array(comparisonClaimSchema),
-      v.minLength(2),
-      v.check(
+    type: Schema.Literal("list"),
+  }).mapFields(Struct.map(Schema.mutableKey)),
+  Schema.Struct({
+    claims: Schema.mutable(Schema.Array(comparisonClaimSchema)).check(
+      Schema.isMinLength(2),
+      Schema.makeFilter(
         (claims) =>
           new Set(claims.map((claim) => claim.id)).size === claims.length,
-        "Comparison claim IDs must be unique"
+        { message: "Comparison claim IDs must be unique" }
       )
     ),
     id: requiredText,
-    type: v.literal("claimComparison"),
-  }),
+    type: Schema.Literal("claimComparison"),
+  }).mapFields(Struct.map(Schema.mutableKey)),
 ]);
 
-export const articleDocumentSchema = v.object({
-  blocks: v.pipe(
-    v.array(contentBlockSchema),
-    v.minLength(1),
-    v.check(
+export const articleDocumentSchema = Schema.Struct({
+  blocks: Schema.mutable(Schema.Array(contentBlockSchema)).check(
+    Schema.isMinLength(1),
+    Schema.makeFilter(
       (blocks) =>
         new Set(blocks.map((block) => block.id)).size === blocks.length,
-      "Article content block IDs must be unique"
+      { message: "Article content block IDs must be unique" }
     )
   ),
-  schemaVersion: v.literal(1),
-});
+  schemaVersion: Schema.Literal(1),
+}).mapFields(Struct.map(Schema.mutableKey));
 
-const articlePlacementSchema = v.object({
-  collectionKey: v.picklist(collectionKeys),
+const articlePlacementSchema = Schema.Struct({
+  collectionKey: Schema.Literals(collectionKeys),
   corpusKey: corpusKeySchema,
-  isPrimary: v.boolean(),
-  position: v.pipe(v.number(), v.integer(), v.minValue(0)),
-});
+  isPrimary: Schema.Boolean,
+  position: Schema.Number.check(
+    Schema.isInt(),
+    Schema.isGreaterThanOrEqualTo(0)
+  ),
+}).mapFields(Struct.map(Schema.mutableKey));
 
-const articlePlacementsSchema = v.pipe(
-  v.array(articlePlacementSchema),
-  v.minLength(1),
-  v.check(
+const articlePlacementsSchema = Schema.mutable(
+  Schema.Array(articlePlacementSchema)
+).check(
+  Schema.isMinLength(1),
+  Schema.makeFilter(
     (placements) =>
       new Set(
         placements.map(
           (placement) => `${placement.corpusKey}:${placement.collectionKey}`
         )
       ).size === placements.length,
-    "Article placements must be unique"
+    { message: "Article placements must be unique" }
   ),
-  v.check(
+  Schema.makeFilter(
     (placements) =>
       [...new Set(placements.map((placement) => placement.corpusKey))].every(
         (corpusKey) =>
@@ -243,98 +185,108 @@ const articlePlacementsSchema = v.pipe(
               placement.corpusKey === corpusKey && placement.isPrimary
           ).length === 1
       ),
-    "Each article corpus must have exactly one primary placement"
+    { message: "Each article corpus must have exactly one primary placement" }
   ),
-  v.check(
+  Schema.makeFilter(
     (placements) =>
       placements.every((placement) =>
         placement.collectionKey === "contradictions"
           ? placement.position > 0
           : placement.position === 0
       ),
-    "Only contradiction placements may have a ranked position"
+    { message: "Only contradiction placements may have a ranked position" }
   )
 );
 
-export const articleContentSchema = v.object({
-  contentWarning: v.optional(requiredText),
+export const articleContentSchema = Schema.Struct({
+  contentWarning: Schema.optional(requiredText),
   document: articleDocumentSchema,
-  finding: v.optional(requiredText),
+  finding: Schema.optional(requiredText),
   placements: articlePlacementsSchema,
   publishedAt: timestamp,
-  readingMinutes: v.pipe(v.number(), v.integer(), v.minValue(1)),
+  readingMinutes: Schema.Number.check(
+    Schema.isInt(),
+    Schema.isGreaterThanOrEqualTo(1)
+  ),
   slug: requiredText,
-  sources: v.array(articleSourceSchema),
+  sources: Schema.mutable(Schema.Array(articleSourceSchema)),
   summary: requiredText,
-  tags: v.pipe(
-    v.array(requiredText),
-    v.check(
-      (tags) => new Set(tags).size === tags.length,
-      "Article tags must be unique"
-    )
+  tags: Schema.mutable(Schema.Array(requiredText)).check(
+    Schema.makeFilter((tags) => new Set(tags).size === tags.length, {
+      message: "Article tags must be unique",
+    })
   ),
   title: requiredText,
   updatedAt: timestamp,
-});
+}).mapFields(Struct.map(Schema.mutableKey));
 
-export const demoContentSchema = v.object({
-  articles: v.pipe(
-    v.array(articleContentSchema),
-    v.check(
+export const demoContentSchema = Schema.Struct({
+  articles: Schema.mutable(Schema.Array(articleContentSchema)).check(
+    Schema.makeFilter(
       (articles) =>
         new Set(articles.map((article) => article.slug)).size ===
         articles.length,
-      "Article slugs must be unique"
+      { message: "Article slugs must be unique" }
     )
   ),
-  corpora: v.array(
-    v.object({
-      description: requiredText,
-      key: corpusKeySchema,
-      name: requiredText,
-    })
+  corpora: Schema.mutable(
+    Schema.Array(
+      Schema.Struct({
+        description: requiredText,
+        key: corpusKeySchema,
+        name: requiredText,
+      }).mapFields(Struct.map(Schema.mutableKey))
+    )
   ),
-});
+}).mapFields(Struct.map(Schema.mutableKey));
 
-export const articleListItemSchema = v.object({
-  assessment: v.optional(contradictionAssessmentSchema),
-  collectionKey: v.picklist(collectionKeys),
-  comparisonReferences: v.array(requiredText),
-  finding: v.optional(requiredText),
+export const articleListItemSchema = Schema.Struct({
+  assessment: Schema.optional(contradictionAssessmentSchema),
+  collectionKey: Schema.Literals(collectionKeys),
+  comparisonReferences: Schema.mutable(Schema.Array(requiredText)),
+  finding: Schema.optional(requiredText),
   id: requiredText,
-  position: v.pipe(v.number(), v.integer(), v.minValue(0)),
+  position: Schema.Number.check(
+    Schema.isInt(),
+    Schema.isGreaterThanOrEqualTo(0)
+  ),
   publishedAt: timestamp,
-  readingMinutes: v.pipe(v.number(), v.integer(), v.minValue(1)),
+  readingMinutes: Schema.Number.check(
+    Schema.isInt(),
+    Schema.isGreaterThanOrEqualTo(1)
+  ),
   slug: requiredText,
   summary: requiredText,
-  tags: v.array(requiredText),
+  tags: Schema.mutable(Schema.Array(requiredText)),
   title: requiredText,
-});
+}).mapFields(Struct.map(Schema.mutableKey));
 
-const articleListResponseSchema = v.object({
-  results: v.array(articleListItemSchema),
-});
+const articleListResponseSchema = Schema.Struct({
+  results: Schema.mutable(Schema.Array(articleListItemSchema)),
+}).mapFields(Struct.map(Schema.mutableKey));
 
-export type InlineContent = v.InferOutput<typeof inlineContentSchema>;
-export type ContentBlock = v.InferOutput<typeof contentBlockSchema>;
-export type ArticleDocument = v.InferOutput<typeof articleDocumentSchema>;
-export type ArticlePlacement = v.InferOutput<typeof articlePlacementSchema>;
-export type ArticleSource = v.InferOutput<typeof articleSourceSchema>;
-export type ArticleContent = v.InferOutput<typeof articleContentSchema>;
-export type ArticleListItem = v.InferOutput<typeof articleListItemSchema>;
-export type DemoContent = v.InferOutput<typeof demoContentSchema>;
+export type InlineContent = typeof inlineContentSchema.Type;
+export type ContentBlock = typeof contentBlockSchema.Type;
+export type ArticleDocument = typeof articleDocumentSchema.Type;
+export type ArticlePlacement = typeof articlePlacementSchema.Type;
+export type ArticleSource = typeof articleSourceSchema.Type;
+export type ArticleContent = typeof articleContentSchema.Type;
+export type ArticleListItem = typeof articleListItemSchema.Type;
+export type DemoContent = typeof demoContentSchema.Type;
 
 export type ContentValidationResult = { success: boolean };
 
-export function validateDemoContent(
-  input: v.InferInput<typeof demoContentSchema>
-): ContentValidationResult {
-  return { success: v.safeParse(demoContentSchema, input).success };
+export function validateDemoContent(input: unknown): ContentValidationResult {
+  return {
+    success: Result.isSuccess(
+      Schema.decodeUnknownResult(demoContentSchema)(input)
+    ),
+  };
 }
 
 export function parseArticleListResponse(
-  input: v.InferInput<typeof articleListResponseSchema>
+  input: unknown
 ): ArticleListItem[] | null {
-  const parsed = v.safeParse(articleListResponseSchema, input);
-  return parsed.success ? parsed.output.results : null;
+  const parsed = Schema.decodeUnknownResult(articleListResponseSchema)(input);
+  return Result.isSuccess(parsed) ? parsed.success.results : null;
 }

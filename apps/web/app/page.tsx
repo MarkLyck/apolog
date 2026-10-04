@@ -1,4 +1,5 @@
 import type { CorpusKey } from "@apolog/shared";
+import * as Effect from "effect/Effect";
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
@@ -106,7 +107,7 @@ async function FeaturedContradictions({
   featuredPromise,
   corpusKey,
 }: {
-  featuredPromise: ReturnType<typeof getFeatured>;
+  featuredPromise: Promise<Effect.Success<ReturnType<typeof getFeatured>>>;
   corpusKey: CorpusKey;
 }) {
   const featured = await featuredPromise;
@@ -139,7 +140,7 @@ async function FeaturedArticles({
   featuredPromise,
   corpusKey,
 }: {
-  featuredPromise: ReturnType<typeof getFeatured>;
+  featuredPromise: Promise<Effect.Success<ReturnType<typeof getFeatured>>>;
   corpusKey: CorpusKey;
 }) {
   const featured = await featuredPromise;
@@ -189,7 +190,7 @@ export default async function Home({
   searchParams: PageSearchParams;
 }) {
   const corpusKey = await getPageCorpus(searchParams);
-  const featured = getFeatured(corpusKey);
+  const featured = Effect.runPromise(getFeatured(corpusKey));
 
   return (
     <div className="landing-page">

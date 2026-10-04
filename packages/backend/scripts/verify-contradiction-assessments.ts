@@ -1,5 +1,5 @@
-import { articleContentSchema } from "@apolog/shared";
-import * as v from "valibot";
+import { articleContentSchema } from "@apolog/shared/content";
+import * as Schema from "effect/Schema";
 
 import { getContradictionAssessment } from "../src/contradiction-assessments";
 import manifest from "../src/contradiction-assessments.json";
@@ -10,19 +10,17 @@ if (!path) {
     "Usage: bun run contradictions:verify-assessments <article-artifact.json>"
   );
 }
-const { articles } = v.parse(
-  v.object({
-    articles: v.pipe(
-      v.array(articleContentSchema),
-      v.check(
-        (items) =>
-          new Set(items.map((item) => item.slug)).size === items.length,
-        "Duplicate article slugs"
+const { articles } = Schema.decodeUnknownSync(
+  Schema.Struct({
+    articles: Schema.mutable(Schema.Array(articleContentSchema)).check(
+      Schema.makeFilter((items) =>
+        new Set(items.map((item) => item.slug)).size === items.length
+          ? undefined
+          : "Duplicate article slugs"
       )
     ),
-  }),
-  await Bun.file(path).json()
-);
+  })
+)(await Bun.file(path).json());
 const slugs = new Set(articles.map((article) => article.slug));
 const missing = manifest
   .filter((review) => !slugs.has(review.slug))

@@ -1,8 +1,11 @@
 import { describe, expect, test } from "bun:test";
 
-import { articleContentSchema, parseArticleListResponse } from "@apolog/shared";
+import {
+  articleContentSchema,
+  parseArticleListResponse,
+} from "@apolog/shared/content";
 import { convexTest } from "convex-test";
-import * as v from "valibot";
+import * as Schema from "effect/Schema";
 
 import { projectArticle } from "../src/article-projection";
 import fixtures from "../src/fixtures/assessment-articles.json";
@@ -15,7 +18,9 @@ const modules = {
   "./search.ts": () => import("./search"),
   "./home.ts": () => import("./home"),
 };
-const articles = v.parse(v.array(articleContentSchema), fixtures);
+const articles = Schema.decodeUnknownSync(
+  Schema.mutable(Schema.Array(articleContentSchema))
+)(fixtures);
 
 describe("public contradiction assessments", () => {
   test("detail, pagination, search, and home agree without changing stored ranks", async () => {

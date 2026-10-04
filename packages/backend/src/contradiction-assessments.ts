@@ -1,31 +1,32 @@
-import { reviewedContradictionSchema } from "@apolog/shared";
 import type { ContradictionAssessment } from "@apolog/shared";
-import * as v from "valibot";
+import { reviewedContradictionSchema } from "@apolog/shared/contradiction-assessment";
+import * as Schema from "effect/Schema";
 
 import { assessmentSourceDigest } from "./assessment-source";
 import type { AssessmentSource } from "./assessment-source";
 import manifest from "./contradiction-assessments.json";
 
+const reviewManifestSchema = Schema.mutable(
+  Schema.Array(
+    Schema.Struct({
+      slug: Schema.String,
+      sourceDigest: Schema.String.check(Schema.isPattern(/^[a-f0-9]{64}$/u)),
+      ...reviewedContradictionSchema.fields,
+    })
+  )
+).check(
+  Schema.makeFilter((entries) =>
+    new Set(entries.map((entry) => entry.slug)).size === entries.length
+      ? undefined
+      : "Assessment slugs must be unique"
+  )
+);
+
 const reviews = new Map(
-  v
-    .parse(
-      v.pipe(
-        v.array(
-          v.object({
-            slug: v.string(),
-            sourceDigest: v.pipe(v.string(), v.regex(/^[a-f0-9]{64}$/u)),
-            ...reviewedContradictionSchema.entries,
-          })
-        ),
-        v.check(
-          (entries) =>
-            new Set(entries.map((entry) => entry.slug)).size === entries.length,
-          "Assessment slugs must be unique"
-        )
-      ),
-      manifest
-    )
-    .map((entry) => [entry.slug, entry])
+  Schema.decodeUnknownSync(reviewManifestSchema)(manifest).map((entry) => [
+    entry.slug,
+    entry,
+  ])
 );
 
 export async function getContradictionAssessment(

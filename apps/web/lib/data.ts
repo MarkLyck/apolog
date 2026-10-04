@@ -1,37 +1,48 @@
 import { api } from "@apolog/backend/api";
 import type { Id } from "@apolog/backend/data-model";
-import type { ArticleListItem, CollectionKey, CorpusKey } from "@apolog/shared";
+import type { CollectionKey, CorpusKey } from "@apolog/shared";
 import { fetchQuery } from "convex/nextjs";
+import * as Data from "effect/Data";
+import * as Effect from "effect/Effect";
 
 type SearchSort = "newest" | "oldest" | "relevance";
 type ArticleListRequest =
   | { mode: "browse"; sort: "newest" | "oldest" | "ranked" }
   | { mode: "search"; query: string; sort: SearchSort };
 
-export async function searchArticles(
+class ArticleQueryError extends Data.TaggedError("ArticleQueryError")<{
+  operation: string;
+  cause: unknown;
+}> {}
+
+export function searchArticles(
   corpusKey: CorpusKey,
   query: string,
   limit = 12,
   collectionKey?: CollectionKey,
   sort: SearchSort = "relevance"
-): Promise<ArticleListItem[]> {
+) {
   if (!query.trim()) {
-    return [];
+    return Effect.succeed([]);
   }
-  return fetchQuery(api.search.keywordArticles, {
-    corpusKey,
-    limit,
-    query,
-    sort,
-    collectionKey,
+  return Effect.tryPromise({
+    try: () =>
+      fetchQuery(api.search.keywordArticles, {
+        corpusKey,
+        limit,
+        query,
+        sort,
+        collectionKey,
+      }),
+    catch: (cause) => new ArticleQueryError({ cause, operation: "search" }),
   });
 }
 
-export async function listArticles(
+export function listArticles(
   collectionKey: CollectionKey,
   corpusKey: CorpusKey,
   request: ArticleListRequest
-): Promise<ArticleListItem[]> {
+) {
   if (request.mode === "search") {
     return searchArticles(
       corpusKey,
@@ -41,17 +52,23 @@ export async function listArticles(
       request.sort
     );
   }
-  const result = await fetchQuery(api.articles.list, {
-    collectionKey,
-    corpusKey,
-    paginationOpts: { cursor: null, numItems: 24 },
-    sort: request.sort,
-  });
-  return result.page;
+  return Effect.tryPromise({
+    try: () =>
+      fetchQuery(api.articles.list, {
+        collectionKey,
+        corpusKey,
+        paginationOpts: { cursor: null, numItems: 24 },
+        sort: request.sort,
+      }),
+    catch: (cause) => new ArticleQueryError({ cause, operation: "list" }),
+  }).pipe(Effect.map((result) => result.page));
 }
 
 export function getArticle(slug: string) {
-  return fetchQuery(api.articles.getBySlug, { slug });
+  return Effect.tryPromise({
+    try: () => fetchQuery(api.articles.getBySlug, { slug }),
+    catch: (cause) => new ArticleQueryError({ cause, operation: "article" }),
+  });
 }
 
 export function getAdjacentArticles(
@@ -59,13 +76,20 @@ export function getAdjacentArticles(
   collectionKey: CollectionKey,
   corpusKey: CorpusKey
 ) {
-  return fetchQuery(api.articles.getAdjacent, {
-    articleId,
-    collectionKey,
-    corpusKey,
+  return Effect.tryPromise({
+    try: () =>
+      fetchQuery(api.articles.getAdjacent, {
+        articleId,
+        collectionKey,
+        corpusKey,
+      }),
+    catch: (cause) => new ArticleQueryError({ cause, operation: "adjacent" }),
   });
 }
 
 export function getFeatured(corpusKey: CorpusKey) {
-  return fetchQuery(api.home.getFeatured, { corpusKey });
+  return Effect.tryPromise({
+    try: () => fetchQuery(api.home.getFeatured, { corpusKey }),
+    catch: (cause) => new ArticleQueryError({ cause, operation: "featured" }),
+  });
 }

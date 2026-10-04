@@ -1,6 +1,6 @@
 import { createHash } from "node:crypto";
 
-import { validateDemoContent } from "@apolog/shared";
+import { validateDemoContent } from "@apolog/shared/content";
 import { contentFixtures } from "@apolog/shared/demo-content";
 
 export function sourceHash(input: string): string {

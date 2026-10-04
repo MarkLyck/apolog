@@ -1,50 +1,46 @@
 import { createHmac, randomBytes, timingSafeEqual } from "node:crypto";
 
-import * as v from "valibot";
+import * as Result from "effect/Result";
+import * as Schema from "effect/Schema";
+import * as SchemaIssue from "effect/SchemaIssue";
 
-const messageSchema = v.object({
-  content: v.pipe(v.string(), v.minLength(1), v.maxLength(4000)),
-  role: v.picklist(["user", "assistant"]),
+const messageSchema = Schema.Struct({
+  content: Schema.String.check(Schema.isMinLength(1), Schema.isMaxLength(4000)),
+  role: Schema.Literals(["user", "assistant"]),
 });
 
-const chatRequestSchema = v.object({
-  corpusKey: v.picklist(["bible", "quran"]),
-  messages: v.pipe(v.array(messageSchema), v.minLength(1), v.maxLength(24)),
+const chatRequestSchema = Schema.Struct({
+  corpusKey: Schema.Literals(["bible", "quran"]),
+  messages: Schema.mutable(Schema.Array(messageSchema)).check(
+    Schema.isMinLength(1),
+    Schema.isMaxLength(24),
+    Schema.makeFilter(
+      (messages) =>
+        messages.reduce((sum, message) => sum + message.content.length, 0) <=
+        16_000,
+      { message: "Conversation context exceeds 16,000 characters." }
+    )
+  ),
 });
 
-type JsonValue =
-  | boolean
-  | number
-  | string
-  | null
-  | JsonValue[]
-  | { [key: string]: JsonValue };
-
-export type ChatRequest = v.InferOutput<typeof chatRequestSchema>;
+export type ChatRequest = typeof chatRequestSchema.Type;
 
 export function validateChatRequest(
-  input: JsonValue
+  input: unknown
 ):
   | { success: true; output: ChatRequest }
   | { success: false; issues: string[] } {
-  const parsed = v.safeParse(chatRequestSchema, input);
-  if (!parsed.success) {
-    return {
-      issues: parsed.issues.map((issue) => issue.message),
-      success: false,
-    };
-  }
-  const totalCharacters = parsed.output.messages.reduce(
-    (sum, message) => sum + message.content.length,
-    0
-  );
-  if (totalCharacters > 16_000) {
-    return {
-      issues: ["Conversation context exceeds 16,000 characters."],
-      success: false,
-    };
-  }
-  return { output: parsed.output, success: true };
+  const parsed = Schema.decodeUnknownResult(chatRequestSchema, {
+    errors: "all",
+  })(input);
+  return Result.isSuccess(parsed)
+    ? { output: parsed.success, success: true }
+    : {
+        issues: SchemaIssue.makeFormatterStandardSchemaV1()(
+          parsed.failure.issue
+        ).issues.map((issue) => issue.message),
+        success: false,
+      };
 }
 
 function sign(value: string, secret: string) {

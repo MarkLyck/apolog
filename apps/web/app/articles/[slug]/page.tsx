@@ -1,4 +1,5 @@
 import { parseCollection } from "@apolog/shared";
+import * as Effect from "effect/Effect";
 import type { Metadata } from "next";
 
 import { ArticleDetailPage } from "@/components/article-detail-page";
@@ -12,7 +13,7 @@ interface Props {
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const article = await getArticle((await params).slug);
+  const article = await Effect.runPromise(getArticle((await params).slug));
   return article
     ? { description: article.summary, title: article.title }
     : { title: "Not found" };

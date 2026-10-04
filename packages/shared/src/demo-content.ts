@@ -1,9 +1,5 @@
-import type {
-  ArticlePlacement,
-  CollectionKey,
-  DemoContent,
-  InlineContent,
-} from "./content";
+import type { CollectionKey } from "./collection";
+import type { ArticlePlacement, DemoContent, InlineContent } from "./content";
 import type { CorpusKey } from "./corpus";
 
 const now = Date.UTC(2026, 6, 28);

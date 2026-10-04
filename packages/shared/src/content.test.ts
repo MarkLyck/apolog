@@ -1,9 +1,13 @@
 import { describe, expect, test } from "bun:test";
 
-import * as v from "valibot";
+import * as Schema from "effect/Schema";
 
 import type { DemoContent } from "./content";
-import { inlineContentSchema, validateDemoContent } from "./content";
+import {
+  articleContentSchema,
+  inlineContentSchema,
+  validateDemoContent,
+} from "./content";
 import { contentFixtures } from "./demo-content";
 
 function first<T>(items: T[]): T {
@@ -59,7 +63,7 @@ describe("representative content fixtures", () => {
   });
 
   test("preserves whitespace between rich text nodes", () => {
-    const content = v.parse(inlineContentSchema, [
+    const content = Schema.decodeUnknownSync(inlineContentSchema)([
       { id: "hello", text: "hello ", type: "text" },
       { id: "world", marks: ["bold"], text: "world", type: "text" },
     ]);
@@ -147,5 +151,57 @@ describe("representative content fixtures", () => {
     const input: DemoContent = structuredClone(contentFixtures);
     corrupt(input);
     expect(validateDemoContent(input).success).toBe(false);
+  });
+});
+
+describe("Effect content decoding", () => {
+  test("normalizes editorial fields while preserving rich-text spacing and optional undefined", () => {
+    const article = first(contentFixtures.articles);
+    const parsed = Schema.decodeUnknownSync(articleContentSchema)({
+      ...article,
+      contentWarning: undefined,
+      finding: undefined,
+      title: `  ${article.title}  `,
+      document: {
+        schemaVersion: 1,
+        blocks: [
+          {
+            id: " paragraph ",
+            type: "paragraph",
+            content: [
+              { id: " text ", type: "text", text: " keep my spacing " },
+            ],
+          },
+        ],
+      },
+      extra: "ignored input field",
+    });
+    expect(parsed.title).toBe(article.title);
+    expect(parsed.contentWarning).toBeUndefined();
+    expect(parsed.finding).toBeUndefined();
+    expect(parsed.document.blocks).toEqual([
+      {
+        id: "paragraph",
+        type: "paragraph",
+        content: [{ id: "text", type: "text", text: " keep my spacing " }],
+      },
+    ]);
+    expect(Object.hasOwn(parsed, "extra")).toBe(false);
+  });
+
+  test.each(
+    [
+      [{ id: "one", type: "text", text: " " }],
+      [{ id: "one", type: "text", text: "a", marks: ["bold", "bold"] }],
+      [
+        { id: "one", type: "text", text: "a" },
+        { id: " one ", type: "text", text: "b" },
+      ],
+      [{ id: "one", type: "link", text: "a", href: "//example.com" }],
+    ].map((nodes) => ({ nodes }))
+  )("rejects invalid inline input %j", ({ nodes }) => {
+    expect(() =>
+      Schema.decodeUnknownSync(inlineContentSchema)(nodes)
+    ).toThrow();
   });
 });

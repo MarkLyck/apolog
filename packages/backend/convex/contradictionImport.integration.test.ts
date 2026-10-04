@@ -1,10 +1,10 @@
 import { describe, expect, test } from "bun:test";
 
-import { articleContentSchema } from "@apolog/shared";
+import { articleContentSchema } from "@apolog/shared/content";
 import { contentFixtures } from "@apolog/shared/demo-content";
 import { convexTest } from "convex-test";
 import { makeFunctionReference } from "convex/server";
-import * as v from "valibot";
+import * as Schema from "effect/Schema";
 
 import { projectArticle } from "../src/article-projection";
 import schema from "./schema";
@@ -23,12 +23,13 @@ const seed = makeFunctionReference<"mutation">("seed:seed");
 const digest = "a".repeat(64);
 const artifact = process.env.APOLOG_CONTRADICTION_ARTIFACT;
 const articles = artifact
-  ? v.parse(
-      v.object({ articles: v.array(articleContentSchema) }),
-      await Bun.file(artifact).json()
-    ).articles
+  ? Schema.decodeUnknownSync(
+      Schema.Struct({
+        articles: Schema.mutable(Schema.Array(articleContentSchema)),
+      })
+    )(await Bun.file(artifact).json()).articles
   : Array.from({ length: 500 }, (_, index) =>
-      v.parse(articleContentSchema, {
+      Schema.decodeUnknownSync(articleContentSchema)({
         title: `Comparison ${index}`,
         slug: `comparison-${index}`,
         summary: "Compare the quoted passages.",

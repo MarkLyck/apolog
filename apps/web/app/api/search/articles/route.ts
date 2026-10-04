@@ -1,4 +1,5 @@
 import { parseCorpus } from "@apolog/shared";
+import * as Effect from "effect/Effect";
 import { NextResponse } from "next/server";
 
 import { searchArticles } from "@/lib/data";
@@ -13,7 +14,7 @@ export async function GET(request: Request) {
       { status: 400 }
     );
   }
-  const hits = await searchArticles(corpusKey, query, 12);
+  const hits = await Effect.runPromise(searchArticles(corpusKey, query, 12));
   return NextResponse.json(
     { results: hits },
     { headers: { "Cache-Control": "private, max-age=15" } }

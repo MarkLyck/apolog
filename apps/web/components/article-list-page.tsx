@@ -1,5 +1,6 @@
 import { collectionRegistry, corpusLabel } from "@apolog/shared";
 import type { CollectionKey } from "@apolog/shared";
+import * as Effect from "effect/Effect";
 
 import { firstSearchParam, getPageCorpus } from "@/lib/corpus";
 import type { PageSearchParams } from "@/lib/corpus";
@@ -29,12 +30,14 @@ export async function ArticleListPage({
       ? requestedSort
       : "relevance";
   const browseSort = requestedSort === "oldest" ? "oldest" : "newest";
-  const articles = await listArticles(
-    collectionKey,
-    corpusKey,
-    query
-      ? { mode: "search", query, sort: searchSort }
-      : { mode: "browse", sort: browseSort }
+  const articles = await Effect.runPromise(
+    listArticles(
+      collectionKey,
+      corpusKey,
+      query
+        ? { mode: "search", query, sort: searchSort }
+        : { mode: "browse", sort: browseSort }
+    )
   );
   const pageCopy = collectionRegistry[collectionKey].page;
 
