@@ -1,10 +1,10 @@
-import { articleContentSchema } from "@apolog/shared";
 import type {
   ArticleContent,
   ContentBlock,
   InlineContent,
 } from "@apolog/shared";
-import * as v from "valibot";
+import { articleContentSchema } from "@apolog/shared/content";
+import * as Schema from "effect/Schema";
 
 import type { Bible, CatalogEntry } from "./acquire";
 import {
@@ -97,7 +97,7 @@ export function buildArticle(
     )
     .join(" ")
     .split(/\s+/u).length;
-  const article = v.parse(articleContentSchema, {
+  const article = Schema.decodeUnknownSync(articleContentSchema)({
     title: entry.title,
     slug,
     summary,

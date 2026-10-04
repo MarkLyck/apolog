@@ -2,6 +2,8 @@
 
 import type { CorpusKey } from "@apolog/shared";
 import { Button } from "@apolog/ui";
+import * as Result from "effect/Result";
+import * as Schema from "effect/Schema";
 import type { SyntheticEvent } from "react";
 import { useState } from "react";
 import {
@@ -12,7 +14,6 @@ import {
   FiMessageCircle,
   FiUser,
 } from "react-icons/fi";
-import * as v from "valibot";
 
 import { AssistantMessage } from "./assistant-message";
 
@@ -27,12 +28,14 @@ const prompts = [
   "What makes a contradiction more than a translation difference?",
   "How can I discuss morality without attacking believers?",
 ];
-const errorResponseSchema = v.object({ error: v.string() });
+const errorResponseSchema = Schema.Struct({ error: Schema.String });
 
 async function responseError(response: Response): Promise<string> {
   const payload = await response.json().catch(() => null);
-  const parsed = v.safeParse(errorResponseSchema, payload);
-  return parsed.success ? parsed.output.error : "Debate request failed.";
+  const parsed = Schema.decodeUnknownResult(errorResponseSchema)(payload);
+  return Result.isSuccess(parsed)
+    ? parsed.success.error
+    : "Debate request failed.";
 }
 
 export function DebateClient({ corpusKey }: { corpusKey: CorpusKey }) {

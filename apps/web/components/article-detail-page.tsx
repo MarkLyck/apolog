@@ -1,6 +1,7 @@
 import { collectionRegistry, corpusLabel } from "@apolog/shared";
 import type { CollectionKey, CorpusKey } from "@apolog/shared";
 import { Badge } from "@apolog/ui";
+import * as Effect from "effect/Effect";
 import Link from "next/link";
 import { notFound, redirect } from "next/navigation";
 import { Suspense } from "react";
@@ -23,7 +24,7 @@ export async function ArticleDetailPage({
   corpusKey: CorpusKey;
   requestedCollection: CollectionKey | null;
 }) {
-  const article = await getArticle(slug);
+  const article = await Effect.runPromise(getArticle(slug));
   if (!article) {
     notFound();
   }
@@ -40,10 +41,8 @@ export async function ArticleDetailPage({
   }
   const activePlacement = resolved.placement;
   const collection = collectionRegistry[activePlacement.collectionKey];
-  const adjacent = await getAdjacentArticles(
-    article._id,
-    activePlacement.collectionKey,
-    corpusKey
+  const adjacent = await Effect.runPromise(
+    getAdjacentArticles(article._id, activePlacement.collectionKey, corpusKey)
   );
 
   return (

@@ -1,5 +1,6 @@
 import type { CollectionKey, CorpusKey } from "@apolog/shared";
 import { withCorpus } from "@apolog/shared";
+import type * as Effect from "effect/Effect";
 import Link from "next/link";
 import { FiArrowLeft, FiArrowRight } from "react-icons/fi";
 
@@ -10,7 +11,7 @@ export function ArticleNavigation({
   collectionKey,
   corpusKey,
 }: {
-  adjacent: Awaited<ReturnType<typeof getAdjacentArticles>>;
+  adjacent: Effect.Success<ReturnType<typeof getAdjacentArticles>>;
   collectionKey: CollectionKey;
   corpusKey: CorpusKey;
 }) {

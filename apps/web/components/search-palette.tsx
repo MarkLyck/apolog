@@ -1,7 +1,8 @@
 "use client";
 
-import { parseArticleListResponse, parseCorpus } from "@apolog/shared";
+import { parseCorpus } from "@apolog/shared";
 import type { ArticleListItem, CorpusKey } from "@apolog/shared";
+import { parseArticleListResponse } from "@apolog/shared/content";
 import Link from "next/link";
 import { usePathname, useSearchParams } from "next/navigation";
 import { useEffect, useEffectEvent, useRef, useState } from "react";

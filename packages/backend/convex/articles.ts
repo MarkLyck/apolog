@@ -1,9 +1,13 @@
-import { articleDocumentSchema, articleSourceSchema } from "@apolog/shared";
 import type { ArticleSource } from "@apolog/shared";
+import {
+  articleDocumentSchema,
+  articleSourceSchema,
+} from "@apolog/shared/content";
 import { getAuthUserId } from "@convex-dev/auth/server";
 import { paginationOptsValidator } from "convex/server";
 import { ConvexError, v } from "convex/values";
-import * as valibot from "valibot";
+import * as Result from "effect/Result";
+import * as Schema from "effect/Schema";
 
 import { articleTagKey, projectArticle } from "../src/article-projection";
 import { getContradictionAssessment } from "../src/contradiction-assessments";
@@ -191,13 +195,15 @@ function validateEditorialInput(
 }
 
 function parseArticleSources(sources: ArticleSource[]) {
-  const result = valibot.safeParse(valibot.array(articleSourceSchema), sources);
-  if (!result.success) {
+  const result = Schema.decodeUnknownResult(
+    Schema.mutable(Schema.Array(articleSourceSchema))
+  )(sources);
+  if (Result.isFailure(result)) {
     throw new ConvexError(
       "Every source needs a title, publisher, and valid URL."
     );
   }
-  return result.output;
+  return result.success;
 }
 
 function cleanEditorialFields(args: {
@@ -235,13 +241,13 @@ function cleanEditorialFields(args: {
 }
 
 function parseArticleDocument(document: Doc<"articles">["document"]) {
-  const result = valibot.safeParse(articleDocumentSchema, document);
-  if (!result.success) {
+  const result = Schema.decodeUnknownResult(articleDocumentSchema)(document);
+  if (Result.isFailure(result)) {
     throw new ConvexError(
-      `Article content is invalid: ${result.issues[0]?.message ?? "unknown content error"}`
+      `Article content is invalid: ${result.failure.message}`
     );
   }
-  return result.output;
+  return result.success;
 }
 
 async function assertSlugAvailable(

@@ -1,11 +1,13 @@
-import {
-  inlineContentSchema,
-  type ArticleDocument,
-  type ContentBlock,
-  type InlineContent,
+import type {
+  ArticleDocument,
+  ContentBlock,
+  InlineContent,
 } from "@apolog/shared";
+import { inlineContentSchema } from "@apolog/shared/content";
 import type { JSONContent } from "@tiptap/core";
-import * as v from "valibot";
+import * as Result from "effect/Result";
+import * as Schema from "effect/Schema";
+import * as Struct from "effect/Struct";
 
 export type ContradictionClaim = {
   content: InlineContent;
@@ -14,34 +16,40 @@ export type ContradictionClaim = {
   reference: string;
 };
 
-const contentIdAttributesSchema = v.object({
-  contentId: v.optional(v.string()),
-});
-const linkAttributesSchema = v.object({
-  contentId: v.optional(v.string()),
-  href: v.string(),
-});
-const calloutAttributesSchema = v.object({
-  title: v.optional(v.string()),
-});
-const scriptureAttributesSchema = v.object({
-  edition: v.optional(v.string()),
-  reference: v.optional(v.string()),
-});
-const storedContradictionClaimSchema = v.pipe(
-  v.object({
-    content: v.optional(inlineContentSchema),
-    id: v.optional(v.string()),
-    label: v.string(),
-    reference: v.string(),
-    text: v.optional(v.string()),
-  }),
-  v.check(
-    (claim) => claim.content !== undefined || claim.text !== undefined,
-    "A contradiction claim must have structured content or legacy text"
-  )
+const contentIdAttributesSchema = Schema.Struct({
+  contentId: Schema.optional(Schema.String),
+}).mapFields(Struct.map(Schema.mutableKey));
+const linkAttributesSchema = Schema.Struct({
+  contentId: Schema.optional(Schema.String),
+  href: Schema.String,
+}).mapFields(Struct.map(Schema.mutableKey));
+const calloutAttributesSchema = Schema.Struct({
+  title: Schema.optional(Schema.String),
+}).mapFields(Struct.map(Schema.mutableKey));
+const scriptureAttributesSchema = Schema.Struct({
+  edition: Schema.optional(Schema.String),
+  reference: Schema.optional(Schema.String),
+}).mapFields(Struct.map(Schema.mutableKey));
+const storedContradictionClaimSchema = Schema.Struct({
+  content: Schema.optional(inlineContentSchema),
+  id: Schema.optional(Schema.String),
+  label: Schema.String,
+  reference: Schema.String,
+  text: Schema.optional(Schema.String),
+})
+  .mapFields(Struct.map(Schema.mutableKey))
+  .check(
+    Schema.makeFilter(
+      (claim) => claim.content !== undefined || claim.text !== undefined,
+      {
+        message:
+          "A contradiction claim must have structured content or legacy text",
+      }
+    )
+  );
+const storedContradictionClaimsSchema = Schema.mutable(
+  Schema.Array(storedContradictionClaimSchema)
 );
-const storedContradictionClaimsSchema = v.array(storedContradictionClaimSchema);
 
 export function emptyContradictionClaim(index: number): ContradictionClaim {
   return {
@@ -147,9 +155,11 @@ export function replaceInlineContentText(
 }
 
 function nodeId(node: JSONContent, fallback: string) {
-  const parsed = v.safeParse(contentIdAttributesSchema, node.attrs);
-  return parsed.success && parsed.output.contentId
-    ? parsed.output.contentId
+  const parsed = Schema.decodeUnknownResult(contentIdAttributesSchema)(
+    node.attrs
+  );
+  return Result.isSuccess(parsed) && parsed.success.contentId
+    ? parsed.success.contentId
     : fallback;
 }
 
@@ -247,21 +257,22 @@ function fromTiptapInline(
       continue;
     }
     const link = node.marks?.find((mark) => mark.type === "link");
-    const linkAttributes = v.safeParse(linkAttributesSchema, link?.attrs);
-    if (linkAttributes.success) {
+    const linkAttributes = Schema.decodeUnknownResult(linkAttributesSchema)(
+      link?.attrs
+    );
+    if (Result.isSuccess(linkAttributes)) {
       result.push({
-        href: linkAttributes.output.href,
-        id: linkAttributes.output.contentId || `${parentId}-link-${index}`,
+        href: linkAttributes.success.href,
+        id: linkAttributes.success.contentId || `${parentId}-link-${index}`,
         text: node.text,
         type: "link",
       });
       continue;
     }
     const contentId = node.marks?.find((mark) => mark.type === "contentId");
-    const textAttributes = v.safeParse(
-      contentIdAttributesSchema,
-      contentId?.attrs
-    );
+    const textAttributes = Schema.decodeUnknownResult(
+      contentIdAttributesSchema
+    )(contentId?.attrs);
     const marks = node.marks
       ?.map((mark) => (mark.type === "strike" ? "strikethrough" : mark.type))
       .filter((mark): mark is "bold" | "italic" | "strikethrough" | "code" =>
@@ -269,7 +280,8 @@ function fromTiptapInline(
       );
     result.push({
       id:
-        (textAttributes.success && textAttributes.output.contentId) ||
+        (Result.isSuccess(textAttributes) &&
+          textAttributes.success.contentId) ||
         `${parentId}-text-${index}`,
       marks: marks?.length ? [...new Set(marks)] : undefined,
       text: node.text,
@@ -281,14 +293,14 @@ function fromTiptapInline(
     : [{ id: `${parentId}-text-0`, text: " ", type: "text" }];
 }
 
-export function normalizeClaims(
-  value: v.InferInput<typeof storedContradictionClaimsSchema>
-): ContradictionClaim[] {
-  const parsed = v.safeParse(storedContradictionClaimsSchema, value);
-  if (!parsed.success) {
+export function normalizeClaims(value: unknown): ContradictionClaim[] {
+  const parsed = Schema.decodeUnknownResult(storedContradictionClaimsSchema)(
+    value
+  );
+  if (Result.isFailure(parsed)) {
     return [];
   }
-  return parsed.output.map((claim) => ({
+  return parsed.success.map((claim) => ({
     content: claim.content ?? [
       {
         id: `${claim.id ?? "claim"}-text-0`,
@@ -364,23 +376,31 @@ function tiptapNodeToBlock(
       return listBlock(node, id);
     }
     case "callout": {
-      const attributes = v.safeParse(calloutAttributesSchema, node.attrs);
+      const attributes = Schema.decodeUnknownResult(calloutAttributesSchema)(
+        node.attrs
+      );
       return {
         content: fromTiptapInline(node.content, id),
         id,
-        title: (attributes.success && attributes.output.title) || "Key point",
+        title:
+          (Result.isSuccess(attributes) && attributes.success.title) ||
+          "Key point",
         type: "callout",
       };
     }
     case "scripture": {
-      const attributes = v.safeParse(scriptureAttributesSchema, node.attrs);
+      const attributes = Schema.decodeUnknownResult(scriptureAttributesSchema)(
+        node.attrs
+      );
       return {
         content: fromTiptapInline(node.content, id),
         edition:
-          (attributes.success && attributes.output.edition) || "Translation",
+          (Result.isSuccess(attributes) && attributes.success.edition) ||
+          "Translation",
         id,
         reference:
-          (attributes.success && attributes.output.reference) || "Reference",
+          (Result.isSuccess(attributes) && attributes.success.reference) ||
+          "Reference",
         type: "quote",
       };
     }

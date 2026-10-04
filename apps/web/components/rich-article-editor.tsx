@@ -3,6 +3,9 @@
 import "./rich-article-editor.css";
 import type { ArticleDocument } from "@apolog/shared";
 import { EditorContent, useEditor, useEditorState } from "@tiptap/react";
+import * as Result from "effect/Result";
+import * as Schema from "effect/Schema";
+import * as Struct from "effect/Struct";
 import { useEffect, useState } from "react";
 import type { ReactNode } from "react";
 import {
@@ -19,7 +22,6 @@ import {
   FiList,
   FiMinus,
 } from "react-icons/fi";
-import * as v from "valibot";
 
 import {
   articleDocumentToTiptap,
@@ -31,13 +33,13 @@ import { articleEditorExtensions } from "./rich-article-editor-extensions";
 
 const fieldClassName =
   "w-full rounded-lg border border-[var(--line)] bg-[var(--paper)] px-3 py-2 text-sm text-[var(--ink)] outline-none focus:border-[var(--accent)]";
-const linkAttributesSchema = v.object({ href: v.optional(v.string()) });
+const linkAttributesSchema = Schema.Struct({
+  href: Schema.optional(Schema.String),
+}).mapFields(Struct.map(Schema.mutableKey));
 
-function currentLinkHref(
-  attributes: v.InferInput<typeof linkAttributesSchema>
-) {
-  const parsed = v.safeParse(linkAttributesSchema, attributes);
-  return parsed.success ? parsed.output.href : undefined;
+function currentLinkHref(attributes: unknown) {
+  const parsed = Schema.decodeUnknownResult(linkAttributesSchema)(attributes);
+  return Result.isSuccess(parsed) ? parsed.success.href : undefined;
 }
 
 function ToolbarButton({

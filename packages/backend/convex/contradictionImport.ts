@@ -1,6 +1,7 @@
-import { type ArticleContent, articleContentSchema } from "@apolog/shared";
+import type { ArticleContent } from "@apolog/shared";
+import { articleContentSchema } from "@apolog/shared/content";
 import { ConvexError, v } from "convex/values";
-import * as valibot from "valibot";
+import * as Schema from "effect/Schema";
 
 import { projectArticle } from "../src/article-projection";
 import type { Id } from "./_generated/dataModel";
@@ -186,10 +187,9 @@ export const replace = internalMutation({
     ),
   },
   handler: async (ctx, args) => {
-    const articles = valibot.parse(
-      valibot.array(articleContentSchema),
-      args.articles
-    );
+    const articles = Schema.decodeUnknownSync(
+      Schema.mutable(Schema.Array(articleContentSchema))
+    )(args.articles);
     if (
       articles.length < 500 ||
       articles.length > 1000 ||

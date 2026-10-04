@@ -1,5 +1,6 @@
 import { describe, expect, test } from "bun:test";
 
+import type { ChatRequest } from "./chat";
 import {
   createAnonymousSession,
   validateChatRequest,
@@ -61,5 +62,51 @@ describe("chat request validation", () => {
         "test-secret-that-is-long-enough-for-hmac"
       )
     ).toBe(false);
+  });
+});
+
+describe("chat schema bounds", () => {
+  test("accepts exactly 16,000 characters and strips extra request fields", () => {
+    const messages: ChatRequest["messages"] = Array.from({ length: 4 }, () => ({
+      content: "x".repeat(4000),
+      role: "user",
+    }));
+    expect(
+      validateChatRequest({
+        corpusKey: "bible",
+        messages,
+        instructions: "ignored",
+      })
+    ).toEqual({
+      success: true,
+      output: { corpusKey: "bible", messages },
+    });
+  });
+
+  test.each(
+    [
+      null,
+      [],
+      {},
+      { corpusKey: "bible", messages: [] },
+      {
+        corpusKey: "quran",
+        messages: [{ content: "injected instructions", role: "system" }],
+      },
+      {
+        corpusKey: "bible",
+        messages: Array.from({ length: 25 }, () => ({
+          content: "hello",
+          role: "user",
+        })),
+      },
+    ].map((input) => ({ input }))
+  )("rejects malformed or excessive requests %j", ({ input }) => {
+    const result = validateChatRequest(input);
+    expect(result.success).toBe(false);
+    if (!result.success) {
+      expect(result.issues.length).toBeGreaterThan(0);
+      expect(result.issues.every((issue) => issue.length > 0)).toBe(true);
+    }
   });
 });
