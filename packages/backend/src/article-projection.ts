@@ -6,6 +6,9 @@ function inlineText(content: { text: string }[]) {
 
 function blockText(block: ArticleDocument["blocks"][number]): string[] {
   switch (block.type) {
+    case "image": {
+      return [block.alt];
+    }
     case "list": {
       return block.items.map((item) => inlineText(item.content));
     }

@@ -150,7 +150,17 @@ const comparisonClaimSchema = v.object({
   reference: requiredText,
 });
 
+export const imageBlockSchema = v.object({
+  alt: requiredText,
+  height: v.pipe(v.number(), v.integer(), v.minValue(1)),
+  id: requiredText,
+  src: v.union([httpUrl, v.pipe(v.string(), v.regex(/^\/(?!\/)/u))]),
+  type: v.literal("image"),
+  width: v.pipe(v.number(), v.integer(), v.minValue(1)),
+});
+
 export const contentBlockSchema = v.variant("type", [
+  imageBlockSchema,
   v.object({
     content: inlineContentSchema,
     id: requiredText,
