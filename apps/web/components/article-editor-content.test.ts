@@ -69,6 +69,124 @@ describe("article editor content", () => {
     expect(editorWordCount(articleDocumentToTiptap(document))).toBe(11);
   });
 
+  test("preserves heading levels, list items, callout titles, and inline formatting on save", () => {
+    const saved = tiptapToArticleDocument({
+      type: "doc",
+      content: [
+        {
+          type: "heading",
+          attrs: { contentId: "heading", level: 3 },
+          content: [
+            {
+              type: "text",
+              text: "Earlier claim",
+              marks: [
+                { type: "contentId", attrs: { contentId: "heading-text" } },
+                { type: "strike" },
+              ],
+            },
+          ],
+        },
+        {
+          type: "bulletList",
+          attrs: { contentId: "list" },
+          content: [
+            {
+              type: "listItem",
+              attrs: { contentId: "item" },
+              content: [
+                {
+                  type: "paragraph",
+                  content: [
+                    {
+                      type: "text",
+                      text: "Read the source",
+                      marks: [
+                        {
+                          type: "link",
+                          attrs: {
+                            contentId: "source-link",
+                            href: "https://example.com/source",
+                          },
+                        },
+                      ],
+                    },
+                  ],
+                },
+              ],
+            },
+          ],
+        },
+        {
+          type: "callout",
+          attrs: { contentId: "callout", title: "Check the context" },
+          content: [
+            {
+              type: "text",
+              text: "Compare translations.",
+              marks: [
+                { type: "contentId", attrs: { contentId: "callout-text" } },
+                { type: "italic" },
+              ],
+            },
+          ],
+        },
+      ],
+    });
+
+    expect(saved).toEqual({
+      schemaVersion: 1,
+      blocks: [
+        {
+          id: "heading",
+          type: "heading",
+          level: 3,
+          content: [
+            {
+              id: "heading-text",
+              type: "text",
+              text: "Earlier claim",
+              marks: ["strikethrough"],
+            },
+          ],
+        },
+        {
+          id: "list",
+          type: "list",
+          items: [
+            {
+              id: "item",
+              content: [
+                {
+                  id: "source-link",
+                  type: "link",
+                  text: "Read the source",
+                  href: "https://example.com/source",
+                },
+              ],
+            },
+          ],
+        },
+        {
+          id: "callout",
+          type: "callout",
+          title: "Check the context",
+          content: [
+            {
+              id: "callout-text",
+              type: "text",
+              text: "Compare translations.",
+              marks: ["italic"],
+            },
+          ],
+        },
+      ],
+    });
+    expect(tiptapToArticleDocument(articleDocumentToTiptap(saved))).toEqual(
+      saved
+    );
+  });
+
   test("preserves formatting around edits to contradiction claim text", () => {
     const content = document.blocks[0];
     if (content?.type !== "paragraph") {
@@ -79,13 +197,42 @@ describe("article editor content", () => {
       "A stronger claim with evidence"
     );
 
-    expect(updated[0]).toMatchObject({ marks: ["bold"], text: "A " });
-    expect(updated.at(-1)).toMatchObject({
-      href: "https://example.com/source",
-      text: "with evidence",
-      type: "link",
-    });
+    expect(updated.map(({ id: _id, ...node }) => node)).toEqual([
+      { marks: ["bold"], text: "A ", type: "text" },
+      { text: "stronger ", type: "text" },
+      { marks: ["bold"], text: "claim ", type: "text" },
+      {
+        href: "https://example.com/source",
+        text: "with evidence",
+        type: "link",
+      },
+    ]);
     expect(new Set(updated.map((node) => node.id)).size).toBe(updated.length);
+  });
+
+  test("deletes across formatted text and a link without losing surviving metadata", () => {
+    expect(
+      replaceInlineContentText(
+        [
+          { id: "text", marks: ["bold"], text: "A claim ", type: "text" },
+          {
+            id: "link",
+            href: "https://example.com/source",
+            text: "with evidence",
+            type: "link",
+          },
+        ],
+        "A evidence"
+      )
+    ).toEqual([
+      { id: "text", marks: ["bold"], text: "A ", type: "text" },
+      {
+        id: "link",
+        href: "https://example.com/source",
+        text: "evidence",
+        type: "link",
+      },
+    ]);
   });
 
   test("uses stable fallback IDs for newly inserted Tiptap blocks", () => {
@@ -99,8 +246,16 @@ describe("article editor content", () => {
       type: "doc",
     };
 
-    expect(tiptapToArticleDocument(json)).toEqual(
-      tiptapToArticleDocument(json)
-    );
+    const firstSave = tiptapToArticleDocument(json);
+    expect(firstSave).toMatchObject({
+      schemaVersion: 1,
+      blocks: [
+        {
+          type: "paragraph",
+          content: [{ type: "text", text: "New paragraph" }],
+        },
+      ],
+    });
+    expect(tiptapToArticleDocument(json)).toEqual(firstSave);
   });
 });

@@ -5,6 +5,8 @@ import { tmpdir } from "node:os";
 import path from "node:path";
 
 import * as Effect from "effect/Effect";
+import * as Fiber from "effect/Fiber";
+import * as TestClock from "effect/testing/TestClock";
 
 import { cachedFetch } from "./acquire";
 
@@ -84,17 +86,21 @@ describe("cached acquisition", () => {
 
   test("an Effect timeout aborts a stalled response body without retrying", async () => {
     let requests = 0;
-    let cancelled = false;
+    const { promise: started, resolve: received } =
+      Promise.withResolvers<boolean>();
+    const { promise: cancelled, resolve: cancel } =
+      Promise.withResolvers<boolean>();
     await withServer(
       () => {
         requests += 1;
+        received(true);
         return new Response(
           new ReadableStream<Uint8Array>({
             start(controller) {
               controller.enqueue(new TextEncoder().encode("partial"));
             },
             cancel() {
-              cancelled = true;
+              cancel(true);
             },
           })
         );
@@ -102,16 +108,17 @@ describe("cached acquisition", () => {
       async (url, directory) => {
         await expect(
           Effect.runPromise(
-            cachedFetch(url, directory).pipe(Effect.timeout("50 millis"))
+            Effect.gen(function* timeoutRequest() {
+              const request = yield* cachedFetch(url, directory).pipe(
+                Effect.forkChild
+              );
+              yield* Effect.promise(() => started);
+              yield* TestClock.adjust("1 minute");
+              return yield* Fiber.join(request);
+            }).pipe(Effect.provide(TestClock.layer()))
           )
         ).rejects.toThrow("timed out");
-        for (let attempt = 0; attempt < 50; attempt += 1) {
-          if (cancelled) {
-            break;
-          }
-          await Bun.sleep(10);
-        }
-        expect(cancelled).toBe(true);
+        expect(await cancelled).toBe(true);
         expect(requests).toBe(1);
         expect(await readdir(directory)).toEqual([]);
       }
@@ -120,7 +127,8 @@ describe("cached acquisition", () => {
 
   test("interrupts a streaming response without caching its partial body", async () => {
     let requests = 0;
-    let cancelled = false;
+    const { promise: cancelled, resolve: cancel } =
+      Promise.withResolvers<boolean>();
     const { promise: started, resolve: received } =
       Promise.withResolvers<boolean>();
     await withServer(
@@ -136,7 +144,7 @@ describe("cached acquisition", () => {
               controller.enqueue(new TextEncoder().encode("partial"));
             },
             cancel() {
-              cancelled = true;
+              cancel(true);
             },
           })
         );
@@ -149,13 +157,7 @@ describe("cached acquisition", () => {
         await started;
         controller.abort();
         await expect(result).rejects.toThrow();
-        for (let attempt = 0; attempt < 50; attempt += 1) {
-          if (cancelled) {
-            break;
-          }
-          await Bun.sleep(10);
-        }
-        expect(cancelled).toBe(true);
+        expect(await cancelled).toBe(true);
         expect(await readdir(directory)).toEqual([]);
         expect(requests).toBe(1);
         expect(await Effect.runPromise(cachedFetch(url, directory))).toBe(

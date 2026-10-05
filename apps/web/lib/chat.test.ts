@@ -3,6 +3,7 @@ import { describe, expect, test } from "bun:test";
 import type { ChatRequest } from "./chat";
 import {
   createAnonymousSession,
+  rotatingIpHash,
   validateChatRequest,
   verifyAnonymousSession,
 } from "./chat";
@@ -62,6 +63,94 @@ describe("chat request validation", () => {
         "test-secret-that-is-long-enough-for-hmac"
       )
     ).toBe(false);
+  });
+});
+
+describe("anonymous session authentication", () => {
+  test("rejects altered IDs, same-length signature changes, and the wrong secret", () => {
+    const session =
+      "fixed-anonymous-session.MWJiMX5qxzBd1NUChlBFvhdiWczvFhD8M5MJ2dI5N-8";
+
+    expect(verifyAnonymousSession(session, "unit-test-secret")).toBe(true);
+    expect(
+      verifyAnonymousSession(
+        session.replace("fixed", "other"),
+        "unit-test-secret"
+      )
+    ).toBe(false);
+    expect(
+      verifyAnonymousSession(`${session.slice(0, -1)}9`, "unit-test-secret")
+    ).toBe(false);
+    expect(verifyAnonymousSession(session, "other-test-secret")).toBe(false);
+    expect(verifyAnonymousSession("", "unit-test-secret")).toBe(false);
+    expect(
+      verifyAnonymousSession("missing-separator", "unit-test-secret")
+    ).toBe(false);
+    expect(verifyAnonymousSession(".signature", "unit-test-secret")).toBe(
+      false
+    );
+    expect(verifyAnonymousSession("session.", "unit-test-secret")).toBe(false);
+  });
+});
+
+describe("daily IP hashes", () => {
+  test("keeps a daily identity stable until midnight UTC", () => {
+    const first = rotatingIpHash(
+      "192.0.2.1",
+      "unit-test-secret",
+      new Date("2026-10-04T00:00:00Z")
+    );
+    const last = rotatingIpHash(
+      "192.0.2.1",
+      "unit-test-secret",
+      new Date("2026-10-04T23:59:59.999Z")
+    );
+    const nextDay = rotatingIpHash(
+      "192.0.2.1",
+      "unit-test-secret",
+      new Date("2026-10-05T00:00:00Z")
+    );
+
+    expect(first).toMatch(/^[a-f0-9]{64}$/u);
+    expect(last).toBe(first);
+    expect(nextDay).toMatch(/^[a-f0-9]{64}$/u);
+    expect(nextDay).not.toBe(first);
+  });
+
+  test("uses the UTC day when the supplied date has a different local day", () => {
+    const utc = rotatingIpHash(
+      "192.0.2.1",
+      "unit-test-secret",
+      new Date("2026-10-05T00:00:00Z")
+    );
+    expect(utc).toMatch(/^[a-f0-9]{64}$/u);
+    expect(
+      rotatingIpHash(
+        "192.0.2.1",
+        "unit-test-secret",
+        new Date("2026-10-04T19:00:00-05:00")
+      )
+    ).toBe(utc);
+    expect(
+      rotatingIpHash(
+        "192.0.2.1",
+        "unit-test-secret",
+        new Date("2026-10-05T09:00:00+09:00")
+      )
+    ).toBe(utc);
+  });
+
+  test("separates clients and secrets within the same day", () => {
+    const now = new Date("2026-10-04T12:00:00Z");
+    const first = rotatingIpHash("192.0.2.1", "unit-test-secret", now);
+    const otherClient = rotatingIpHash("192.0.2.2", "unit-test-secret", now);
+    const otherSecret = rotatingIpHash("192.0.2.1", "other-test-secret", now);
+
+    expect(first).toMatch(/^[a-f0-9]{64}$/u);
+    expect(otherClient).toMatch(/^[a-f0-9]{64}$/u);
+    expect(otherSecret).toMatch(/^[a-f0-9]{64}$/u);
+    expect(otherClient).not.toBe(first);
+    expect(otherSecret).not.toBe(first);
   });
 });
 
