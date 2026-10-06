@@ -1,5 +1,7 @@
 # The Bible gets mustard seeds wrong. Orchids have the receipts.
 
+![God says "smallest of all the seeds on earth" while four smaller seeds mock him. One laughs, "All-knowing. Can't sort by size." The lineup shows black mustard and four smaller seed examples with their reported dimensions.](./mustard-seed-meme-v2.png)
+
 Mustard seeds are small. They are not the smallest seeds on Earth. The difference is awkward for a book whose every factual claim is sometimes defended as the word of an all-knowing God.
 
 In the mustard-seed parable, Matthew and Mark attribute a sweeping seed-size comparison to Jesus. Read as a universal botanical statement, that comparison is wrong. You can preserve the parable's religious lesson. You cannot make the smaller seeds disappear.
@@ -48,11 +50,5 @@ The passages themselves do not provide a list of crops that defines this smaller
 So there are two different questions. Is the universal botanical claim true? No. Does its failure prove that the parable's spiritual lesson is false, or that God does not exist? No. The criticism lands on a literal scientific reading and on versions of biblical inerrancy that insist this wording must be factually exact.
 
 An ordinary storyteller can use an imprecise comparison. An omniscient creator presented as delivering flawless botany faces a harder question. Why does the seed catalog need an asterisk?
-
-## God forgot to check the inventory
-
-![God says "smallest of all the seeds on earth" while four smaller seeds mock him. One laughs, "All-knowing. Can't sort by size." The lineup shows black mustard and four smaller seed examples with their reported dimensions.](./mustard-seed-meme-v2.png)
-
-The joke is an embarrassed creator meeting four seeds smaller than his supposed champion. They laugh at his claim and ask whether he forgot his own creations. God's speech bubble quotes Mark 4:31 in the ESV. The seed names and measurements come from the sources above.
 
 The mustard seed can keep its role in the parable. It loses the smallest-seed trophy.
