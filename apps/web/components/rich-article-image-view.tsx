@@ -53,9 +53,11 @@ export function ArticleImageView({ node, updateAttributes }: NodeViewProps) {
           block={{
             alt: image.alt ?? "",
             caption: image.caption,
+            height: image.height ?? undefined,
             id: "image-preview",
             src: url.success,
             type: "image",
+            width: image.width ?? undefined,
           }}
         />
       ) : (

@@ -302,4 +302,34 @@ describe("article image content", () => {
       Schema.decodeUnknownSync(contentBlockSchema)({ ...image, caption: " " })
     ).toThrow();
   });
+
+  test.each([{ width: 1254, height: 1254 }, { width: 1254 }, { height: 1254 }])(
+    "preserves independent image dimensions %j",
+    (dimensions) => {
+      expect(
+        Schema.decodeUnknownSync(contentBlockSchema)({
+          ...image,
+          ...dimensions,
+        })
+      ).toEqual({ ...image, ...dimensions });
+    }
+  );
+
+  test.each([
+    0,
+    -1,
+    1.5,
+    Number.NaN,
+    Number.POSITIVE_INFINITY,
+    Number.NEGATIVE_INFINITY,
+  ])("rejects invalid image dimensions %j", (dimension) => {
+    for (const field of ["width", "height"]) {
+      expect(() =>
+        Schema.decodeUnknownSync(contentBlockSchema)({
+          ...image,
+          [field]: dimension,
+        })
+      ).toThrow();
+    }
+  });
 });

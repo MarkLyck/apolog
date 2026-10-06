@@ -48,9 +48,11 @@ export function ImageBlock({
         alt={block.alt}
         className="h-auto w-full rounded-2xl"
         decoding="async"
+        height={block.height}
         loading="lazy"
         referrerPolicy="no-referrer"
         src={block.src}
+        width={block.width}
       />
       {block.caption ? (
         <figcaption className="mt-3 text-sm text-[var(--muted)]">

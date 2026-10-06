@@ -45,4 +45,28 @@ describe("article image rendering", () => {
     expect(html).toContain("<img");
     expect(html).not.toContain("<figcaption");
   });
+
+  test.each([
+    { width: 1254, height: 1254 },
+    { width: 1254 },
+    { height: 1254 },
+    {},
+  ])("renders supplied intrinsic dimensions independently %j", (dimensions) => {
+    const html = renderToStaticMarkup(
+      <ContentBlocks
+        blocks={[
+          {
+            alt: "A globe",
+            id: "globe",
+            src: "https://example.com/globe.png",
+            type: "image",
+            ...dimensions,
+          },
+        ]}
+      />
+    );
+    for (const field of ["width", "height"]) {
+      expect(html.includes(`${field}="1254"`)).toBe(field in dimensions);
+    }
+  });
 });

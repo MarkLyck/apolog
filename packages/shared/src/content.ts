@@ -11,6 +11,10 @@ const timestamp = Schema.Number.check(
   Schema.isInt(),
   Schema.isGreaterThanOrEqualTo(0)
 );
+const imageDimension = Schema.Number.check(
+  Schema.isInt(),
+  Schema.isGreaterThan(0)
+);
 const corpusKeySchema = Schema.Literals(["bible", "quran"]);
 function isUrl(value: string): boolean {
   try {
@@ -140,9 +144,11 @@ export const contentBlockSchema = Schema.Union([
   Schema.Struct({
     alt: requiredText,
     caption: Schema.optional(requiredText),
+    height: Schema.optional(imageDimension),
     id: requiredText,
     src: articleImageUrlSchema,
     type: Schema.Literal("image"),
+    width: Schema.optional(imageDimension),
   }).mapFields(Struct.map(Schema.mutableKey)),
   Schema.Struct({
     content: inlineContentSchema,

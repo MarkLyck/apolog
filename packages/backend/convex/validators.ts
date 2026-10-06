@@ -57,9 +57,11 @@ export const contentBlockValidator = v.union(
   v.object({
     alt: v.string(),
     caption: v.optional(v.string()),
+    height: v.optional(v.number()),
     id: v.string(),
     src: v.string(),
     type: v.literal("image"),
+    width: v.optional(v.number()),
   }),
   v.object({
     content: inlineContentValidator,

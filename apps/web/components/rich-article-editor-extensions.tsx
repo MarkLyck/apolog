@@ -90,10 +90,28 @@ const ArticleImage = Node.create({
           element.querySelector("figcaption")?.textContent ?? "",
         rendered: false,
       },
+      height: {
+        default: null,
+        parseHTML: (element) => {
+          const value =
+            element.querySelector("img")?.getAttribute("height") ?? null;
+          return value === null ? null : Number(value);
+        },
+        rendered: false,
+      },
       src: {
         default: "",
         parseHTML: (element) =>
           element.querySelector("img")?.getAttribute("src") ?? "",
+        rendered: false,
+      },
+      width: {
+        default: null,
+        parseHTML: (element) => {
+          const value =
+            element.querySelector("img")?.getAttribute("width") ?? null;
+          return value === null ? null : Number(value);
+        },
         rendered: false,
       },
     };
@@ -112,7 +130,15 @@ const ArticleImage = Node.create({
     return [
       "figure",
       mergeAttributes(HTMLAttributes, { "data-type": "article-image" }),
-      ["img", { alt: node.attrs.alt, src: node.attrs.src }],
+      [
+        "img",
+        {
+          alt: node.attrs.alt,
+          height: node.attrs.height,
+          src: node.attrs.src,
+          width: node.attrs.width,
+        },
+      ],
       ["figcaption", {}, node.attrs.caption],
     ];
   },

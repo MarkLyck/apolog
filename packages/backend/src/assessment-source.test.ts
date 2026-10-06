@@ -45,4 +45,16 @@ describe("image assessment source", () => {
       })
     ).toBe(await assessmentSourceDigest(article));
   });
+
+  test("ignores image layout dimensions", async () => {
+    expect(
+      await assessmentSourceDigest({
+        ...article,
+        document: {
+          schemaVersion: 1,
+          blocks: [{ ...image, width: 1254, height: 1254 }],
+        },
+      })
+    ).toBe(await assessmentSourceDigest(article));
+  });
 });

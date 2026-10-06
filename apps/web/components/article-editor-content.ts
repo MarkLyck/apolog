@@ -33,7 +33,9 @@ const scriptureAttributesSchema = Schema.Struct({
 export const imageAttributesSchema = Schema.Struct({
   alt: Schema.optional(Schema.String),
   caption: Schema.optional(Schema.String),
+  height: Schema.optional(Schema.NullOr(Schema.Number)),
   src: Schema.optional(Schema.String),
+  width: Schema.optional(Schema.NullOr(Schema.Number)),
 }).mapFields(Struct.map(Schema.mutableKey));
 const storedContradictionClaimSchema = Schema.Struct({
   content: Schema.optional(inlineContentSchema),
@@ -186,7 +188,9 @@ export function articleDocumentToTiptap(
               alt: block.alt,
               caption: block.caption ?? "",
               contentId: block.id,
+              height: block.height ?? null,
               src: block.src,
+              width: block.width ?? null,
             },
             type: "articleImage",
           };
@@ -375,13 +379,20 @@ function imageBlock(
     node.attrs
   );
   const image = Result.isSuccess(attributes) ? attributes.success : {};
-  return {
+  const block: Extract<ContentBlock, { type: "image" }> = {
     alt: image.alt ?? "",
     caption: image.caption?.trim() ? image.caption : undefined,
     id,
     src: image.src ?? "",
     type: "image",
   };
+  if (image.height !== undefined && image.height !== null) {
+    block.height = image.height;
+  }
+  if (image.width !== undefined && image.width !== null) {
+    block.width = image.width;
+  }
+  return block;
 }
 
 function tiptapNodeToBlock(

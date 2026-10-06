@@ -154,9 +154,11 @@ describe("article management", () => {
         {
           alt: "Square Earth blueprint",
           caption: "Creation needs geometry",
+          height: 1254,
           id: "meme",
           src: "https://example.com/meme.png",
           type: "image",
+          width: 1254,
         },
         {
           content: [{ id: "last-text", text: "Last passage", type: "text" }],
@@ -190,10 +192,48 @@ describe("article management", () => {
     );
   });
 
+  test.each([{ width: 1254 }, { height: 1254 }])(
+    "saves independent legacy image dimensions %j",
+    async (dimensions) => {
+      const { authenticated, t } = await setupUser("admin");
+      const document = {
+        schemaVersion: 1,
+        blocks: [
+          {
+            alt: "A legacy illustration",
+            id: "legacy-image",
+            src: "https://quaint-salmon-146.convex.cloud/api/storage/legacy-image",
+            type: "image",
+            ...dimensions,
+          },
+        ],
+      } satisfies ArticleDocument;
+      const created = await authenticated.mutation(save, {
+        ...validInput,
+        document,
+        status: "published",
+      });
+      expect(
+        (
+          await authenticated.query(api.articles.getForAdmin, {
+            id: created.id,
+          })
+        )?.document
+      ).toEqual(document);
+      expect(
+        (await t.query(api.articles.getBySlug, { slug: validInput.slug }))
+          ?.document
+      ).toEqual(document);
+    }
+  );
+
   test.each([
     { alt: "", src: "https://example.com/meme.png" },
     { alt: "An Earth meme", src: "http://example.com/meme.png" },
     { alt: "An Earth meme", src: "https://user:password@example.com/meme.png" },
+    { alt: "An Earth meme", src: "https://example.com/meme.png", width: 0 },
+    { alt: "An Earth meme", src: "https://example.com/meme.png", height: -1 },
+    { alt: "An Earth meme", src: "https://example.com/meme.png", width: 1.5 },
   ])(
     "rejects invalid image content without storing an article %j",
     async (image) => {

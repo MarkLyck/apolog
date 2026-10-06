@@ -342,6 +342,35 @@ describe("article images in the editor", () => {
     ).toBe(5);
   });
 
+  test.each([
+    { width: 1254, height: 1254 },
+    { width: 1254 },
+    { height: 1254 },
+    {},
+  ])(
+    "preserves independent image dimensions through the registered editor %j",
+    (dimensions) => {
+      const input = { ...article, blocks: [{ ...image, ...dimensions }] };
+      const editor = new Editor({
+        content: articleDocumentToTiptap(input),
+        element: null,
+        enableContentCheck: true,
+        extensions: articleEditorExtensions,
+      });
+      try {
+        expect(tiptapToArticleDocument(editor.getJSON())).toEqual(input);
+        expect(
+          editor.schema.nodes.articleImage?.spec.attrs?.width?.default
+        ).toBe(null);
+        expect(
+          editor.schema.nodes.articleImage?.spec.attrs?.height?.default
+        ).toBe(null);
+      } finally {
+        editor.destroy();
+      }
+    }
+  );
+
   test("retains invalid draft fields until save validation rejects them", () => {
     const draft = tiptapToArticleDocument({
       content: [
