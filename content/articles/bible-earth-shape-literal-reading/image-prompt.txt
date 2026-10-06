@@ -1,0 +1,11 @@
+Use case: illustration-story
+Asset type: finished satirical meme for an atheist article about literal biblical cosmology
+Primary request: Mock the biblical God for failing basic geometry when describing his own creation. A funny, polished, irreverent editorial cartoon, square 1024x1024 composition.
+Scene: God depicted as an elderly bearded deity in a white robe at a heavenly architect's desk in clouds. He looks confidently pleased with himself, holding a pencil and a wildly wrong blueprint of a FLAT SQUARE Earth with FOUR obvious corners, oceans and continents on top, on four stone pillars. Beside his desk floats the actual round blue planet Earth, creating an obvious visual contradiction. God's plan has an absurd tiny mountain and giant tree. No human believers depicted or targeted.
+Style: clean bold hand-drawn cartoon, expressive face, strong outlines, witty newspaper cartoon details, readable at phone size.
+Text (verbatim): top headline "CREATED THE EARTH."
+Bottom punchline "STILL THINKS IT HAS FOUR CORNERS."
+Small blueprint label "GOD'S BLUEPRINT"
+Small footer "Isaiah 11:12 • Revelation 7:1"
+Composition: headline and punchline in large bold uppercase lettering on pale cream bands; cartoon fills the middle; all wording perfectly spelled; generous safe margins, no cropping. No other text, no watermark.
+Mood: confidently incompetent cosmic architect. The joke targets God's claimed omniscience.
