@@ -1,0 +1,22 @@
+{
+  "title": "God's sandwich compromise. Fine, use cow poop.",
+  "slug": "bible-gods-poop-sandwich-compromise",
+  "summary": "God tells Ezekiel to bake bread using human poop as fuel. Ezekiel protests, and God allows cow poop instead. A silly look at Ezekiel 4:9-17 and heaven's least reassuring lunch negotiation.",
+  "status": "published",
+  "tags": ["Ezekiel", "bread", "divine-commands"],
+  "placements": [
+    {
+      "corpusKey": "bible",
+      "collectionKey": "silly",
+      "isPrimary": true,
+      "position": 0
+    }
+  ],
+  "sources": [
+    {
+      "title": "Ezekiel 4, World English Bible",
+      "publisher": "Bible Gateway",
+      "url": "https://www.biblegateway.com/passage/?search=Ezekiel%204&version=WEB"
+    }
+  ]
+}
