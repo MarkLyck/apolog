@@ -58,12 +58,12 @@ export function verifyAnonymousSession(value: string, secret: string): boolean {
     return false;
   }
   const id = value.slice(0, separator);
-  const signature = value.slice(separator + 1);
-  const expected = sign(id, secret);
+  const signature = Buffer.from(value.slice(separator + 1));
+  const expected = Buffer.from(sign(id, secret));
   if (signature.length !== expected.length) {
     return false;
   }
-  return timingSafeEqual(Buffer.from(signature), Buffer.from(expected));
+  return timingSafeEqual(signature, expected);
 }
 
 export function rotatingIpHash(
