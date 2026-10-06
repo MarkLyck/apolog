@@ -20,8 +20,11 @@ function isUrl(value: string): boolean {
   }
 }
 
-const url = Schema.String.check(
-  Schema.makeFilter(isUrl, { message: "Invalid URL" })
+const inlineUrl = Schema.String.check(
+  Schema.makeFilter(isUrl, { message: "Invalid URL" }),
+  Schema.isPattern(/^(?:https?:\/\/|mailto:|tel:)/iu, {
+    message: "Inline links must use HTTP, HTTPS, mailto, or tel",
+  })
 );
 const httpUrl = Schema.Trim.check(
   Schema.makeFilter(isUrl, { message: "Invalid URL" }),
@@ -30,9 +33,21 @@ const httpUrl = Schema.Trim.check(
   })
 );
 const href = Schema.Union([
-  url,
+  inlineUrl,
   Schema.String.check(Schema.isPattern(/^\/(?!\/)/u)),
-]);
+]).check(
+  Schema.makeFilter(
+    (value) =>
+      [...value].every(
+        (character) =>
+          character >= " " && character !== "\u007F" && character !== "\\"
+      ),
+    {
+      message:
+        "Inline links must not contain control characters or backslashes",
+    }
+  )
+);
 
 export const articleSourceSchema = Schema.Struct({
   publisher: requiredText,
