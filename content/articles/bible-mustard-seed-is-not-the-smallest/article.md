@@ -18,7 +18,7 @@ Mark gives the comparison an especially broad wording:
 >
 > Mark 4:31, King James Version, excerpt
 
-These are words attributed to Jesus in a story about God's kingdom. They are not a separate speech by God the Father. The meme depicts God as the supposed omniscient creator for comic effect. Its speech bubble paraphrases the claim rather than quoting a Bible translation.
+These are words attributed to Jesus in a story about God's kingdom. The ESV renders Mark 4:31 as "smallest of all the seeds on earth," the exact excerpt used in the meme. The cartoon depicts God as the supposed omniscient creator for comic effect. [Mark 4:31, ESV](https://www.esv.org/verses/Mark%2B4%3A31/).
 
 Read the passages in context at [Matthew 13:31-32](https://www.biblegateway.com/passage/?search=Matthew%2013%3A31-32&version=KJV) and [Mark 4:30-32](https://www.biblegateway.com/passage/?search=Mark%204%3A30-32&version=KJV).
 
@@ -51,8 +51,8 @@ An ordinary storyteller can use an imprecise comparison. An omniscient creator p
 
 ## God forgot to check the inventory
 
-[Open or download the seed meme](https://raw.githubusercontent.com/MarkLyck/apolog/mustard-seed-article-meme/content/articles/bible-mustard-seed-is-not-the-smallest/mustard-seed-meme.png).
+![God says "smallest of all the seeds on earth" while four smaller seeds mock him. One laughs, "All-knowing. Can't sort by size." The lineup shows black mustard and four smaller seed examples with their reported dimensions.](./mustard-seed-meme-v2.png)
 
-The joke is an embarrassed creator meeting four seeds smaller than his supposed champion. The speech is a paraphrase of the claim attributed to Jesus. The seed names and measurements come from the sources above.
+The joke is an embarrassed creator meeting four seeds smaller than his supposed champion. They laugh at his claim and ask whether he forgot his own creations. God's speech bubble quotes Mark 4:31 in the ESV. The seed names and measurements come from the sources above.
 
 The mustard seed can keep its role in the parable. It loses the smallest-seed trophy.

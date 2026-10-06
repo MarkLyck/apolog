@@ -1,20 +1,29 @@
-Generated with the built-in image generation tool. The final edit corrected the source footer from Plant Pathology to Weed Research.
-
 Use case: illustration-story
-Asset type: satirical editorial meme for an article criticizing the Bible's mustard-seed claim.
-Primary request: A funny, polished, legible landscape cartoon meme. A recognizable fictional cartoon God, elderly white-bearded figure with halo and robe seated on a cloud, proudly holds up a round black mustard seed. He looks embarrassed as four smaller seed characters present themselves with smug faces and raised eyebrows. The joke targets divine omniscience and the botanical claim, not religious people.
-Composition: wide 1536x1024 editorial comic, bold readable typography, ample spacing. Upper half God and speech bubble. Lower half a tidy evidence lineup with a large round mustard seed at left and four clearly much smaller real seed silhouettes at right, each with its own readable label and an enlarged inset for tiny seeds. Render orchids as translucent spindle-shaped or dustlike seeds, broomrape as tiny ovoid net-textured brown seed, witchweed as tiny ridged oblong seed. Seed characters are schematic cartoons, not scientific photographs.
-Text (verbatim):
-Top caption: "WHEN YOU CREATE EVERY SEED"
-God speech bubble: "Mustard is the smallest seed."
-Bottom punchline: "BUT FORGET TO CHECK YOUR OWN INVENTORY"
-Five seed labels, each exactly once:
-"BLACK MUSTARD" and "1.2-1.5 mm"
-"Anoectochilus imitans" and "~0.05 mm"
-"Aerides odorata" and "~0.2 mm"
-"Orobanche minor" and "0.2-0.4 mm"
-"Striga hermonthica" and "0.2-0.3 mm"
-Footer, small but readable: "Selected smaller seeds. Illustrations not to scale."
-Second footer line: "Speech paraphrases Jesus in Mark 4:31. Sources: Kew, FNA, USDA, Weed Research."
-Constraints: high contrast, accurate spelled labels, exactly these named examples, no claim to show every smaller-seeded species, no moss spores or fern spores, no fake quotations, no watermarks. Approximate lengths for smaller seeds, diameter for mustard. Funny mockery with the four little seeds collectively side-eyeing God's boast.
+Generated with the built-in image generation tool as a new image.
 
+Create a BRAND NEW polished satirical editorial comic meme for a Bible criticism article. Landscape 1536x1024, crisp ink outlines, expressive cartoon characters, warm cream background, rich restrained colors, large HIGHLY LEGIBLE lettering. The joke targets God's claim and omniscience, not worshippers. No photo, no watermark.
+
+Top heading EXACT: "OMNISCIENCE MEETS THE SEED AISLE"
+
+Upper left: recognizable fictional God, elderly white beard, white robe and golden halo, sitting on a cloud with label "GOD", proudly displaying one round mustard seed. One large speech bubble clearly from GOD contains ONLY this EXACT Bible excerpt, with quotation marks: "smallest of all the seeds on earth"
+Small line immediately beneath God's bubble: "Mark 4:31 (ESV excerpt)"
+God is confidently pointing at the mustard but sweating as the smaller seeds laugh at him.
+
+Upper right and middle: four cheeky smaller SEED CHARACTERS stand together, mocking God directly. Each has a distinct speech bubble and clear tail:
+1 translucent thin spindle-shaped orchid seed, saying "You made us. Forgot already?"
+2 another translucent dustlike orchid seed laughing, saying "All-knowing. Can't sort by size."
+3 little net-textured brown ovoid broomrape seed, saying "Need a magnifying glass, God?"
+4 little ridged oblong witchweed seed, saying "We'd like a word, Creator."
+
+Lower portion: five orderly labeled seed specimens in five columns, black mustard first, then four named counterexamples. Each name and size appears exactly once, perfectly spelled, no extra species.
+"BLACK MUSTARD" / "1.2-1.5 mm diameter"
+"Anoectochilus imitans" / "~0.05 mm long"
+"Aerides odorata" / "~0.2 mm long"
+"Orobanche minor" / "0.2-0.4 mm long"
+"Striga hermonthica" / "0.2-0.3 mm long"
+Tiny seeds are enlarged so characters and features are visible, not a scientific scale diagram.
+
+Bottom punchline EXACT: "CREATED EVERY SEED. LOST THE SIZE CONTEST."
+Footer EXACT: "Selected smaller seeds. Illustrations not to scale."
+Optional second tiny footer: "Sources: Kew, Flora of North America, USDA, Weed Research."
+Ensure GOD says the EXACT quoted excerpt above, and the smaller seeds explicitly MOCK GOD with their speech bubbles. Keep layout uncluttered, all text separated, generous margins.
