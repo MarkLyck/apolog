@@ -91,6 +91,27 @@ describe("anonymous session authentication", () => {
     );
     expect(verifyAnonymousSession("session.", "unit-test-secret")).toBe(false);
   });
+
+  test.each([
+    { characters: "multi-byte characters", signature: "é".repeat(43) },
+    {
+      characters: "mixed ASCII and multi-byte characters",
+      signature: `${"a".repeat(42)}é`,
+    },
+    { characters: "astral characters", signature: `${"😀".repeat(21)}a` },
+    { characters: "a lone surrogate", signature: `${"a".repeat(42)}\uD800` },
+    {
+      characters: "multi-byte characters at the expected byte length",
+      signature: `${"é".repeat(21)}a`,
+    },
+  ])("rejects a signature of $characters without throwing", ({ signature }) => {
+    expect(
+      verifyAnonymousSession(
+        `fixed-anonymous-session.${signature}`,
+        "unit-test-secret"
+      )
+    ).toBe(false);
+  });
 });
 
 describe("daily IP hashes", () => {
