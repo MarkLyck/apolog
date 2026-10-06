@@ -2,7 +2,6 @@
 
 import { parseCorpus } from "@apolog/shared";
 import type { ArticleListItem, CorpusKey } from "@apolog/shared";
-import { parseArticleListResponse } from "@apolog/shared/content";
 import Link from "next/link";
 import { usePathname, useSearchParams } from "next/navigation";
 import { useEffect, useEffectEvent, useRef, useState } from "react";
@@ -71,10 +70,13 @@ export function SearchPalette({
     const timer = window.setTimeout(async () => {
       setSearch({ status: "loading" });
       try {
-        const response = await fetch(
-          `/api/search/articles?text=${corpusKey}&q=${encodeURIComponent(query)}`,
-          { signal: controller.signal }
-        );
+        const [response, { parseArticleListResponse }] = await Promise.all([
+          fetch(
+            `/api/search/articles?text=${corpusKey}&q=${encodeURIComponent(query)}`,
+            { signal: controller.signal }
+          ),
+          import("@apolog/shared/content"),
+        ]);
         if (!response.ok) {
           throw new Error(`Search request failed with ${response.status}`);
         }
@@ -82,9 +84,11 @@ export function SearchPalette({
         if (!resultsPayload) {
           throw new Error("Search returned an invalid response");
         }
-        setSearch({ results: resultsPayload, status: "success" });
-      } catch (error) {
-        if (!(error instanceof DOMException && error.name === "AbortError")) {
+        if (!controller.signal.aborted) {
+          setSearch({ results: resultsPayload, status: "success" });
+        }
+      } catch {
+        if (!controller.signal.aborted) {
           setSearch({
             message: "Search is temporarily unavailable. Please retry.",
             status: "error",

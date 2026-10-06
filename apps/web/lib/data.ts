@@ -4,6 +4,11 @@ import type { CollectionKey, CorpusKey } from "@apolog/shared";
 import { fetchQuery } from "convex/nextjs";
 import * as Data from "effect/Data";
 import * as Effect from "effect/Effect";
+import { cache } from "react";
+
+const fetchArticleForRequest = cache((slug: string) =>
+  fetchQuery(api.articles.getBySlug, { slug })
+);
 
 type SearchSort = "newest" | "oldest" | "relevance";
 type ArticleListRequest =
@@ -66,7 +71,7 @@ export function listArticles(
 
 export function getArticle(slug: string) {
   return Effect.tryPromise({
-    try: () => fetchQuery(api.articles.getBySlug, { slug }),
+    try: () => fetchArticleForRequest(slug),
     catch: (cause) => new ArticleQueryError({ cause, operation: "article" }),
   });
 }
