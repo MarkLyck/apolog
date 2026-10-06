@@ -160,6 +160,35 @@ describe("article management", () => {
     ).rejects.toThrow("Article content is invalid");
   });
 
+  test.each([
+    ["javascript", "alert(1)"].join(":"),
+    "data:text/html,test",
+    "/\\evil.example",
+  ])(
+    "rejects unsafe inline link %s without saving an article",
+    async (href) => {
+      const { authenticated, t } = await setupUser("admin");
+      await expect(
+        authenticated.mutation(save, {
+          ...validInput,
+          document: {
+            schemaVersion: 1,
+            blocks: [
+              {
+                id: "intro",
+                type: "paragraph",
+                content: [{ id: "link", type: "link", text: "Source", href }],
+              },
+            ],
+          },
+        })
+      ).rejects.toThrow("Article content is invalid");
+      expect(await t.run((ctx) => ctx.db.query("articles").collect())).toEqual(
+        []
+      );
+    }
+  );
+
   test("validates sources without relying on URL.canParse", async () => {
     const { authenticated, t } = await setupUser("admin");
     const canParseDescriptor = Object.getOwnPropertyDescriptor(URL, "canParse");

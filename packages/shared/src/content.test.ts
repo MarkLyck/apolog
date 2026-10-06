@@ -2,7 +2,7 @@ import { describe, expect, test } from "bun:test";
 
 import * as Schema from "effect/Schema";
 
-import type { DemoContent } from "./content";
+import type { DemoContent, InlineContent } from "./content";
 import {
   articleContentSchema,
   inlineContentSchema,
@@ -155,6 +155,46 @@ describe("representative content fixtures", () => {
 });
 
 describe("Effect content decoding", () => {
+  test.each([
+    "https://example.com/article?text=bible#reference",
+    "http://example.com/article",
+    "HTTPS://example.com/article",
+    "mailto:editor@example.com",
+    "tel:+15551234567",
+    "/articles/example?text=bible#reference",
+    "/",
+  ])("preserves supported inline link %s", (href) => {
+    const nodes: InlineContent = [
+      { id: "link", type: "link", text: " link text ", href },
+    ];
+    expect(Schema.decodeUnknownSync(inlineContentSchema)(nodes)).toEqual(nodes);
+  });
+
+  test.each([
+    ["javascript", "alert(1)"].join(":"),
+    ["JaVaScRiPt", "alert(1)"].join(":"),
+    "data:text/html,test",
+    "vbscript:msgbox(1)",
+    "ftp://example.com/file",
+    "//evil.example",
+    "/\\evil.example",
+    "/\t/evil.example",
+    "/\n/evil.example",
+    "/\r/evil.example",
+    "/articles/\u0000example",
+    "/articles/\u007Fexample",
+    "https://example.com/\tarticle",
+    "https://example.com/\\article",
+    "https://",
+    "article",
+  ])("rejects unsafe inline link %j", (href) => {
+    expect(() =>
+      Schema.decodeUnknownSync(inlineContentSchema)([
+        { id: "link", type: "link", text: "link text", href },
+      ])
+    ).toThrow();
+  });
+
   test("normalizes editorial fields while preserving rich-text spacing and optional undefined", () => {
     const article = first(contentFixtures.articles);
     const parsed = Schema.decodeUnknownSync(articleContentSchema)({
