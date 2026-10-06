@@ -6,7 +6,7 @@ Yet the Bible gives us corners, ends, a circle, pillars, foundations, and a moun
 
 ![God admires a square Earth blueprint with four corners and pillars while the actual round Earth floats beside him.](https://raw.githubusercontent.com/MarkLyck/apolog/8481c6c1a9d0ce91b74a3c29a1a4e63aa8ee04e9/content/articles/bible-earth-shape-literal-reading/earth-shape-meme.png)
 
-This article takes an atheist, deliberately literal perspective. It asks what happens when the physical descriptions are treated as physical claims. Calling a passage poetry, prophecy, or a dream does not make its imagined geography accurate. Those labels remain relevant to identifying what the text says, so they appear below without being used to rescue the literal claim.
+Read the physical descriptions as physical claims. Calling a passage poetry, prophecy, or a dream does not make its imagined geography accurate. Those labels remain relevant to identifying what the text says, so they appear below without being used to rescue the literal claim.
 
 Earth is approximately an oblate spheroid, with an equatorial bulge and an irregular surface. Globe is a useful shorthand. The scientific objection here concerns corners, terminal edges, and impossible sightlines, not the difference between a perfect sphere and the real planet. [NOAA's account of Earth's shape](https://oceanservice.noaa.gov/facts/earth-round.html).
 
@@ -218,7 +218,7 @@ Read as simultaneous ordinary sight of a localized figure in the clouds, that ha
 
 Acts 10:11 mentions a sheet with four corners descending to Earth. The sheet has the corners. Quoting it as if those corners belong to the planet would be a mistake.
 
-The atheist case loses nothing by getting those details right. The explicit Earth-corner passages and the impossible ordinary mountain and tree sightlines remain.
+The objection loses nothing by getting those details right. The explicit Earth-corner passages and the impossible ordinary mountain and tree sightlines remain.
 
 ## Passage index
 
@@ -268,7 +268,7 @@ The KJV corpus used for the scan is available in the [aruljohn Bible repository]
 
 ## Omniscience with a geometry problem
 
-An atheist does not need to pretend these passages form one consistent engineering manual. Their images vary. That is exactly what one expects from human authors describing the world with inherited stories and familiar physical pictures.
+These passages do not form one consistent engineering manual. Their images vary. That is exactly what one expects from human authors describing the world with inherited stories and familiar physical pictures.
 
 The difficulty belongs to the claim that these physical descriptions must be literally accurate because their ultimate author knows everything. The actual Earth supplies a straightforward check. It has no corners to stand on or ends to shake. Its curvature blocks the mountain's worldwide view and the tree's worldwide visibility.
 
