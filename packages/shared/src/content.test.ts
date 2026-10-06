@@ -2,9 +2,10 @@ import { describe, expect, test } from "bun:test";
 
 import * as Schema from "effect/Schema";
 
-import type { DemoContent, InlineContent } from "./content";
+import type { ContentBlock, DemoContent, InlineContent } from "./content";
 import {
   articleContentSchema,
+  contentBlockSchema,
   inlineContentSchema,
   validateDemoContent,
 } from "./content";
@@ -242,6 +243,63 @@ describe("Effect content decoding", () => {
   )("rejects invalid inline input %j", ({ nodes }) => {
     expect(() =>
       Schema.decodeUnknownSync(inlineContentSchema)(nodes)
+    ).toThrow();
+  });
+});
+
+describe("article image content", () => {
+  const image = {
+    alt: "A square Earth blueprint beside a globe",
+    caption: "Creation needs a geometry lesson",
+    id: "meme",
+    src: "https://example.com/meme.png",
+    type: "image",
+  } satisfies ContentBlock;
+
+  test("normalizes image fields and allows an omitted caption", () => {
+    expect(
+      Schema.decodeUnknownSync(contentBlockSchema)({
+        ...image,
+        alt: ` ${image.alt} `,
+        caption: ` ${image.caption} `,
+        src: ` ${image.src} `,
+      })
+    ).toEqual(image);
+    expect(
+      Schema.decodeUnknownSync(contentBlockSchema)({
+        ...image,
+        caption: undefined,
+      })
+    ).toEqual({ ...image, caption: undefined });
+  });
+
+  test.each([
+    "http://example.com/meme.png",
+    ["javascript", "alert(1)"].join(":"),
+    "data:image/png;base64,test",
+    "//example.com/meme.png",
+    "https:example.com/meme.png",
+    "https:///example.com/meme.png",
+    "https://user:password@example.com/meme.png",
+    "https://example.com/\\meme.png",
+    "https://example.com/\tmeme.png",
+    "https://example.com/\u007Fmeme.png",
+    "https://",
+  ])("rejects unsafe image URL %j", (src) => {
+    expect(() =>
+      Schema.decodeUnknownSync(contentBlockSchema)({ ...image, src })
+    ).toThrow();
+  });
+
+  test.each(["", " "])("requires visible alt text %j", (alt) => {
+    expect(() =>
+      Schema.decodeUnknownSync(contentBlockSchema)({ ...image, alt })
+    ).toThrow();
+  });
+
+  test("rejects an explicitly empty caption", () => {
+    expect(() =>
+      Schema.decodeUnknownSync(contentBlockSchema)({ ...image, caption: " " })
     ).toThrow();
   });
 });

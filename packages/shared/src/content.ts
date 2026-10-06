@@ -49,6 +49,36 @@ const href = Schema.Union([
   )
 );
 
+function isSafeHttpsImageUrl(value: string): boolean {
+  if (
+    !/^https:\/\/[^/?#\s]/iu.test(value) ||
+    [...value].some(
+      (character) =>
+        character < " " || character === "\u007F" || character === "\\"
+    )
+  ) {
+    return false;
+  }
+  try {
+    const url = new URL(value);
+    return (
+      url.protocol === "https:" &&
+      url.hostname.length > 0 &&
+      url.username === "" &&
+      url.password === ""
+    );
+  } catch {
+    return false;
+  }
+}
+
+export const articleImageUrlSchema = Schema.Trim.check(
+  Schema.makeFilter(isSafeHttpsImageUrl, {
+    message:
+      "Image URL must be an absolute HTTPS URL without credentials, control characters, or backslashes",
+  })
+);
+
 export const articleSourceSchema = Schema.Struct({
   publisher: requiredText,
   title: requiredText,
@@ -107,6 +137,13 @@ const comparisonClaimSchema = Schema.Struct({
 }).mapFields(Struct.map(Schema.mutableKey));
 
 export const contentBlockSchema = Schema.Union([
+  Schema.Struct({
+    alt: requiredText,
+    caption: Schema.optional(requiredText),
+    id: requiredText,
+    src: articleImageUrlSchema,
+    type: Schema.Literal("image"),
+  }).mapFields(Struct.map(Schema.mutableKey)),
   Schema.Struct({
     content: inlineContentSchema,
     id: requiredText,

@@ -1,5 +1,6 @@
 import { describe, expect, test } from "bun:test";
 
+import type { ArticleDocument } from "@apolog/shared";
 import { convexTest } from "convex-test";
 import { makeFunctionReference } from "convex/server";
 
@@ -135,6 +136,80 @@ describe("article management", () => {
           corpusKey: "bible",
         })
       ).toEqual({ previous: null, next: null });
+    }
+  );
+
+  test("persists an image between quotes and returns it to public and admin readers", async () => {
+    const { authenticated, t } = await setupUser("admin");
+    const document = {
+      schemaVersion: 1,
+      blocks: [
+        {
+          content: [{ id: "first-text", text: "First passage", type: "text" }],
+          edition: "KJV",
+          id: "first-quote",
+          reference: "Isaiah 11:12",
+          type: "quote",
+        },
+        {
+          alt: "Square Earth blueprint",
+          caption: "Creation needs geometry",
+          id: "meme",
+          src: "https://example.com/meme.png",
+          type: "image",
+        },
+        {
+          content: [{ id: "last-text", text: "Last passage", type: "text" }],
+          edition: "KJV",
+          id: "last-quote",
+          reference: "Revelation 7:1",
+          type: "quote",
+        },
+      ],
+    } satisfies ArticleDocument;
+    const created = await authenticated.mutation(save, {
+      ...validInput,
+      document,
+      status: "published",
+    });
+    const admin = await authenticated.query(api.articles.getForAdmin, {
+      id: created.id,
+    });
+    const published = await t.query(api.articles.getBySlug, {
+      slug: validInput.slug,
+    });
+    expect(admin?.document).toEqual(document);
+    expect(published?.document).toEqual(document);
+    const searches = await t.run((ctx) =>
+      ctx.db.query("searchDocuments").collect()
+    );
+    expect(searches[0]?.searchText).toContain("square earth blueprint");
+    expect(searches[0]?.searchText).toContain("creation needs geometry");
+    expect(searches[0]?.searchText).not.toContain(
+      "https://example.com/meme.png"
+    );
+  });
+
+  test.each([
+    { alt: "", src: "https://example.com/meme.png" },
+    { alt: "An Earth meme", src: "http://example.com/meme.png" },
+    { alt: "An Earth meme", src: "https://user:password@example.com/meme.png" },
+  ])(
+    "rejects invalid image content without storing an article %j",
+    async (image) => {
+      const { authenticated, t } = await setupUser("admin");
+      await expect(
+        authenticated.mutation(save, {
+          ...validInput,
+          document: {
+            schemaVersion: 1,
+            blocks: [{ ...image, id: "meme", type: "image" }],
+          },
+        })
+      ).rejects.toThrow("Article content is invalid");
+      expect(await t.run((ctx) => ctx.db.query("articles").collect())).toEqual(
+        []
+      );
     }
   );
 
