@@ -11,7 +11,7 @@
   "dependencies": {
     "@apolog/shared": "workspace:*",
     "cheerio": "1.2.0",
-    "effect": "4.0.1"
+    "effect": "4.0.2"
   },
   "devDependencies": {
     "@types/bun": "1.4.2",

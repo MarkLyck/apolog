@@ -11,7 +11,7 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "effect": "4.0.1"
+    "effect": "4.0.2"
   },
   "devDependencies": {
     "@types/bun": "1.4.2",
