@@ -4,7 +4,7 @@ Apolog is a source-first research experience for examining factual and moral cla
 
 ## Run locally
 
-Requirements: Bun 1.3.13 and the project `.env` values.
+Requirements: Bun 1.4.2 and the project `.env` values.
 
 ```bash
 bun install --frozen-lockfile

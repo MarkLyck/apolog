@@ -9,7 +9,7 @@ Read the [feature map](features/README.md), then run the affected recipes. For a
 
 ## Launch
 
-Use Bun 1.3.13, Python 3, rsync, curl, and lsof. Run from the checkout root. The first Convex launch downloads its backend binary and needs network access.
+Use Bun 1.4.2, Python 3, rsync, curl, and lsof. Run from the checkout root. The first Convex launch downloads its backend binary and needs network access.
 
 The default run copies the current working files into a disposable directory, installs the locked dependencies, and starts a local anonymous Convex deployment. This tests uncommitted changes too. It excludes environment files and deployment credentials. Keep evidence in the original checkout, outside the runtime directory.
 
