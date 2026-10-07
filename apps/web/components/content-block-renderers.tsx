@@ -36,6 +36,33 @@ export function RichText({ content }: { content: InlineContent }) {
   );
 }
 
+export function ImageBlock({
+  block,
+}: {
+  block: Extract<ContentBlock, { type: "image" }>;
+}) {
+  return (
+    <figure className="my-8">
+      {/* oxlint-disable-next-line nextjs/no-img-element -- Editorial images load directly without a server proxy. */}
+      <img
+        alt={block.alt}
+        className="h-auto w-full rounded-2xl"
+        decoding="async"
+        height={block.height}
+        loading="lazy"
+        referrerPolicy="no-referrer"
+        src={block.src}
+        width={block.width}
+      />
+      {block.caption ? (
+        <figcaption className="mt-3 text-sm text-[var(--muted)]">
+          {block.caption}
+        </figcaption>
+      ) : null}
+    </figure>
+  );
+}
+
 export function ParagraphBlock({
   block,
 }: {

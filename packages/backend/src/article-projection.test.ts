@@ -141,6 +141,30 @@ describe("article projection", () => {
     ]);
   });
 
+  test("indexes image descriptions and captions without indexing asset URLs", () => {
+    const projection = projectArticle({
+      document: {
+        schemaVersion: 1,
+        blocks: [
+          {
+            alt: "Square Earth blueprint",
+            caption: "Creation needs geometry",
+            id: "meme",
+            src: "https://example.com/private-image-url.png",
+            type: "image",
+          },
+        ],
+      },
+      summary: "Image article",
+      tags: [],
+      title: "Earth geometry",
+    });
+    expect(projection.searchText).toContain("square earth blueprint");
+    expect(projection.searchText).toContain("creation needs geometry");
+    expect(projection.searchText).not.toContain("private-image-url");
+    expect(projection.comparisonReferences).toEqual([]);
+  });
+
   test("normalizes tag keys while preserving their display labels", () => {
     const projection = projectArticle({
       document,
