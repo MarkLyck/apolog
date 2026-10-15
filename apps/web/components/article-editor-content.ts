@@ -30,6 +30,13 @@ const scriptureAttributesSchema = Schema.Struct({
   edition: Schema.optional(Schema.String),
   reference: Schema.optional(Schema.String),
 }).mapFields(Struct.map(Schema.mutableKey));
+export const imageAttributesSchema = Schema.Struct({
+  alt: Schema.optional(Schema.String),
+  caption: Schema.optional(Schema.String),
+  height: Schema.optional(Schema.NullOr(Schema.Number)),
+  src: Schema.optional(Schema.String),
+  width: Schema.optional(Schema.NullOr(Schema.Number)),
+}).mapFields(Struct.map(Schema.mutableKey));
 const storedContradictionClaimSchema = Schema.Struct({
   content: Schema.optional(inlineContentSchema),
   id: Schema.optional(Schema.String),
@@ -175,6 +182,19 @@ export function articleDocumentToTiptap(
   return {
     content: document.blocks.map((block) => {
       switch (block.type) {
+        case "image": {
+          return {
+            attrs: {
+              alt: block.alt,
+              caption: block.caption ?? "",
+              contentId: block.id,
+              height: block.height ?? null,
+              src: block.src,
+              width: block.width ?? null,
+            },
+            type: "articleImage",
+          };
+        }
         case "paragraph": {
           return {
             attrs: { contentId: block.id },
@@ -351,12 +371,39 @@ function contradictionBlock(
   };
 }
 
+function imageBlock(
+  node: JSONContent,
+  id: string
+): Extract<ContentBlock, { type: "image" }> {
+  const attributes = Schema.decodeUnknownResult(imageAttributesSchema)(
+    node.attrs
+  );
+  const image = Result.isSuccess(attributes) ? attributes.success : {};
+  const block: Extract<ContentBlock, { type: "image" }> = {
+    alt: image.alt ?? "",
+    caption: image.caption?.trim() ? image.caption : undefined,
+    id,
+    src: image.src ?? "",
+    type: "image",
+  };
+  if (image.height !== undefined && image.height !== null) {
+    block.height = image.height;
+  }
+  if (image.width !== undefined && image.width !== null) {
+    block.width = image.width;
+  }
+  return block;
+}
+
 function tiptapNodeToBlock(
   node: JSONContent,
   index: number
 ): ContentBlock | null {
   const id = nodeId(node, `${node.type ?? "block"}-${index}`);
   switch (node.type) {
+    case "articleImage": {
+      return imageBlock(node, id);
+    }
     case "paragraph": {
       return {
         content: fromTiptapInline(node.content, id),
@@ -434,6 +481,14 @@ export function tiptapToArticleDocument(json: JSONContent): ArticleDocument {
 export function editorWordCount(json: JSONContent) {
   const text = (json.content ?? [])
     .flatMap((node) => {
+      if (node.type === "articleImage") {
+        const attributes = Schema.decodeUnknownResult(imageAttributesSchema)(
+          node.attrs
+        );
+        return Result.isSuccess(attributes)
+          ? [attributes.success.caption ?? ""]
+          : [];
+      }
       if (node.type === "contradiction") {
         return normalizeClaims(node.attrs?.claims).map((claim) =>
           inlineContentText(claim.content)

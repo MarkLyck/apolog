@@ -5,6 +5,7 @@ import StarterKitExtension from "@tiptap/starter-kit";
 
 import { CalloutView } from "./rich-article-callout-view";
 import { ContradictionView } from "./rich-article-contradiction-view";
+import { ArticleImageView } from "./rich-article-image-view";
 import { ScriptureView } from "./rich-article-scripture-view";
 
 const Callout = Node.create({
@@ -71,6 +72,74 @@ const Contradiction = Node.create({
     return [
       "section",
       mergeAttributes(HTMLAttributes, { "data-type": "contradiction" }),
+    ];
+  },
+});
+
+const ArticleImage = Node.create({
+  addAttributes() {
+    return {
+      alt: {
+        default: "",
+        parseHTML: (element) => element.querySelector("img")?.alt ?? "",
+        rendered: false,
+      },
+      caption: {
+        default: "",
+        parseHTML: (element) =>
+          element.querySelector("figcaption")?.textContent ?? "",
+        rendered: false,
+      },
+      height: {
+        default: null,
+        parseHTML: (element) => {
+          const value =
+            element.querySelector("img")?.getAttribute("height") ?? null;
+          return value === null ? null : Number(value);
+        },
+        rendered: false,
+      },
+      src: {
+        default: "",
+        parseHTML: (element) =>
+          element.querySelector("img")?.getAttribute("src") ?? "",
+        rendered: false,
+      },
+      width: {
+        default: null,
+        parseHTML: (element) => {
+          const value =
+            element.querySelector("img")?.getAttribute("width") ?? null;
+          return value === null ? null : Number(value);
+        },
+        rendered: false,
+      },
+    };
+  },
+  addNodeView() {
+    return ReactNodeViewRenderer(ArticleImageView);
+  },
+  atom: true,
+  draggable: true,
+  group: "block",
+  name: "articleImage",
+  parseHTML() {
+    return [{ tag: 'figure[data-type="article-image"]' }];
+  },
+  renderHTML({ HTMLAttributes, node }) {
+    return [
+      "figure",
+      mergeAttributes(HTMLAttributes, { "data-type": "article-image" }),
+      [
+        "img",
+        {
+          alt: node.attrs.alt,
+          height: node.attrs.height,
+          src: node.attrs.src,
+          width: node.attrs.width,
+        },
+      ],
+      ["figcaption", {}, node.attrs.caption],
     ];
   },
 });
@@ -147,9 +216,11 @@ export const articleEditorExtensions = [
       "callout",
       "scripture",
       "contradiction",
+      "articleImage",
     ],
   }),
   Callout,
   Scripture,
   Contradiction,
+  ArticleImage,
 ];

@@ -1,6 +1,9 @@
 import { describe, expect, test } from "bun:test";
 
 import type { ArticleDocument } from "@apolog/shared";
+import { articleDocumentSchema } from "@apolog/shared/content";
+import { Editor } from "@tiptap/core";
+import * as Schema from "effect/Schema";
 
 import {
   articleDocumentToTiptap,
@@ -8,6 +11,7 @@ import {
   replaceInlineContentText,
   tiptapToArticleDocument,
 } from "./article-editor-content";
+import { articleEditorExtensions } from "./rich-article-editor-extensions";
 
 const document: ArticleDocument = {
   blocks: [
@@ -257,5 +261,142 @@ describe("article editor content", () => {
       ],
     });
     expect(tiptapToArticleDocument(json)).toEqual(firstSave);
+  });
+});
+
+describe("article images in the editor", () => {
+  const image = {
+    alt: "An Earth blueprint with four corners",
+    caption: "God needs a geometry lesson",
+    id: "earth-meme",
+    src: "https://example.com/earth-meme.png",
+    type: "image",
+  } satisfies ArticleDocument["blocks"][number];
+  const article: ArticleDocument = {
+    schemaVersion: 1,
+    blocks: [
+      ...document.blocks.slice(0, 1),
+      image,
+      ...document.blocks.slice(1, 2),
+    ],
+  };
+
+  test("preserves image fields, order, and neighboring quote IDs through the registered editor", () => {
+    const editor = new Editor({
+      content: articleDocumentToTiptap(article),
+      element: null,
+      enableContentCheck: true,
+      extensions: articleEditorExtensions,
+    });
+    try {
+      expect(tiptapToArticleDocument(editor.getJSON())).toEqual(article);
+      expect(editor.schema.nodes.articleImage?.spec.atom).toBe(true);
+      expect(
+        editor.schema.nodes.articleImage?.spec.attrs?.contentId
+      ).toBeDefined();
+      const changed = {
+        ...image,
+        alt: "A globe next to a square blueprint",
+        caption: "A revised caption",
+        src: "https://example.com/revised-meme.png",
+      };
+      const changedArticle = {
+        ...article,
+        blocks: article.blocks.map((block) =>
+          block.type === "image" ? changed : block
+        ),
+      };
+      const json = articleDocumentToTiptap(changedArticle);
+      const saved = tiptapToArticleDocument(
+        editor.schema.nodeFromJSON(json).toJSON()
+      );
+      expect(saved).toEqual(changedArticle);
+      expect(
+        tiptapToArticleDocument(
+          editor.schema
+            .nodeFromJSON({
+              ...json,
+              content: json.content?.filter(
+                (node) => node.type !== "articleImage"
+              ),
+            })
+            .toJSON()
+        ).blocks
+      ).toEqual(article.blocks.filter((block) => block.type !== "image"));
+    } finally {
+      editor.destroy();
+    }
+  });
+
+  test("round-trips images without captions and counts only visible captions", () => {
+    const withoutCaption = {
+      ...article,
+      blocks: [{ ...image, caption: undefined }],
+    };
+    expect(
+      tiptapToArticleDocument(articleDocumentToTiptap(withoutCaption))
+    ).toEqual(withoutCaption);
+    expect(editorWordCount(articleDocumentToTiptap(withoutCaption))).toBe(0);
+    expect(
+      editorWordCount(articleDocumentToTiptap({ ...article, blocks: [image] }))
+    ).toBe(5);
+  });
+
+  test.each([
+    { width: 1254, height: 1254 },
+    { width: 1254 },
+    { height: 1254 },
+    {},
+  ])(
+    "preserves independent image dimensions through the registered editor %j",
+    (dimensions) => {
+      const input = { ...article, blocks: [{ ...image, ...dimensions }] };
+      const editor = new Editor({
+        content: articleDocumentToTiptap(input),
+        element: null,
+        enableContentCheck: true,
+        extensions: articleEditorExtensions,
+      });
+      try {
+        expect(tiptapToArticleDocument(editor.getJSON())).toEqual(input);
+        expect(
+          editor.schema.nodes.articleImage?.spec.attrs?.width?.default
+        ).toBe(null);
+        expect(
+          editor.schema.nodes.articleImage?.spec.attrs?.height?.default
+        ).toBe(null);
+      } finally {
+        editor.destroy();
+      }
+    }
+  );
+
+  test("retains invalid draft fields until save validation rejects them", () => {
+    const draft = tiptapToArticleDocument({
+      content: [
+        {
+          attrs: {
+            alt: "",
+            contentId: "draft-image",
+            src: "http://example.com/meme.png",
+            caption: " ",
+          },
+          type: "articleImage",
+        },
+      ],
+      type: "doc",
+    });
+    expect(draft.blocks).toEqual([
+      {
+        alt: "",
+        caption: undefined,
+        id: "draft-image",
+        src: "http://example.com/meme.png",
+        type: "image",
+      },
+    ]);
+    expect(() =>
+      Schema.decodeUnknownSync(articleDocumentSchema)(draft)
+    ).toThrow();
   });
 });

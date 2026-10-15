@@ -4,6 +4,7 @@ import {
   CalloutBlock,
   ClaimComparisonBlock,
   HeadingBlock,
+  ImageBlock,
   ListBlock,
   ParagraphBlock,
   QuoteBlock,
@@ -11,6 +12,9 @@ import {
 
 function ContentBlockView({ block }: { block: ContentBlock }) {
   switch (block.type) {
+    case "image": {
+      return <ImageBlock block={block} />;
+    }
     case "paragraph": {
       return <ParagraphBlock block={block} />;
     }

@@ -11,6 +11,10 @@ const timestamp = Schema.Number.check(
   Schema.isInt(),
   Schema.isGreaterThanOrEqualTo(0)
 );
+const imageDimension = Schema.Number.check(
+  Schema.isInt(),
+  Schema.isGreaterThan(0)
+);
 const corpusKeySchema = Schema.Literals(["bible", "quran"]);
 function isUrl(value: string): boolean {
   try {
@@ -47,6 +51,36 @@ const href = Schema.Union([
         "Inline links must not contain control characters or backslashes",
     }
   )
+);
+
+function isSafeHttpsImageUrl(value: string): boolean {
+  if (
+    !/^https:\/\/[^/?#\s]/iu.test(value) ||
+    [...value].some(
+      (character) =>
+        character < " " || character === "\u007F" || character === "\\"
+    )
+  ) {
+    return false;
+  }
+  try {
+    const url = new URL(value);
+    return (
+      url.protocol === "https:" &&
+      url.hostname.length > 0 &&
+      url.username === "" &&
+      url.password === ""
+    );
+  } catch {
+    return false;
+  }
+}
+
+export const articleImageUrlSchema = Schema.Trim.check(
+  Schema.makeFilter(isSafeHttpsImageUrl, {
+    message:
+      "Image URL must be an absolute HTTPS URL without credentials, control characters, or backslashes",
+  })
 );
 
 export const articleSourceSchema = Schema.Struct({
@@ -107,6 +141,15 @@ const comparisonClaimSchema = Schema.Struct({
 }).mapFields(Struct.map(Schema.mutableKey));
 
 export const contentBlockSchema = Schema.Union([
+  Schema.Struct({
+    alt: requiredText,
+    caption: Schema.optional(requiredText),
+    height: Schema.optional(imageDimension),
+    id: requiredText,
+    src: articleImageUrlSchema,
+    type: Schema.Literal("image"),
+    width: Schema.optional(imageDimension),
+  }).mapFields(Struct.map(Schema.mutableKey)),
   Schema.Struct({
     content: inlineContentSchema,
     id: requiredText,

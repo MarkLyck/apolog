@@ -18,6 +18,9 @@ function inlineSource(content: InlineContent) {
 
 function blockSource(block: ContentBlock) {
   switch (block.type) {
+    case "image": {
+      return [block.type, block.src, block.alt, block.caption ?? null];
+    }
     case "paragraph":
     case "heading": {
       return [block.type, inlineSource(block.content)];
