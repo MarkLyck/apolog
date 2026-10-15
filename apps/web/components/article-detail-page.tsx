@@ -88,13 +88,6 @@ export async function ArticleDetailPage({
           ) : null}
         </div>
       </header>
-      <div className="pt-8">
-        <ArticleNavigation
-          adjacent={adjacent}
-          collectionKey={activePlacement.collectionKey}
-          corpusKey={corpusKey}
-        />
-      </div>
       <div className="grid items-start gap-8 pt-8 sm:pt-10 lg:grid-cols-[minmax(0,1fr)_18rem] lg:gap-10">
         <ContentBlocks blocks={article.document.blocks} />
         <section

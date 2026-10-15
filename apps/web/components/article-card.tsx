@@ -2,7 +2,7 @@ import type { ArticleListItem, CorpusKey } from "@apolog/shared";
 import { collectionRegistry, withCorpus } from "@apolog/shared";
 import { Badge, Card } from "@apolog/ui";
 import Link from "next/link";
-import { FiArrowUpRight, FiClock } from "react-icons/fi";
+import { FiArrowRight, FiClock } from "react-icons/fi";
 
 import { ContradictionAssessmentLabels } from "./contradiction-assessment";
 
@@ -50,7 +50,7 @@ export function ArticleCard({
           ))}
         </div>
         <span className="mt-6 inline-flex items-center gap-2 text-sm font-medium text-[var(--accent-strong)]">
-          Read analysis <FiArrowUpRight aria-hidden="true" />
+          Read analysis <FiArrowRight aria-hidden="true" />
         </span>
       </Card>
     </Link>

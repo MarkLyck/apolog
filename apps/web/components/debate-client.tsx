@@ -5,10 +5,10 @@ import { Button } from "@apolog/ui";
 import * as Result from "effect/Result";
 import * as Schema from "effect/Schema";
 import type { SyntheticEvent } from "react";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import {
+  FiArrowRight,
   FiArrowUp,
-  FiArrowUpRight,
   FiBookOpen,
   FiCopy,
   FiMessageCircle,
@@ -43,6 +43,7 @@ export function DebateClient({ corpusKey }: { corpusKey: CorpusKey }) {
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+  const composerRef = useRef<HTMLTextAreaElement>(null);
 
   const submit = async () => {
     const content = input.trim();
@@ -96,7 +97,8 @@ export function DebateClient({ corpusKey }: { corpusKey: CorpusKey }) {
           ? requestError.message
           : "Debate request failed."
       );
-      setMessages(nextMessages);
+      setMessages(messages);
+      setInput(content);
     } finally {
       setLoading(false);
     }
@@ -115,7 +117,9 @@ export function DebateClient({ corpusKey }: { corpusKey: CorpusKey }) {
         <strong className="text-[var(--ink)]">
           {corpusKey === "bible" ? "Bible" : "Quran"}
         </strong>
-        <span className="ml-2">· Conversations stay in this browser.</span>
+        <span className="ml-2">
+          · Conversations are not saved. Reloading clears them.
+        </span>
       </div>
       <div className="min-h-[28rem] p-5 sm:p-7">
         {messages.length === 0 ? (
@@ -133,10 +137,13 @@ export function DebateClient({ corpusKey }: { corpusKey: CorpusKey }) {
                 <button
                   className="debate-prompt"
                   key={prompt}
-                  onClick={() => setInput(prompt)}
+                  onClick={() => {
+                    setInput(prompt);
+                    composerRef.current?.focus();
+                  }}
                   type="button"
                 >
-                  {prompt} <FiArrowUpRight aria-hidden="true" />
+                  {prompt} <FiArrowRight aria-hidden="true" />
                 </button>
               ))}
             </div>
@@ -190,6 +197,7 @@ export function DebateClient({ corpusKey }: { corpusKey: CorpusKey }) {
           </label>
           <textarea
             id="debate-message"
+            ref={composerRef}
             className="max-h-40 min-h-11 flex-1 resize-none bg-transparent py-3 text-sm outline-none placeholder:text-[var(--muted)]"
             maxLength={4000}
             onChange={(event) => setInput(event.target.value)}

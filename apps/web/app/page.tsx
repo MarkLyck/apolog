@@ -4,7 +4,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { Suspense } from "react";
-import { FiArrowUpRight, FiPlus } from "react-icons/fi";
+import { FiArrowRight, FiPlus } from "react-icons/fi";
 
 import { ArticleCard } from "@/components/article-card";
 import { ContradictionCard } from "@/components/contradiction-card";
@@ -130,7 +130,7 @@ async function FeaturedContradictions({
         className="landing-text-link"
         href={`/contradictions?text=${corpusKey}`}
       >
-        All contradictions <FiArrowUpRight aria-hidden="true" />
+        All contradictions <FiArrowRight aria-hidden="true" />
       </Link>
     </section>
   ) : null;
@@ -160,7 +160,7 @@ async function FeaturedArticles({
         ))}
       </div>
       <Link className="landing-text-link" href={`/evidence?text=${corpusKey}`}>
-        Explore the evidence <FiArrowUpRight aria-hidden="true" />
+        Explore the evidence <FiArrowRight aria-hidden="true" />
       </Link>
     </section>
   ) : null;
@@ -223,7 +223,7 @@ export default async function Home({
               <span className="landing-number">0{index + 1}</span>
               <h3>{label}</h3>
               <p>{description}</p>
-              <FiArrowUpRight aria-hidden="true" />
+              <FiArrowRight aria-hidden="true" />
             </Link>
           ))}
         </div>

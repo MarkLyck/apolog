@@ -1,7 +1,7 @@
 "use client";
 
 import { api } from "@apolog/backend/api";
-import { collectionRegistry } from "@apolog/shared";
+import { collectionRegistry, corpusLabel } from "@apolog/shared";
 import { Badge } from "@apolog/ui";
 import { usePaginatedQuery } from "convex/react";
 import Link from "next/link";
@@ -105,14 +105,17 @@ export function AdminArticleList() {
                   <Badge>{article.status}</Badge>
                   {[
                     ...new Set(
-                      article.placements.map((item) => item.collectionKey)
+                      article.placements.map(
+                        (item) =>
+                          `${corpusLabel(item.corpusKey)} · ${collectionRegistry[item.collectionKey].label}`
+                      )
                     ),
-                  ].map((collection) => (
+                  ].map((placement) => (
                     <span
                       className="text-xs font-semibold text-[var(--muted)]"
-                      key={collection}
+                      key={placement}
                     >
-                      {collectionRegistry[collection].label}
+                      {placement}
                     </span>
                   ))}
                 </div>

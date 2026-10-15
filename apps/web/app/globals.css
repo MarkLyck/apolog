@@ -106,6 +106,7 @@ textarea {
   padding-left: 1.25rem;
   color: var(--muted);
   line-height: 1.7;
+  list-style: disc;
 }
 
 .prose-apolog > :first-child {
