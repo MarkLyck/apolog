@@ -424,8 +424,7 @@
 }
 
 .site-header[data-landing="true"] [data-search-trigger] span,
-.site-header[data-landing="true"] [data-search-trigger] kbd,
-.site-header[data-landing="true"] .site-editor-link {
+.site-header[data-landing="true"] [data-search-trigger] kbd {
   display: none;
 }
 

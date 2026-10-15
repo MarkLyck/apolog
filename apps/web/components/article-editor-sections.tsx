@@ -266,8 +266,10 @@ export function PublishingSection({
           </span>
         </label>
         <label className={labelClassName}>
-          Finding{" "}
-          <span className="font-normal text-[var(--muted)]">(optional)</span>
+          <span>
+            Finding{" "}
+            <span className="font-normal text-[var(--muted)]">(optional)</span>
+          </span>
           <input
             className={inputClassName}
             onChange={(event) => update("finding", event.target.value)}
@@ -276,8 +278,10 @@ export function PublishingSection({
           />
         </label>
         <label className={labelClassName}>
-          Content notice{" "}
-          <span className="font-normal text-[var(--muted)]">(optional)</span>
+          <span>
+            Content notice{" "}
+            <span className="font-normal text-[var(--muted)]">(optional)</span>
+          </span>
           <textarea
             className={`${inputClassName} min-h-24 resize-y py-3`}
             onChange={(event) => update("contentWarning", event.target.value)}

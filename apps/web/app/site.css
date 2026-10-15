@@ -60,8 +60,7 @@
 }
 
 .site-header [data-search-trigger],
-.site-header .theme-toggle,
-.site-header .site-editor-link {
+.site-header .theme-toggle {
   width: 32px;
   height: 32px;
   padding: 0;
@@ -76,8 +75,7 @@
   display: none;
 }
 
-.site-header button:hover,
-.site-header .site-editor-link:hover {
+.site-header button:hover {
   background: var(--surface-strong);
 }
 
@@ -95,10 +93,6 @@
 .site-header nav[aria-label^="Primary"] a:hover,
 .site-header nav[aria-label^="Primary"] a[aria-current="page"] {
   color: var(--ink);
-}
-
-.site-header[data-landing="true"] .site-editor-link {
-  display: none;
 }
 
 .site-mobile-menu {
@@ -603,9 +597,6 @@ select option {
   .site-header-row {
     padding: 12px 20px;
     gap: 6px;
-  }
-  .site-header .site-editor-link {
-    display: none;
   }
   .site-header nav[aria-label="Choose text corpus"] a {
     padding-inline: 10px;

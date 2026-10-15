@@ -23,7 +23,10 @@ export function ContradictionCard({
       )}
     >
       <Card className="relative h-full overflow-hidden">
-        <div className="font-display absolute -top-5 -right-2 text-[7rem] leading-none text-[color:var(--line)]/55">
+        <div
+          aria-hidden="true"
+          className="font-display absolute top-6 right-7 hidden text-[5rem] leading-none text-[color:var(--line)]/55 sm:block"
+        >
           {article.position}
         </div>
         <div className="relative">

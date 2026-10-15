@@ -5,7 +5,7 @@ import type { CorpusKey } from "@apolog/shared";
 import Link from "next/link";
 import { usePathname, useSearchParams } from "next/navigation";
 import { useCallback, useRef, useState } from "react";
-import { FiEdit3, FiMenu } from "react-icons/fi";
+import { FiMenu } from "react-icons/fi";
 
 import { primaryNavigationLinks } from "@/lib/public-routes";
 
@@ -101,14 +101,6 @@ export function SiteHeader({ initialCorpus }: { initialCorpus: CorpusKey }) {
             search={serialized}
           />
           <SearchTrigger onOpen={openSearch} triggerRef={searchTriggerRef} />
-          <Link
-            aria-label="Open article editor"
-            className="site-editor-link hidden size-10 place-items-center rounded-lg border border-[var(--line)] text-[var(--muted)] transition hover:border-[var(--ink)] hover:text-[var(--ink)] sm:grid"
-            href="/admin/articles"
-            title="Article editor"
-          >
-            <FiEdit3 aria-hidden="true" />
-          </Link>
           {pathname === "/" ? (
             <details className="landing-mobile-menu">
               <summary aria-label="Open navigation">

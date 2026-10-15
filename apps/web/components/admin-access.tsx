@@ -27,14 +27,12 @@ export function AdminAccess({ children }: { children: ReactNode }) {
             ? "Your account is signed in, but it does not have administrator access."
             : "Sign in with an administrator account to write and manage articles."}
         </p>
-        {access.authenticated ? null : (
-          <Link
-            className="mt-7 inline-flex min-h-11 items-center justify-center rounded-full bg-[var(--ink)] px-5 text-sm font-bold text-[var(--paper)] transition hover:-translate-y-0.5 hover:bg-[var(--accent-strong)]"
-            href="/login?next=/admin/articles"
-          >
-            Sign in
-          </Link>
-        )}
+        <Link
+          className="mt-7 inline-flex min-h-11 items-center justify-center rounded-full bg-[var(--ink)] px-5 text-sm font-bold text-[var(--paper)] transition hover:-translate-y-0.5 hover:bg-[var(--accent-strong)]"
+          href="/login?next=/admin/articles"
+        >
+          {access.authenticated ? "Switch account" : "Sign in"}
+        </Link>
       </section>
     );
   }
