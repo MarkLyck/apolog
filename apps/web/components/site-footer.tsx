@@ -17,8 +17,7 @@ export function SiteFooter({ initialCorpus }: { initialCorpus: CorpusKey }) {
         <div>
           <div className="font-display text-3xl">Apolog</div>
           <p className="mt-3 max-w-xl text-sm leading-6 opacity-70">
-            An evidence-first editorial demo. Verify quotations before
-            publication.
+            Read the passages, weigh the evidence, and make up your own mind.
           </p>
         </div>
         <div className="flex gap-5 text-sm font-semibold">

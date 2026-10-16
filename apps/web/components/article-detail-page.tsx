@@ -1,15 +1,15 @@
 import { collectionRegistry, corpusLabel } from "@apolog/shared";
 import type { CollectionKey, CorpusKey } from "@apolog/shared";
-import { Badge } from "@apolog/ui";
 import * as Effect from "effect/Effect";
 import Link from "next/link";
 import { notFound, redirect } from "next/navigation";
 import { Suspense } from "react";
-import { FiArrowLeft, FiClock, FiExternalLink } from "react-icons/fi";
+import { FiArrowLeft, FiClock } from "react-icons/fi";
 
 import { resolveArticlePlacement } from "@/lib/article-placement";
 import { getAdjacentArticles, getArticle } from "@/lib/data";
 
+import { ArticleDetails } from "./article-details";
 import { ArticleEditButton } from "./article-edit-button";
 import { ArticleNavigation } from "./article-navigation";
 import { ContentBlocks } from "./content-blocks";
@@ -88,52 +88,16 @@ export async function ArticleDetailPage({
           ) : null}
         </div>
       </header>
-      <div className="grid items-start gap-8 pt-8 sm:pt-10 lg:grid-cols-[minmax(0,1fr)_18rem] lg:gap-10">
-        <ContentBlocks blocks={article.document.blocks} />
-        <section
-          aria-label="Article details"
-          className="reader-details space-y-7 lg:sticky lg:top-32"
-        >
-          <div>
-            <h2 className="font-sans text-xs font-semibold tracking-[0.12em] text-[var(--muted)] uppercase">
-              Topics
-            </h2>
-            <div className="mt-3 flex flex-wrap gap-2">
-              {article.tags.map((tag) => (
-                <Badge className="bg-transparent font-medium" key={tag}>
-                  {tag}
-                </Badge>
-              ))}
-            </div>
-          </div>
-          <div>
-            <h2 className="font-sans text-xs font-semibold tracking-[0.12em] text-[var(--muted)] uppercase">
-              Sources
-            </h2>
-            <ol className="mt-3 grid gap-3">
-              {article.sources.map((source) => (
-                <li key={source.url}>
-                  <a
-                    className="group block rounded-lg border border-[var(--line)] bg-[var(--surface)] p-4 text-sm leading-snug font-medium transition-colors hover:border-[var(--accent)]"
-                    href={source.url}
-                    rel="noreferrer"
-                    target="_blank"
-                  >
-                    {source.title}
-                    <span className="mt-2 flex items-start gap-2 text-xs leading-relaxed font-normal text-[var(--muted)]">
-                      {source.publisher}{" "}
-                      <FiExternalLink
-                        aria-hidden="true"
-                        className="mt-0.5 shrink-0"
-                      />
-                    </span>
-                  </a>
-                </li>
-              ))}
-            </ol>
-          </div>
-        </section>
-      </div>
+      {article.tags.length > 0 || article.sources.length > 0 ? (
+        <div className="grid items-start gap-8 pt-8 sm:pt-10 lg:grid-cols-[minmax(0,1fr)_18rem] lg:gap-10">
+          <ContentBlocks blocks={article.document.blocks} />
+          <ArticleDetails sources={article.sources} tags={article.tags} />
+        </div>
+      ) : (
+        <div className="max-w-4xl pt-8 sm:pt-10">
+          <ContentBlocks blocks={article.document.blocks} />
+        </div>
+      )}
       <div className="pt-10">
         <ArticleNavigation
           adjacent={adjacent}
