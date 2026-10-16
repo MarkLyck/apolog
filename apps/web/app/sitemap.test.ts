@@ -34,4 +34,13 @@ describe("sitemap", () => {
       expect(new URL(canonical, url.origin).href).toBe(url.href);
     }
   });
+
+  test("publishes each site information page once, without a corpus", () => {
+    const urls = buildSitemap({ articles: [] }).map((entry) => entry.url);
+    for (const route of ["/about", "/contact", "/privacy"]) {
+      expect(urls.filter((url) => url.includes(route))).toEqual([
+        expect.stringMatching(new RegExp(`${route}$`, "u")),
+      ]);
+    }
+  });
 });
