@@ -9,9 +9,11 @@ import { ContradictionAssessmentLabels } from "./contradiction-assessment";
 export function ContradictionCard({
   article,
   corpusKey,
+  showReadingOrder = true,
 }: {
   article: ArticleListItem;
   corpusKey: CorpusKey;
+  showReadingOrder?: boolean;
 }) {
   return (
     <Link
@@ -22,40 +24,32 @@ export function ContradictionCard({
         corpusKey
       )}
     >
-      <Card className="relative h-full overflow-hidden">
-        <div
-          aria-hidden="true"
-          className="font-display absolute top-6 right-7 hidden text-[5rem] leading-none text-[color:var(--line)]/55 sm:block"
-        >
-          {article.position}
-        </div>
-        <div className="relative">
+      <Card className="h-full">
+        {showReadingOrder && (
           <div className="mb-5 text-[0.65rem] font-medium tracking-[0.16em] text-[var(--accent-strong)] uppercase">
             Reading order {article.position}
           </div>
-          <h2 className="max-w-md text-2xl leading-tight">{article.title}</h2>
-          <p className="mt-3 text-sm leading-6 text-[var(--muted)]">
-            {article.summary}
-          </p>
-          <div className="mt-4">
-            <ContradictionAssessmentLabels assessment={article.assessment} />
+        )}
+        <h2 className="max-w-md text-2xl leading-tight">{article.title}</h2>
+        <p className="mt-3 text-sm leading-6 text-[var(--muted)]">
+          {article.summary}
+        </p>
+        <ContradictionAssessmentLabels assessment={article.assessment} />
+        {article.comparisonReferences.length > 0 ? (
+          <div className="mt-5 flex flex-wrap gap-2">
+            {[...new Set(article.comparisonReferences)].map((reference) => (
+              <span
+                className="rounded-full border border-[var(--line)] bg-[var(--surface-strong)] px-3 py-1.5 text-xs font-medium"
+                key={reference}
+              >
+                {reference}
+              </span>
+            ))}
           </div>
-          {article.comparisonReferences.length > 0 ? (
-            <div className="mt-5 flex flex-wrap gap-2">
-              {[...new Set(article.comparisonReferences)].map((reference) => (
-                <span
-                  className="rounded-full border border-[var(--line)] bg-[var(--surface-strong)] px-3 py-1.5 text-xs font-medium"
-                  key={reference}
-                >
-                  {reference}
-                </span>
-              ))}
-            </div>
-          ) : null}
-          <span className="mt-6 inline-flex items-center gap-2 text-sm font-medium text-[var(--accent-strong)]">
-            Compare the accounts <FiArrowRight aria-hidden="true" />
-          </span>
-        </div>
+        ) : null}
+        <span className="mt-6 inline-flex items-center gap-2 text-sm font-medium text-[var(--accent-strong)]">
+          Compare the accounts <FiArrowRight aria-hidden="true" />
+        </span>
       </Card>
     </Link>
   );

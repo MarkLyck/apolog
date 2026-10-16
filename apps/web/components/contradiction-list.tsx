@@ -8,6 +8,26 @@ import { loadContradictions } from "@/app/contradictions/actions";
 import { ContradictionCard } from "@/components/contradiction-card";
 import { mergeArticlePage } from "@/lib/article-pagination";
 
+function resultsLabel({
+  isDone,
+  matchCount,
+  query,
+  totalCount,
+}: {
+  isDone: boolean;
+  matchCount: number;
+  query: string;
+  totalCount: number;
+}) {
+  if (!query) {
+    return `${totalCount} ranked ${totalCount === 1 ? "comparison" : "comparisons"}`;
+  }
+  if (!isDone) {
+    return `Comparisons matching “${query}”`;
+  }
+  return `${matchCount} ${matchCount === 1 ? "comparison matches" : "comparisons match"} “${query}”`;
+}
+
 export function ContradictionList({
   corpusKey,
   initialPage,
@@ -64,14 +84,12 @@ export function ContradictionList({
   return (
     <>
       <div className="collection-results" aria-live="polite">
-        {totalCount} ranked {totalCount === 1 ? "comparison" : "comparisons"}
-        {query && result.isDone && (
-          <>
-            {" "}
-            · {result.page.length} matching{" "}
-            {result.page.length === 1 ? "comparison" : "comparisons"}
-          </>
-        )}
+        {resultsLabel({
+          isDone: result.isDone,
+          matchCount: result.page.length,
+          query,
+          totalCount,
+        })}
       </div>
       <div className="grid gap-5 md:grid-cols-2">
         {result.page.map((article) => (
@@ -79,6 +97,7 @@ export function ContradictionList({
             article={article}
             corpusKey={corpusKey}
             key={article.id}
+            showReadingOrder={!query}
           />
         ))}
       </div>

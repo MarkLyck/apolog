@@ -30,7 +30,7 @@ describe("comparison assessment labels", () => {
       )
     ).toContain("Importance: Minor");
   });
-  test("does not call an unproven claim a direct contradiction or show stale importance", () => {
+  test("does not call an unproven claim a direct contradiction", () => {
     expect(
       renderToStaticMarkup(
         <ContradictionAssessmentLabels
@@ -43,16 +43,24 @@ describe("comparison assessment labels", () => {
         />
       )
     ).toContain("Weak contradiction");
-    const changed = renderToStaticMarkup(
-      <ContradictionAssessmentPanel assessment={{ status: "changed" }} />
-    );
-    expect(changed).toContain("Assessment needs review");
-    expect(changed).not.toContain("Foundational");
-    expect(
-      renderToStaticMarkup(
-        <ContradictionAssessmentPanel assessment={undefined} />
-      )
-    ).toContain("Awaiting assessment");
+  });
+  test("shows readers nothing until an assessment is reviewed", () => {
+    for (const assessment of [
+      { status: "changed" },
+      { status: "unreviewed" },
+      undefined,
+    ] as const) {
+      expect(
+        renderToStaticMarkup(
+          <ContradictionAssessmentLabels assessment={assessment} />
+        )
+      ).toBe("");
+      expect(
+        renderToStaticMarkup(
+          <ContradictionAssessmentPanel assessment={assessment} />
+        )
+      ).toBe("");
+    }
   });
   test("explains inference and rank without presenting a certainty percentage", () => {
     const html = renderToStaticMarkup(<ContradictionAssessmentGuide />);
