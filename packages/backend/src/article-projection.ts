@@ -23,11 +23,10 @@ export function projectArticle({
   return {
     comparisonReferences: [
       ...new Set(
-        document.blocks.flatMap((block, index) =>
+        document.blocks.flatMap((block) =>
           block.type === "claimComparison"
             ? block.claims.map((claim) => claim.reference)
-            : block.type === "quote" &&
-                document.blocks[index - 1]?.type !== "quote"
+            : block.type === "quote"
               ? [block.reference]
               : []
         )

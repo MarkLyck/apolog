@@ -43,9 +43,9 @@ bun --env-file=/absolute/path/to/.env run contradictions:refresh verify
 
 ## Content and passage metadata
 
-Each passage is a `quote` block. Its `reference` and `edition` fields are separate from the quotation in `content`. The existing renderer displays the quotation and its citation. Search indexes every quotation and reference; list-card metadata uses the first quote of each consecutive quotation group.
+Each passage is a `quote` block. Its `reference` and `edition` fields are separate from the quotation in `content`. The existing renderer displays the quotation and its citation. Search indexes every quotation and reference. List cards show each quoted reference once, in document order.
 
-The importer does not reproduce the website's collection of original commentary. It retains short headings within a 25-word limit per article, including the title, and uses numbered passage groups otherwise. It expands cited ranges to complete verses, including citations in surrounding explanatory text. Ellipses, editorial annotations, and modern translations from the source are replaced with public-domain passage text. The creation example supplied in the task retains its supplied wording and headings, with separate edition labels for the supplied quotations.
+The importer does not reproduce the website's collection of original commentary. It retains short headings within a 25-word limit per article, including the title, and uses numbered passage groups otherwise. The summary lists each retained heading with its first reference. When headings are withheld, it names the cited books and the number of passage groups instead. It expands cited ranges to complete verses, including citations in surrounding explanatory text. Ellipses, editorial annotations, and modern translations from the source are replaced with public-domain passage text. The creation example supplied in the task retains its supplied wording and headings, with separate edition labels for the supplied quotations.
 
 Articles have no SAB mentions or links, including their slugs and source lists. The scraper's source URLs remain in the script and local cache.
 
