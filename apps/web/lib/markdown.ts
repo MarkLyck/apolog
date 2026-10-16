@@ -99,11 +99,46 @@ export function homeMarkdown(
   ].join("\n\n");
 }
 
+const markDelimiters = {
+  bold: "**",
+  italic: "_",
+  strikethrough: "~~",
+} as const;
+
+function codeSpan(text: string) {
+  const fence = "`".repeat(
+    Math.max(0, ...(text.match(/`+/gu) ?? []).map((run) => run.length)) + 1
+  );
+  return fence.length > 1
+    ? `${fence} ${text} ${fence}`
+    : `${fence}${text}${fence}`;
+}
+
+function markedText(text: string, marks: readonly string[] = []) {
+  const core = text.trim();
+  if (!core) {
+    return text;
+  }
+  const leading = text.slice(0, text.length - text.trimStart().length);
+  const trailing = text.slice(text.trimEnd().length);
+  const present = new Set(marks);
+  let opening = "";
+  let closing = "";
+  for (const mark of ["strikethrough", "bold", "italic"] as const) {
+    if (present.has(mark)) {
+      opening += markDelimiters[mark];
+      closing = markDelimiters[mark] + closing;
+    }
+  }
+  const inner = present.has("code") ? codeSpan(core) : core;
+  return `${leading}${opening}${inner}${closing}${trailing}`;
+}
+
 function inlineMarkdown(content: InlineContent) {
   return content
     .map((node) => {
       if (node.type === "text") {
-        return node.text;
+        return markedText(node.text, node.marks);
       }
       const href = (
         node.href.startsWith("/") ? `${siteConfig.url}${node.href}` : node.href

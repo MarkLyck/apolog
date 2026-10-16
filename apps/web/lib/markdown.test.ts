@@ -63,3 +63,38 @@ test("article Markdown keeps inline link destinations", () => {
   );
   expect(markdown).toContain(`[flood](${siteConfig.url}/articles/flood)`);
 });
+
+test("article Markdown keeps inline marks", () => {
+  const markdown = articleMarkdown({
+    document: {
+      blocks: [
+        {
+          content: [
+            {
+              id: "a",
+              marks: ["strikethrough"],
+              text: "Old claim",
+              type: "text",
+            },
+            { id: "b", text: " then ", type: "text" },
+            {
+              id: "c",
+              marks: ["bold", "italic"],
+              text: "new claim ",
+              type: "text",
+            },
+            { id: "d", marks: ["code"], text: "a`b", type: "text" },
+          ],
+          id: "p",
+          type: "paragraph",
+        },
+      ],
+    },
+    slug: "marks",
+    sources: [],
+    summary: "Summary",
+    title: "Marks",
+    updatedAt: 0,
+  });
+  expect(markdown).toContain("~~Old claim~~ then **_new claim_** `` a`b ``");
+});
