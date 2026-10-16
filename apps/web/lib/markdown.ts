@@ -30,9 +30,9 @@ export function frontmatter(fields: {
 }) {
   return [
     "---",
-    ...Object.entries(fields).map(
-      ([key, value]) => `${key}: ${JSON.stringify(value)}`
-    ),
+    ...Object.entries(fields)
+      .filter(([, value]) => value !== undefined)
+      .map(([key, value]) => `${key}: ${JSON.stringify(value)}`),
     "---",
   ].join("\n");
 }

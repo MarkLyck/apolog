@@ -11,3 +11,13 @@ test("frontmatter values with colons and quotes parse back unchanged", () => {
   };
   expect(Bun.YAML.parse(frontmatter(fields))).toEqual([fields, null]);
 });
+
+test("frontmatter omits fields without a value", () => {
+  const fields = {
+    canonical: "https://apolog.example/",
+    description: "Home",
+    last_updated: undefined,
+    title: "Apolog",
+  };
+  expect(frontmatter(fields)).not.toContain("last_updated");
+});
