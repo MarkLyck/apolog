@@ -5,6 +5,7 @@ import path from "node:path";
 import {
   markdownTarget,
   matchRoute,
+  parseRoutePattern,
   prefersMarkdown,
   routeTable,
 } from "./markdown-routes";
@@ -42,7 +43,7 @@ function appRoutePatterns() {
     const folders = parts
       .slice(0, -1)
       .filter((folder) => !/^\(.*\)$/u.test(folder));
-    if (["page.tsx", "route.ts"].includes(file)) {
+    if (/^(?:page|route)\.(?:[jt]sx?|mdx?)$/u.test(file)) {
       return [`/${folders.join("/")}`];
     }
     const metadataRoute = metadataRoutes.get(file);
@@ -79,6 +80,14 @@ describe("Markdown route table", () => {
       route: { kind: "markdown", pattern: "/articles/[slug]" },
     });
     expect(matchRoute("/articles/genesis-flood/extra")).toBeNull();
+  });
+});
+
+describe("matchRoute", () => {
+  test("binds hyphenated dynamic segments", () => {
+    expect(
+      parseRoutePattern("/notes/[note-id]").map((segment) => segment.kind)
+    ).toEqual(["static", "param"]);
   });
 });
 
@@ -139,6 +148,7 @@ describe("prefersMarkdown", () => {
     "*/*",
     "text/markdown;q=0.5, text/html",
     "text/markdown;q=0",
+    "text/markdown;Q=0",
   ])("serves HTML for %p", (accept) => {
     expect(prefersMarkdown(accept)).toBe(false);
   });

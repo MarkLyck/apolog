@@ -8,6 +8,7 @@ import type {
 import { blockText } from "@apolog/shared/article-text";
 
 import { collections, homePage, questions, steps } from "./home-content";
+import { matchRoute } from "./markdown-routes";
 import { siteConfig } from "./site";
 
 export function markdownResponse(body: string, status = 200) {
@@ -152,7 +153,9 @@ export function articleMarkdown(article: {
 export function notFoundMarkdown(pathname: string) {
   return [
     "# Page not found",
-    `${siteConfig.name} has no page at \`${pathname}\`. The link may be wrong, or the article may not be published yet.`,
+    ["app", "public"].includes(matchRoute(pathname)?.route.kind ?? "")
+      ? `\`${pathname}\` has no Markdown version. Read it at ${siteConfig.url}${pathname}.`
+      : `${siteConfig.name} has no page at \`${pathname}\`. The link may be wrong, or the article may not be published yet.`,
     [
       `- [${siteConfig.name} homepage](${siteConfig.url}/)`,
       `- [Sitemap](${siteConfig.url}/sitemap.xml)`,

@@ -45,15 +45,18 @@ type Segment =
   | { kind: "rest"; optional: boolean };
 
 function parseSegment(segment: string): Segment {
-  const rest = /^\[(?<optional>\[)?\.\.\.\w+\]\]?$/u.exec(segment);
+  const rest = /^\[(?<optional>\[)?\.\.\.[^\]]+\]\]?$/u.exec(segment);
   if (rest) {
     return { kind: "rest", optional: rest.groups?.optional === "[" };
   }
-  const name = /^\[(?<name>\w+)\]$/u.exec(segment)?.groups?.name;
+  const name = /^\[(?<name>[^\]]+)\]$/u.exec(segment)?.groups?.name;
   return name === undefined
     ? { kind: "static", value: segment }
     : { kind: "param", name };
 }
+
+export const parseRoutePattern = (pattern: string) =>
+  pattern.split("/").filter(Boolean).map(parseSegment);
 
 const dynamicSegments = (segments: readonly Segment[]) =>
   segments.filter((segment) => segment.kind !== "static").length;
@@ -61,7 +64,7 @@ const dynamicSegments = (segments: readonly Segment[]) =>
 const compiledRoutes = routeTable
   .map((route) => ({
     route,
-    segments: route.pattern.split("/").filter(Boolean).map(parseSegment),
+    segments: parseRoutePattern(route.pattern),
   }))
   .sort(
     (left, right) =>
@@ -102,7 +105,9 @@ const markdownTypes = new Set(["text/markdown", "text/x-markdown"]);
 const htmlTypes = new Set(["text/html", "text/*", "*/*"]);
 
 function quality(parameters: string[]) {
-  const q = parameters.find((parameter) => parameter.trim().startsWith("q="));
+  const q = parameters.find((parameter) =>
+    parameter.trim().toLowerCase().startsWith("q=")
+  );
   const value = q === undefined ? 1 : Number(q.trim().slice(2));
   return Number.isNaN(value) ? 0 : value;
 }

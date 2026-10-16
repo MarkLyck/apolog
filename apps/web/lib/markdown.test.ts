@@ -1,6 +1,6 @@
 import { expect, test } from "bun:test";
 
-import { frontmatter } from "./markdown";
+import { frontmatter, notFoundMarkdown } from "./markdown";
 
 test("frontmatter values with colons and quotes parse back unchanged", () => {
   const fields = {
@@ -20,4 +20,12 @@ test("frontmatter omits fields without a value", () => {
     title: "Apolog",
   };
   expect(frontmatter(fields)).not.toContain("last_updated");
+});
+
+test("a .md request for an HTML-only page points at the page instead of denying it", () => {
+  expect(notFoundMarkdown("/about")).toContain("no Markdown version");
+  expect(notFoundMarkdown("/no-such-page")).toContain("has no page at");
+  expect(notFoundMarkdown("/articles/no-such-article")).toContain(
+    "has no page at"
+  );
 });
