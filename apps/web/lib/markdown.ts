@@ -4,8 +4,9 @@ import type {
   ArticleSource,
   ContentBlock,
   CorpusKey,
+  InlineContent,
 } from "@apolog/shared";
-import { blockText } from "@apolog/shared/article-text";
+import { blockParts } from "@apolog/shared/article-text";
 
 import { collections, homePage, questions, steps } from "./home-content";
 import { matchRoute } from "./markdown-routes";
@@ -98,8 +99,25 @@ export function homeMarkdown(
   ].join("\n\n");
 }
 
+function inlineMarkdown(content: InlineContent) {
+  return content
+    .map((node) => {
+      if (node.type === "text") {
+        return node.text;
+      }
+      const href = (
+        node.href.startsWith("/") ? `${siteConfig.url}${node.href}` : node.href
+      )
+        .replaceAll(" ", "%20")
+        .replaceAll("(", "%28")
+        .replaceAll(")", "%29");
+      return `[${node.text.replaceAll(/[[\]]/gu, "\\$&")}](${href})`;
+    })
+    .join("");
+}
+
 function blockMarkdown(block: ContentBlock) {
-  const lines = blockText(block).filter((line) => line.trim());
+  const lines = blockParts(block, inlineMarkdown).filter((line) => line.trim());
   switch (block.type) {
     case "heading": {
       return `${"#".repeat(block.level)} ${lines.join(" ")}`;

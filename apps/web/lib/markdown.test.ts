@@ -1,6 +1,7 @@
 import { expect, test } from "bun:test";
 
-import { frontmatter, notFoundMarkdown } from "./markdown";
+import { articleMarkdown, frontmatter, notFoundMarkdown } from "./markdown";
+import { siteConfig } from "./site";
 
 test("frontmatter values with colons and quotes parse back unchanged", () => {
   const fields = {
@@ -28,4 +29,37 @@ test("a .md request for an HTML-only page points at the page instead of denying 
   expect(notFoundMarkdown("/articles/no-such-article")).toContain(
     "has no page at"
   );
+});
+
+test("article Markdown keeps inline link destinations", () => {
+  const markdown = articleMarkdown({
+    document: {
+      blocks: [
+        {
+          content: [
+            { id: "a", text: "See ", type: "text" },
+            {
+              href: "https://example.org/a_(b)",
+              id: "b",
+              text: "the [source]",
+              type: "link",
+            },
+            { id: "c", text: " and ", type: "text" },
+            { href: "/articles/flood", id: "d", text: "flood", type: "link" },
+          ],
+          id: "p",
+          type: "paragraph",
+        },
+      ],
+    },
+    slug: "links",
+    sources: [],
+    summary: "Summary",
+    title: "Links",
+    updatedAt: 0,
+  });
+  expect(markdown).toContain(
+    "See [the \\[source\\]](https://example.org/a_%28b%29) and "
+  );
+  expect(markdown).toContain(`[flood](${siteConfig.url}/articles/flood)`);
 });
