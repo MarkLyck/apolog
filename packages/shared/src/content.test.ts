@@ -36,14 +36,23 @@ describe("representative content fixtures", () => {
   });
 
   test("allows one article to appear in multiple collections", () => {
+    const input: DemoContent = structuredClone(contentFixtures);
+    first(input.articles).placements.push({
+      collectionKey: "evidence",
+      corpusKey: "bible",
+      isPrimary: false,
+      position: 0,
+    });
+    expect(validateDemoContent(input)).toEqual({ success: true });
+  });
+
+  test("files the radiometric dating explainer under evidence only", () => {
+    const article = contentFixtures.articles.find(
+      (item) => item.slug === "how-radiometric-dating-cross-checks-itself"
+    );
     expect(
-      contentFixtures.articles.some(
-        (article) =>
-          new Set(
-            article.placements.map((placement) => placement.collectionKey)
-          ).size > 1
-      )
-    ).toBe(true);
+      new Set(article?.placements.map((placement) => placement.collectionKey))
+    ).toEqual(new Set(["evidence"]));
   });
 
   test("models contradictions as articles with comparison blocks", () => {
@@ -114,19 +123,12 @@ describe("representative content fixtures", () => {
     [
       "multiple primary placements for one corpus",
       (value: DemoContent) => {
-        const article = value.articles.find(
-          (item) =>
-            new Set(item.placements.map((placement) => placement.collectionKey))
-              .size > 1
-        );
-        if (!article) {
-          throw new Error("Expected a multi-collection fixture");
-        }
-        const secondaryPlacement = article.placements[1];
-        if (!secondaryPlacement) {
-          throw new Error("Expected a secondary placement");
-        }
-        secondaryPlacement.isPrimary = true;
+        first(value.articles).placements.push({
+          collectionKey: "evidence",
+          corpusKey: "bible",
+          isPrimary: true,
+          position: 0,
+        });
       },
     ],
     [

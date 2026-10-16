@@ -172,7 +172,7 @@ export const contentFixtures = {
         ],
         schemaVersion: 1,
       },
-      placements: place(["bible", "quran"], ["evidence", "debunked"]),
+      placements: place(["bible", "quran"], ["evidence"]),
       publishedAt: now - day * 3,
       slug: "how-radiometric-dating-cross-checks-itself",
       sources: [
