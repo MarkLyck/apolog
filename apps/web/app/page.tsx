@@ -11,13 +11,9 @@ import { HomeHero } from "@/components/home-hero";
 import { corpusPageMetadata, getPageCorpus } from "@/lib/corpus";
 import type { PageSearchParams } from "@/lib/corpus";
 import { getFeatured } from "@/lib/data";
-import { collections, questions, steps } from "@/lib/home-content";
+import { collections, homePage, questions, steps } from "@/lib/home-content";
 
-export const generateMetadata = corpusPageMetadata("/", {
-  description:
-    "Examine Biblical and Quranic claims. Compare passages, investigate the evidence, and work through the arguments with Apolog.",
-  title: "Beliefs deserve a closer look",
-});
+export const generateMetadata = corpusPageMetadata("/", homePage);
 
 async function FeaturedContradictions({
   featuredPromise,

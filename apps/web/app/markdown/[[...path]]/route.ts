@@ -2,6 +2,7 @@ import { resolveCorpus } from "@apolog/shared";
 import * as Effect from "effect/Effect";
 import type { NextRequest } from "next/server";
 
+import { corpusCanonical } from "@/lib/corpus";
 import { getArticle, getFeatured } from "@/lib/data";
 import {
   articleMarkdown,
@@ -20,6 +21,10 @@ const renderers = {
     );
     return homeMarkdown(
       corpusKey,
+      await corpusCanonical(
+        "/",
+        Promise.resolve(Object.fromEntries(request.nextUrl.searchParams))
+      ),
       await Effect.runPromise(getFeatured(corpusKey))
     );
   },

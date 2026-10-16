@@ -7,7 +7,7 @@ import type {
 } from "@apolog/shared";
 import { blockText } from "@apolog/shared/article-text";
 
-import { collections, questions, steps } from "./home-content";
+import { collections, homePage, questions, steps } from "./home-content";
 import { siteConfig } from "./site";
 
 export function markdownResponse(body: string, status = 200) {
@@ -18,6 +18,23 @@ export function markdownResponse(body: string, status = 200) {
     },
     status,
   });
+}
+
+// JSON strings are valid YAML double-quoted scalars, so a colon or quote in a
+// title cannot break the block.
+export function frontmatter(fields: {
+  canonical: string;
+  description: string;
+  last_updated?: string;
+  title: string;
+}) {
+  return [
+    "---",
+    ...Object.entries(fields).map(
+      ([key, value]) => `${key}: ${JSON.stringify(value)}`
+    ),
+    "---",
+  ].join("\n");
 }
 
 const absolute = (path: string, corpusKey: CorpusKey) =>
@@ -34,12 +51,17 @@ const articleLinks = (
 
 export function homeMarkdown(
   corpusKey: CorpusKey,
+  canonicalPath: string,
   featured: {
     articles: readonly ArticleListItem[];
     contradictions: readonly ArticleListItem[];
   }
 ) {
   return [
+    frontmatter({
+      ...homePage,
+      canonical: `${siteConfig.url}${canonicalPath}`,
+    }),
     `# ${siteConfig.name}`,
     siteConfig.description,
     `Showing the ${corpusLabel(corpusKey)} library.`,
@@ -99,8 +121,16 @@ export function articleMarkdown(article: {
   sources: readonly ArticleSource[];
   summary: string;
   title: string;
+  updatedAt: number;
 }) {
+  const canonical = `${siteConfig.url}/articles/${article.slug}`;
   return [
+    frontmatter({
+      canonical,
+      description: article.summary,
+      last_updated: new Date(article.updatedAt).toISOString(),
+      title: article.title,
+    }),
     `# ${article.title}`,
     article.summary,
     ...article.document.blocks.map(blockMarkdown),
@@ -115,7 +145,7 @@ export function articleMarkdown(article: {
             .join("\n"),
         ]
       : []),
-    `Read this article on ${siteConfig.name}: ${siteConfig.url}/articles/${article.slug}`,
+    `Read this article on ${siteConfig.name}: ${canonical}`,
   ].join("\n\n");
 }
 

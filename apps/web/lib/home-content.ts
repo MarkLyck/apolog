@@ -1,3 +1,9 @@
+export const homePage = {
+  description:
+    "Examine Biblical and Quranic claims. Compare passages, investigate the evidence, and work through the arguments with Apolog.",
+  title: "Beliefs deserve a closer look",
+};
+
 export const collections = [
   {
     label: "Contradictions",
