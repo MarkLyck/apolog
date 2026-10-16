@@ -76,7 +76,6 @@ export const contentFixtures = {
       finding: "contradicted",
       placements: place(["bible", "quran"], ["debunked"]),
       publishedAt: now - day * 2,
-      readingMinutes: 8,
       slug: "global-flood-evidence",
       sources: [
         {
@@ -118,7 +117,6 @@ export const contentFixtures = {
       },
       placements: place(["bible"], ["immoral"]),
       publishedAt: now - day * 4,
-      readingMinutes: 9,
       slug: "collective-punishment-jericho",
       sources: [
         {
@@ -176,7 +174,6 @@ export const contentFixtures = {
       },
       placements: place(["bible", "quran"], ["evidence", "debunked"]),
       publishedAt: now - day * 3,
-      readingMinutes: 10,
       slug: "how-radiometric-dating-cross-checks-itself",
       sources: [
         {
@@ -207,7 +204,6 @@ export const contentFixtures = {
       },
       placements: place(["bible", "quran"], ["evidence"]),
       publishedAt: now - day * 7,
-      readingMinutes: 11,
       slug: "evolution-predictions-and-evidence",
       sources: [
         {
@@ -249,7 +245,6 @@ export const contentFixtures = {
       finding: "comic miracle narrative",
       placements: place(["bible"], ["silly"]),
       publishedAt: now - day,
-      readingMinutes: 5,
       slug: "balaams-talking-donkey",
       sources: [
         {
@@ -283,7 +278,6 @@ export const contentFixtures = {
       finding: "whimsical wonder tale",
       placements: place(["quran"], ["silly"]),
       publishedAt: now - day * 2,
-      readingMinutes: 5,
       slug: "solomon-understands-the-ant",
       sources: [
         {
@@ -347,7 +341,6 @@ export const contentFixtures = {
       },
       placements: place(["bible"], ["contradictions"], 1),
       publishedAt: now,
-      readingMinutes: 4,
       slug: "who-incited-davids-census",
       sources: [
         {
@@ -402,7 +395,6 @@ export const contentFixtures = {
       },
       placements: place(["quran"], ["contradictions"], 1),
       publishedAt: now - day,
-      readingMinutes: 4,
       slug: "intercession-denied-and-permitted",
       sources: [
         {

@@ -3,6 +3,10 @@ import type {
   ContentBlock,
   InlineContent,
 } from "@apolog/shared";
+import {
+  articleWordCount,
+  estimateReadingMinutes,
+} from "@apolog/shared/article-text";
 import { articleContentSchema } from "@apolog/shared/content";
 import * as Schema from "effect/Schema";
 
@@ -91,12 +95,6 @@ export function buildArticle(
   const summary = creation
     ? "Isaiah describes God creating alone; John and Colossians attribute creation to Jesus; 1 Corinthians distinguishes creation from the Father and through Jesus."
     : `Compare ${references}. Read the passages together to examine their different accounts of the question.`;
-  const wordCount = blocks
-    .flatMap((block) =>
-      "content" in block ? block.content.map((node) => node.text) : []
-    )
-    .join(" ")
-    .split(/\s+/u).length;
   const article = Schema.decodeUnknownSync(articleContentSchema)({
     title: entry.title,
     slug,
@@ -121,7 +119,7 @@ export function buildArticle(
     ],
     publishedAt: now,
     updatedAt: now,
-    readingMinutes: Math.max(1, Math.ceil(wordCount / 200)),
+    readingMinutes: estimateReadingMinutes(articleWordCount(blocks)),
   });
   if (
     /\bsab\b|skeptic['’]?s annotated|skepticsannotatedbible/iu.test(

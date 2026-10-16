@@ -64,4 +64,16 @@ describe("Convex seed preparation", () => {
     ]);
     expect(contradiction?.searches[0]?.tags).toContain("contradiction");
   });
+
+  test("derives reading time from the article body", () => {
+    const result = buildSeedDocuments(contentFixtures);
+    const minutes = new Map(
+      result.articles.map(({ document }) => [
+        document.slug,
+        document.readingMinutes,
+      ])
+    );
+    expect(minutes.get("global-flood-evidence")).toBe(1);
+    expect(minutes.get("evolution-predictions-and-evidence")).toBe(1);
+  });
 });

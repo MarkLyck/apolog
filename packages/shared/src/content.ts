@@ -235,8 +235,12 @@ export const articleContentSchema = Schema.Struct({
   updatedAt: timestamp,
 }).mapFields(Struct.map(Schema.mutableKey));
 
+const demoArticleSchema = articleContentSchema.mapFields(
+  Struct.omit(["readingMinutes"])
+);
+
 export const demoContentSchema = Schema.Struct({
-  articles: Schema.mutable(Schema.Array(articleContentSchema)).check(
+  articles: Schema.mutable(Schema.Array(demoArticleSchema)).check(
     Schema.makeFilter(
       (articles) =>
         new Set(articles.map((article) => article.slug)).size ===

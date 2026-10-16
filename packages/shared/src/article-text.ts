@@ -32,3 +32,13 @@ export function blockText(block: ContentBlock): string[] {
     }
   }
 }
+
+export function articleWordCount(blocks: readonly ContentBlock[]) {
+  return blocks.flatMap(blockText).join(" ").match(/\S+/gu)?.length ?? 0;
+}
+
+const wordsPerMinute = 200;
+
+export function estimateReadingMinutes(wordCount: number) {
+  return Math.max(1, Math.ceil(wordCount / wordsPerMinute));
+}

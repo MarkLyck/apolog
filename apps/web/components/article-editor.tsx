@@ -3,6 +3,7 @@
 import { api } from "@apolog/backend/api";
 import type { Id } from "@apolog/backend/data-model";
 import { collectionKeys, corpusKeys } from "@apolog/shared";
+import { estimateReadingMinutes } from "@apolog/shared/article-text";
 import { useMutation, useQuery } from "convex/react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -246,7 +247,7 @@ function ArticleEditorForm({
               setValues((current) => ({
                 ...current,
                 document,
-                readingMinutes: Math.max(1, Math.ceil(wordCount / 225)),
+                readingMinutes: estimateReadingMinutes(wordCount),
               }));
               if (editorReady.current) {
                 setDirty(true);

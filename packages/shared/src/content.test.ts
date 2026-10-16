@@ -199,6 +199,7 @@ describe("Effect content decoding", () => {
     const article = first(contentFixtures.articles);
     const parsed = Schema.decodeUnknownSync(articleContentSchema)({
       ...article,
+      readingMinutes: 1,
       contentWarning: undefined,
       finding: undefined,
       title: `  ${article.title}  `,
