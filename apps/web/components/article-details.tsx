@@ -2,16 +2,6 @@ import type { ArticleSource } from "@apolog/shared";
 import { Badge } from "@apolog/ui";
 import { FiExternalLink } from "react-icons/fi";
 
-export function hasArticleDetails({
-  sources,
-  tags,
-}: {
-  sources: ArticleSource[];
-  tags: string[];
-}) {
-  return sources.length > 0 || tags.length > 0;
-}
-
 export function ArticleDetails({
   sources,
   tags,

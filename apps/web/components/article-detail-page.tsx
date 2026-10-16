@@ -9,7 +9,7 @@ import { FiArrowLeft, FiClock } from "react-icons/fi";
 import { resolveArticlePlacement } from "@/lib/article-placement";
 import { getAdjacentArticles, getArticle } from "@/lib/data";
 
-import { ArticleDetails, hasArticleDetails } from "./article-details";
+import { ArticleDetails } from "./article-details";
 import { ArticleEditButton } from "./article-edit-button";
 import { ArticleNavigation } from "./article-navigation";
 import { ContentBlocks } from "./content-blocks";
@@ -88,7 +88,7 @@ export async function ArticleDetailPage({
           ) : null}
         </div>
       </header>
-      {hasArticleDetails(article) ? (
+      {article.tags.length > 0 || article.sources.length > 0 ? (
         <div className="grid items-start gap-8 pt-8 sm:pt-10 lg:grid-cols-[minmax(0,1fr)_18rem] lg:gap-10">
           <ContentBlocks blocks={article.document.blocks} />
           <ArticleDetails sources={article.sources} tags={article.tags} />

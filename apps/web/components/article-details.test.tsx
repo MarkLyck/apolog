@@ -2,7 +2,7 @@ import { describe, expect, test } from "bun:test";
 
 import { renderToStaticMarkup } from "react-dom/server";
 
-import { ArticleDetails, hasArticleDetails } from "./article-details";
+import { ArticleDetails } from "./article-details";
 
 const source = {
   publisher: "United States Geological Survey",
@@ -27,11 +27,5 @@ describe("ArticleDetails", () => {
     expect(html).toContain("Sedimentary rock record");
     expect(html).toContain('href="https://www.usgs.gov/example"');
     expect(html).not.toContain("Topics");
-  });
-
-  test("the sidebar is skipped only when there are neither tags nor sources", () => {
-    expect(hasArticleDetails({ sources: [], tags: [] })).toBe(false);
-    expect(hasArticleDetails({ sources: [source], tags: [] })).toBe(true);
-    expect(hasArticleDetails({ sources: [], tags: ["afterlife"] })).toBe(true);
   });
 });
