@@ -1,32 +1,14 @@
 import { corpusLabel, withCorpus } from "@apolog/shared";
-import type { ArticleListItem, CorpusKey } from "@apolog/shared";
+import type {
+  ArticleListItem,
+  ArticleSource,
+  ContentBlock,
+  CorpusKey,
+} from "@apolog/shared";
+import { blockText } from "@apolog/shared/article-text";
 
 import { collections, questions, steps } from "./home-content";
 import { siteConfig } from "./site";
-
-const markdownTypes = new Set(["text/markdown", "text/x-markdown"]);
-const htmlTypes = new Set(["text/html", "text/*", "*/*"]);
-
-function quality(parameters: string[]) {
-  const q = parameters.find((parameter) => parameter.trim().startsWith("q="));
-  const value = q === undefined ? 1 : Number(q.trim().slice(2));
-  return Number.isNaN(value) ? 0 : value;
-}
-
-export function prefersMarkdown(accept: string | null) {
-  let markdown = 0;
-  let html = 0;
-  for (const range of (accept ?? "").split(",")) {
-    const [type = "", ...parameters] = range.split(";");
-    const mediaType = type.trim().toLowerCase();
-    if (markdownTypes.has(mediaType)) {
-      markdown = Math.max(markdown, quality(parameters));
-    } else if (htmlTypes.has(mediaType)) {
-      html = Math.max(html, quality(parameters));
-    }
-  }
-  return markdown > 0 && markdown >= html;
-}
 
 export function markdownResponse(body: string, status = 200) {
   return new Response(body, {
@@ -90,5 +72,61 @@ export function homeMarkdown(
     "## Common questions",
     ...questions.map(({ answer, title }) => `### ${title}\n\n${answer}`),
     `Start a conversation with the debate assistant: ${absolute("/debate", corpusKey)}`,
+  ].join("\n\n");
+}
+
+function blockMarkdown(block: ContentBlock) {
+  const lines = blockText(block).filter((line) => line.trim());
+  switch (block.type) {
+    case "heading": {
+      return `${"#".repeat(block.level)} ${lines.join(" ")}`;
+    }
+    case "list": {
+      return lines.map((line) => `- ${line}`).join("\n");
+    }
+    case "quote": {
+      return lines.map((line) => `> ${line}`).join("\n>\n");
+    }
+    default: {
+      return lines.join("\n\n");
+    }
+  }
+}
+
+export function articleMarkdown(article: {
+  document: { blocks: readonly ContentBlock[] };
+  slug: string;
+  sources: readonly ArticleSource[];
+  summary: string;
+  title: string;
+}) {
+  return [
+    `# ${article.title}`,
+    article.summary,
+    ...article.document.blocks.map(blockMarkdown),
+    ...(article.sources.length > 0
+      ? [
+          "## Sources",
+          article.sources
+            .map(
+              ({ publisher, title, url }) =>
+                `- [${title}](${url}), ${publisher}`
+            )
+            .join("\n"),
+        ]
+      : []),
+    `Read this article on ${siteConfig.name}: ${siteConfig.url}/articles/${article.slug}`,
+  ].join("\n\n");
+}
+
+export function notFoundMarkdown(pathname: string) {
+  return [
+    "# Page not found",
+    `${siteConfig.name} has no page at \`${pathname}\`. The link may be wrong, or the article may not be published yet.`,
+    [
+      `- [${siteConfig.name} homepage](${siteConfig.url}/)`,
+      `- [Sitemap](${siteConfig.url}/sitemap.xml)`,
+      `- [llms.txt](${siteConfig.url}/llms.txt)`,
+    ].join("\n"),
   ].join("\n\n");
 }

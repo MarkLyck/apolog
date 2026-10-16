@@ -2,15 +2,16 @@ import { convexAuthNextjsMiddleware } from "@convex-dev/auth/nextjs/server";
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 
-import { prefersMarkdown } from "@/lib/markdown";
+import { markdownTarget } from "@/lib/markdown-routes";
 
 function negotiateMarkdown(request: NextRequest) {
-  if (
-    request.nextUrl.pathname === "/" &&
-    prefersMarkdown(request.headers.get("accept"))
-  ) {
+  const target = markdownTarget(
+    request.nextUrl.pathname,
+    request.headers.get("accept")
+  );
+  if (target !== null) {
     const url = request.nextUrl.clone();
-    url.pathname = "/index.md";
+    url.pathname = target === "/" ? "/markdown" : `/markdown${target}`;
     return NextResponse.rewrite(url);
   }
 }
@@ -24,9 +25,10 @@ export const config = {
     "/api/auth",
     "/api/auth/:path*",
     "/articles/:path*",
+    "/(.*\\.md)",
     {
       has: [{ key: "accept", type: "header", value: ".*text/(x-)?markdown.*" }],
-      source: "/",
+      source: "/((?!_next/).*)",
     },
   ],
 };
