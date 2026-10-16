@@ -38,7 +38,7 @@ const renderers = {
 
 export async function GET(
   request: NextRequest,
-  { params }: RouteContext<"/markdown/[[...path]]">
+  { params }: { params: Promise<{ path?: string[] }> }
 ) {
   const pathname = `/${((await params).path ?? []).join("/")}`;
   const match = matchRoute(pathname);
