@@ -1,5 +1,6 @@
-import { parseCorpus, resolveCorpus } from "@apolog/shared";
+import { parseCorpus, resolveCorpus, withCorpus } from "@apolog/shared";
 import type { CorpusKey } from "@apolog/shared";
+import type { Metadata } from "next";
 import { cookies } from "next/headers";
 
 export type PageSearchParams = Promise<
@@ -8,6 +9,27 @@ export type PageSearchParams = Promise<
 
 export function firstSearchParam(value: string | string[] | undefined): string {
   return Array.isArray(value) ? (value[0] ?? "") : (value ?? "");
+}
+
+// `?text=` selects different content, so it stays in the canonical exactly as
+// the sitemap lists it; every other parameter (search, sort) is dropped.
+export async function corpusCanonical(
+  path: `/${string}`,
+  searchParams: PageSearchParams
+): Promise<string> {
+  const corpusKey = parseCorpus(firstSearchParam((await searchParams).text));
+  return corpusKey ? withCorpus(path, corpusKey) : path;
+}
+
+export function corpusPageMetadata(path: `/${string}`, metadata: Metadata) {
+  return async ({
+    searchParams,
+  }: {
+    searchParams: PageSearchParams;
+  }): Promise<Metadata> => ({
+    ...metadata,
+    alternates: { canonical: await corpusCanonical(path, searchParams) },
+  });
 }
 
 export async function getPageCorpus(

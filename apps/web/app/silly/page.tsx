@@ -1,9 +1,10 @@
-import type { Metadata } from "next";
-
 import { ArticleListPage } from "@/components/article-list-page";
+import { corpusPageMetadata } from "@/lib/corpus";
 import type { PageSearchParams } from "@/lib/corpus";
 
-export const metadata: Metadata = { title: "Silly stories" };
+export const generateMetadata = corpusPageMetadata("/silly", {
+  title: "Silly stories",
+});
 
 export default function Page({
   searchParams,

@@ -8,6 +8,7 @@ import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
 import { getInitialCorpus } from "@/lib/corpus";
 import { siteConfig } from "@/lib/site";
+import { serializeJsonLd, siteStructuredData } from "@/lib/structured-data";
 
 import "./globals.css";
 
@@ -65,6 +66,13 @@ export default async function RootLayout({
       suppressHydrationWarning
     >
       <body>
+        <script
+          // oxlint-disable-next-line react/no-danger -- JSON-LD must be raw script text; serializeJsonLd escapes "<".
+          dangerouslySetInnerHTML={{
+            __html: serializeJsonLd(siteStructuredData),
+          }}
+          type="application/ld+json"
+        />
         <ThemeProvider
           defaultTheme="light"
           disableTransitionOnChange

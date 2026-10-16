@@ -1,6 +1,5 @@
 import { api } from "@apolog/backend/api";
 import { fetchQuery } from "convex/nextjs";
-import type { Metadata } from "next";
 
 import {
   CollectionSearch,
@@ -9,16 +8,20 @@ import {
 import { ContradictionAssessmentGuide } from "@/components/contradiction-assessment";
 import { ContradictionList } from "@/components/contradiction-list";
 import { PageIntro } from "@/components/page-intro";
-import { firstSearchParam, getPageCorpus } from "@/lib/corpus";
+import {
+  corpusPageMetadata,
+  firstSearchParam,
+  getPageCorpus,
+} from "@/lib/corpus";
 import type { PageSearchParams } from "@/lib/corpus";
 
 import { loadContradictions } from "./actions";
 
-export const metadata: Metadata = {
+export const generateMetadata = corpusPageMetadata("/contradictions", {
   description:
     "Structured claim-by-claim comparisons, ordered for editorial review.",
   title: "Contradictions",
-};
+});
 
 export default async function Page({
   searchParams,
