@@ -114,6 +114,9 @@ function codeSpan(text: string) {
     : `${fence}${text}${fence}`;
 }
 
+const escapeMarkdown = (text: string) =>
+  text.replaceAll(/[\\`*_~[\]<]/gu, "\\$&");
+
 function markedText(text: string, marks: readonly string[] = []) {
   const core = text.trim();
   if (!core) {
@@ -130,7 +133,7 @@ function markedText(text: string, marks: readonly string[] = []) {
       closing = markDelimiters[mark] + closing;
     }
   }
-  const inner = present.has("code") ? codeSpan(core) : core;
+  const inner = present.has("code") ? codeSpan(core) : escapeMarkdown(core);
   return `${leading}${opening}${inner}${closing}${trailing}`;
 }
 
@@ -146,7 +149,7 @@ function inlineMarkdown(content: InlineContent) {
         .replaceAll(" ", "%20")
         .replaceAll("(", "%28")
         .replaceAll(")", "%29");
-      return `[${node.text.replaceAll(/[[\]]/gu, "\\$&")}](${href})`;
+      return `[${escapeMarkdown(node.text)}](${href})`;
     })
     .join("");
 }

@@ -98,3 +98,32 @@ test("article Markdown keeps inline marks", () => {
   });
   expect(markdown).toContain("~~Old claim~~ then **_new claim_** `` a`b ``");
 });
+
+test("article Markdown escapes literal Markdown syntax in text", () => {
+  const markdown = articleMarkdown({
+    document: {
+      blocks: [
+        {
+          content: [
+            {
+              id: "a",
+              text: "*not emphasized* <tag> a_b ~x~ [y]",
+              type: "text",
+            },
+            { id: "b", marks: ["code"], text: "*raw*", type: "text" },
+          ],
+          id: "p",
+          type: "paragraph",
+        },
+      ],
+    },
+    slug: "escapes",
+    sources: [],
+    summary: "Summary",
+    title: "Escapes",
+    updatedAt: 0,
+  });
+  expect(markdown).toContain(
+    "\\*not emphasized\\* \\<tag> a\\_b \\~x\\~ \\[y\\]`*raw*`"
+  );
+});
