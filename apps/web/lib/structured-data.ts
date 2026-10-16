@@ -32,7 +32,7 @@ export interface SiteStructuredData {
   "@graph": [WebSiteNode, OrganizationNode];
 }
 
-const repositoryUrl = "https://github.com/MarkLyck/apolog";
+const { repositoryUrl } = siteConfig;
 const organization: NodeReference = {
   "@id": `${siteConfig.url}/#organization`,
 };

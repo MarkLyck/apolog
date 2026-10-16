@@ -44,7 +44,7 @@ ${Object.values(collectionRegistry)
 
 ## Optional
 
-- [Source code and issues](https://github.com/MarkLyck/apolog): The public repository. Open an issue to report an error in an article.
+- [Source code and issues](${siteConfig.repositoryUrl}): The public repository. Open an issue to report an error in an article.
 - [Sitemap](${url("/sitemap.xml")}): Machine-readable index of every public page.
 `;
 
