@@ -13,9 +13,14 @@ interface Props {
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const article = await Effect.runPromise(getArticle((await params).slug));
+  const { slug } = await params;
+  const article = await Effect.runPromise(getArticle(slug));
   return article
-    ? { description: article.summary, title: article.title }
+    ? {
+        alternates: { canonical: `/articles/${slug}` },
+        description: article.summary,
+        title: article.title,
+      }
     : { title: "Not found" };
 }
 

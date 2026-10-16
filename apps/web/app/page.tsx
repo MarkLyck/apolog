@@ -1,6 +1,5 @@
 import type { CorpusKey } from "@apolog/shared";
 import * as Effect from "effect/Effect";
-import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { Suspense } from "react";
@@ -9,15 +8,15 @@ import { FiArrowRight, FiPlus } from "react-icons/fi";
 import { ArticleCard } from "@/components/article-card";
 import { ContradictionCard } from "@/components/contradiction-card";
 import { HomeHero } from "@/components/home-hero";
-import { getPageCorpus } from "@/lib/corpus";
+import { corpusPageMetadata, getPageCorpus } from "@/lib/corpus";
 import type { PageSearchParams } from "@/lib/corpus";
 import { getFeatured } from "@/lib/data";
 
-export const metadata: Metadata = {
+export const generateMetadata = corpusPageMetadata("/", {
   description:
     "Examine Biblical and Quranic claims. Compare passages, investigate the evidence, and work through the arguments with Apolog.",
   title: "Beliefs deserve a closer look",
-};
+});
 
 const collections = [
   {
