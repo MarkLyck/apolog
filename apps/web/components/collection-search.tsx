@@ -1,8 +1,13 @@
-import { collectionRegistry, corpusLabel } from "@apolog/shared";
+import {
+  collectionRegistry,
+  corpusKeys,
+  corpusLabel,
+  withCorpus,
+} from "@apolog/shared";
 import type { CollectionKey, CorpusKey } from "@apolog/shared";
 import { Button } from "@apolog/ui";
 import Link from "next/link";
-import { FiArrowRight, FiFilter, FiSearch } from "react-icons/fi";
+import { FiArrowRight, FiBookOpen, FiFilter, FiSearch } from "react-icons/fi";
 
 export function CollectionSearch({
   collectionKey,
@@ -60,26 +65,52 @@ export function CollectionEmptyState({
   corpusKey: CorpusKey;
   query: string;
 }) {
+  if (query) {
+    return (
+      <div className="empty-state">
+        <FiSearch aria-hidden="true" />
+        <h2>No matches this time.</h2>
+        <p>
+          Try a different phrase or a passage reference. You can also clear your
+          search to see the whole collection.
+        </p>
+        <Link
+          className="text-link"
+          href={`/${collectionKey}?text=${corpusKey}`}
+        >
+          Clear the search <FiArrowRight aria-hidden="true" />
+        </Link>
+      </div>
+    );
+  }
+  const { href, label } = collectionRegistry[collectionKey];
+  const corpus = corpusLabel(corpusKey);
   return (
     <div className="empty-state">
-      <FiSearch aria-hidden="true" />
-      <h2>{query ? "No matches this time." : "More questions to explore."}</h2>
+      <FiBookOpen aria-hidden="true" />
+      <h2>
+        No {corpus} articles in {label} yet.
+      </h2>
       <p>
-        {query
-          ? "Try a different phrase or a passage reference. You can also clear your search to see the whole collection."
-          : `There are no published articles in this ${corpusLabel(corpusKey)} collection yet. Explore another part of the library.`}
+        Read this section in another library, or explore what the {corpus}{" "}
+        library already has.
       </p>
-      <Link
-        className="text-link"
-        href={
-          query
-            ? `/${collectionKey}?text=${corpusKey}`
-            : `/?text=${corpusKey}#explore`
-        }
-      >
-        {query ? "Clear the search" : "Explore the library"}{" "}
-        <FiArrowRight aria-hidden="true" />
-      </Link>
+      <div className="empty-state-actions">
+        {corpusKeys
+          .filter((key) => key !== corpusKey)
+          .map((key) => (
+            <Link
+              className="empty-state-switch"
+              href={withCorpus(href, key)}
+              key={key}
+            >
+              See {corpusLabel(key)} {label} <FiArrowRight aria-hidden="true" />
+            </Link>
+          ))}
+        <Link className="text-link" href={`/?text=${corpusKey}#explore`}>
+          Explore the library <FiArrowRight aria-hidden="true" />
+        </Link>
+      </div>
     </div>
   );
 }

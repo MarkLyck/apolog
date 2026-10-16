@@ -160,8 +160,8 @@
 
 .page-intro {
   position: relative;
-  margin-bottom: 64px;
-  padding: 88px 0 96px;
+  margin-bottom: 40px;
+  padding: 48px 0 52px;
   isolation: isolate;
   overflow: hidden;
   background: #0749dc;
@@ -186,7 +186,7 @@
   flex-wrap: wrap;
   align-items: center;
   gap: 10px;
-  margin-bottom: 16px;
+  margin-bottom: 12px;
   color: #d5e4ff;
   font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
   font-size: 10px;
@@ -201,14 +201,14 @@
 
 .page-intro h1 {
   max-width: 900px;
-  font-size: clamp(38px, 4.4vw, 60px);
-  line-height: 1.2;
+  font-size: clamp(32px, 3vw, 44px);
+  line-height: 1.15;
   text-wrap: balance;
 }
 
 .page-intro p {
-  max-width: 670px;
-  margin-top: 23px;
+  max-width: 760px;
+  margin-top: 12px;
   color: #dce8ff;
   font-size: 16px;
   line-height: 1.6;
@@ -321,6 +321,33 @@ select option {
   line-height: 1.6;
 }
 
+.empty-state-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 12px 24px;
+  margin-top: 4px;
+}
+
+.empty-state-switch {
+  display: inline-flex;
+  min-height: 44px;
+  align-items: center;
+  gap: 10px;
+  padding: 0 20px;
+  border-radius: 999px;
+  background: var(--ink);
+  color: var(--paper);
+  font-size: 14px;
+  font-weight: 500;
+  transition: opacity 180ms;
+}
+
+.empty-state-switch:hover {
+  opacity: 0.8;
+}
+
 .text-link {
   display: inline-flex;
   align-items: center;
@@ -417,13 +444,20 @@ select option {
   max-width: 680px;
   justify-items: center;
   margin: 0 auto;
-  padding: 35px 0 20px;
   text-align: center;
 }
 
 .debate-empty h2 {
+  margin-top: 16px;
+  font-size: 26px;
+}
+
+.debate-prompts {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+  width: 100%;
   margin-top: 24px;
-  font-size: 32px;
 }
 
 .debate-prompt {
@@ -431,7 +465,7 @@ select option {
   justify-content: space-between;
   align-items: flex-start;
   gap: 14px;
-  padding: 16px;
+  padding: 14px;
   border: 1px solid var(--line);
   border-radius: 12px;
   background: var(--paper);
@@ -603,24 +637,25 @@ select option {
     font-size: 12px;
   }
   .page-intro {
-    padding: 56px 0 64px;
-    margin-bottom: 40px;
+    padding: 28px 0 32px;
+    margin-bottom: 28px;
   }
   .page-intro-landscape {
     transform: scale(1.5);
     transform-origin: left top;
   }
   .page-intro h1 {
-    font-size: clamp(34px, 7vw, 46px);
+    font-size: 28px;
   }
   .page-intro p {
     font-size: 14px;
-    margin-top: 20px;
+    line-height: 1.5;
+    margin-top: 10px;
   }
   .page-eyebrow {
     font-size: 9px;
     line-height: 1.6;
-    margin-bottom: 18px;
+    margin-bottom: 10px;
   }
   .collection-search {
     gap: 10px;
@@ -655,13 +690,32 @@ select option {
     padding: 22px;
   }
   .debate-status {
-    padding: 16px 20px;
-  }
-  .debate-empty {
-    padding: 20px 0;
+    padding: 12px 20px;
   }
   .debate-empty h2 {
-    font-size: 28px;
+    margin-top: 0;
+    font-size: 22px;
+  }
+  .debate-prompts {
+    grid-template-columns: none;
+    grid-auto-columns: 78%;
+    grid-auto-flow: column;
+    gap: 10px;
+    width: calc(100% + 40px);
+    margin: 16px -20px 0;
+    padding-inline: 20px;
+    scroll-padding-inline: 20px;
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+  }
+  .debate-prompt {
+    scroll-snap-align: start;
+  }
+  .debate-composer {
+    gap: 8px;
+    padding-left: 14px;
   }
   .auth-page {
     grid-template-columns: minmax(0, 1fr);

@@ -335,6 +335,23 @@
   text-align: center;
 }
 
+.landing-invitation::after {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  z-index: -1;
+  width: max(92%, 920px);
+  height: 116%;
+  content: "";
+  translate: -50% -50%;
+  background: radial-gradient(
+    closest-side,
+    #0640c8d9 0%,
+    #0640c8c7 55%,
+    #0640c800 100%
+  );
+}
+
 .landing-invitation .landing-kicker {
   color: #dce8ff;
 }
@@ -604,4 +621,5 @@
 .landing-invitation-landscape {
   z-index: -1;
   object-fit: cover;
+  object-position: 20% 50%;
 }
