@@ -1,37 +1,5 @@
 import type { ArticleDocument } from "@apolog/shared";
-
-function inlineText(content: { text: string }[]) {
-  return content.map((node) => node.text).join("");
-}
-
-function blockText(block: ArticleDocument["blocks"][number]): string[] {
-  switch (block.type) {
-    case "list": {
-      return block.items.map((item) => inlineText(item.content));
-    }
-    case "claimComparison": {
-      return block.claims.flatMap((claim) => [
-        claim.label,
-        claim.reference,
-        inlineText(claim.content),
-      ]);
-    }
-    case "callout": {
-      return [block.title, inlineText(block.content)];
-    }
-    case "quote": {
-      return [block.reference, block.edition, inlineText(block.content)];
-    }
-    case "heading":
-    case "paragraph": {
-      return [inlineText(block.content)];
-    }
-    default: {
-      const exhaustive: never = block;
-      return exhaustive;
-    }
-  }
-}
+import { blockText } from "@apolog/shared/article-text";
 
 export function articleTagKey(label: string) {
   return label
@@ -55,11 +23,10 @@ export function projectArticle({
   return {
     comparisonReferences: [
       ...new Set(
-        document.blocks.flatMap((block, index) =>
+        document.blocks.flatMap((block) =>
           block.type === "claimComparison"
             ? block.claims.map((claim) => claim.reference)
-            : block.type === "quote" &&
-                document.blocks[index - 1]?.type !== "quote"
+            : block.type === "quote"
               ? [block.reference]
               : []
         )

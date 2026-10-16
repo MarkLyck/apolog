@@ -1,5 +1,9 @@
 import { describe, expect, test } from "bun:test";
 
+import {
+  articleWordCount,
+  estimateReadingMinutes,
+} from "@apolog/shared/article-text";
 import { contentFixtures } from "@apolog/shared/demo-content";
 import { renderToStaticMarkup } from "react-dom/server";
 
@@ -20,7 +24,9 @@ describe("ArticleCard", () => {
           id: "article-id",
           position: 0,
           publishedAt: article.publishedAt,
-          readingMinutes: article.readingMinutes,
+          readingMinutes: estimateReadingMinutes(
+            articleWordCount(article.document.blocks)
+          ),
           slug: article.slug,
           summary: article.summary,
           tags: article.tags,
@@ -30,7 +36,7 @@ describe("ArticleCard", () => {
       />
     );
     expect(html).toContain(article.title);
-    expect(html).toContain("8 min read");
+    expect(html).toContain("1 min read");
     expect(html).toContain(
       "/articles/global-flood-evidence?from=debunked&amp;text=quran"
     );

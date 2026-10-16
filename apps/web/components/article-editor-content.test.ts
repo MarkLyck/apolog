@@ -65,8 +65,8 @@ describe("article editor content", () => {
     expect(roundTrip).toEqual(document);
   });
 
-  test("counts words inside custom contradiction nodes", () => {
-    expect(editorWordCount(articleDocumentToTiptap(document))).toBe(11);
+  test("counts words inside custom contradiction nodes, references, and labels", () => {
+    expect(editorWordCount(articleDocumentToTiptap(document))).toBe(22);
   });
 
   test("preserves heading levels, list items, callout titles, and inline formatting on save", () => {

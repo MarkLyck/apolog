@@ -1,4 +1,8 @@
 import type { DemoContent } from "@apolog/shared";
+import {
+  articleWordCount,
+  estimateReadingMinutes,
+} from "@apolog/shared/article-text";
 
 import { projectArticle } from "./article-projection";
 
@@ -8,6 +12,9 @@ export function buildSeedDocuments(fixtures: DemoContent) {
     const document = {
       ...article,
       importKey: `demo:article:${article.slug}`,
+      readingMinutes: estimateReadingMinutes(
+        articleWordCount(article.document.blocks)
+      ),
       status: "published" as const,
       version: 1,
     };

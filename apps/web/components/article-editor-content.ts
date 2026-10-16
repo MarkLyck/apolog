@@ -3,6 +3,7 @@ import type {
   ContentBlock,
   InlineContent,
 } from "@apolog/shared";
+import { articleWordCount } from "@apolog/shared/article-text";
 import { inlineContentSchema } from "@apolog/shared/content";
 import type { JSONContent } from "@tiptap/core";
 import * as Result from "effect/Result";
@@ -432,20 +433,5 @@ export function tiptapToArticleDocument(json: JSONContent): ArticleDocument {
 }
 
 export function editorWordCount(json: JSONContent) {
-  const text = (json.content ?? [])
-    .flatMap((node) => {
-      if (node.type === "contradiction") {
-        return normalizeClaims(node.attrs?.claims).map((claim) =>
-          inlineContentText(claim.content)
-        );
-      }
-      const walk = (item: JSONContent): string[] => [
-        item.text ?? "",
-        ...(item.content?.flatMap(walk) ?? []),
-      ];
-      return walk(node);
-    })
-    .join(" ")
-    .trim();
-  return text ? text.split(/\s+/u).length : 0;
+  return articleWordCount(tiptapToArticleDocument(json).blocks);
 }

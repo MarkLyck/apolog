@@ -126,7 +126,7 @@ describe("article projection", () => {
     expect(searchText).not.toContain("word-start");
   });
 
-  test("lists each comparison reference once and uses the first quote in each passage group", () => {
+  test("lists every quoted and compared reference once in document order", () => {
     const projection = projectArticle({
       document,
       title: "Creation accounts",
@@ -136,6 +136,7 @@ describe("article projection", () => {
 
     expect(projection.comparisonReferences).toEqual([
       "Genesis 1:1",
+      "Isaiah 44:24",
       "John 1:3",
       "Colossians 1:16",
     ]);

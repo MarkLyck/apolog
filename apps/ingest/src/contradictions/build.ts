@@ -3,6 +3,10 @@ import type {
   ContentBlock,
   InlineContent,
 } from "@apolog/shared";
+import {
+  articleWordCount,
+  estimateReadingMinutes,
+} from "@apolog/shared/article-text";
 import { articleContentSchema } from "@apolog/shared/content";
 import * as Schema from "effect/Schema";
 
@@ -15,8 +19,65 @@ import {
 } from "./corrections";
 import { resolvePassages } from "./passages";
 
+type PassageGroup = {
+  label: string | undefined;
+  passages: ReturnType<typeof resolvePassages>;
+};
+
 function inline(id: string, text: string): InlineContent {
   return [{ id, text, type: "text" }];
+}
+
+const numberWords = [
+  "zero",
+  "one",
+  "two",
+  "three",
+  "four",
+  "five",
+  "six",
+  "seven",
+  "eight",
+  "nine",
+  "ten",
+];
+
+function countWord(count: number) {
+  return numberWords[count] ?? String(count);
+}
+
+function joinList(items: string[]) {
+  return items.length <= 2
+    ? items.join(" and ")
+    : `${items.slice(0, -1).join(", ")}, and ${items.at(-1)}`;
+}
+
+function bookOf(reference: string) {
+  return reference.replace(/\s+\d+:.*$/u, "");
+}
+
+function summarize(title: string, groups: PassageGroup[]) {
+  const noun = title.trim().endsWith("?") ? "answers" : "accounts";
+  const count = countWord(groups.length);
+  const labelled = groups.flatMap(({ label, passages: [first] }) => {
+    const answer = label?.replace(/[\s.,;:]+$/u, "");
+    return answer && first ? [`“${answer}” (${first.reference})`] : [];
+  });
+  if (labelled.length === groups.length) {
+    return `${count.charAt(0).toUpperCase()}${count.slice(1)} ${noun}: ${joinList(labelled)}.`;
+  }
+  const books = [
+    ...new Set(
+      groups.flatMap(({ passages }) =>
+        passages.map((passage) => bookOf(passage.reference))
+      )
+    ),
+  ];
+  const subject =
+    books.length > 3
+      ? `Passages from ${countWord(books.length)} books`
+      : joinList(books);
+  return `${subject} ${books.length === 1 ? "gives" : "give"} ${count} different ${noun}.`;
 }
 
 export function buildArticle(
@@ -31,8 +92,17 @@ export function buildArticle(
     .toLowerCase()
     .replaceAll(/[^a-z0-9]+/gu, "-")}`;
   const creation = entry.path === "/contra/who_created.html";
-  const groups = entry.groups.map((group) =>
-    group.references.flatMap((citation) => {
+  const copiedWords = [entry.title, ...entry.groups.map((group) => group.label)]
+    .join(" ")
+    .split(/\s+/u).length;
+  const groups: PassageGroup[] = entry.groups.map((group, index) => ({
+    label:
+      (creation
+        ? creationLabels[index]
+        : copiedWords <= 25
+          ? group.label
+          : undefined) || undefined,
+    passages: group.references.flatMap((citation) => {
       if (
         citation.href === "/moses/1.html#3" &&
         citation.text === "Pearl of Great Price: Moses 1:3"
@@ -45,26 +115,16 @@ export function buildArticle(
           referenceCorrections.get(`${entry.path}|${citation.text}`) ??
           citation.text,
       });
-    })
-  );
-  const copiedWords = [entry.title, ...entry.groups.map((group) => group.label)]
-    .join(" ")
-    .split(/\s+/u).length;
+    }),
+  }));
   const blocks: ContentBlock[] = [];
-  for (const [index, passages] of groups.entries()) {
+  for (const [index, { label, passages }] of groups.entries()) {
     const id = `group-${index + 1}`;
-    const sourceLabel = entry.groups[index]?.label;
-    const label =
-      (creation
-        ? creationLabels[index]
-        : copiedWords <= 25
-          ? sourceLabel
-          : undefined) || `Passage group ${index + 1}`;
     blocks.push({
       id,
       type: "heading",
       level: 2,
-      content: inline(`${id}-text`, label),
+      content: inline(`${id}-text`, label ?? `Passage group ${index + 1}`),
     });
     for (const [offset, passage] of passages.entries()) {
       const quoteId = `${id}-passage-${offset + 1}`;
@@ -84,19 +144,9 @@ export function buildArticle(
       });
     }
   }
-  const references = groups
-    .map((group) => group[0]?.reference)
-    .filter(Boolean)
-    .join("; ");
   const summary = creation
     ? "Isaiah describes God creating alone; John and Colossians attribute creation to Jesus; 1 Corinthians distinguishes creation from the Father and through Jesus."
-    : `Compare ${references}. Read the passages together to examine their different accounts of the question.`;
-  const wordCount = blocks
-    .flatMap((block) =>
-      "content" in block ? block.content.map((node) => node.text) : []
-    )
-    .join(" ")
-    .split(/\s+/u).length;
+    : summarize(entry.title, groups);
   const article = Schema.decodeUnknownSync(articleContentSchema)({
     title: entry.title,
     slug,
@@ -106,8 +156,8 @@ export function buildArticle(
     tags: [
       "contradiction",
       ...new Set(
-        groups.flatMap((group) =>
-          group.map((passage) => passage.reference.replace(/\s+\d+:.*$/u, ""))
+        groups.flatMap(({ passages }) =>
+          passages.map((passage) => bookOf(passage.reference))
         )
       ),
     ],
@@ -121,7 +171,7 @@ export function buildArticle(
     ],
     publishedAt: now,
     updatedAt: now,
-    readingMinutes: Math.max(1, Math.ceil(wordCount / 200)),
+    readingMinutes: estimateReadingMinutes(articleWordCount(blocks)),
   });
   if (
     /\bsab\b|skeptic['’]?s annotated|skepticsannotatedbible/iu.test(

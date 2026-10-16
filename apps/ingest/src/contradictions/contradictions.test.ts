@@ -48,6 +48,68 @@ describe("contradiction passage import", () => {
     );
   });
 
+  test("keeps the supplied creation summary aligned with its quoted passages", () => {
+    const article = buildArticle(
+      {
+        groups: parseDetail(`<div class="contra">${html}</div>`),
+        path: "/contra/who_created.html",
+        title: "Who created heaven and earth?",
+        position: 2,
+      },
+      bible,
+      1000
+    );
+    expect(article.summary).toBe(
+      "Isaiah describes God creating alone; John and Colossians attribute creation to Jesus; 1 Corinthians distinguishes creation from the Father and through Jesus."
+    );
+  });
+
+  describe("generated summaries", () => {
+    const groups = parseDetail(`<div class="contra">${html}</div>`);
+    const summarize = (title: string, entryGroups = groups) =>
+      buildArticle(
+        {
+          groups: entryGroups,
+          path: "/contra/creators.html",
+          title,
+          position: 3,
+        },
+        bible,
+        1000
+      ).summary;
+
+    test("states each group's answer when its heading is short enough to keep", () => {
+      expect(summarize("Who created heaven and earth?")).toBe(
+        "Three answers: “God the Father did it all by himself” (Genesis 1:1), “Jesus did it” (John 1:6-10), and “Both of them did it” (1 Corinthians 8:6)."
+      );
+      expect(summarize("The creator of heaven", groups.slice(0, 2))).toBe(
+        "Two accounts: “God the Father did it all by himself” (Genesis 1:1) and “Jesus did it” (John 1:6-10)."
+      );
+    });
+
+    test("names the books instead of withheld headings", () => {
+      const title =
+        "Who, according to the many passages that describe the beginning of all things, created heaven and earth?";
+      const summary = summarize(title);
+      expect(summary).toBe(
+        "Passages from five books give three different answers."
+      );
+      expect(summary).not.toContain("Jesus did it");
+      expect(
+        summarize("Who created heaven and earth?", [
+          {
+            label: "",
+            references: [{ text: "Genesis 1:1", href: "../gen/1.html#1" }],
+          },
+          {
+            label: "",
+            references: [{ text: "Isaiah 44:24", href: "../is/44.html#24" }],
+          },
+        ])
+      ).toBe("Genesis and Isaiah give two different answers.");
+    });
+  });
+
   test("keeps the entire numbered-book range instead of falling back to the link's first verse", () => {
     const passages = resolvePassages(bible, {
       text: "1 Corinthians 8:6",
