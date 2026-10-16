@@ -13,7 +13,7 @@ import type { PageSearchParams } from "@/lib/corpus";
 import { getFeatured } from "@/lib/data";
 import { collections, homePage, questions, steps } from "@/lib/home-content";
 
-export const generateMetadata = corpusPageMetadata("/", homePage);
+export const generateMetadata = corpusPageMetadata("/", homePage, "/index.md");
 
 async function FeaturedContradictions({
   featuredPromise,
