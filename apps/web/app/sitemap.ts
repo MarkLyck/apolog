@@ -3,7 +3,7 @@ import { corpusKeys } from "@apolog/shared";
 import { fetchQuery } from "convex/nextjs";
 import type { MetadataRoute } from "next";
 
-import { sitemapRoutes } from "@/lib/public-routes";
+import { siteInfoRoutes, sitemapRoutes } from "@/lib/public-routes";
 import { siteConfig } from "@/lib/site";
 
 interface SitemapContent {
@@ -19,13 +19,19 @@ export function buildSitemap(content: SitemapContent): MetadataRoute.Sitemap {
       url: `${siteConfig.url}${route}?text=${corpus}`,
     }))
   );
+  const infoRoutes = Object.values(siteInfoRoutes).map((route) => ({
+    changeFrequency: "yearly" as const,
+    lastModified: new Date(),
+    priority: 0.3,
+    url: `${siteConfig.url}${route}`,
+  }));
   const articleRoutes = content.articles.map((article) => ({
     changeFrequency: "monthly" as const,
     lastModified: new Date(article.updatedAt),
     priority: 0.7,
     url: `${siteConfig.url}/articles/${article.slug}`,
   }));
-  return [...corpusRoutes, ...articleRoutes];
+  return [...corpusRoutes, ...infoRoutes, ...articleRoutes];
 }
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {

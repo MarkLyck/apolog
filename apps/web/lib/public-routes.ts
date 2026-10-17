@@ -52,9 +52,18 @@ export const searchPaletteLinks = [
   { href: publicRoutes.silly, label: "Browse the silliest stories" },
 ] as const;
 
+export const siteInfoRoutes = {
+  about: "/about",
+  contact: "/contact",
+  privacy: "/privacy",
+} as const;
+
 export const footerLinks = [
   { href: publicRoutes.evidence, label: "Methods" },
   { href: publicRoutes.debate, label: "Debate" },
+  { href: siteInfoRoutes.about, label: "About" },
+  { href: siteInfoRoutes.contact, label: "Contact" },
+  { href: siteInfoRoutes.privacy, label: "Privacy" },
 ] as const;
 
 export const sitemapRoutes = Object.values(publicRoutes);

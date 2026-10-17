@@ -21,7 +21,7 @@ export function SiteFooter({ initialCorpus }: { initialCorpus: CorpusKey }) {
             publication.
           </p>
         </div>
-        <div className="flex gap-5 text-sm font-semibold">
+        <div className="flex flex-wrap gap-x-5 gap-y-2 text-sm font-semibold">
           {links.map((link) => (
             <Link href={link.href} key={link.href}>
               {link.label}

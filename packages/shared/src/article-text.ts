@@ -4,27 +4,30 @@ function inlineText(content: InlineContent) {
   return content.map((node) => node.text).join("");
 }
 
-export function blockText(block: ContentBlock): string[] {
+export function blockParts(
+  block: ContentBlock,
+  inline: (content: InlineContent) => string
+): string[] {
   switch (block.type) {
     case "list": {
-      return block.items.map((item) => inlineText(item.content));
+      return block.items.map((item) => inline(item.content));
     }
     case "claimComparison": {
       return block.claims.flatMap((claim) => [
         claim.label,
         claim.reference,
-        inlineText(claim.content),
+        inline(claim.content),
       ]);
     }
     case "callout": {
-      return [block.title, inlineText(block.content)];
+      return [block.title, inline(block.content)];
     }
     case "quote": {
-      return [block.reference, block.edition, inlineText(block.content)];
+      return [block.reference, block.edition, inline(block.content)];
     }
     case "heading":
     case "paragraph": {
-      return [inlineText(block.content)];
+      return [inline(block.content)];
     }
     default: {
       const exhaustive: never = block;
@@ -33,8 +36,17 @@ export function blockText(block: ContentBlock): string[] {
   }
 }
 
+export function blockText(block: ContentBlock) {
+  return blockParts(block, inlineText);
+}
+
 export function articleWordCount(blocks: readonly ContentBlock[]) {
-  return blocks.flatMap(blockText).join(" ").match(/\S+/gu)?.length ?? 0;
+  return (
+    blocks
+      .flatMap((block) => blockText(block))
+      .join(" ")
+      .match(/\S+/gu)?.length ?? 0
+  );
 }
 
 const wordsPerMinute = 200;

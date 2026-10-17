@@ -17,7 +17,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const article = await Effect.runPromise(getArticle(slug));
   return article
     ? {
-        alternates: { canonical: `/articles/${slug}` },
+        alternates: {
+          canonical: `/articles/${slug}`,
+          types: { "text/markdown": `/articles/${slug}.md` },
+        },
         description: article.summary,
         title: article.title,
       }

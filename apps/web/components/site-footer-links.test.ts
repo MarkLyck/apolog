@@ -7,6 +7,9 @@ describe("site footer corpus links", () => {
     expect(getSiteFooterLinks("quran")).toEqual([
       { href: "/evidence?text=quran", label: "Methods" },
       { href: "/debate?text=quran", label: "Debate" },
+      { href: "/about?text=quran", label: "About" },
+      { href: "/contact?text=quran", label: "Contact" },
+      { href: "/privacy?text=quran", label: "Privacy" },
     ]);
   });
 });
