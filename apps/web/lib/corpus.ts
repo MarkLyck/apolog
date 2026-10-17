@@ -21,14 +21,25 @@ export async function corpusCanonical(
   return corpusKey ? withCorpus(path, corpusKey) : path;
 }
 
-export function corpusPageMetadata(path: `/${string}`, metadata: Metadata) {
+export function corpusPageMetadata(
+  path: `/${string}`,
+  metadata: Metadata,
+  markdownPath?: `/${string}`
+) {
   return async ({
     searchParams,
   }: {
     searchParams: PageSearchParams;
   }): Promise<Metadata> => ({
     ...metadata,
-    alternates: { canonical: await corpusCanonical(path, searchParams) },
+    alternates: {
+      canonical: await corpusCanonical(path, searchParams),
+      ...(markdownPath && {
+        types: {
+          "text/markdown": await corpusCanonical(markdownPath, searchParams),
+        },
+      }),
+    },
   });
 }
 
