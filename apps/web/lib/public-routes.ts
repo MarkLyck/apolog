@@ -60,3 +60,7 @@ export const footerLinks = [
 ] as const;
 
 export const sitemapRoutes = Object.values(publicRoutes);
+
+export const corpusIndependentRoutes: ReadonlySet<string> = new Set([
+  publicRoutes.privacy,
+]);

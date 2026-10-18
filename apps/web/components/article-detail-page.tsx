@@ -2,18 +2,20 @@ import { collectionRegistry, corpusLabel } from "@apolog/shared";
 import type { CollectionKey, CorpusKey } from "@apolog/shared";
 import { Badge } from "@apolog/ui";
 import * as Effect from "effect/Effect";
-import Link from "next/link";
 import { notFound, redirect } from "next/navigation";
 import { Suspense } from "react";
-import { FiArrowLeft, FiClock, FiExternalLink } from "react-icons/fi";
+import { FiClock, FiExternalLink } from "react-icons/fi";
 
 import { resolveArticlePlacement } from "@/lib/article-placement";
 import { getAdjacentArticles, getArticle } from "@/lib/data";
+import { articleBreadcrumbs, articleGraph } from "@/lib/structured-data";
 
 import { ArticleEditButton } from "./article-edit-button";
 import { ArticleNavigation } from "./article-navigation";
+import { Breadcrumb } from "./breadcrumb";
 import { ContentBlocks } from "./content-blocks";
 import { ContradictionAssessmentPanel } from "./contradiction-assessment";
+import { JsonLd } from "./json-ld";
 
 export async function ArticleDetailPage({
   slug,
@@ -44,18 +46,25 @@ export async function ArticleDetailPage({
   const adjacent = await Effect.runPromise(
     getAdjacentArticles(article._id, activePlacement.collectionKey, corpusKey)
   );
+  const breadcrumbs = articleBreadcrumbs(
+    article,
+    activePlacement.collectionKey,
+    corpusKey
+  );
 
   return (
     <article className="article-reader page-container">
+      <JsonLd
+        graph={articleGraph(
+          article,
+          activePlacement.collectionKey,
+          breadcrumbs
+        )}
+      />
       <header className="reader-header">
         <div className="reader-heading">
-          <div className="flex flex-wrap items-center justify-between gap-4">
-            <Link
-              className="inline-flex items-center gap-2 text-sm font-medium text-[var(--muted)] transition-colors hover:text-[var(--ink)]"
-              href={`/${activePlacement.collectionKey}?text=${corpusKey}`}
-            >
-              <FiArrowLeft aria-hidden="true" /> Back to {collection.label}
-            </Link>
+          <div className="flex items-center justify-between gap-4">
+            <Breadcrumb crumbs={breadcrumbs} />
             <Suspense fallback={null}>
               <ArticleEditButton articleId={article._id} />
             </Suspense>

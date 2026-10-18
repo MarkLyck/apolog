@@ -1,6 +1,6 @@
 import { api } from "@apolog/backend/api";
+import { collectionRegistry } from "@apolog/shared";
 import { fetchQuery } from "convex/nextjs";
-import type { Metadata } from "next";
 
 import {
   CollectionSearch,
@@ -8,17 +8,24 @@ import {
 } from "@/components/collection-search";
 import { ContradictionAssessmentGuide } from "@/components/contradiction-assessment";
 import { ContradictionList } from "@/components/contradiction-list";
+import { JsonLd } from "@/components/json-ld";
 import { PageIntro } from "@/components/page-intro";
 import { firstSearchParam, getPageCorpus } from "@/lib/corpus";
 import type { PageSearchParams } from "@/lib/corpus";
+import { corpusPageMetadata } from "@/lib/metadata";
+import { collectionGraph } from "@/lib/structured-data";
 
 import { loadContradictions } from "./actions";
 
-export const metadata: Metadata = {
+export const generateMetadata = corpusPageMetadata({
   description:
     "Structured claim-by-claim comparisons, ordered for editorial review.",
+  path: collectionRegistry.contradictions.href,
   title: "Contradictions",
-};
+});
+
+const introDescription =
+  "Compare the passages and see which conflicts are direct, which require interpretation, and why the difference matters.";
 
 export default async function Page({
   searchParams,
@@ -39,9 +46,16 @@ export default async function Page({
   ]);
   return (
     <>
+      <JsonLd
+        graph={collectionGraph({
+          collectionKey: "contradictions",
+          corpusKey,
+          description: introDescription,
+        })}
+      />
       <PageIntro
         corpusKey={corpusKey}
-        description="Compare the passages and see which conflicts are direct, which require interpretation, and why the difference matters."
+        description={introDescription}
         eyebrow="Claim against claim"
         title="Where the accounts pull apart."
       />

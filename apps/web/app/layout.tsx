@@ -9,6 +9,7 @@ import { SiteHeader } from "@/components/site-header";
 import { getInitialCorpus } from "@/lib/corpus";
 import { feedAlternateTypes } from "@/lib/discovery";
 import { speculationRules } from "@/lib/document-caching";
+import { siteOpenGraph } from "@/lib/metadata";
 import { siteConfig } from "@/lib/site";
 
 import "./globals.css";
@@ -38,8 +39,8 @@ export const metadata: Metadata = {
   },
   metadataBase: new URL(siteConfig.url),
   openGraph: {
+    ...siteOpenGraph,
     description: siteConfig.description,
-    siteName: siteConfig.name,
     title: "Apolog — examine the claim",
     type: "website",
   },

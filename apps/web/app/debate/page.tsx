@@ -1,15 +1,15 @@
-import type { Metadata } from "next";
-
 import { DebateClient } from "@/components/debate-client";
 import { PageIntro } from "@/components/page-intro";
 import { getPageCorpus } from "@/lib/corpus";
 import type { PageSearchParams } from "@/lib/corpus";
+import { corpusPageMetadata } from "@/lib/metadata";
 
-export const metadata: Metadata = {
+export const generateMetadata = corpusPageMetadata({
   description:
     "Turn source-led research into a concise response while preserving caveats.",
+  path: "/debate",
   title: "Debate assistant",
-};
+});
 
 export default async function Page({
   searchParams,
