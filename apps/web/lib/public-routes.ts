@@ -8,6 +8,7 @@ export const publicRoutes = {
   debunked: collectionRegistry.debunked.href,
   evidence: collectionRegistry.evidence.href,
   immoral: collectionRegistry.immoral.href,
+  privacy: "/privacy",
   silly: collectionRegistry.silly.href,
 } as const;
 
@@ -55,6 +56,7 @@ export const searchPaletteLinks = [
 export const footerLinks = [
   { href: publicRoutes.evidence, label: "Methods" },
   { href: publicRoutes.debate, label: "Debate" },
+  { href: publicRoutes.privacy, label: "Privacy" },
 ] as const;
 
 export const sitemapRoutes = Object.values(publicRoutes);
