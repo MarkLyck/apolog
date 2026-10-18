@@ -1,6 +1,6 @@
 import type { NextConfig } from "next";
 
-type HeaderRule = Awaited<
+export type HeaderRule = Awaited<
   ReturnType<NonNullable<NextConfig["headers"]>>
 >[number];
 

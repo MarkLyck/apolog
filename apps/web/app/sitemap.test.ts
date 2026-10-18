@@ -13,4 +13,19 @@ describe("sitemap", () => {
     ).toBe(true);
     expect(urls.some((url) => url.includes("/map"))).toBe(false);
   });
+
+  test("dates only article entries, from their last update", () => {
+    const entries = buildSitemap({
+      articles: [{ slug: "talking-donkey", updatedAt: 1_700_000_000_000 }],
+    });
+    const article = entries.find((entry) =>
+      entry.url.endsWith("/talking-donkey")
+    );
+    expect(article?.lastModified).toEqual(new Date(1_700_000_000_000));
+    expect(
+      entries.filter((entry) => !entry.url.includes("/articles/"))
+    ).not.toContainEqual(
+      expect.objectContaining({ lastModified: expect.anything() })
+    );
+  });
 });
