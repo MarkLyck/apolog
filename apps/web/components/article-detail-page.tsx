@@ -7,7 +7,11 @@ import { Suspense } from "react";
 import { FiClock, FiExternalLink } from "react-icons/fi";
 
 import { resolveArticlePlacement } from "@/lib/article-placement";
-import { getAdjacentArticles, getArticle } from "@/lib/data";
+import {
+  getAdjacentArticles,
+  getArticle,
+  getRelatedArticles,
+} from "@/lib/data";
 import { articleBreadcrumbs, articleGraph } from "@/lib/structured-data";
 
 import { ArticleEditButton } from "./article-edit-button";
@@ -16,6 +20,7 @@ import { Breadcrumb } from "./breadcrumb";
 import { ContentBlocks } from "./content-blocks";
 import { ContradictionAssessmentPanel } from "./contradiction-assessment";
 import { JsonLd } from "./json-ld";
+import { RelatedArticles } from "./related-articles";
 
 export async function ArticleDetailPage({
   slug,
@@ -43,8 +48,18 @@ export async function ArticleDetailPage({
   }
   const activePlacement = resolved.placement;
   const collection = collectionRegistry[activePlacement.collectionKey];
-  const adjacent = await Effect.runPromise(
-    getAdjacentArticles(article._id, activePlacement.collectionKey, corpusKey)
+  const [adjacent, related] = await Effect.runPromise(
+    Effect.all(
+      [
+        getAdjacentArticles(
+          article._id,
+          activePlacement.collectionKey,
+          corpusKey
+        ),
+        getRelatedArticles(article, activePlacement.collectionKey, corpusKey),
+      ],
+      { concurrency: "unbounded" }
+    )
   );
   const breadcrumbs = articleBreadcrumbs(
     article,
@@ -143,6 +158,7 @@ export async function ArticleDetailPage({
           </div>
         </section>
       </div>
+      <RelatedArticles articles={related} corpusKey={corpusKey} />
       <div className="pt-10">
         <ArticleNavigation
           adjacent={adjacent}
