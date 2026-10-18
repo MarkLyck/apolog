@@ -1,77 +1,8 @@
-import { collectionRegistry } from "@apolog/shared";
-import type { CollectionKey } from "@apolog/shared";
-
 import { AdminListHeading } from "./admin-list-heading";
 import { PageIntro } from "./page-intro";
 
 function Skeleton({ className = "" }: { className?: string }) {
   return <div aria-hidden="true" className={`skeleton ${className}`} />;
-}
-
-export function CollectionLoading({
-  collectionKey,
-}: {
-  collectionKey: CollectionKey;
-}) {
-  const copy =
-    collectionKey === "contradictions"
-      ? {
-          eyebrow: "Claim against claim",
-          title: "Where the accounts pull apart.",
-          description:
-            "Compare the precise claims, their passage references, the point of conflict, and the strongest common reconciliation.",
-        }
-      : collectionRegistry[collectionKey].page;
-  return (
-    <div aria-busy="true">
-      <PageIntro {...copy} />
-      <section className="page-container" aria-label="Loading collection">
-        <div className="collection-search" aria-hidden="true">
-          <Skeleton className="collection-query h-[46px]" />
-          {collectionKey === "contradictions" ? null : (
-            <Skeleton className="collection-sort h-[46px] w-44" />
-          )}
-          <Skeleton className="h-[46px] w-28" />
-        </div>
-        <div className="collection-results">
-          <output>Loading results…</output>
-        </div>
-        <div
-          className={
-            collectionKey === "contradictions"
-              ? "grid gap-5 md:grid-cols-2"
-              : "grid gap-4 md:grid-cols-2 xl:grid-cols-3"
-          }
-        >
-          {[0, 1, 2, 3, 4, 5].map((item) => (
-            <Skeleton className="h-80 rounded-2xl" key={item} />
-          ))}
-        </div>
-      </section>
-    </div>
-  );
-}
-
-export function ArticleLoading() {
-  return (
-    <div className="article-reader page-container" aria-busy="true">
-      <header className="reader-header">
-        <div className="reader-heading">
-          <output className="text-sm text-[var(--muted)]">
-            Loading article…
-          </output>
-          <Skeleton className="mt-8 h-4 w-64 sm:mt-10" />
-          <Skeleton className="mt-4 h-24 max-w-4xl" />
-          <Skeleton className="mt-4 h-16 max-w-3xl sm:mt-5" />
-        </div>
-      </header>
-      <Skeleton className="mt-8 h-20" />
-      <div className="grid gap-8 pt-8 sm:pt-10 lg:grid-cols-[minmax(0,1fr)_18rem] lg:gap-10">
-        <Skeleton className="h-96" />
-        <Skeleton className="h-64" />
-      </div>
-    </div>
-  );
 }
 
 export function EditorLoading() {
