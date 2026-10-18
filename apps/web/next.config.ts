@@ -29,6 +29,7 @@ const nextConfig: NextConfig = {
       { destination: "/api/articles/:slug/markdown", source: markdownSource },
     ];
   },
+  skipTrailingSlashRedirect: true,
   transpilePackages: ["@apolog/backend", "@apolog/shared", "@apolog/ui"],
 };
 
