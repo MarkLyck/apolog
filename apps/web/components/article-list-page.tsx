@@ -5,9 +5,11 @@ import * as Effect from "effect/Effect";
 import { firstSearchParam, getPageCorpus } from "@/lib/corpus";
 import type { PageSearchParams } from "@/lib/corpus";
 import { listArticles } from "@/lib/data";
+import { collectionGraph } from "@/lib/structured-data";
 
 import { ArticleCard } from "./article-card";
 import { CollectionSearch, CollectionEmptyState } from "./collection-search";
+import { JsonLd } from "./json-ld";
 import { PageIntro } from "./page-intro";
 
 export async function ArticleListPage({
@@ -43,6 +45,13 @@ export async function ArticleListPage({
 
   return (
     <>
+      <JsonLd
+        graph={collectionGraph({
+          collectionKey,
+          corpusKey,
+          description: pageCopy.description,
+        })}
+      />
       <PageIntro {...pageCopy} corpusKey={corpusKey} />
       <section className="page-container" aria-label="Collection results">
         <CollectionSearch

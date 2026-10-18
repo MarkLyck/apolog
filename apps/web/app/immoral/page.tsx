@@ -1,9 +1,13 @@
-import type { Metadata } from "next";
+import { collectionRegistry } from "@apolog/shared";
 
 import { ArticleListPage } from "@/components/article-list-page";
 import type { PageSearchParams } from "@/lib/corpus";
+import { corpusPageMetadata } from "@/lib/metadata";
 
-export const metadata: Metadata = { title: "Moral analysis" };
+export const generateMetadata = corpusPageMetadata({
+  path: collectionRegistry.immoral.href,
+  title: "Moral analysis",
+});
 export default function Page({
   searchParams,
 }: {
