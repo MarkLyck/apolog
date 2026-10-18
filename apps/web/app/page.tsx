@@ -245,10 +245,8 @@ export default async function Home({
       >
         <div className="landing-section-heading">
           <p className="landing-kicker">THE APPROACH</p>
-          <h2 id="approach-title">
-            From a difficult question
-            <br />
-            to an informed perspective
+          <h2 className="mx-auto max-w-[13em]" id="approach-title">
+            From a difficult question to an informed perspective
           </h2>
           <p>
             You do not need to have the answer before you start.
@@ -280,10 +278,8 @@ export default async function Home({
       >
         <div>
           <p className="landing-kicker">FAQ</p>
-          <h2 id="questions-title">
-            Common
-            <br />
-            questions
+          <h2 className="max-w-[6em]" id="questions-title">
+            Common questions
           </h2>
         </div>
         <div>
@@ -311,10 +307,8 @@ export default async function Home({
           className="landing-invitation-landscape"
         />
         <p className="landing-kicker">LET&apos;S THINK IT THROUGH</p>
-        <h2 id="invitation-title">
-          Have a question
-          <br />
-          you keep coming back to?
+        <h2 className="mx-auto max-w-[12em]" id="invitation-title">
+          Have a question you keep coming back to?
         </h2>
         <p>
           Bring a claim, a passage, or a doubt.

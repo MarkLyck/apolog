@@ -31,6 +31,7 @@ export function SearchPalette({
   const corpusKey = parseCorpus(searchParams.get("text")) ?? initialCorpus;
   const [query, setQuery] = useState("");
   const [search, setSearch] = useState<SearchState>({ status: "idle" });
+  const dialogRef = useRef<HTMLDialogElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
   const closeIfOpen = useEffectEvent(() => {
     if (isOpen) {
@@ -45,9 +46,6 @@ export function SearchPalette({
         event.preventDefault();
         toggleFromKeyboard();
       }
-      if (event.key === "Escape") {
-        closeIfOpen();
-      }
     };
     window.addEventListener("keydown", onKeyDown);
     return () => {
@@ -57,7 +55,8 @@ export function SearchPalette({
 
   useEffect(() => {
     if (isOpen) {
-      requestAnimationFrame(() => inputRef.current?.focus());
+      dialogRef.current?.showModal();
+      inputRef.current?.focus();
     }
   }, [isOpen]);
 
@@ -111,8 +110,9 @@ export function SearchPalette({
   return (
     <dialog
       aria-label="Search Apolog"
-      className="fixed inset-0 z-50 m-0 flex h-full w-full max-w-none items-start justify-center border-0 bg-black/45 px-4 pt-[12vh] backdrop-blur-sm"
-      open
+      className="fixed inset-0 m-0 flex h-full max-h-none w-full max-w-none items-start justify-center border-0 bg-black/45 px-4 pt-[12vh] backdrop-blur-sm backdrop:bg-transparent"
+      onClose={onClose}
+      ref={dialogRef}
     >
       <button
         aria-label="Close search"
@@ -125,7 +125,11 @@ export function SearchPalette({
           <FiSearch aria-hidden="true" className="text-[var(--muted)]" />
           <input
             aria-label="Search published analysis"
+            autoCapitalize="none"
+            autoCorrect="off"
             className="min-h-16 flex-1 bg-transparent text-base outline-none placeholder:text-[var(--muted)]"
+            dir="auto"
+            inputMode="search"
             onChange={(event) => setQuery(event.target.value)}
             placeholder={`Search ${corpusKey === "bible" ? "Bible" : "Quran"} analysis…`}
             ref={inputRef}
@@ -140,7 +144,7 @@ export function SearchPalette({
             <FiX aria-hidden="true" />
           </button>
         </div>
-        <div className="max-h-[60vh] overflow-y-auto p-3" id="search-results">
+        <div className="max-h-[60dvh] overflow-y-auto p-3" id="search-results">
           {query.trim().length < 2 ? (
             <div className="p-2">
               <p className="px-3 py-2 text-xs font-bold tracking-[0.18em] text-[var(--muted)] uppercase">

@@ -196,9 +196,10 @@ export function DebateClient({ corpusKey }: { corpusKey: CorpusKey }) {
             Debate message
           </label>
           <textarea
+            dir="auto"
             id="debate-message"
             ref={composerRef}
-            className="max-h-40 min-h-11 flex-1 resize-none bg-transparent py-3 text-sm outline-none placeholder:text-[var(--muted)]"
+            className="max-h-40 min-h-11 flex-1 resize-none bg-transparent py-3 text-base outline-none placeholder:text-[var(--muted)] md:text-sm"
             maxLength={4000}
             onChange={(event) => setInput(event.target.value)}
             onKeyDown={(event) => {

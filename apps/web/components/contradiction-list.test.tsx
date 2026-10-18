@@ -113,7 +113,9 @@ describe("contradiction pagination", () => {
     const html = renderToStaticMarkup(
       <ContradictionCard article={article(1)} corpusKey="bible" />
     );
-    expect(html).toStartWith('<a aria-label="Comparison 1"');
+    expect(html).toStartWith('<a class="');
+    expect(html).not.toContain("aria-label");
+    expect(html).toContain("Comparison 1");
     expect(html).toEndWith("</a>");
     expect(html.match(/<a\s/gu)).toHaveLength(1);
     expect(html).toContain("from=contradictions&amp;text=bible");

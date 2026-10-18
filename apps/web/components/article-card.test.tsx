@@ -36,6 +36,7 @@ describe("ArticleCard", () => {
       />
     );
     expect(html).toContain(article.title);
+    expect(html).not.toContain("aria-label");
     expect(html).toContain("1 min read");
     expect(html).toContain(
       "/articles/global-flood-evidence?from=debunked&amp;text=quran"

@@ -15,7 +15,6 @@ export function ArticleCard({
 }) {
   return (
     <Link
-      aria-label={article.title}
       className="block h-full focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--accent)]"
       href={withCorpus(
         `/articles/${article.slug}?from=${article.collectionKey}`,
