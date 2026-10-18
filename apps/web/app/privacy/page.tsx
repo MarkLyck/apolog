@@ -58,6 +58,13 @@ export default function PrivacyPage() {
               request logs.
             </li>
             <li>
+              <strong>Browser security reports.</strong> When your browser
+              blocks something our security policy does not allow, it may send
+              us a report. Our server logs the report type, the page path, the
+              policy rule and the address of the blocked resource, with query
+              strings removed. It does not log your IP address or cookies.
+            </li>
+            <li>
               <strong>Reading preferences.</strong> If you choose the Bible or
               Quran library, or switch between light and dark themes, your
               browser stores that choice so the next page renders the same way.
