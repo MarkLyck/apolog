@@ -27,7 +27,11 @@ export function CollectionSearch({
         <FiSearch aria-hidden="true" />
         <span className="sr-only">Search {label}</span>
         <input
+          autoCapitalize="none"
+          autoCorrect="off"
           defaultValue={query}
+          dir="auto"
+          enterKeyHint="search"
           name="q"
           type="search"
           placeholder={`Search ${corpusLabel(corpusKey)} ${label.toLowerCase()}...`}

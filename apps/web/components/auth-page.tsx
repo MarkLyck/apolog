@@ -23,11 +23,7 @@ export function AuthPage({
         <div className="page-eyebrow">
           <FiBookOpen aria-hidden="true" /> A little curiosity. A closer look.
         </div>
-        <h2>
-          Every question
-          <br />
-          deserves a closer look.
-        </h2>
+        <h2>Every question deserves a closer look.</h2>
         <p>
           A source-led library for exploring faith, questioning claims, and
           following the evidence.

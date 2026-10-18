@@ -628,6 +628,9 @@ select option {
   .collection-query {
     flex-basis: 100%;
   }
+  .collection-query input {
+    font-size: 16px;
+  }
   .collection-search > button {
     flex: 1;
   }

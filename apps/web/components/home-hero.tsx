@@ -52,10 +52,8 @@ export function HomeHero({ corpusKey }: { corpusKey: CorpusKey }) {
       </picture>
       <div className="landing-hero-content">
         <p className="landing-kicker">A CLOSER LOOK AT THE BIBLE &amp; QURAN</p>
-        <h1 id="hero-title">
-          You have questions.
-          <br />
-          Take a closer look.
+        <h1 className="max-w-[11em]" id="hero-title">
+          You have questions. Take a closer look.
         </h1>
         <p className="landing-hero-description">
           Explore the passages, test the claims, and follow the evidence. A

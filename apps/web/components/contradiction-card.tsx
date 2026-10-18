@@ -15,17 +15,16 @@ export function ContradictionCard({
 }) {
   return (
     <Link
-      aria-label={article.title}
       className="block h-full focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--accent)]"
       href={withCorpus(
         `/articles/${article.slug}?from=contradictions`,
         corpusKey
       )}
     >
-      <Card className="relative h-full overflow-hidden">
+      <Card className="@container relative h-full overflow-hidden">
         <div
           aria-hidden="true"
-          className="font-display absolute top-6 right-7 hidden text-[5rem] leading-none text-[color:var(--line)]/55 sm:block"
+          className="font-display absolute top-6 right-7 hidden text-[5rem] leading-none text-[color:var(--line)]/55 @lg:block"
         >
           {article.position}
         </div>
