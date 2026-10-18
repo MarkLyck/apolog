@@ -7,6 +7,8 @@ import * as Data from "effect/Data";
 import * as Effect from "effect/Effect";
 import { cache } from "react";
 
+import { rankRelatedArticles } from "./related-articles";
+
 const fetchArticleForRequest = cache((slug: string) =>
   fetchQuery(api.articles.getBySlug, { slug })
 );
@@ -119,6 +121,27 @@ export function getAdjacentArticles(
       }),
     catch: (cause) => new ArticleQueryError({ cause, operation: "adjacent" }),
   });
+}
+
+export function getRelatedArticles(
+  article: { slug: string; tags: readonly string[] },
+  collectionKey: CollectionKey,
+  corpusKey: CorpusKey
+) {
+  return Effect.all(
+    [
+      listArticles(collectionKey, corpusKey, {
+        mode: "browse",
+        sort: "newest",
+      }),
+      searchArticles(corpusKey, article.tags.join(" "), 6),
+    ],
+    { concurrency: "unbounded" }
+  ).pipe(
+    Effect.map(([sameCollection, topicMatches]) =>
+      rankRelatedArticles(article, sameCollection, topicMatches)
+    )
+  );
 }
 
 export function getFeatured(corpusKey: CorpusKey) {
