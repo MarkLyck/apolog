@@ -1,6 +1,7 @@
 import type { NextConfig } from "next";
 
 import { linkHeader } from "./lib/discovery";
+import { cacheHeaderRules } from "./lib/document-caching";
 import { securityHeaderRules } from "./lib/security-headers";
 
 const markdownSource = "/articles/:slug.md";
@@ -9,6 +10,7 @@ const nextConfig: NextConfig = {
   async headers() {
     return [
       ...securityHeaderRules,
+      ...cacheHeaderRules,
       { headers: [{ key: "Link", value: linkHeader() }], source: "/:path*" },
       {
         headers: [

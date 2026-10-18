@@ -8,6 +8,7 @@ import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
 import { getInitialCorpus } from "@/lib/corpus";
 import { feedAlternateTypes } from "@/lib/discovery";
+import { speculationRules } from "@/lib/document-caching";
 import { siteConfig } from "@/lib/site";
 
 import "./globals.css";
@@ -94,6 +95,9 @@ export default async function RootLayout({
             <SiteFooter initialCorpus={initialCorpus} />
           </Suspense>
         </ThemeProvider>
+        <script type="speculationrules">
+          {JSON.stringify(speculationRules)}
+        </script>
       </body>
     </html>
   );

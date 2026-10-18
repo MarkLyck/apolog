@@ -14,7 +14,6 @@ export function buildSitemap(content: SitemapContent): MetadataRoute.Sitemap {
   const corpusRoutes = sitemapRoutes.flatMap((route) =>
     corpusKeys.map((corpus) => ({
       changeFrequency: "weekly" as const,
-      lastModified: new Date(),
       priority: route === "" ? 1 : 0.8,
       url: `${siteConfig.url}${route}?text=${corpus}`,
     }))
