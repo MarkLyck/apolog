@@ -7,6 +7,7 @@ import type { ReactNode } from "react";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
 import { getInitialCorpus } from "@/lib/corpus";
+import { feedAlternateTypes } from "@/lib/discovery";
 import { siteConfig } from "@/lib/site";
 
 import "./globals.css";
@@ -19,6 +20,7 @@ const astaSans = localFont({
 });
 
 export const metadata: Metadata = {
+  alternates: { types: feedAlternateTypes },
   appleWebApp: {
     capable: true,
     statusBarStyle: "default",

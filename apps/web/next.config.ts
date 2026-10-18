@@ -1,10 +1,32 @@
 import type { NextConfig } from "next";
 
+import { linkHeader } from "./lib/discovery";
 import { securityHeaderRules } from "./lib/security-headers";
 
+const markdownSource = "/articles/:slug.md";
+
 const nextConfig: NextConfig = {
-  headers: async () => securityHeaderRules,
+  async headers() {
+    return [
+      ...securityHeaderRules,
+      { headers: [{ key: "Link", value: linkHeader() }], source: "/:path*" },
+      {
+        headers: [
+          {
+            key: "Link",
+            value: `${linkHeader()}, </articles/:slug>; rel="canonical"`,
+          },
+        ],
+        source: markdownSource,
+      },
+    ];
+  },
   htmlLimitedBots: /.*/u,
+  async rewrites() {
+    return [
+      { destination: "/api/articles/:slug/markdown", source: markdownSource },
+    ];
+  },
   transpilePackages: ["@apolog/backend", "@apolog/shared", "@apolog/ui"],
 };
 

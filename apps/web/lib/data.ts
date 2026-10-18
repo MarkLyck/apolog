@@ -1,7 +1,9 @@
 import { api } from "@apolog/backend/api";
 import type { Id } from "@apolog/backend/data-model";
+import { collectionKeys, corpusKeys } from "@apolog/shared";
 import type { CollectionKey, CorpusKey } from "@apolog/shared";
 import { fetchQuery } from "convex/nextjs";
+import type { FunctionReturnType } from "convex/server";
 import * as Data from "effect/Data";
 import * as Effect from "effect/Effect";
 import { cache } from "react";
@@ -67,6 +69,62 @@ export function listArticles(
       }),
     catch: (cause) => new ArticleQueryError({ cause, operation: "list" }),
   }).pipe(Effect.map((result) => result.page));
+}
+
+type ArticleListPage = FunctionReturnType<typeof api.articles.list>["page"];
+
+function listAllArticles(
+  collectionKey: CollectionKey,
+  corpusKey: CorpusKey,
+  sort: "newest" | "ranked",
+  cursor: string | null = null
+): Effect.Effect<ArticleListPage, ArticleQueryError> {
+  return Effect.tryPromise({
+    try: () =>
+      fetchQuery(api.articles.list, {
+        collectionKey,
+        corpusKey,
+        paginationOpts: { cursor, numItems: 100 },
+        sort,
+      }),
+    catch: (cause) => new ArticleQueryError({ cause, operation: "list" }),
+  }).pipe(
+    Effect.flatMap((result) =>
+      result.isDone
+        ? Effect.succeed(result.page)
+        : listAllArticles(
+            collectionKey,
+            corpusKey,
+            sort,
+            result.continueCursor
+          ).pipe(Effect.map((rest) => [...result.page, ...rest]))
+    )
+  );
+}
+
+export function listArticlesByCollection(
+  sortFor: (collectionKey: CollectionKey) => "newest" | "ranked"
+) {
+  return Effect.forEach(
+    collectionKeys,
+    (collectionKey) =>
+      Effect.forEach(
+        corpusKeys,
+        (corpusKey) =>
+          listAllArticles(collectionKey, corpusKey, sortFor(collectionKey)),
+        { concurrency: "unbounded" }
+      ).pipe(
+        Effect.map((pages) => ({
+          articles: [
+            ...new Map(
+              pages.flat().map((article) => [article.slug, article])
+            ).values(),
+          ],
+          collectionKey,
+        }))
+      ),
+    { concurrency: "unbounded" }
+  );
 }
 
 export function getArticle(slug: string) {
