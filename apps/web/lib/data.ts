@@ -1,5 +1,6 @@
 import { api } from "@apolog/backend/api";
 import type { Id } from "@apolog/backend/data-model";
+import { collectionKeys, corpusKeys } from "@apolog/shared";
 import type { CollectionKey, CorpusKey } from "@apolog/shared";
 import { fetchQuery } from "convex/nextjs";
 import * as Data from "effect/Data";
@@ -67,6 +68,34 @@ export function listArticles(
       }),
     catch: (cause) => new ArticleQueryError({ cause, operation: "list" }),
   }).pipe(Effect.map((result) => result.page));
+}
+
+export function listArticlesByCollection(
+  sortFor: (collectionKey: CollectionKey) => "newest" | "ranked"
+) {
+  return Effect.forEach(
+    collectionKeys,
+    (collectionKey) =>
+      Effect.forEach(
+        corpusKeys,
+        (corpusKey) =>
+          listArticles(collectionKey, corpusKey, {
+            mode: "browse",
+            sort: sortFor(collectionKey),
+          }),
+        { concurrency: "unbounded" }
+      ).pipe(
+        Effect.map((pages) => ({
+          articles: [
+            ...new Map(
+              pages.flat().map((article) => [article.slug, article])
+            ).values(),
+          ],
+          collectionKey,
+        }))
+      ),
+    { concurrency: "unbounded" }
+  );
 }
 
 export function getArticle(slug: string) {
