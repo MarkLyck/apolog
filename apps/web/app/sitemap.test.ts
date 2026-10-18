@@ -1,5 +1,7 @@
 import { describe, expect, test } from "bun:test";
 
+import { absoluteUrl } from "@/lib/metadata";
+
 import { buildSitemap } from "./sitemap";
 
 describe("sitemap", () => {
@@ -27,5 +29,15 @@ describe("sitemap", () => {
     ).not.toContainEqual(
       expect.objectContaining({ lastModified: expect.anything() })
     );
+  });
+
+  test("lists each page by its canonical URL", () => {
+    const urls = buildSitemap({ articles: [] }).map((entry) => entry.url);
+    expect(urls).toContain(absoluteUrl("/"));
+    expect(urls).toContain(absoluteUrl("/?text=quran"));
+    expect(urls).not.toContain(absoluteUrl("/?text=bible"));
+    expect(urls.filter((url) => url.includes("/privacy"))).toEqual([
+      absoluteUrl("/privacy"),
+    ]);
   });
 });

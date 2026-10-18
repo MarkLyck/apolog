@@ -1,12 +1,12 @@
-import type { Metadata } from "next";
-
+import { canonicalUrl, pageMetadata } from "@/lib/metadata";
 import { operatorContactUrl, privacyPolicyUpdated } from "@/lib/privacy";
 
-export const metadata: Metadata = {
+export const metadata = pageMetadata({
   description:
     "What personal data Apolog processes, why, who receives it, how long it is kept, and the rights you have over it.",
   title: "Privacy policy",
-};
+  url: canonicalUrl("/privacy"),
+});
 
 const updatedLabel = new Intl.DateTimeFormat("en-GB", {
   dateStyle: "long",

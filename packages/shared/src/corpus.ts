@@ -2,6 +2,8 @@ export const corpusKeys = ["bible", "quran"] as const;
 
 export type CorpusKey = (typeof corpusKeys)[number];
 
+export const defaultCorpus: CorpusKey = "bible";
+
 export function parseCorpus(
   value: string | null | undefined
 ): CorpusKey | null {
@@ -12,7 +14,7 @@ export function resolveCorpus(
   urlValue: string | null | undefined,
   cookieValue: string | null | undefined
 ): CorpusKey {
-  return parseCorpus(urlValue) ?? parseCorpus(cookieValue) ?? "bible";
+  return parseCorpus(urlValue) ?? parseCorpus(cookieValue) ?? defaultCorpus;
 }
 
 export function withCorpus(path: string, corpusKey: CorpusKey): string {

@@ -1,8 +1,10 @@
 import { ImageResponse } from "next/og";
 
-export const alt = "Apolog — examine the claim";
-export const size = { height: 630, width: 1200 };
-export const contentType = "image/png";
+import { shareImage } from "@/lib/metadata";
+
+export const alt = shareImage.alt;
+export const size = { height: shareImage.height, width: shareImage.width };
+export const contentType = shareImage.type;
 
 export default function OpenGraphImage() {
   return new ImageResponse(

@@ -344,6 +344,50 @@ select option {
   padding-top: 64px;
 }
 
+.breadcrumb {
+  min-width: 0;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--muted);
+}
+
+.breadcrumb ol {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.breadcrumb li {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  white-space: nowrap;
+}
+
+.breadcrumb li + li::before {
+  content: "/";
+  content: "/" / "";
+  color: var(--line);
+}
+
+.breadcrumb li:last-child {
+  min-width: 0;
+}
+
+.breadcrumb a {
+  transition: color 150ms;
+}
+
+.breadcrumb a:hover {
+  color: var(--ink);
+}
+
+.breadcrumb [aria-current="page"] {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
 .reader-header {
   padding-bottom: 38px;
   border-bottom: 1px solid var(--line);
