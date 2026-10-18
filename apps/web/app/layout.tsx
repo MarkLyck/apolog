@@ -1,6 +1,7 @@
 import { ThemeProvider } from "@wrksz/themes/next";
 import type { Metadata, Viewport } from "next";
 import localFont from "next/font/local";
+import { headers } from "next/headers";
 import { Suspense } from "react";
 import type { ReactNode } from "react";
 
@@ -61,7 +62,11 @@ export default async function RootLayout({
 }: {
   children: ReactNode;
 }) {
-  const initialCorpus = await getInitialCorpus();
+  const [initialCorpus, requestHeaders] = await Promise.all([
+    getInitialCorpus(),
+    headers(),
+  ]);
+  const nonce = requestHeaders.get("x-nonce") ?? undefined;
   return (
     <html
       className={astaSans.variable}
@@ -73,6 +78,7 @@ export default async function RootLayout({
         <ThemeProvider
           defaultTheme="light"
           disableTransitionOnChange
+          nonce={nonce}
           storage="hybrid"
           storageKey="apolog-theme"
         >
@@ -96,7 +102,7 @@ export default async function RootLayout({
             <SiteFooter initialCorpus={initialCorpus} />
           </Suspense>
         </ThemeProvider>
-        <script type="speculationrules">
+        <script nonce={nonce} type="speculationrules">
           {JSON.stringify(speculationRules)}
         </script>
       </body>
