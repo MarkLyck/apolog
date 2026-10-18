@@ -6,6 +6,7 @@ import { ArticleDetailPage } from "@/components/article-detail-page";
 import { getPageCorpus } from "@/lib/corpus";
 import type { PageSearchParams } from "@/lib/corpus";
 import { getArticle } from "@/lib/data";
+import { feedAlternateTypes } from "@/lib/discovery";
 
 interface Props {
   params: Promise<{ slug: string }>;
@@ -13,9 +14,24 @@ interface Props {
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const article = await Effect.runPromise(getArticle((await params).slug));
+  const { slug } = await params;
+  const article = await Effect.runPromise(getArticle(slug));
   return article
-    ? { description: article.summary, title: article.title }
+    ? {
+        alternates: {
+          types: {
+            ...feedAlternateTypes,
+            "text/markdown": [
+              {
+                title: `${article.title} (Markdown source)`,
+                url: `/articles/${slug}.md`,
+              },
+            ],
+          },
+        },
+        description: article.summary,
+        title: article.title,
+      }
     : { title: "Not found" };
 }
 
