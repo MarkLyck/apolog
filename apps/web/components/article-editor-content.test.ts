@@ -2,6 +2,8 @@ import { describe, expect, test } from "bun:test";
 
 import type { ArticleDocument, ContentBlock } from "@apolog/shared";
 import { articleDocumentSchema } from "@apolog/shared/content";
+import { getSchema } from "@tiptap/core";
+import { Node as ProseMirrorNode } from "@tiptap/pm/model";
 import * as Schema from "effect/Schema";
 
 import {
@@ -10,6 +12,7 @@ import {
   replaceInlineContentText,
   tiptapToArticleDocument,
 } from "./article-editor-content";
+import { articleEditorExtensions } from "./rich-article-editor-extensions";
 
 const document: ArticleDocument = {
   blocks: [
@@ -264,30 +267,35 @@ describe("article editor content", () => {
   test.each([
     ["without a caption", {}],
     ["with a caption", { caption: "The Gilgamesh flood tablet." }],
-  ])("round-trips an image block %s", (_label, caption) => {
-    const image: ContentBlock = {
-      alt: "A clay tablet with cuneiform script",
-      height: 800,
-      id: "image-1",
-      src: "https://store.public.blob.vercel-storage.com/articles/tablet.webp",
-      type: "image",
-      width: 1200,
-      ...caption,
-    };
-    const imageDocument: ArticleDocument = {
-      blocks: [image],
-      schemaVersion: 1,
-    };
+  ])(
+    "round-trips an image block %s through the editor schema",
+    (_label, caption) => {
+      const image: ContentBlock = {
+        alt: "A clay tablet with cuneiform script",
+        height: 800,
+        id: "image-1",
+        src: "https://store.public.blob.vercel-storage.com/articles/tablet.webp",
+        type: "image",
+        width: 1200,
+        ...caption,
+      };
+      const imageDocument: ArticleDocument = {
+        blocks: [image],
+        schemaVersion: 1,
+      };
 
-    const roundTrip = tiptapToArticleDocument(
-      articleDocumentToTiptap(imageDocument)
-    );
+      const editorNode = ProseMirrorNode.fromJSON(
+        getSchema(articleEditorExtensions),
+        articleDocumentToTiptap(imageDocument)
+      );
+      const roundTrip = tiptapToArticleDocument(editorNode.toJSON());
 
-    expect(roundTrip).toEqual(imageDocument);
-    expect(Object.hasOwn(roundTrip.blocks[0] ?? {}, "caption")).toBe(
-      "caption" in caption
-    );
-  });
+      expect(roundTrip).toEqual(imageDocument);
+      expect(Object.hasOwn(roundTrip.blocks[0] ?? {}, "caption")).toBe(
+        "caption" in caption
+      );
+    }
+  );
 
   test("keeps an image without alt text so saving rejects it", () => {
     const saved = tiptapToArticleDocument({

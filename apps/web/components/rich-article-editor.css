@@ -285,6 +285,62 @@
   color: var(--accent-strong);
 }
 
+.editor-image-body {
+  display: grid;
+  gap: 1rem;
+  padding: 1rem;
+}
+
+.editor-image-preview {
+  width: 100%;
+  height: auto;
+  border-radius: 0.75rem;
+  background: var(--surface-strong);
+}
+
+.editor-image[data-missing-alt] {
+  border-color: var(--accent);
+}
+
+.editor-image input[aria-invalid="true"] {
+  border-color: var(--accent);
+}
+
+.editor-image-warning {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin: 0 !important;
+  color: var(--accent-strong);
+  font-family: var(--font-sans);
+  font-size: 0.78rem;
+  font-weight: 600;
+}
+
+.editor-upload-status {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.7rem 1rem;
+  border-bottom: 1px solid var(--line);
+  background: var(--surface-strong);
+  color: var(--muted);
+  font-size: 0.8rem;
+}
+
+.editor-upload-status[data-status="failed"] {
+  color: var(--accent-strong);
+  font-weight: 600;
+}
+
+.editor-upload-status button {
+  margin-left: auto;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+}
+
 .editor-help {
   display: flex;
   flex-wrap: wrap;
