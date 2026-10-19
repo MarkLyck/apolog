@@ -9,6 +9,7 @@ import type { NextFetchEvent, NextRequest } from "next/server";
 
 import { articleSlugFromPathname } from "./lib/article-route";
 import { documentSecurityHeaders } from "./lib/content-security-policy";
+import { redirectWithoutTrailingSlash } from "./lib/trailing-slash";
 
 const isAuthRoute = createRouteMatcher([
   "/login",
@@ -61,6 +62,10 @@ async function withDocumentSecurity(request: NextRequest) {
 const authProxy = convexAuthNextjsMiddleware(withDocumentSecurity);
 
 export default function proxy(request: NextRequest, event: NextFetchEvent) {
+  const redirect = redirectWithoutTrailingSlash(request);
+  if (redirect) {
+    return redirect;
+  }
   return isAuthRoute(request)
     ? authProxy(request, event)
     : withDocumentSecurity(request);
@@ -70,6 +75,7 @@ export const config = {
   matcher: [
     "/api/auth",
     "/api/auth/:path*",
+    "/(.+)/",
     "/((?!api/|_next/|fonts/|images/|favicon|apple-touch-icon|icon-|manifest\\.webmanifest|robots\\.txt|sitemap\\.xml|opengraph-image|\\.well-known/).*)",
   ],
 };
