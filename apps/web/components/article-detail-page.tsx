@@ -8,7 +8,7 @@ import { Suspense } from "react";
 import { FiArrowLeft, FiClock, FiExternalLink } from "react-icons/fi";
 
 import { resolveArticlePlacement } from "@/lib/article-placement";
-import { getAdjacentArticles, getArticle } from "@/lib/data";
+import { getArticle } from "@/lib/data";
 
 import { ArticleEditButton } from "./article-edit-button";
 import { ArticleNavigation } from "./article-navigation";
@@ -41,9 +41,6 @@ export async function ArticleDetailPage({
   }
   const activePlacement = resolved.placement;
   const collection = collectionRegistry[activePlacement.collectionKey];
-  const adjacent = await Effect.runPromise(
-    getAdjacentArticles(article._id, activePlacement.collectionKey, corpusKey)
-  );
 
   return (
     <article className="article-reader page-container">
@@ -135,11 +132,13 @@ export async function ArticleDetailPage({
         </section>
       </div>
       <div className="pt-10">
-        <ArticleNavigation
-          adjacent={adjacent}
-          collectionKey={activePlacement.collectionKey}
-          corpusKey={corpusKey}
-        />
+        <Suspense fallback={null}>
+          <ArticleNavigation
+            articleId={article._id}
+            collectionKey={activePlacement.collectionKey}
+            corpusKey={corpusKey}
+          />
+        </Suspense>
       </div>
     </article>
   );

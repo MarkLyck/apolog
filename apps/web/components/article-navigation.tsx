@@ -1,20 +1,24 @@
+import type { Id } from "@apolog/backend/data-model";
 import type { CollectionKey, CorpusKey } from "@apolog/shared";
 import { withCorpus } from "@apolog/shared";
-import type * as Effect from "effect/Effect";
+import * as Effect from "effect/Effect";
 import Link from "next/link";
 import { FiArrowLeft, FiArrowRight } from "react-icons/fi";
 
-import type { getAdjacentArticles } from "@/lib/data";
+import { getAdjacentArticles } from "@/lib/data";
 
-export function ArticleNavigation({
-  adjacent,
+export async function ArticleNavigation({
+  articleId,
   collectionKey,
   corpusKey,
 }: {
-  adjacent: Effect.Success<ReturnType<typeof getAdjacentArticles>>;
+  articleId: Id<"articles">;
   collectionKey: CollectionKey;
   corpusKey: CorpusKey;
 }) {
+  const adjacent = await Effect.runPromise(
+    getAdjacentArticles(articleId, collectionKey, corpusKey)
+  );
   if (!adjacent.previous && !adjacent.next) {
     return null;
   }
