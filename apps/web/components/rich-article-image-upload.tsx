@@ -1,3 +1,4 @@
+import type { Transaction } from "@tiptap/pm/state";
 import type { Editor } from "@tiptap/react";
 import { upload } from "@vercel/blob/client";
 import { useRef, useState } from "react";
@@ -70,24 +71,29 @@ export function useImageUpload(editor: Editor | null) {
     if (!editor || state.status === "uploading") {
       return;
     }
-    for (const file of files) {
-      setState({ fileName: file.name, status: "uploading" });
-      const outcome = await uploadArticleImage(file);
-      if (outcome.status === "failed") {
-        setState({
-          message: `${file.name}: ${outcome.message}`,
-          status: "failed",
-        });
-        return;
-      }
-      editor
-        .chain()
-        .focus()
-        .insertContentAt(editor.state.selection.to, {
+    let position = editor.state.selection.to;
+    const followEdits = ({ transaction }: { transaction: Transaction }) => {
+      position = transaction.mapping.map(position);
+    };
+    editor.on("transaction", followEdits);
+    try {
+      for (const file of files) {
+        setState({ fileName: file.name, status: "uploading" });
+        const outcome = await uploadArticleImage(file);
+        if (outcome.status === "failed") {
+          setState({
+            message: `${file.name}: ${outcome.message}`,
+            status: "failed",
+          });
+          return;
+        }
+        editor.commands.insertContentAt(position, {
           attrs: { ...outcome.image, alt: "", caption: null },
           type: "image",
-        })
-        .run();
+        });
+      }
+    } finally {
+      editor.off("transaction", followEdits);
     }
     setState({ status: "idle" });
   };
