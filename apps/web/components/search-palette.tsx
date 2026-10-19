@@ -1,7 +1,7 @@
 "use client";
 
-import { parseCorpus } from "@apolog/shared";
-import type { ArticleListItem, CorpusKey } from "@apolog/shared";
+import { corpusFromSearch, withCorpus } from "@apolog/shared";
+import type { ArticleListItem } from "@apolog/shared";
 import Link from "next/link";
 import { usePathname, useSearchParams } from "next/navigation";
 import { useEffect, useEffectEvent, useRef, useState } from "react";
@@ -16,19 +16,17 @@ type SearchState =
   | { status: "success"; results: ArticleListItem[] };
 
 export function SearchPalette({
-  initialCorpus,
   isOpen,
   onClose,
   onToggle,
 }: {
-  initialCorpus: CorpusKey;
   isOpen: boolean;
   onClose: () => void;
   onToggle: () => void;
 }) {
   const pathname = usePathname();
   const searchParams = useSearchParams();
-  const corpusKey = parseCorpus(searchParams.get("text")) ?? initialCorpus;
+  const corpusKey = corpusFromSearch(searchParams.get("text"));
   const [query, setQuery] = useState("");
   const [search, setSearch] = useState<SearchState>({ status: "idle" });
   const inputRef = useRef<HTMLInputElement>(null);
@@ -149,7 +147,7 @@ export function SearchPalette({
               {searchPaletteLinks.map(({ href, label }) => (
                 <Link
                   className="flex items-center justify-between rounded-xl px-3 py-3 text-sm font-semibold hover:bg-[var(--surface)]"
-                  href={`${href}?text=${corpusKey}`}
+                  href={withCorpus(href, corpusKey)}
                   key={href}
                 >
                   {label} <FiArrowRight aria-hidden="true" />
@@ -180,7 +178,10 @@ export function SearchPalette({
             ? search.results.map((result) => (
                 <Link
                   className="block rounded-xl p-4 hover:bg-[var(--surface)] focus:bg-[var(--surface)] focus:outline-none"
-                  href={`/articles/${result.slug}?from=${result.collectionKey}&text=${corpusKey}`}
+                  href={withCorpus(
+                    `/articles/${result.slug}?from=${result.collectionKey}`,
+                    corpusKey
+                  )}
                   key={result.slug}
                 >
                   <div className="mb-1 text-[0.65rem] font-bold tracking-[0.18em] text-[var(--accent-strong)] uppercase">

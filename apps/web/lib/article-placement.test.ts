@@ -48,4 +48,15 @@ describe("article placement resolution", () => {
       redirect: "/debunked?text=quran",
     });
   });
+
+  test("redirects to the Bible without naming it in the URL", () => {
+    const quranPlacements = placements.map((placement) => ({
+      ...placement,
+      corpusKey: "quran" as const,
+    }));
+    expect(resolveArticlePlacement(quranPlacements, "bible", null)).toEqual({
+      placement: null,
+      redirect: "/evidence",
+    });
+  });
 });

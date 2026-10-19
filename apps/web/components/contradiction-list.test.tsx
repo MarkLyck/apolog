@@ -116,7 +116,8 @@ describe("contradiction pagination", () => {
     expect(html).toStartWith('<a aria-label="Comparison 1"');
     expect(html).toEndWith("</a>");
     expect(html.match(/<a\s/gu)).toHaveLength(1);
-    expect(html).toContain("from=contradictions&amp;text=bible");
+    expect(html).toContain("from=contradictions");
+    expect(html).not.toContain("text=");
     expect(html.match(/Genesis 1:1/gu)).toHaveLength(1);
     expect(html.match(/Genesis 2:1/gu)).toHaveLength(1);
   });

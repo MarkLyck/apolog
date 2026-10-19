@@ -9,4 +9,11 @@ describe("site footer corpus links", () => {
       { href: "/debate?text=quran", label: "Debate" },
     ]);
   });
+
+  test("leave the default Bible corpus out of the URL", () => {
+    expect(getSiteFooterLinks("bible")).toEqual([
+      { href: "/evidence", label: "Methods" },
+      { href: "/debate", label: "Debate" },
+    ]);
+  });
 });

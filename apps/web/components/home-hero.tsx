@@ -1,4 +1,4 @@
-import { corpusLabel } from "@apolog/shared";
+import { corpusLabel, withCorpus } from "@apolog/shared";
 import type { CorpusKey } from "@apolog/shared";
 import Image, { getImageProps } from "next/image";
 import Link from "next/link";
@@ -70,7 +70,7 @@ export function HomeHero({ corpusKey }: { corpusKey: CorpusKey }) {
           </Link>
           <Link
             className="landing-button landing-button-glass"
-            href={`/debate?text=${corpusKey}`}
+            href={withCorpus("/debate", corpusKey)}
           >
             Start a conversation
           </Link>

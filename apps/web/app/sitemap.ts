@@ -1,5 +1,5 @@
 import { api } from "@apolog/backend/api";
-import { corpusKeys } from "@apolog/shared";
+import { corpusKeys, withCorpus } from "@apolog/shared";
 import { fetchQuery } from "convex/nextjs";
 import type { MetadataRoute } from "next";
 
@@ -16,7 +16,7 @@ export function buildSitemap(content: SitemapContent): MetadataRoute.Sitemap {
       changeFrequency: "weekly" as const,
       lastModified: new Date(),
       priority: route === "" ? 1 : 0.8,
-      url: `${siteConfig.url}${route}?text=${corpus}`,
+      url: `${siteConfig.url}${withCorpus(route, corpus)}`,
     }))
   );
   const articleRoutes = content.articles.map((article) => ({

@@ -6,7 +6,6 @@ import type { ReactNode } from "react";
 
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
-import { getInitialCorpus } from "@/lib/corpus";
 import { siteConfig } from "@/lib/site";
 
 import "./globals.css";
@@ -51,12 +50,7 @@ export const viewport: Viewport = {
   themeColor: "#0749dc",
 };
 
-export default async function RootLayout({
-  children,
-}: {
-  children: ReactNode;
-}) {
-  const initialCorpus = await getInitialCorpus();
+export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html
       className={astaSans.variable}
@@ -84,11 +78,11 @@ export default async function RootLayout({
               </div>
             }
           >
-            <SiteHeader initialCorpus={initialCorpus} />
+            <SiteHeader />
           </Suspense>
           <main id="main-content">{children}</main>
           <Suspense>
-            <SiteFooter initialCorpus={initialCorpus} />
+            <SiteFooter />
           </Suspense>
         </ThemeProvider>
       </body>

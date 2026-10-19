@@ -13,7 +13,7 @@ export default function NotFound() {
         </p>
         <Link
           className="mt-8 inline-flex rounded-full bg-[var(--ink)] px-6 py-3 text-sm font-bold text-[var(--paper)]"
-          href="/?text=bible"
+          href="/"
         >
           Return home
         </Link>

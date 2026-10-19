@@ -1,4 +1,9 @@
-import { collectionRegistry, corpusLabel } from "@apolog/shared";
+import {
+  collectionRegistry,
+  corpusLabel,
+  defaultCorpus,
+  withCorpus,
+} from "@apolog/shared";
 import type { CollectionKey, CorpusKey } from "@apolog/shared";
 import { Button } from "@apolog/ui";
 import Link from "next/link";
@@ -22,7 +27,9 @@ export function CollectionSearch({
       method="get"
       aria-label={`Search ${label}`}
     >
-      <input name="text" type="hidden" value={corpusKey} />
+      {corpusKey === defaultCorpus ? null : (
+        <input name="text" type="hidden" value={corpusKey} />
+      )}
       <label className="collection-query">
         <FiSearch aria-hidden="true" />
         <span className="sr-only">Search {label}</span>
@@ -71,11 +78,7 @@ export function CollectionEmptyState({
       </p>
       <Link
         className="text-link"
-        href={
-          query
-            ? `/${collectionKey}?text=${corpusKey}`
-            : `/?text=${corpusKey}#explore`
-        }
+        href={withCorpus(query ? `/${collectionKey}` : "/#explore", corpusKey)}
       >
         {query ? "Clear the search" : "Explore the library"}{" "}
         <FiArrowRight aria-hidden="true" />
