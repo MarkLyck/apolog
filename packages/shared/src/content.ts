@@ -32,6 +32,32 @@ const httpUrl = Schema.Trim.check(
     message: "Source URL must use HTTP or HTTPS",
   })
 );
+function isBlobImageUrl(value: string): boolean {
+  try {
+    const url = new URL(value);
+    return (
+      url.protocol === "https:" &&
+      url.hostname.endsWith(".public.blob.vercel-storage.com") &&
+      url.port === "" &&
+      url.username === "" &&
+      url.password === "" &&
+      url.search === "" &&
+      url.hash === ""
+    );
+  } catch {
+    return false;
+  }
+}
+
+const blobImageUrl = Schema.String.check(
+  Schema.makeFilter(isBlobImageUrl, {
+    message: "Image source must be an HTTPS Vercel Blob URL",
+  })
+);
+const imageDimension = Schema.Number.check(
+  Schema.isInt(),
+  Schema.isGreaterThan(0)
+);
 const href = Schema.Union([
   inlineUrl,
   Schema.String.check(Schema.isPattern(/^\/(?!\/)/u)),
@@ -153,6 +179,15 @@ export const contentBlockSchema = Schema.Union([
     ),
     id: requiredText,
     type: Schema.Literal("claimComparison"),
+  }).mapFields(Struct.map(Schema.mutableKey)),
+  Schema.Struct({
+    alt: requiredText,
+    caption: Schema.optional(requiredText),
+    height: imageDimension,
+    id: requiredText,
+    src: blobImageUrl,
+    type: Schema.Literal("image"),
+    width: imageDimension,
   }).mapFields(Struct.map(Schema.mutableKey)),
 ]);
 

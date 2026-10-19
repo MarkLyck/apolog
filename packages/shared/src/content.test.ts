@@ -5,6 +5,7 @@ import * as Schema from "effect/Schema";
 import type { DemoContent, InlineContent } from "./content";
 import {
   articleContentSchema,
+  contentBlockSchema,
   inlineContentSchema,
   validateDemoContent,
 } from "./content";
@@ -245,6 +246,45 @@ describe("Effect content decoding", () => {
   )("rejects invalid inline input %j", ({ nodes }) => {
     expect(() =>
       Schema.decodeUnknownSync(inlineContentSchema)(nodes)
+    ).toThrow();
+  });
+});
+
+describe("image blocks", () => {
+  const image = {
+    alt: "A clay tablet with cuneiform script",
+    height: 800,
+    id: "image",
+    src: "https://h10hqun98rmndyjq.public.blob.vercel-storage.com/articles/tablet-Xy12.webp",
+    type: "image",
+    width: 1200,
+  } as const;
+
+  test("accepts a public Vercel Blob image with and without a caption", () => {
+    expect(Schema.decodeUnknownSync(contentBlockSchema)(image)).toEqual(image);
+    expect(
+      Schema.decodeUnknownSync(contentBlockSchema)({
+        ...image,
+        caption: "The Gilgamesh flood tablet.",
+      })
+    ).toEqual({ ...image, caption: "The Gilgamesh flood tablet." });
+  });
+
+  test.each([
+    ["an HTTP URL", { src: image.src.replace("https:", "http:") }],
+    ["a non-Blob host", { src: "https://example.com/articles/tablet.webp" }],
+    [
+      "a host that only mentions Blob storage",
+      { src: "https://public.blob.vercel-storage.com.example.com/a.webp" },
+    ],
+    ["a query string", { src: `${image.src}?download=1` }],
+    ["an empty alt", { alt: "   " }],
+    ["an empty caption", { caption: " " }],
+    ["a fractional width", { width: 1.5 }],
+    ["a zero height", { height: 0 }],
+  ])("rejects %s", (_label, override) => {
+    expect(() =>
+      Schema.decodeUnknownSync(contentBlockSchema)({ ...image, ...override })
     ).toThrow();
   });
 });

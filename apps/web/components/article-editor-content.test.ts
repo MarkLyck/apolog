@@ -1,6 +1,8 @@
 import { describe, expect, test } from "bun:test";
 
-import type { ArticleDocument } from "@apolog/shared";
+import type { ArticleDocument, ContentBlock } from "@apolog/shared";
+import { articleDocumentSchema } from "@apolog/shared/content";
+import * as Schema from "effect/Schema";
 
 import {
   articleDocumentToTiptap,
@@ -257,5 +259,66 @@ describe("article editor content", () => {
       ],
     });
     expect(tiptapToArticleDocument(json)).toEqual(firstSave);
+  });
+
+  test.each([
+    ["without a caption", {}],
+    ["with a caption", { caption: "The Gilgamesh flood tablet." }],
+  ])("round-trips an image block %s", (_label, caption) => {
+    const image: ContentBlock = {
+      alt: "A clay tablet with cuneiform script",
+      height: 800,
+      id: "image-1",
+      src: "https://store.public.blob.vercel-storage.com/articles/tablet.webp",
+      type: "image",
+      width: 1200,
+      ...caption,
+    };
+    const imageDocument: ArticleDocument = {
+      blocks: [image],
+      schemaVersion: 1,
+    };
+
+    const roundTrip = tiptapToArticleDocument(
+      articleDocumentToTiptap(imageDocument)
+    );
+
+    expect(roundTrip).toEqual(imageDocument);
+    expect(Object.hasOwn(roundTrip.blocks[0] ?? {}, "caption")).toBe(
+      "caption" in caption
+    );
+  });
+
+  test("keeps an image without alt text so saving rejects it", () => {
+    const saved = tiptapToArticleDocument({
+      content: [
+        {
+          attrs: {
+            alt: null,
+            caption: "  ",
+            contentId: "image-1",
+            height: 600,
+            src: "https://store.public.blob.vercel-storage.com/articles/a.webp",
+            width: 800,
+          },
+          type: "image",
+        },
+      ],
+      type: "doc",
+    });
+
+    expect(saved.blocks).toEqual([
+      {
+        alt: "",
+        height: 600,
+        id: "image-1",
+        src: "https://store.public.blob.vercel-storage.com/articles/a.webp",
+        type: "image",
+        width: 800,
+      },
+    ]);
+    expect(() =>
+      Schema.decodeUnknownSync(articleDocumentSchema)(saved)
+    ).toThrow();
   });
 });

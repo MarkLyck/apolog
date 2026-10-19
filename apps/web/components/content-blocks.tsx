@@ -4,6 +4,7 @@ import {
   CalloutBlock,
   ClaimComparisonBlock,
   HeadingBlock,
+  ImageBlock,
   ListBlock,
   ParagraphBlock,
   QuoteBlock,
@@ -28,6 +29,9 @@ function ContentBlockView({ block }: { block: ContentBlock }) {
     }
     case "claimComparison": {
       return <ClaimComparisonBlock block={block} />;
+    }
+    case "image": {
+      return <ImageBlock block={block} />;
     }
     default: {
       const exhaustive: never = block;
