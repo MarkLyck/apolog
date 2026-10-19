@@ -8,6 +8,7 @@ export const config = {
     "/signup",
     "/api/auth",
     "/api/auth/:path*",
+    "/api/images/upload",
     "/articles/:path*",
   ],
 };
