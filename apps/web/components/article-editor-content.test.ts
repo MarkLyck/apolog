@@ -329,4 +329,28 @@ describe("article editor content", () => {
       Schema.decodeUnknownSync(articleDocumentSchema)(saved)
     ).toThrow();
   });
+
+  test("keeps numeric-looking alt text and captions as text when parsing pasted HTML", () => {
+    const attributes = new Map([
+      ["alt", "1984"],
+      ["caption", "2024"],
+      ["height", "600"],
+      ["src", "https://store.public.blob.vercel-storage.com/articles/a.webp"],
+      ["width", "800"],
+    ]);
+    // SAFETY: Bun has no DOM, and the image parse rule reads only getAttribute.
+    const element = {
+      getAttribute: (name: string) => attributes.get(name) ?? null,
+    } as HTMLElement;
+    const [rule] =
+      getSchema(articleEditorExtensions).nodes.image?.spec.parseDOM ?? [];
+    const attrs = rule?.getAttrs?.(element);
+
+    expect(
+      tiptapToArticleDocument({
+        content: [{ attrs: attrs || {}, type: "image" }],
+        type: "doc",
+      }).blocks
+    ).toMatchObject([{ alt: "1984", caption: "2024", type: "image" }]);
+  });
 });

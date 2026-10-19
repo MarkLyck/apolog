@@ -79,8 +79,14 @@ const Contradiction = Node.create({
 const ArticleImage = Node.create({
   addAttributes() {
     return {
-      alt: { default: "" },
-      caption: { default: null },
+      alt: {
+        default: "",
+        parseHTML: (element) => element.getAttribute("alt") ?? "",
+      },
+      caption: {
+        default: null,
+        parseHTML: (element) => element.getAttribute("caption"),
+      },
       height: { default: null },
       src: { default: null },
       width: { default: null },
