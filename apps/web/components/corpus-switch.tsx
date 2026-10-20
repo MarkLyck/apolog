@@ -5,10 +5,6 @@ import type { CorpusKey } from "@apolog/shared";
 import { cn } from "cnfast";
 import Link from "next/link";
 
-function selectCorpus(key: CorpusKey) {
-  document.cookie = `apolog-text=${key}; Path=/; Max-Age=31536000; SameSite=Lax`;
-}
-
 export function CorpusSwitch({
   corpusKey,
   pathname,
@@ -36,7 +32,6 @@ export function CorpusSwitch({
           )}
           href={withCorpus(currentPath, key)}
           key={key}
-          onClick={() => selectCorpus(key)}
         >
           {key === "bible" ? "Bible" : "Quran"}
         </Link>

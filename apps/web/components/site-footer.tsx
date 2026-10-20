@@ -1,15 +1,14 @@
 "use client";
 
-import { parseCorpus } from "@apolog/shared";
-import type { CorpusKey } from "@apolog/shared";
+import { corpusFromSearch } from "@apolog/shared";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 
 import { getSiteFooterLinks } from "./site-footer-links";
 
-export function SiteFooter({ initialCorpus }: { initialCorpus: CorpusKey }) {
+export function SiteFooter() {
   const searchParams = useSearchParams();
-  const corpusKey = parseCorpus(searchParams.get("text")) ?? initialCorpus;
+  const corpusKey = corpusFromSearch(searchParams.get("text"));
   const links = getSiteFooterLinks(corpusKey);
   return (
     <footer className="site-footer">

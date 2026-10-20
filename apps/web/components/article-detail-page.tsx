@@ -1,4 +1,4 @@
-import { collectionRegistry, corpusLabel } from "@apolog/shared";
+import { collectionRegistry, corpusLabel, withCorpus } from "@apolog/shared";
 import type { CollectionKey, CorpusKey } from "@apolog/shared";
 import { Badge } from "@apolog/ui";
 import * as Effect from "effect/Effect";
@@ -49,7 +49,7 @@ export async function ArticleDetailPage({
           <div className="flex flex-wrap items-center justify-between gap-4">
             <Link
               className="inline-flex items-center gap-2 text-sm font-medium text-[var(--muted)] transition-colors hover:text-[var(--ink)]"
-              href={`/${activePlacement.collectionKey}?text=${corpusKey}`}
+              href={withCorpus(`/${activePlacement.collectionKey}`, corpusKey)}
             >
               <FiArrowLeft aria-hidden="true" /> Back to {collection.label}
             </Link>

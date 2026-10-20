@@ -1,6 +1,6 @@
 "use client";
 
-import { parseCorpus } from "@apolog/shared";
+import { corpusFromSearch, withCorpus } from "@apolog/shared";
 import type { CorpusKey } from "@apolog/shared";
 import Link from "next/link";
 import { usePathname, useSearchParams } from "next/navigation";
@@ -42,7 +42,7 @@ export function PrimaryNavigation({
               ? "border-b-2 border-transparent px-3 py-2.5 text-xs font-semibold text-[var(--muted)] transition hover:text-[var(--ink)] aria-[current=page]:border-[var(--accent)] aria-[current=page]:text-[var(--ink)]"
               : "border-b-2 border-transparent py-2 text-sm font-semibold text-[var(--muted)] transition hover:text-[var(--ink)] aria-[current=page]:border-[var(--accent)] aria-[current=page]:text-[var(--ink)]"
           }
-          href={`${href}?text=${corpusKey}`}
+          href={withCorpus(href, corpusKey)}
           key={href}
         >
           {label}
@@ -52,10 +52,10 @@ export function PrimaryNavigation({
   );
 }
 
-export function SiteHeader({ initialCorpus }: { initialCorpus: CorpusKey }) {
+export function SiteHeader() {
   const pathname = usePathname();
   const searchParams = useSearchParams();
-  const corpusKey = parseCorpus(searchParams.get("text")) ?? initialCorpus;
+  const corpusKey = corpusFromSearch(searchParams.get("text"));
   const serialized = searchParams.toString();
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const searchTriggerRef = useRef<HTMLButtonElement>(null);
@@ -75,7 +75,7 @@ export function SiteHeader({ initialCorpus }: { initialCorpus: CorpusKey }) {
         <div className="site-header-row">
           <Link
             className="mr-auto flex items-center focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--accent)]"
-            href={`/?text=${corpusKey}`}
+            href={withCorpus("/", corpusKey)}
           >
             <span className="site-brand-name font-display text-xl tracking-tight">
               Apolog
@@ -85,7 +85,7 @@ export function SiteHeader({ initialCorpus }: { initialCorpus: CorpusKey }) {
             <nav aria-label="Primary" className="landing-navigation">
               <Link href="#explore">The library</Link>
               <Link href="#approach">Our approach</Link>
-              <Link href={`/evidence?text=${corpusKey}`}>Evidence</Link>
+              <Link href={withCorpus("/evidence", corpusKey)}>Evidence</Link>
               <Link href="#questions">FAQ</Link>
             </nav>
           ) : (
@@ -109,9 +109,9 @@ export function SiteHeader({ initialCorpus }: { initialCorpus: CorpusKey }) {
               <nav aria-label="Primary mobile">
                 <Link href="#explore">The library</Link>
                 <Link href="#approach">Our approach</Link>
-                <Link href={`/evidence?text=${corpusKey}`}>Evidence</Link>
+                <Link href={withCorpus("/evidence", corpusKey)}>Evidence</Link>
                 <Link href="#questions">FAQ</Link>
-                <Link href={`/debate?text=${corpusKey}`}>
+                <Link href={withCorpus("/debate", corpusKey)}>
                   Start a conversation
                 </Link>
               </nav>
@@ -134,7 +134,6 @@ export function SiteHeader({ initialCorpus }: { initialCorpus: CorpusKey }) {
         </div>
       </header>
       <SearchPalette
-        initialCorpus={initialCorpus}
         isOpen={isSearchOpen}
         onClose={closeSearch}
         onToggle={toggleSearch}

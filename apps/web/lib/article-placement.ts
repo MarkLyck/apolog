@@ -1,3 +1,4 @@
+import { withCorpus } from "@apolog/shared";
 import type { CollectionKey, CorpusKey } from "@apolog/shared";
 
 interface Placement {
@@ -41,6 +42,8 @@ export function resolveArticlePlacement(
     null;
   return {
     placement: null,
-    redirect: fallback ? `/${fallback.collectionKey}?text=${corpusKey}` : null,
+    redirect: fallback
+      ? withCorpus(`/${fallback.collectionKey}`, corpusKey)
+      : null,
   };
 }

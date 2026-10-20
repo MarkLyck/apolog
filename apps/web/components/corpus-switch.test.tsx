@@ -17,4 +17,16 @@ describe("CorpusSwitch", () => {
     expect(html).toContain('aria-current="true"');
     expect(html).toContain("/evidence?q=evolution&amp;text=quran");
   });
+
+  test("switches back to the Bible by dropping the corpus from the URL", () => {
+    const html = renderToStaticMarkup(
+      <CorpusSwitch
+        corpusKey="quran"
+        pathname="/evidence"
+        search="q=evolution&text=quran"
+      />
+    );
+    expect(html).toContain('href="/evidence?q=evolution"');
+    expect(html).not.toContain("text=bible");
+  });
 });

@@ -7,7 +7,9 @@ describe("sitemap", () => {
     const urls = buildSitemap({
       articles: [{ slug: "talking-donkey", updatedAt: 1 }],
     }).map((entry) => entry.url);
-    expect(urls.some((url) => url.includes("/silly?text=bible"))).toBe(true);
+    expect(urls.some((url) => url.endsWith("/silly"))).toBe(true);
+    expect(urls.some((url) => url.endsWith("/silly?text=quran"))).toBe(true);
+    expect(urls.some((url) => url.includes("text=bible"))).toBe(false);
     expect(
       urls.some((url) => url.includes("/articles/") && !url.includes("?"))
     ).toBe(true);

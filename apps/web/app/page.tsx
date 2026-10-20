@@ -1,3 +1,4 @@
+import { withCorpus } from "@apolog/shared";
 import type { CorpusKey } from "@apolog/shared";
 import * as Effect from "effect/Effect";
 import type { Metadata } from "next";
@@ -128,7 +129,7 @@ async function FeaturedContradictions({
       </div>
       <Link
         className="landing-text-link"
-        href={`/contradictions?text=${corpusKey}`}
+        href={withCorpus("/contradictions", corpusKey)}
       >
         All contradictions <FiArrowRight aria-hidden="true" />
       </Link>
@@ -159,7 +160,10 @@ async function FeaturedArticles({
           />
         ))}
       </div>
-      <Link className="landing-text-link" href={`/evidence?text=${corpusKey}`}>
+      <Link
+        className="landing-text-link"
+        href={withCorpus("/evidence", corpusKey)}
+      >
         Explore the evidence <FiArrowRight aria-hidden="true" />
       </Link>
     </section>
@@ -217,7 +221,7 @@ export default async function Home({
           {collections.map(({ label, href, description }, index) => (
             <Link
               className="landing-collection"
-              href={`${href}?text=${corpusKey}`}
+              href={withCorpus(href, corpusKey)}
               key={href}
             >
               <span className="landing-number">0{index + 1}</span>
@@ -323,7 +327,7 @@ export default async function Home({
         </p>
         <Link
           className="landing-button landing-button-primary"
-          href={`/debate?text=${corpusKey}`}
+          href={withCorpus("/debate", corpusKey)}
         >
           Start a conversation
         </Link>
