@@ -121,18 +121,18 @@ export function DebateClient({ corpusKey }: { corpusKey: CorpusKey }) {
           · Conversations are not saved. Reloading clears them.
         </span>
       </div>
-      <div className="min-h-[28rem] p-5 sm:p-7">
+      <div className="p-5 sm:p-7">
         {messages.length === 0 ? (
           <div className="debate-empty">
-            <span className="grid size-14 place-items-center rounded-2xl bg-[var(--surface-strong)] text-2xl text-[var(--accent-strong)]">
+            <span className="hidden size-12 place-items-center rounded-2xl bg-[var(--surface-strong)] text-xl text-[var(--accent-strong)] sm:grid">
               <FiMessageCircle aria-hidden="true" />
             </span>
-            <h2 className="text-3xl">Build a clear, sourced response.</h2>
-            <p className="mt-3 max-w-xl text-sm leading-6 text-[var(--muted)]">
+            <h2>Build a clear, sourced response.</h2>
+            <p className="mt-2 max-w-xl text-sm leading-6 text-[var(--muted)]">
               Ask about a claim or paste an argument. The response starts
               concise, then preserves reasoning and caveats.
             </p>
-            <div className="mt-8 grid w-full gap-3 sm:grid-cols-3">
+            <div className="debate-prompts">
               {prompts.map((prompt) => (
                 <button
                   className="debate-prompt"
@@ -188,7 +188,7 @@ export function DebateClient({ corpusKey }: { corpusKey: CorpusKey }) {
         )}
       </div>
       <form
-        className="border-t border-[var(--line)] p-4 sm:p-5"
+        className="border-t border-[var(--line)] p-3 sm:p-5"
         onSubmit={handleSubmit}
       >
         <div className="debate-composer">
