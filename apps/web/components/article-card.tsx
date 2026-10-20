@@ -1,10 +1,10 @@
 import type { ArticleListItem, CorpusKey } from "@apolog/shared";
 import { collectionRegistry, withCorpus } from "@apolog/shared";
 import { Badge, Card } from "@apolog/ui";
-import Link from "next/link";
 import { FiArrowRight, FiClock } from "react-icons/fi";
 
 import { ContradictionAssessmentLabels } from "./contradiction-assessment";
+import { IntentPrefetchLink } from "./intent-prefetch-link";
 
 export function ArticleCard({
   article,
@@ -14,7 +14,7 @@ export function ArticleCard({
   corpusKey: CorpusKey;
 }) {
   return (
-    <Link
+    <IntentPrefetchLink
       aria-label={article.title}
       className="block h-full focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--accent)]"
       href={withCorpus(
@@ -53,6 +53,6 @@ export function ArticleCard({
           Read analysis <FiArrowRight aria-hidden="true" />
         </span>
       </Card>
-    </Link>
+    </IntentPrefetchLink>
   );
 }
