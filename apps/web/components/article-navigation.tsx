@@ -2,10 +2,11 @@ import type { Id } from "@apolog/backend/data-model";
 import type { CollectionKey, CorpusKey } from "@apolog/shared";
 import { withCorpus } from "@apolog/shared";
 import * as Effect from "effect/Effect";
-import Link from "next/link";
 import { FiArrowLeft, FiArrowRight } from "react-icons/fi";
 
 import { getAdjacentArticles } from "@/lib/data";
+
+import { IntentPrefetchLink } from "./intent-prefetch-link";
 
 export async function ArticleNavigation({
   articleId,
@@ -30,7 +31,7 @@ export async function ArticleNavigation({
         const Icon = direction === "previous" ? FiArrowLeft : FiArrowRight;
         const className = `flex min-w-0 flex-col gap-2 rounded-xl border border-[var(--line)] p-4 text-sm ${direction === "next" ? "items-end text-right" : "items-start"}`;
         return article ? (
-          <Link
+          <IntentPrefetchLink
             className={`${className} bg-[var(--surface)] transition-colors hover:border-[var(--accent)] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--accent)]`}
             href={withCorpus(
               `/articles/${article.slug}?from=${collectionKey}`,
@@ -45,7 +46,7 @@ export async function ArticleNavigation({
               <Icon aria-hidden="true" /> {label}
             </span>
             <span className="line-clamp-2 leading-snug">{article.title}</span>
-          </Link>
+          </IntentPrefetchLink>
         ) : (
           <span
             aria-disabled="true"

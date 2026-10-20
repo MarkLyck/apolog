@@ -44,6 +44,7 @@ export function PrimaryNavigation({
           }
           href={withCorpus(href, corpusKey)}
           key={href}
+          prefetch
         >
           {label}
         </Link>

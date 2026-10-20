@@ -1,10 +1,10 @@
 import type { ArticleListItem, CorpusKey } from "@apolog/shared";
 import { withCorpus } from "@apolog/shared";
 import { Card } from "@apolog/ui";
-import Link from "next/link";
 import { FiArrowRight } from "react-icons/fi";
 
 import { ContradictionAssessmentLabels } from "./contradiction-assessment";
+import { IntentPrefetchLink } from "./intent-prefetch-link";
 
 export function ContradictionCard({
   article,
@@ -14,7 +14,7 @@ export function ContradictionCard({
   corpusKey: CorpusKey;
 }) {
   return (
-    <Link
+    <IntentPrefetchLink
       aria-label={article.title}
       className="block h-full focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--accent)]"
       href={withCorpus(
@@ -57,6 +57,6 @@ export function ContradictionCard({
           </span>
         </div>
       </Card>
-    </Link>
+    </IntentPrefetchLink>
   );
 }

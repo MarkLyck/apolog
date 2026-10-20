@@ -223,6 +223,7 @@ export default async function Home({
               className="landing-collection"
               href={withCorpus(href, corpusKey)}
               key={href}
+              prefetch
             >
               <span className="landing-number">0{index + 1}</span>
               <h3>{label}</h3>
