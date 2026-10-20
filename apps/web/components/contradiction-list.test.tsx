@@ -73,7 +73,7 @@ describe("contradiction pagination", () => {
     expect(html).toContain("from=contradictions&amp;text=quran");
   });
 
-  test("hides partial search counts while more results are available", () => {
+  test("describes search results by match instead of global rank", () => {
     const html = renderToStaticMarkup(
       <ContradictionList
         corpusKey="bible"
@@ -86,10 +86,31 @@ describe("contradiction pagination", () => {
         }}
       />
     );
-    expect(html).toContain("550 ranked comparisons");
-    expect(html).not.toContain("matching comparisons");
-    expect(html).not.toContain("loaded");
+    expect(html).toContain("Comparisons matching “angels”</div>");
+    expect(html).not.toContain("550");
+    expect(html).not.toContain("Reading order");
     expect(html).toContain("Load more comparisons");
+  });
+
+  test("counts search matches once every result has loaded", () => {
+    const search = (count: number) =>
+      renderToStaticMarkup(
+        <ContradictionList
+          corpusKey="bible"
+          query="flood"
+          totalCount={564}
+          initialPage={{
+            page: Array.from({ length: count }, (_, index) =>
+              article(index + 40)
+            ),
+            continueCursor: "end",
+            isDone: true,
+          }}
+        />
+      );
+    expect(search(18)).toContain("18 comparisons match “flood”</div>");
+    expect(search(1)).toContain("1 comparison matches “flood”</div>");
+    expect(search(18)).not.toContain("564");
   });
 
   test("removes the load control when the server says the list is complete", () => {
@@ -119,5 +140,17 @@ describe("contradiction pagination", () => {
     expect(html).toContain("from=contradictions&amp;text=bible");
     expect(html.match(/Genesis 1:1/gu)).toHaveLength(1);
     expect(html.match(/Genesis 2:1/gu)).toHaveLength(1);
+  });
+
+  test("shows the reading order once", () => {
+    const html = renderToStaticMarkup(
+      <ContradictionCard
+        article={{ ...article(42), title: "Two accounts" }}
+        corpusKey="bible"
+      />
+    );
+    const text = html.replaceAll(/<[^>]*>/gu, " ");
+    expect(text).toContain("Reading order");
+    expect(text.match(/\b42\b/gu)).toHaveLength(1);
   });
 });

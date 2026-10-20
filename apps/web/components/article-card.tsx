@@ -38,9 +38,7 @@ export function ArticleCard({
           {article.summary}
         </p>
         {article.collectionKey === "contradictions" && (
-          <div className="mt-4">
-            <ContradictionAssessmentLabels assessment={article.assessment} />
-          </div>
+          <ContradictionAssessmentLabels assessment={article.assessment} />
         )}
         <div className="mt-5 flex flex-wrap gap-2">
           {article.tags.slice(0, 3).map((tag) => (
