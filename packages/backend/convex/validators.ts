@@ -96,6 +96,15 @@ export const contentBlockValidator = v.union(
     ),
     id: v.string(),
     type: v.literal("claimComparison"),
+  }),
+  v.object({
+    alt: v.string(),
+    caption: v.optional(v.string()),
+    height: v.number(),
+    id: v.string(),
+    src: v.string(),
+    type: v.literal("image"),
+    width: v.number(),
   })
 );
 

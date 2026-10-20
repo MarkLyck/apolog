@@ -1,6 +1,10 @@
 import { describe, expect, test } from "bun:test";
 
-import type { ArticleDocument } from "@apolog/shared";
+import type { ArticleDocument, ContentBlock } from "@apolog/shared";
+import { articleDocumentSchema } from "@apolog/shared/content";
+import { getSchema } from "@tiptap/core";
+import { Node as ProseMirrorNode } from "@tiptap/pm/model";
+import * as Schema from "effect/Schema";
 
 import {
   articleDocumentToTiptap,
@@ -8,6 +12,7 @@ import {
   replaceInlineContentText,
   tiptapToArticleDocument,
 } from "./article-editor-content";
+import { articleEditorExtensions } from "./rich-article-editor-extensions";
 
 const document: ArticleDocument = {
   blocks: [
@@ -257,5 +262,95 @@ describe("article editor content", () => {
       ],
     });
     expect(tiptapToArticleDocument(json)).toEqual(firstSave);
+  });
+
+  test.each([
+    ["without a caption", {}],
+    ["with a caption", { caption: "The Gilgamesh flood tablet." }],
+  ])(
+    "round-trips an image block %s through the editor schema",
+    (_label, caption) => {
+      const image: ContentBlock = {
+        alt: "A clay tablet with cuneiform script",
+        height: 800,
+        id: "image-1",
+        src: "https://store.public.blob.vercel-storage.com/articles/tablet.webp",
+        type: "image",
+        width: 1200,
+        ...caption,
+      };
+      const imageDocument: ArticleDocument = {
+        blocks: [image],
+        schemaVersion: 1,
+      };
+
+      const editorNode = ProseMirrorNode.fromJSON(
+        getSchema(articleEditorExtensions),
+        articleDocumentToTiptap(imageDocument)
+      );
+      const roundTrip = tiptapToArticleDocument(editorNode.toJSON());
+
+      expect(roundTrip).toEqual(imageDocument);
+      expect(Object.hasOwn(roundTrip.blocks[0] ?? {}, "caption")).toBe(
+        "caption" in caption
+      );
+    }
+  );
+
+  test("keeps an image without alt text so saving rejects it", () => {
+    const saved = tiptapToArticleDocument({
+      content: [
+        {
+          attrs: {
+            alt: null,
+            caption: "  ",
+            contentId: "image-1",
+            height: 600,
+            src: "https://store.public.blob.vercel-storage.com/articles/a.webp",
+            width: 800,
+          },
+          type: "image",
+        },
+      ],
+      type: "doc",
+    });
+
+    expect(saved.blocks).toEqual([
+      {
+        alt: "",
+        height: 600,
+        id: "image-1",
+        src: "https://store.public.blob.vercel-storage.com/articles/a.webp",
+        type: "image",
+        width: 800,
+      },
+    ]);
+    expect(() =>
+      Schema.decodeUnknownSync(articleDocumentSchema)(saved)
+    ).toThrow();
+  });
+
+  test("keeps numeric-looking alt text and captions as text when parsing pasted HTML", () => {
+    const attributes = new Map([
+      ["alt", "1984"],
+      ["caption", "2024"],
+      ["height", "600"],
+      ["src", "https://store.public.blob.vercel-storage.com/articles/a.webp"],
+      ["width", "800"],
+    ]);
+    // SAFETY: Bun has no DOM, and the image parse rule reads only getAttribute.
+    const element = {
+      getAttribute: (name: string) => attributes.get(name) ?? null,
+    } as HTMLElement;
+    const [rule] =
+      getSchema(articleEditorExtensions).nodes.image?.spec.parseDOM ?? [];
+    const attrs = rule?.getAttrs?.(element);
+
+    expect(
+      tiptapToArticleDocument({
+        content: [{ attrs: attrs || {}, type: "image" }],
+        type: "doc",
+      }).blocks
+    ).toMatchObject([{ alt: "1984", caption: "2024", type: "image" }]);
   });
 });

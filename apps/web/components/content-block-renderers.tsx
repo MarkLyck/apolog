@@ -1,4 +1,5 @@
 import type { ContentBlock, InlineContent } from "@apolog/shared";
+import Image from "next/image";
 import type { ReactNode } from "react";
 import { FiAlertTriangle, FiBookOpen } from "react-icons/fi";
 
@@ -140,5 +141,29 @@ export function ClaimComparisonBlock({
         ))}
       </div>
     </section>
+  );
+}
+
+export function ImageBlock({
+  block,
+}: {
+  block: Extract<ContentBlock, { type: "image" }>;
+}) {
+  return (
+    <figure className="my-8">
+      <Image
+        alt={block.alt}
+        className="h-auto w-full rounded-xl border border-[var(--line)] bg-[var(--surface-strong)]"
+        height={block.height}
+        sizes="(min-width: 1440px) 1032px, (min-width: 1024px) calc(100vw - 408px), calc(100vw - 40px)"
+        src={block.src}
+        width={block.width}
+      />
+      {block.caption ? (
+        <figcaption className="mt-3 text-sm leading-6 text-[var(--muted)]">
+          {block.caption}
+        </figcaption>
+      ) : null}
+    </figure>
   );
 }

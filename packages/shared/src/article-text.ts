@@ -22,6 +22,9 @@ export function blockText(block: ContentBlock): string[] {
     case "quote": {
       return [block.reference, block.edition, inlineText(block.content)];
     }
+    case "image": {
+      return block.caption ? [block.caption] : [];
+    }
     case "heading":
     case "paragraph": {
       return [inlineText(block.content)];

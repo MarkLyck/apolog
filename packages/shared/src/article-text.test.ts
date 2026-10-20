@@ -26,6 +26,21 @@ describe("article reading time", () => {
     expect(articleWordCount(blocks)).toBe(10);
   });
 
+  test("counts an image caption as prose and ignores its alt text", () => {
+    const image = {
+      alt: "Alt text is announced, not read inline",
+      height: 600,
+      id: "image",
+      src: "https://store.public.blob.vercel-storage.com/articles/a.webp",
+      type: "image",
+      width: 800,
+    } as const;
+    expect(articleWordCount([image])).toBe(0);
+    expect(
+      articleWordCount([{ ...image, caption: "Three caption words" }])
+    ).toBe(3);
+  });
+
   test("counts an empty body as no words", () => {
     expect(articleWordCount([])).toBe(0);
   });

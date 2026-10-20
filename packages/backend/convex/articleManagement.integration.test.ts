@@ -189,6 +189,44 @@ describe("article management", () => {
     }
   );
 
+  test("saves a hosted image block and rejects one without alt text", async () => {
+    const { authenticated, t } = await setupUser("admin");
+    const image = {
+      alt: "A clay tablet with cuneiform script",
+      caption: "The Gilgamesh flood tablet.",
+      height: 800,
+      id: "tablet",
+      src: "https://store.public.blob.vercel-storage.com/articles/tablet.webp",
+      type: "image" as const,
+      width: 1200,
+    };
+    const documentWith = (block: typeof image) => ({
+      blocks: [...validInput.document.blocks, block],
+      schemaVersion: 1 as const,
+    });
+
+    await expect(
+      authenticated.mutation(save, {
+        ...validInput,
+        document: documentWith({ ...image, alt: " " }),
+      })
+    ).rejects.toThrow("Article content is invalid");
+    await authenticated.mutation(save, {
+      ...validInput,
+      document: documentWith(image),
+    });
+
+    const [article, searchDocument] = await t.run((ctx) =>
+      Promise.all([
+        ctx.db.query("articles").unique(),
+        ctx.db.query("searchDocuments").unique(),
+      ])
+    );
+    expect(article?.document.blocks.at(-1)).toEqual(image);
+    expect(searchDocument?.searchText).toContain("gilgamesh flood tablet");
+    expect(searchDocument?.searchText).not.toContain("cuneiform");
+  });
+
   test("validates sources without relying on URL.canParse", async () => {
     const { authenticated, t } = await setupUser("admin");
     const canParseDescriptor = Object.getOwnPropertyDescriptor(URL, "canParse");

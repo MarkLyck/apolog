@@ -5,6 +5,7 @@ import StarterKitExtension from "@tiptap/starter-kit";
 
 import { CalloutView } from "./rich-article-callout-view";
 import { ContradictionView } from "./rich-article-contradiction-view";
+import { ImageView } from "./rich-article-image-view";
 import { ScriptureView } from "./rich-article-scripture-view";
 
 const Callout = Node.create({
@@ -71,6 +72,40 @@ const Contradiction = Node.create({
     return [
       "section",
       mergeAttributes(HTMLAttributes, { "data-type": "contradiction" }),
+    ];
+  },
+});
+
+const ArticleImage = Node.create({
+  addAttributes() {
+    return {
+      alt: {
+        default: "",
+        parseHTML: (element) => element.getAttribute("alt") ?? "",
+      },
+      caption: {
+        default: null,
+        parseHTML: (element) => element.getAttribute("caption"),
+      },
+      height: { default: null },
+      src: { default: null },
+      width: { default: null },
+    };
+  },
+  addNodeView() {
+    return ReactNodeViewRenderer(ImageView);
+  },
+  atom: true,
+  draggable: true,
+  group: "block",
+  name: "image",
+  parseHTML() {
+    return [{ tag: 'figure[data-type="image"]' }];
+  },
+  renderHTML({ HTMLAttributes }) {
+    return [
+      "figure",
+      mergeAttributes(HTMLAttributes, { "data-type": "image" }),
     ];
   },
 });
@@ -147,9 +182,11 @@ export const articleEditorExtensions = [
       "callout",
       "scripture",
       "contradiction",
+      "image",
     ],
   }),
   Callout,
   Scripture,
   Contradiction,
+  ArticleImage,
 ];

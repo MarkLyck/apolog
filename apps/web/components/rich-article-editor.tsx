@@ -30,6 +30,11 @@ import {
   tiptapToArticleDocument,
 } from "./article-editor-content";
 import { articleEditorExtensions } from "./rich-article-editor-extensions";
+import {
+  ImageUploadButton,
+  ImageUploadStatus,
+  useImageUpload,
+} from "./rich-article-image-upload";
 
 const fieldClassName =
   "w-full rounded-lg border border-[var(--line)] bg-[var(--paper)] px-3 py-2 text-sm text-[var(--ink)] outline-none focus:border-[var(--accent)]";
@@ -111,6 +116,8 @@ export function RichArticleEditor({
       strike: instance?.isActive("strike") ?? false,
     }),
   });
+
+  const imageUpload = useImageUpload(editor);
 
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
@@ -274,6 +281,7 @@ export function RichArticleEditor({
           >
             <FiColumns aria-hidden="true" /> <span>Contradiction</span>
           </ToolbarButton>
+          <ImageUploadButton onFiles={imageUpload.handleFiles} />
         </div>
         <div className="editor-toolbar-group ml-auto">
           <ToolbarButton
@@ -318,7 +326,16 @@ export function RichArticleEditor({
           </button>
         </div>
       ) : null}
-      <EditorContent editor={editor} />
+      <ImageUploadStatus
+        onDismiss={imageUpload.handleDismiss}
+        state={imageUpload.state}
+      />
+      <div
+        onDropCapture={imageUpload.handleDrop}
+        onPasteCapture={imageUpload.handlePaste}
+      >
+        <EditorContent editor={editor} />
+      </div>
       <div className="editor-help">
         <span>
           <FiEdit3 aria-hidden="true" /> Select text to format it

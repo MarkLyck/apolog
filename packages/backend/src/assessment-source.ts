@@ -49,6 +49,9 @@ function blockSource(block: ContentBlock) {
         ]),
       ];
     }
+    case "image": {
+      return [block.type, block.src, block.alt, block.caption ?? null];
+    }
     default: {
       const exhaustive: never = block;
       return exhaustive;

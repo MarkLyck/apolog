@@ -31,6 +31,13 @@ const scriptureAttributesSchema = Schema.Struct({
   edition: Schema.optional(Schema.String),
   reference: Schema.optional(Schema.String),
 }).mapFields(Struct.map(Schema.mutableKey));
+const imageAttributesSchema = Schema.Struct({
+  alt: Schema.optional(Schema.NullOr(Schema.String)),
+  caption: Schema.optional(Schema.NullOr(Schema.String)),
+  height: Schema.Number,
+  src: Schema.String,
+  width: Schema.Number,
+}).mapFields(Struct.map(Schema.mutableKey));
 const storedContradictionClaimSchema = Schema.Struct({
   content: Schema.optional(inlineContentSchema),
   id: Schema.optional(Schema.String),
@@ -238,6 +245,19 @@ export function articleDocumentToTiptap(
             type: "contradiction",
           };
         }
+        case "image": {
+          return {
+            attrs: {
+              alt: block.alt,
+              caption: block.caption ?? null,
+              contentId: block.id,
+              height: block.height,
+              src: block.src,
+              width: block.width,
+            },
+            type: "image",
+          };
+        }
         default: {
           const exhaustive: never = block;
           return exhaustive;
@@ -352,6 +372,28 @@ function contradictionBlock(
   };
 }
 
+function imageBlock(node: JSONContent, id: string): ContentBlock | null {
+  const attributes = Schema.decodeUnknownResult(imageAttributesSchema)(
+    node.attrs
+  );
+  if (Result.isFailure(attributes)) {
+    return null;
+  }
+  const { alt, caption, height, src, width } = attributes.success;
+  const block: Extract<ContentBlock, { type: "image" }> = {
+    alt: alt ?? "",
+    height,
+    id,
+    src,
+    type: "image",
+    width,
+  };
+  if (caption?.trim()) {
+    block.caption = caption;
+  }
+  return block;
+}
+
 function tiptapNodeToBlock(
   node: JSONContent,
   index: number
@@ -407,6 +449,9 @@ function tiptapNodeToBlock(
     }
     case "contradiction": {
       return contradictionBlock(node, id);
+    }
+    case "image": {
+      return imageBlock(node, id);
     }
     default: {
       return null;
