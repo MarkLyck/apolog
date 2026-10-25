@@ -1,5 +1,6 @@
 import { contradictionImportance, contradictionKinds } from "@apolog/shared";
 import type { ContradictionAssessment } from "@apolog/shared";
+import { FiChevronDown } from "react-icons/fi";
 
 export function ContradictionAssessmentLabels({
   assessment,
@@ -91,30 +92,42 @@ export function ContradictionAssessmentPanel({
 
 export function ContradictionAssessmentGuide() {
   return (
-    <details className="my-6 rounded-xl border border-[var(--line)] bg-[var(--surface)] px-5 py-4 text-sm">
-      <summary className="cursor-pointer font-semibold">
-        How to read the labels
+    <details className="disclosure-card group my-6 overflow-hidden rounded-xl border border-[var(--line)] bg-[var(--paper)] text-sm">
+      <summary className="flex min-h-16 cursor-pointer list-none items-center justify-between gap-5 px-5 py-4 transition-colors hover:bg-[var(--surface)] focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-[var(--accent)] [&::-webkit-details-marker]:hidden">
+        <span>
+          <span className="block font-medium">How to read the labels</span>
+          <span className="mt-1 block text-xs text-[var(--muted)]">
+            What textual conflict, importance, and reading order mean
+          </span>
+        </span>
+        <FiChevronDown
+          aria-hidden="true"
+          className="shrink-0 text-[var(--muted)] transition-transform duration-300 group-open:rotate-180 group-open:text-[var(--ink)]"
+          size={18}
+        />
       </summary>
-      <p className="mt-4 leading-6 text-[var(--muted)]">
-        Textual conflict describes how much inference an argument requires.
-        Importance describes its stakes. A minor numerical disagreement can be
-        direct; a foundational claim can still depend on interpretation.
-      </p>
-      <dl className="mt-4 grid gap-4 sm:grid-cols-2">
-        {Object.entries(contradictionKinds).map(([kind, value]) => (
-          <div key={kind}>
-            <dt className="font-semibold">{value.label}</dt>
-            <dd className="m-0 mt-1 leading-6 text-[var(--muted)]">
-              {value.description}
-            </dd>
-          </div>
-        ))}
-      </dl>
-      <p className="mt-4 mb-0 leading-6 text-[var(--muted)]">
-        Reading order weighs conflict and importance together. It is not a
-        certainty score. Unreviewed or changed articles carry no assessment
-        until reviewed.
-      </p>
+      <div className="bg-[var(--surface)] px-5 pt-4 pb-5 shadow-[inset_0_1px_0_var(--line)]">
+        <p className="leading-6 text-[var(--muted)]">
+          Textual conflict describes how much inference an argument requires.
+          Importance describes its stakes. A minor numerical disagreement can be
+          direct; a foundational claim can still depend on interpretation.
+        </p>
+        <dl className="mt-4 grid gap-4 sm:grid-cols-2">
+          {Object.entries(contradictionKinds).map(([kind, value]) => (
+            <div key={kind}>
+              <dt className="font-semibold">{value.label}</dt>
+              <dd className="m-0 mt-1 leading-6 text-[var(--muted)]">
+                {value.description}
+              </dd>
+            </div>
+          ))}
+        </dl>
+        <p className="mt-4 mb-0 leading-6 text-[var(--muted)]">
+          Reading order weighs conflict and importance together. It is not a
+          certainty score. Unreviewed or changed articles carry no assessment
+          until reviewed.
+        </p>
+      </div>
     </details>
   );
 }
