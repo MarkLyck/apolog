@@ -66,4 +66,13 @@ describe("comparison assessment labels", () => {
     }
     expect(html).toContain("It is not a certainty score");
   });
+  test("labels the guide disclosure without announcing its decorative chevron", () => {
+    const html = renderToStaticMarkup(<ContradictionAssessmentGuide />);
+    const [summary] = html.split("</summary>");
+    expect(summary).toContain("How to read the labels");
+    expect(summary).toContain(
+      "What textual conflict, importance, and reading order mean"
+    );
+    expect(summary).toMatch(/<svg[^>]*aria-hidden="true"/u);
+  });
 });
