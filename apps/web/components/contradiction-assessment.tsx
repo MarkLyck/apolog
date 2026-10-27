@@ -8,16 +8,10 @@ export function ContradictionAssessmentLabels({
   assessment: ContradictionAssessment | undefined;
 }) {
   if (assessment?.status !== "reviewed") {
-    return (
-      <span className="text-xs font-medium text-[var(--muted)]">
-        {assessment?.status === "changed"
-          ? "Assessment needs review"
-          : "Awaiting assessment"}
-      </span>
-    );
+    return null;
   }
   return (
-    <div className="flex flex-wrap items-center gap-2 text-xs font-medium">
+    <div className="mt-4 flex flex-wrap items-center gap-2 text-xs font-medium">
       <span className="rounded-full border border-[var(--line)] bg-[var(--surface-strong)] px-3 py-1.5">
         {contradictionKinds[assessment.kind].label}
       </span>
@@ -34,23 +28,7 @@ export function ContradictionAssessmentPanel({
   assessment: ContradictionAssessment | undefined;
 }) {
   if (assessment?.status !== "reviewed") {
-    return (
-      <section
-        aria-label="Comparison assessment"
-        className="mt-6 rounded-xl border border-[var(--line)] p-5"
-      >
-        <p className="m-0 text-sm font-semibold">
-          {assessment?.status === "changed"
-            ? "Assessment needs review"
-            : "Awaiting assessment"}
-        </p>
-        <p className="mt-2 mb-0 text-sm text-[var(--muted)]">
-          {assessment?.status === "changed"
-            ? "This article has changed since its assessment. Its previous classification and importance are withheld until the updated argument is reviewed."
-            : "This comparison has not yet been assessed for the inference it requires or its importance."}
-        </p>
-      </section>
-    );
+    return null;
   }
   const classification = contradictionKinds[assessment.kind];
   const importance = contradictionImportance[assessment.importance];
